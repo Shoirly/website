@@ -60,7 +60,7 @@ Nav: Product, Solutions (Agent vendors, Banks), DORA, Security, Blog, About, plu
 - Next.js (App Router, TypeScript), Tailwind CSS, `motion` (Framer Motion) for animation, MDX for the blog.
 - Deployed on Vercel at shoirly.com (DNS on Cloudflare; shoirly.ie redirects to .com).
 - One config file, `src/config/site.ts`, holds the contact email (hello@shoirly.com), booking URL (`TODO(team)`, use a mailto until we have Cal.com), social links and nav. No hardcoded contact details anywhere else.
-- Logo lives in one component, `src/components/brand/Logo.tsx`, so it can be swapped in a single place. Until the real logo arrives, use a clean typographic wordmark.
+- **Logo (final):** files live in `public/brand/` (read its `README.md` for usage rules). `src/components/brand/Logo.tsx` is the only place the logo is drawn: `logo.svg` on light backgrounds, `logo-white.svg` on dark ones. The favicon set, apple touch icon and manifest icons come from `mark.svg`, and the default OG image uses `logo.svg`. Don't redraw, recolour or stretch the logo. The header shows the full wordmark at 36px, a deliberate exception to the README's "mark only below ~48px" rule (see DECISIONS.md).
 - Use react-bits (cloned for reference, see below) selectively. Copy individual components into `src/components/fx/`, adapt them to our tokens, credit the source in a comment. Never pull in the whole library.
 - Quality floor: Lighthouse 90+ on all four scores, semantic HTML, keyboard focus visible, `prefers-reduced-motion` respected everywhere, no layout shift from animations, works from 360px to 1920px.
 
@@ -70,8 +70,8 @@ Light, trustworthy enterprise, in the family of secureframe.com and sprinto.com,
 
 The subject is evidence: signatures, chains of custody, receipts, audit files, a verified seal. Draw the visual language from that world rather than from generic SaaS. The one memorable element should be the hero's evidence animation. Keep everything around it calm and disciplined.
 
-- **Palette:** mostly white and a cool off-white, deep ink for text, one confident accent that reads as "verified". Propose 4 to 6 named hex values in `DECISIONS.md` before building. Avoid purple-to-blue gradient washes (every compliance site uses them) and the defaults listed below.
-- **Type:** one or two deliberately chosen families, not Inter by default. A clear type scale. Sentence case everywhere.
+- **Palette:** mostly white and a cool off-white, deep ink for text, one confident accent that reads as "verified". Ink `#0F1B17` and the accent, Seal blue `#3157F0`, come from the logo; the full token set is in `DECISIONS.md` and `src/app/globals.css`. Avoid purple-to-blue gradient washes (every compliance site uses them) and the defaults listed below.
+- **Type:** headings in Bricolage Grotesque (the family the wordmark is drawn from), body in Schibsted Grotesk, data in IBM Plex Mono. A clear type scale. Sentence case everywhere.
 - **Motion:** one orchestrated hero moment, scroll-linked storytelling in "how it works", and motion that responds to the user. No fade-up on every section, no hover wobble on every card. Smooth, short, eased.
 - **Avoid these generated-site tells:** all-caps eyebrow labels above every heading, one highlighted word in a headline, identical rounded cards with the same grey shadow, gradient blobs as decoration, `A · B · C` meta strings, `→` on every link, numbered 01/02/03 markers unless the content really is a sequence (how it works is a sequence, so it can use them).
 

@@ -280,3 +280,15 @@ CLAUDE.md now carries the sharper positioning: EU financial services (banks lead
 - Calculator labels shortened to "Annual contract value" and "Weeks in security review", so they fit beside their values on phones.
 - Banks request template: removed hard line breaks mid-sentence, so it wraps naturally on phones and in email clients.
 - Architecture diagram: a wider boundary-crossing column, so "Only proof leaves" doesn't squeeze.
+
+## Real logo (2 Oct 2026)
+
+- The logo files moved from `/shoirly-logo` to `public/brand/` unchanged (including their C2PA content credentials metadata). The README moved with them as the usage reference.
+- `Logo.tsx` now renders `logo.svg` through `next/image` (unoptimized SVG, fixed dimensions, so no layout shift), with a `tone="dark"` option for `logo-white.svg`. No surface on the site is dark yet, so the white version is wired up but unused. The footer uses the wordmark at 48px. The old typographic wordmark is gone.
+- **Overruling the logo README in the header:** the README says to use the mark alone below about 48px tall. The header shows the full wordmark at 36px (about 116px wide), because a mark-only header loses the company name and a 48px wordmark would crowd a 64px header, especially on phones. At 36px the seal still renders at roughly two thirds of the logo's height. Revisit if the team prefers mark plus text, or a taller header.
+- Favicon set rendered from `mark.svg` in the browser at each exact size: `favicon.ico` (16, 32, 48), `icon.svg` (modern browsers), a 180px apple touch icon on white (iOS fills transparency with black), and 192 and 512px manifest icons with a new `manifest.ts`. The old font-drawn `icon.tsx` and `apple-icon.tsx` were removed.
+- The default OG image now uses `logo.svg` at 72px tall, with the headline in Bricolage and the subline in Schibsted, from static font cuts in `src/assets/fonts` (OFL licences included).
+- **Accent switched from green `#0A7350` to the logo's Seal blue `#3157F0`.** The logo's "o" is the brand's verification seal, in blue, so green "verified" ticks beside it meant two verification colours. Contrast: 5.5:1 on Paper, 5.0:1 on Ledger, 5.6:1 for white text on blue. Seal-deep `#2443C7` (7.6:1 on Paper) carries accent text, and Seal-wash `#E8EDFE` is the tint. The CLAUDE.md warning about "purple-to-blue gradient washes" isn't triggered, because this is one flat blue with no gradients.
+- **Ink switched to the logo's `#0F1B17`** (from `#0D1B1E`, a near-identical green-black). Shadows and the hero's ledger grid were retinted to match. The green-grey neutrals (Paper, Ledger, Rule, Graphite) stay, because they sit naturally with this ink.
+- **Headings switched to Bricolage Grotesque** (weight 650, optical sizing on), because Schibsted headings directly under a Bricolage wordmark read as two competing grotesques. Body stays Schibsted Grotesk and data stays IBM Plex Mono.
+- The favicon and OG files were previously off-limits to me because other agents own metadata. They changed only because the logo brief asked for it. Metadata text, sitemap and robots weren't touched.

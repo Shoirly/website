@@ -6,18 +6,20 @@
   --color-ledger: #eef2f0;
   --color-rule: #d5ddda;
   --color-graphite: #4d5c59;
-  --color-ink: #0d1b1e;
-  --color-seal: #0a7350;
+  /* Ink and Seal blue come from the logo (public/brand/README.md). */
+  --color-ink: #0f1b17;
+  --color-seal: #3157f0;
 
   /* Tints of the same hues, not new colours */
-  --color-seal-wash: #e2f1ea;
-  --color-seal-deep: #075c40;
-  --color-ink-soft: rgb(13 27 30 / 0.06);
+  --color-seal-wash: #e8edfe;
+  --color-seal-deep: #2443c7;
+  --color-ink-soft: rgb(15 27 23 / 0.06);
   --color-rule-strong: #8a9a96;
   /* Single exception: the "unrecorded" fault state in the hero. */
   --color-fault: #a4442b;
 
   --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
 
   --text-xs: 0.8125rem;
@@ -40,7 +42,7 @@
   --radius-sm: 4px;
   --radius-md: 6px;
 
-  --shadow-paper: 0 1px 2px rgb(13 27 30 / 0.05), 0 12px 32px -12px rgb(13 27 30 / 0.18);
+  --shadow-paper: 0 1px 2px rgb(15 27 23 / 0.05), 0 12px 32px -12px rgb(15 27 23 / 0.18);
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
@@ -106,7 +108,8 @@
   h1,
   h2,
   h3 {
-    font-weight: 600;
+    font-family: var(--font-display);
+    font-weight: 650;
     text-wrap: balance;
   }
 
@@ -156,8 +159,8 @@
 /* Faint ledger grid used once, behind the hero trail. */
 @utility ledger-grid {
   background-image:
-    linear-gradient(to right, rgb(13 27 30 / 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(13 27 30 / 0.045) 1px, transparent 1px);
+    linear-gradient(to right, rgb(15 27 23 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(15 27 23 / 0.045) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
@@ -281,7 +284,7 @@
     border-radius: 999px;
     background: var(--color-paper);
     border: 2px solid var(--color-seal);
-    box-shadow: 0 1px 3px rgb(13 27 30 / 0.22), var(--thumb-ring);
+    box-shadow: 0 1px 3px rgb(15 27 23 / 0.22), var(--thumb-ring);
     transform: scale(var(--thumb-scale));
     transition:
       transform 160ms var(--ease-out),
@@ -293,7 +296,7 @@
     border-radius: 999px;
     background: var(--color-paper);
     border: 2px solid var(--color-seal);
-    box-shadow: 0 1px 3px rgb(13 27 30 / 0.22), var(--thumb-ring);
+    box-shadow: 0 1px 3px rgb(15 27 23 / 0.22), var(--thumb-ring);
     transform: scale(var(--thumb-scale));
     transition:
       transform 160ms var(--ease-out),
@@ -301,12 +304,12 @@
   }
   &:hover {
     --thumb-scale: 1.08;
-    --thumb-ring: 0 0 0 6px rgb(10 115 80 / 0.12);
+    --thumb-ring: 0 0 0 6px rgb(49 87 240 / 0.14);
   }
   &:active {
     cursor: grabbing;
     --thumb-scale: 1.16;
-    --thumb-ring: 0 0 0 8px rgb(10 115 80 / 0.18);
+    --thumb-ring: 0 0 0 8px rgb(49 87 240 / 0.2);
   }
   &:focus-visible {
     outline: none;

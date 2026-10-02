@@ -1,33 +1,48 @@
+import Image from "next/image";
 import Link from "next/link";
 
 /**
- * Temporary typographic wordmark. The tittle of the "i" is a small square seal
- * in the accent colour, a nod to a stamped, verified record.
+ * The Shoirly logo. Files live in public/brand (see its README.md for usage
+ * rules). This is the only component that draws the logo on the site.
  *
- * TODO(team): replace with the real logo when it arrives. This is the only
- * place the logo is drawn (icon.tsx and opengraph-image.tsx echo it for the
- * favicon and social card).
+ * - `logo.svg`: dark ink on light backgrounds (every surface on the site today)
+ * - `logo-white.svg`: for dark backgrounds
+ *
+ * The README asks for the mark alone below ~48px tall. The header deliberately
+ * overrides that at 36px, because a mark-only header loses the name; see
+ * DECISIONS.md.
  */
-export function Wordmark({ className = "" }: { className?: string }) {
+const RATIO = 3115 / 971; // viewBox of logo.svg
+
+export function LogoImage({
+  height = 36,
+  tone = "light",
+  priority = false,
+  decorative = false,
+}: {
+  height?: number;
+  tone?: "light" | "dark";
+  priority?: boolean;
+  /** True when a parent already provides the accessible name. */
+  decorative?: boolean;
+}) {
   return (
-    <span
-      className={`inline-flex items-baseline font-sans font-semibold tracking-[-0.03em] text-ink ${className}`}
-    >
-      <span aria-hidden="true">sho</span>
-      <span aria-hidden="true" className="relative inline-block">
-        {"ı"}
-        <span className="absolute left-1/2 top-[0.08em] block size-[0.2em] -translate-x-1/2 rounded-[1px] bg-seal" />
-      </span>
-      <span aria-hidden="true">rly</span>
-      <span className="sr-only">Shoirly</span>
-    </span>
+    <Image
+      src={tone === "dark" ? "/brand/logo-white.svg" : "/brand/logo.svg"}
+      alt={decorative ? "" : "Shoirly"}
+      width={Math.round(height * RATIO)}
+      height={height}
+      priority={priority}
+      unoptimized
+      className="block"
+    />
   );
 }
 
-export function Logo({ className = "" }: { className?: string }) {
+export function Logo({ className = "", tone = "light" }: { className?: string; tone?: "light" | "dark" }) {
   return (
     <Link href="/" className={`inline-flex min-h-11 items-center rounded-sm ${className}`} aria-label="Shoirly home">
-      <Wordmark className="text-[1.5rem] leading-none" />
+      <LogoImage height={36} tone={tone} priority decorative />
     </Link>
   );
 }

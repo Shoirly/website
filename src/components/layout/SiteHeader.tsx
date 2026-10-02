@@ -252,7 +252,7 @@ export function SiteHeader() {
       <header
         className={`sticky top-0 z-50 border-b transition-[border-color,background-color,box-shadow] duration-300 ease-out ${
           scrolled || menuOpen
-            ? "border-rule bg-paper/90 shadow-[0_8px_24px_-18px_rgb(13_27_30/0.35)] backdrop-blur-md supports-[not(backdrop-filter:blur(1px))]:bg-paper"
+            ? "border-rule bg-paper/90 shadow-[0_8px_24px_-18px_rgb(15_27_23/0.35)] backdrop-blur-md supports-[not(backdrop-filter:blur(1px))]:bg-paper"
             : "border-transparent bg-paper"
         }`}
       >

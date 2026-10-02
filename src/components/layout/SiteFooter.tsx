@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Wordmark } from "@/components/brand/Logo";
+import { LogoImage } from "@/components/brand/Logo";
 import { Container } from "@/components/ui/Layout";
 import { site } from "@/config/site";
 
@@ -10,7 +10,7 @@ export function SiteFooter() {
       <Container className="py-14 md:py-16">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.3fr_2fr]">
           <div>
-            <Wordmark className="text-[1.75rem] leading-none" />
+            <LogoImage height={48} />
             <p className="mt-4 max-w-[34ch] text-sm text-graphite">
               Signed evidence of what your AI agent did, and who approved it.
             </p>
