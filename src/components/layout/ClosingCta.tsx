@@ -3,7 +3,7 @@ import { Container } from "@/components/ui/Layout";
 
 /** The last section before the footer on every marketing page. */
 export function ClosingCta({
-  title = "Show a bank what your agent did.",
+  title = "Show your buyer what your agent did.",
   body = "Thirty minutes. We'll walk through a sample evidence pack and how it fits your next security review.",
 }: {
   title?: string;

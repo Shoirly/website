@@ -23,7 +23,7 @@ const nodes: Record<NodeId, { n: number; label: string; title: string; body: str
     n: 3,
     label: "Tool or system",
     title: "The tool or system",
-    body: "The API or system the agent acts on: payments, core banking, a CRM. It receives the call exactly as your agent sent it.",
+    body: "The API or system the agent acts on: a CRM, a ticketing tool or, for example, a bank's payments API. It receives the call exactly as your agent sent it.",
   },
   auth: {
     n: 4,
@@ -53,7 +53,7 @@ const nodes: Record<NodeId, { n: number; label: string; title: string; body: str
     n: 8,
     label: "Evidence pack",
     title: "Only proof leaves",
-    // TODO(team): explain how readable records reach the bank alongside the proof, once settled.
+    // TODO(team): explain how readable records reach the customer alongside the proof, once settled.
     body: "Only signatures, hashes and coverage counts leave your environment. That proof is what makes each per-customer evidence pack verifiable. Share packs through Vanta or your trust centre.",
   },
 };
@@ -140,10 +140,10 @@ export function ArchitectureDiagram() {
         {/* The environment boundary */}
         <div
           role="group"
-          aria-label="Inside your environment: your cloud or the bank's"
+          aria-label="Inside your environment: your cloud or your customer's"
           className="rounded-md border-2 border-dashed border-rule-strong/70 bg-ledger/50 p-4 sm:p-5"
         >
-          <p className="text-xs font-medium text-graphite">Your environment: your cloud or the bank&apos;s</p>
+          <p className="text-xs font-medium text-graphite">Your environment: your cloud or your customer&apos;s</p>
 
           {/* Request path */}
           <div className="mt-4 grid grid-cols-1 items-center gap-2 sm:grid-cols-[minmax(0,1fr)_1.5rem_minmax(0,1fr)_1.5rem_minmax(0,1fr)]">

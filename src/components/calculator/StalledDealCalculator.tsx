@@ -139,7 +139,7 @@ export function StalledDealCalculator({ variant = "full" }: { variant?: "full" |
   const sliders = (
     <>
       <Slider
-        label="Deals in your pipeline with banks"
+        label="Deals with regulated buyers"
         value={deals}
         min={1}
         max={20}

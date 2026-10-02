@@ -25,14 +25,14 @@ export function Deployment() {
 
         <figure aria-labelledby="deploy-caption" className="grid grid-cols-1 items-center gap-4 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,13rem)]">
           <figcaption id="deploy-caption" className="sr-only">
-            Inside your cloud or the bank&apos;s: your agent, Shoirly, and the action records and customer data, which
+            Inside your cloud or your customer&apos;s: your agent, Shoirly, and the action records and customer data, which
             stay put. Only signatures, hashes and coverage counts leave.
           </figcaption>
 
           {/* Boundary: where the agent runs */}
           <div className="rounded-md border-2 border-dashed border-rule-strong/70 bg-ledger/60 p-4 sm:p-5">
             <p className="flex items-center gap-1.5 text-xs font-medium text-graphite">
-              <LockSimple size={14} aria-hidden /> Your cloud, or the bank&apos;s
+              <LockSimple size={14} aria-hidden /> Your cloud, or your customer&apos;s
             </p>
             <ul className="mt-4 grid grid-cols-1 gap-2.5">
               <li className="flex items-center gap-2.5 rounded-md border border-rule bg-paper px-3 py-2.5 text-sm">

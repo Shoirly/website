@@ -4,21 +4,22 @@ This file is the source of truth for the Shoirly marketing site. Read it fully b
 
 ## The company
 
-Shoirly gives AI agent vendors independent, verifiable evidence of what their agent did and who authorised each action. Vendors already say "we log everything". Shoirly makes those records provably complete and unedited, per customer: each action is signed and chained, a coverage check shows whether anything went unrecorded, and the output is mapped to the controls financial institutions care about, starting with DORA.
+Shoirly gives AI agent companies independent, verifiable evidence of what their agent did and who authorised each action. Vendors already say "we log everything". Shoirly makes those records provably complete and unedited, per customer: each action is signed and chained, a coverage check shows whether anything went unrecorded, and the output is mapped to the controls regulated buyers check, starting with DORA for EU financial services.
 
-- **Who buys:** AI agent vendors selling into EU financial services: banks, payment firms and insurers. Banks stay the lead example in copy. Longer term this extends to any regulated or audited buyer, but don't market to those yet.
+- **Who buys:** AI agent companies selling to any regulated buyer. Finance (banks, payment firms and insurers, under DORA) is where we start, not the whole company.
+- **Default wording:** "your customers", "regulated buyers" or "your buyer's risk team". Banks, insurers and DORA appear only as examples (at most one finance example per section, phrased "for example" or "starting with"), or on pages that are specifically about them: `/dora`, `/solutions/banks`, and blog posts about finance.
 - **Their pain:** deals stall in the buyer's security review and vendor due diligence. A SOC 2 or ISO cert helps a buyer shortlist a vendor, but on its own it usually isn't enough. Today the buyer's evidence is contract clauses plus periodic service reviews. Nothing shows what the vendor's system actually did on a given day, for a given action.
-- **Why now:** DORA gives financial entities audit and information rights over their ICT third parties, and supervisors are paying close attention to AI. Banks will give agents more autonomy, but only inside defined risk tolerances, with proof the controls held.
+- **Why now:** regulators are paying close attention to AI, and regulated buyers will give agents more autonomy only inside defined risk tolerances, with proof the controls held. In EU financial services, for example, DORA gives firms audit and information rights over their ICT third parties.
 - **Where we sit:**
   - Certifications like SOC 2 and AIUC-1 show an agent passed tests at a point in time. We show what it did on Tuesday.
   - Guardrail tools block actions. We prove them.
   - Trust centres and vendor-risk tools run on documents. Our packs are live evidence they can carry.
 - **Positioning line:** "Vanta proves you have controls. We prove they held." Shoirly works alongside Vanta and trust centres. It does not replace them.
-- **Deployment:** Shoirly is designed to run where the agent runs (the vendor's cloud or the bank's). Say "designed to run", not "runs", until deployments are live. Raw data stays there. Only signatures, hashes and coverage counts leave. Line: "Your data never leaves. Only the proof does."
+- **Deployment:** Shoirly is designed to run where the agent runs (the vendor's cloud or their customer's). Say "designed to run", not "runs", until deployments are live. Raw data stays there. Only signatures, hashes and coverage counts leave. Line: "Your data never leaves. Only the proof does."
 - **Architecture:** the agent calls its tools through the Shoirly proxy. Each call is linked to its authoriser, signed, added to a chain, and counted by the coverage check. Only proof leaves the environment for the evidence pack. SDK languages and supported frameworks are still unknown (`TODO(team)`).
 - **Roadmap (never present as shipped):** hardware-isolated signing, eIDAS qualified timestamps, trust-centre integrations. Always mark these as not yet available.
 - **Stage:** early, taking on design partners. Say so plainly where it helps.
-- **Second audience:** risk, procurement and third-party oversight teams at banks, payment firms and insurers, who receive the evidence.
+- **Second audience:** risk, procurement and third-party oversight teams at regulated buyers, who receive the evidence (starting with banks, payment firms and insurers).
 - **Context:** four-person founding team in Dublin, competing in Baseline's Pressure Cooker during Dublin AI Week (Oct 2026). Judges and investors will look at this site, so it has to read as a real, credible company.
 
 ### Honesty rules (non-negotiable)
@@ -29,7 +30,7 @@ Shoirly gives AI agent vendors independent, verifiable evidence of what their ag
 - Compare against categories ("certs", "gateway logs", "questionnaires", "guardrail tools"), not named competitors, except the Vanta line above. Naming a standard such as SOC 2 or AIUC-1 is fine.
 - Never imply a shipped integration with Vanta or any other platform. Say "packs you can share through Vanta or your trust centre".
 - The coverage check "shows whether anything went unrecorded". Never say it "proves nothing went unrecorded".
-- Don't claim banks can verify evidence independently today. Say they will be able to once the verification guide is published.
+- Don't claim buyers can verify evidence independently today. Say they will be able to once the verification guide is published.
 
 ## Site goals
 
@@ -41,11 +42,11 @@ Shoirly gives AI agent vendors independent, verifiable evidence of what their ag
 
 | Route | Purpose |
 |---|---|
-| `/` | Home. Hero, problem, how it works (animated), evidence pack preview, where it runs (only proof leaves), cost-of-a-stalled-deal calculator, works-with-your-trust-centre, for vendors / for banks split, final CTA |
+| `/` | Home. Hero, problem, how it works (animated), evidence pack preview, where it runs (only proof leaves), cost-of-a-stalled-deal calculator, works-with-your-trust-centre, for vendors / for buyers' risk teams split, final CTA |
 | `/product` | Deeper how-it-works: capture, sign, coverage check, evidence pack. Interactive diagram |
-| `/solutions/agent-vendors` | For the buyer: close bank deals faster |
-| `/solutions/banks` | For the receiving side (banks, payment firms and insurers): what a risk team gets and how to request it |
-| `/dora` | Plain-English DORA explainer and how Shoirly evidence maps to it. Strong SEO page |
+| `/solutions/agent-vendors` | For AI agent companies: close deals with regulated buyers faster |
+| `/solutions/banks` | Finance-specific page for the receiving side (banks, payment firms and insurers): what a risk team gets and how to request it |
+| `/dora` | Finance-specific: plain-English DORA explainer and how Shoirly evidence maps to it. Strong SEO page |
 | `/security` | Trust page: how evidence is signed and verified, where Shoirly runs and what leaves, what we're building next (roadmap, clearly not yet available). Unknowns marked TODO |
 | `/about` | Mission, team of four, Dublin |
 | `/blog` + `/blog/[slug]` | MDX blog |
@@ -81,19 +82,19 @@ A live "evidence trail": a stream of agent actions (e.g. "Refund €240 to custo
 
 ### Cost-of-a-stalled-deal calculator
 
-Sliders for deals in pipeline with banks, average contract value, and weeks stuck in security review. Output: revenue delayed this year and the effect of cutting review time. Clearly labelled as an estimate based on the visitor's own inputs.
+Sliders for deals with regulated buyers, average contract value, and weeks stuck in security review. Output: revenue delayed this year and the effect of cutting review time. Clearly labelled as an estimate based on the visitor's own inputs.
 
 ## Copy
 
-Voice: plain, confident, specific. Written for a founder or CTO at an agent startup, credible to a bank's head of third-party risk. British/Irish spelling. No em dashes. No hype words ("revolutionary", "seamless", "unlock", "supercharge").
+Voice: plain, confident, specific. Written for a founder or CTO at an agent startup, credible to a regulated buyer's head of third-party risk (for example, at a bank). British/Irish spelling. No em dashes. No hype words ("revolutionary", "seamless", "unlock", "supercharge").
 
 Starting copy (refine, don't replace the meaning):
 
 - **Hero headline:** Signed proof of what your AI agent did, and who approved it.
-- **Hero sub:** Shoirly gives AI agent vendors per-customer evidence of every action, mapped to DORA, so security reviews at banks, insurers and payment firms stop stalling your deals.
+- **Hero sub:** Shoirly gives AI agent companies per-customer evidence of every action, mapped to the controls regulated buyers check, so security reviews stop stalling your deals.
 - **CTAs:** "Book a demo" (primary), "See how it works" (secondary, scrolls to the walkthrough).
-- **Problem:** Banks want to let your agent do more. Their risk team needs proof it stayed inside the lines. A certificate says you have controls. It doesn't show what happened on Tuesday.
-- **How it works (a real sequence):** 1. Connect your agent. 2. Every action is signed and linked to who authorised it. 3. A coverage check shows whether anything went unrecorded. 4. Share a per-customer evidence pack, mapped to DORA, through Vanta or your trust centre.
+- **Problem:** Your customers want to let your agent do more. Their risk team needs proof it stayed inside the lines. A certificate says you have controls. It doesn't show what happened on Tuesday.
+- **How it works (a real sequence):** 1. Connect your agent. 2. Every action is signed and linked to who authorised it. 3. A coverage check shows whether anything went unrecorded. 4. Share a per-customer evidence pack, mapped to your buyer's controls (for example, DORA), through Vanta or your trust centre.
 - **Trust centre section:** Vanta proves you have controls. We prove they held.
 - **Deployment section:** Your data never leaves. Only the proof does.
 - **Stage line (near CTAs):** We're early and taking on design partners.

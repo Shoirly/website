@@ -329,7 +329,7 @@ function TrailBody({
             <div className="flex items-start justify-between gap-3">
               <div>
                 <p className="text-sm font-semibold leading-5 text-graphite">Evidence pack</p>
-                <p className="font-mono text-[11px] leading-4 text-graphite">Sample bank, Sep 2026</p>
+                <p className="font-mono text-[11px] leading-4 text-graphite">Sample customer, Sep 2026</p>
               </div>
               <span className="whitespace-nowrap text-[11px] text-graphite">
                 {state.check ? "Compiling" : "Waiting for 100%"}
@@ -374,7 +374,7 @@ function TrailBody({
                 <div>
                   <p className="text-sm font-semibold leading-5">Evidence pack</p>
                   <p className="font-mono text-[11px] leading-4 text-graphite">
-                    Sample bank, Sep 2026<span className="hidden sm:inline">, {N} of {N} signatures verified</span>
+                    Sample customer, Sep 2026<span className="hidden sm:inline">, {N} of {N} signatures verified</span>
                   </p>
                 </div>
                 <motion.span
@@ -449,8 +449,8 @@ export function EvidenceTrail() {
       <figcaption id="trail-caption" className="sr-only">
         Animated sample of an evidence trail. Five agent actions, such as a €240 refund and a credit limit change,
         are each linked to the policy or person who approved them, signed, and chained together. Coverage reaches
-        100 percent and the trail compiles into an evidence pack for one bank customer, tagged with the DORA areas
-        it covers.
+        100 percent and the trail compiles into an evidence pack for one customer, tagged with the control areas it
+        covers (DORA, in this sample).
       </figcaption>
 
       {/* Header */}

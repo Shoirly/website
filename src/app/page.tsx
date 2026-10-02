@@ -16,7 +16,7 @@ export const metadata: Metadata = pageMetadata(pageSeo["/"]);
 const steps: StoryStep[] = [
   {
     title: "Connect your agent",
-    body: "Your agent calls its tools through the Shoirly proxy, which records each action it takes for a bank customer. Your agent's logic stays as it is.",
+    body: "Your agent calls its tools through the Shoirly proxy, which records each action it takes for a customer. Your agent's logic stays as it is.",
     scene: <SceneCapture />,
   },
   {
@@ -30,8 +30,8 @@ const steps: StoryStep[] = [
     scene: <SceneCoverage />,
   },
   {
-    title: "Share a per-customer evidence pack, mapped to DORA",
-    body: "Each bank, insurer or payment firm gets a pack about its own customers, organised by DORA area, that you can share through Vanta or your trust centre.",
+    title: "Share a per-customer evidence pack, mapped to their controls",
+    body: "Each customer gets a pack about its own accounts, organised by the controls its risk team checks (for example, DORA areas for EU banks). Share it through Vanta or your trust centre.",
     scene: <ScenePack />,
   },
 ];

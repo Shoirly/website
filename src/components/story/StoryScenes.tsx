@@ -52,7 +52,7 @@ export function SceneCapture() {
             <span className="font-mono">{action.action}</span>
           </Field>
           <Field k="Customer">
-            <span className="font-mono">#4471, sample bank</span>
+            <span className="font-mono">#4471, sample customer</span>
           </Field>
           <Field k="Time">
             <span className="font-mono">2026-09-14 {action.time} UTC</span>
@@ -138,7 +138,7 @@ export function ScenePack() {
       <div className="rounded-md border border-rule p-4 motion-safe:animate-rise-in">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <p className="text-sm font-semibold">Sample bank</p>
+            <p className="text-sm font-semibold">Sample customer</p>
             <p className="font-mono text-[11px] text-graphite">1-30 Sep 2026, 1,284 actions</p>
           </div>
           <span className="inline-flex items-center gap-1 rounded-sm bg-seal-wash px-1.5 py-0.5 text-[11px] font-medium text-seal-deep motion-safe:animate-stamp-in motion-safe:[animation-delay:240ms]">

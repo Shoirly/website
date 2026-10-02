@@ -25,7 +25,7 @@ export const site = {
   name: "Shoirly",
   url: "https://shoirly.com",
   description:
-    "Signed, per-customer evidence of what your AI agent did and who approved it, mapped to DORA, so security reviews at banks, insurers and payment firms stop stalling your deals.",
+    "Signed, per-customer evidence of what your AI agent did and who approved it, so security reviews with regulated buyers stop stalling your deals. Starting with financial services.",
   email,
   location: "Dublin, Ireland",
 
@@ -48,7 +48,7 @@ export const site = {
         {
           label: "For agent vendors",
           href: "/solutions/agent-vendors",
-          description: "Get through security review with financial institutions",
+          description: "Get through security review with regulated buyers",
         },
         {
           label: "For banks, payment firms and insurers",

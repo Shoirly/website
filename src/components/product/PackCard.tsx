@@ -22,7 +22,7 @@ export function PackCard() {
       <header className="flex flex-wrap items-start justify-between gap-4 border-b border-rule px-5 py-4 sm:px-6">
         <div>
           <p className="font-mono text-xs text-graphite">Evidence pack</p>
-          <h3 className="mt-1 text-xl">Example Bank</h3>
+          <h3 className="mt-1 text-xl">Example Co.</h3>
           <p className="text-xs text-graphite">Illustrative customer</p>
         </div>
         <div className="flex flex-col items-end gap-2">
@@ -48,7 +48,7 @@ export function PackCard() {
       </dl>
 
       <div className="border-t border-rule px-5 py-4 sm:px-6">
-        <p className="text-xs font-semibold">DORA areas covered</p>
+        <p className="text-xs font-semibold">Controls covered (DORA, for example)</p>
         <ul className="mt-3 flex flex-wrap gap-2">
           {dora.map((d) => (
             <li key={d.area} className="rounded-sm border border-rule px-2 py-1 text-xs">

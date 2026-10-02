@@ -8,7 +8,7 @@ const columns = [
     title: "Get through security review faster",
     points: [
       "Answer \"what did your agent do?\" with records, not reassurances.",
-      "Give each bank evidence about its own customers, ready before they ask.",
+      "Give each buyer evidence about its own customers, ready before they ask.",
       "Keep your existing certifications and trust centre. This sits on top.",
     ],
     href: "/solutions/agent-vendors",
@@ -16,12 +16,12 @@ const columns = [
   },
   {
     id: "banks",
-    who: "For banks, payment firms and insurers",
+    who: "For risk teams at regulated buyers",
     title: "Evidence of what happened, not reassurance",
     points: [
       "See each action your vendor's agent took for your customers, and who approved it.",
       "A coverage check shows whether anything went unrecorded.",
-      "Organised by DORA area, for third-party oversight and audit.",
+      "Organised by the controls you report against, starting with DORA for EU financial services.",
     ],
     href: "/solutions/banks",
     link: "What your risk team receives",
