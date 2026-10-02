@@ -244,62 +244,81 @@
   }
 }
 
-/* Range input used by the calculator. Track is Rule-strong for 3:1 UI contrast;
-   the filled part is driven by --fill (0-100%). */
+/* Range input used by the calculator. 44px tall hit area; the thumb grows with a
+   seal halo on hover, drag and keyboard focus. Track is Rule-strong for 3:1 UI
+   contrast; the filled part is driven by --fill (0-100%). */
 @utility range {
   appearance: none;
   width: 100%;
-  height: 28px;
+  height: 44px;
   background: transparent;
   cursor: pointer;
+  touch-action: pan-y;
   --fill: 50%;
+  --thumb-ring: 0 0 0 0 transparent;
+  --thumb-scale: 1;
 
   &::-webkit-slider-runnable-track {
-    height: 4px;
+    height: 6px;
     border-radius: 999px;
     background: linear-gradient(to right, var(--color-seal) var(--fill), var(--color-rule-strong) var(--fill));
   }
   &::-moz-range-track {
-    height: 4px;
+    height: 6px;
     border-radius: 999px;
     background: var(--color-rule-strong);
   }
   &::-moz-range-progress {
-    height: 4px;
+    height: 6px;
     border-radius: 999px;
     background: var(--color-seal);
   }
   &::-webkit-slider-thumb {
     appearance: none;
     margin-top: -8px;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     border-radius: 999px;
     background: var(--color-paper);
     border: 2px solid var(--color-seal);
-    box-shadow: 0 1px 3px rgb(13 27 30 / 0.2);
-    transition: transform 150ms var(--ease-out);
+    box-shadow: 0 1px 3px rgb(13 27 30 / 0.22), var(--thumb-ring);
+    transform: scale(var(--thumb-scale));
+    transition:
+      transform 160ms var(--ease-out),
+      box-shadow 160ms var(--ease-out);
   }
   &::-moz-range-thumb {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     border-radius: 999px;
     background: var(--color-paper);
     border: 2px solid var(--color-seal);
-    box-shadow: 0 1px 3px rgb(13 27 30 / 0.2);
+    box-shadow: 0 1px 3px rgb(13 27 30 / 0.22), var(--thumb-ring);
+    transform: scale(var(--thumb-scale));
+    transition:
+      transform 160ms var(--ease-out),
+      box-shadow 160ms var(--ease-out);
   }
-  &:active::-webkit-slider-thumb {
-    transform: scale(1.12);
+  &:hover {
+    --thumb-scale: 1.08;
+    --thumb-ring: 0 0 0 6px rgb(10 115 80 / 0.12);
+  }
+  &:active {
+    cursor: grabbing;
+    --thumb-scale: 1.16;
+    --thumb-ring: 0 0 0 8px rgb(10 115 80 / 0.18);
   }
   &:focus-visible {
     outline: none;
+    --thumb-ring: 0 0 0 3px var(--color-paper), 0 0 0 5px var(--color-seal);
   }
-  &:focus-visible::-webkit-slider-thumb {
-    outline: 2px solid var(--color-seal);
-    outline-offset: 3px;
-  }
-  &:focus-visible::-moz-range-thumb {
-    outline: 2px solid var(--color-seal);
-    outline-offset: 3px;
+
+  @media (prefers-reduced-motion: reduce) {
+    &::-webkit-slider-thumb {
+      transition: none;
+    }
+    &::-moz-range-thumb {
+      transition: none;
+    }
   }
 }

@@ -245,3 +245,11 @@ CLAUDE.md now carries the sharper positioning: EU financial services (banks lead
 - The diagram's pack text says only proof leaves and that this proof makes the pack verifiable. It doesn't say how readable records reach the bank; that's flagged TODO(team).
 - /product pack card uses "Example Bank", labelled "Illustrative customer" with an "Illustrative data" tag, so nobody reads it as a real customer.
 - Removed the superseded `HowItWorks`, `StepVisuals` and `PipelineDiagram` components.
+
+### Phase 4: calculator
+- One component, `src/components/calculator/StalledDealCalculator.tsx`, with `full` (home) and `compact` (/solutions/agent-vendors) variants. Compact puts the sliders in a 2x2 grid with results underneath.
+- Sliders stay native `<input type="range">`, for free keyboard support (arrows, Page Up/Down, Home/End) and screen-reader semantics. They feel tactile through CSS: a 44px tall hit area, a 6px track, and a thumb that grows with a seal halo on hover, grows further while dragging, and gets a double ring on keyboard focus. A small scale "pop" on the value confirms each change, and is skipped under reduced motion.
+- Before/after review time is two bars on the same 40-week scale, with no background track, as the taste skill asks. The "Today" bar is neutral and the "With evidence" bar is Seal.
+- The screen-reader live region updates 700ms after input settles, rather than on every step of a drag. Each slider keeps its `aria-valuetext`.
+- The assumption is now one line ("Estimate only..."), with "Book a demo" beside it on desktop and under it on mobile.
+- On the vendor page, the FAQ moved to the Ledger tone so the new calculator section and the FAQ don't sit as two consecutive Paper sections.

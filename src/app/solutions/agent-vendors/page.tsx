@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
+import { StalledDealCalculator } from "@/components/calculator/StalledDealCalculator";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { ButtonLink } from "@/components/ui/Button";
 import { Faq, FaqJsonLd, type FaqItem } from "@/components/ui/Faq";
@@ -166,7 +167,19 @@ export default function AgentVendorsPage() {
         </div>
       </Section>
 
-      <Section labelledBy="faq-title">
+      <Section labelledBy="cost-title">
+        <h2 id="cost-title" className="max-w-[24ch] text-3xl">
+          What the wait costs you
+        </h2>
+        <p className="mt-4 max-w-[52ch] text-lg text-graphite">
+          Your numbers, your estimate. Move the sliders to see what time in security review is worth.
+        </p>
+        <div className="mt-10">
+          <StalledDealCalculator variant="compact" />
+        </div>
+      </Section>
+
+      <Section tone="ledger" labelledBy="faq-title">
         <h2 id="faq-title" className="text-3xl">
           Questions vendors ask
         </h2>
