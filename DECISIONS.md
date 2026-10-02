@@ -224,3 +224,13 @@ CLAUDE.md now carries the sharper positioning: EU financial services (banks lead
 ### Phase 0 and 1
 - The screenshot rule now refers to phases. Most of the positioning work had landed in the previous commit. The one change this brief adds is "designed to run where the agent runs" instead of "runs", applied to CLAUDE.md, the home deployment section and /security (last edit to /security before it goes off-limits). CLAUDE.md now says to keep "designed to" until deployments are live.
 - From Phase 2 on I don't touch blog files, /security, /privacy, /terms, the 404, /dora, /about, `src/lib/metadata.ts`, `opengraph-image.tsx`, `icon.tsx`, `apple-icon.tsx`, `sitemap.ts` or `robots.ts`.
+
+### Phase 2: hero animation
+- Pacing went from about 1.9s to about 3.2s per action (arrive 0.8s, authoriser lands 0.95s, signing 0.7s, signed 0.8s), so each action is readable. A full loop is about 22s, which is acceptable because the server-rendered first frame already shows the whole story.
+- The coverage meter now fills steadily (signed out of five). Before, it was signed out of visible, so it dropped each time a new action arrived, which read as a glitch. The percentage and count animate with the same spring as the calculator.
+- "Satisfying moments" are each single, non-looping, transform or opacity only: the authoriser slides in with a seal-wash highlight that fades; the signature resolves at 62ms per character, then the check mark stamps in (spring, slight rotation) with a single expanding ring; the chain node fills with the same ring; and the chain segment back to the previous record draws downward.
+- The pack resolves in two beats: a one-pass sheen across the outline while "Compiling", then the solid card settles, the "Verified" badge stamps in and the DORA tags follow in sequence.
+- Clean loops: the body fades out, then remounts empty under a new cycle key, so rows never visibly unwind or scroll back.
+- Pauses when less than 35% is in view, when the tab is hidden (Page Visibility via `useSyncExternalStore`), or with the Pause button (now a 44px target). Under reduced motion, the static finished frame shows and the Pause button is hidden.
+- Mount animations only run from cycle 1 onwards, so the server HTML (cycle 0) is the finished, fully visible frame.
+- A header status ("Recording", "Checking coverage", "Pack ready") narrates the state. It's text, not a decorative dot.
