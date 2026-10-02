@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import Link from "next/link";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { ArchitectureDiagram } from "@/components/product/ArchitectureDiagram";
@@ -8,12 +8,7 @@ import { ScrollStory, type StoryStep } from "@/components/story/ScrollStory";
 import { SceneCapture, ScenePack, SceneCoverage, SceneSign } from "@/components/story/StoryScenes";
 import { PageHeader, Section } from "@/components/ui/Layout";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Product: how Shoirly works",
-  description:
-    "Capture each agent action, sign it with who authorised it, check coverage, and share a per-customer evidence pack mapped to DORA.",
-  path: "/product",
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/product"]);
 
 const steps: StoryStep[] = [
   {

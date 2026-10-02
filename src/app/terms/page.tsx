@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import { LegalPage } from "@/components/layout/LegalPage";
 import { site } from "@/config/site";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Terms (draft)",
-  description: "Placeholder website terms for Shoirly, based in Dublin, Ireland. Draft pending legal review.",
-  path: "/terms",
-  noindex: true,
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/terms"]);
 
 export default function TermsPage() {
   return (

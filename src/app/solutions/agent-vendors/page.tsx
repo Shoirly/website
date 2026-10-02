@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import Link from "next/link";
 import { StalledDealCalculator } from "@/components/calculator/StalledDealCalculator";
 import { ClosingCta } from "@/components/layout/ClosingCta";
@@ -8,12 +8,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Faq, FaqJsonLd, type FaqItem } from "@/components/ui/Faq";
 import { PageHeader, Section } from "@/components/ui/Layout";
 
-export const metadata: Metadata = pageMetadata({
-  title: "For AI agent vendors: close deals with banks, insurers and payment firms",
-  description:
-    "Security reviews at banks, insurers and payment firms stall on one question: what did your agent actually do? Answer it with signed, per-customer evidence mapped to DORA.",
-  path: "/solutions/agent-vendors",
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/solutions/agent-vendors"]);
 
 const stages = [
   {
