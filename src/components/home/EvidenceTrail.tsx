@@ -460,22 +460,22 @@ export function EvidenceTrail() {
           <span className="rounded-sm bg-ledger px-1.5 py-0.5 font-mono text-[11px] leading-4 text-graphite">
             Sample data
           </span>
-          <span aria-hidden className="hidden truncate text-xs text-graphite sm:inline">
-            {reduce ? "" : status}
+          {/* Same text on server and client (avoids a hydration mismatch); hidden by CSS under reduced motion */}
+          <span aria-hidden className="hidden truncate text-xs text-graphite motion-safe:sm:inline">
+            {status}
           </span>
         </div>
-        {!reduce ? (
-          <button
-            type="button"
-            onClick={() => setPaused((p) => !p)}
-            aria-pressed={paused}
-            aria-label={paused ? "Play animation" : "Pause animation"}
-            className="inline-flex h-11 items-center gap-1.5 rounded-md px-3 text-xs text-graphite transition-colors duration-150 hover:bg-ink-soft hover:text-ink"
-          >
-            {paused ? <Play size={14} weight="fill" aria-hidden /> : <Pause size={14} weight="fill" aria-hidden />}
-            {paused ? "Play" : "Pause"}
-          </button>
-        ) : null}
+        {/* Always rendered (server and client match); hidden by CSS under reduced motion */}
+        <button
+          type="button"
+          onClick={() => setPaused((p) => !p)}
+          aria-pressed={paused}
+          aria-label={paused ? "Play animation" : "Pause animation"}
+          className="inline-flex h-11 items-center gap-1.5 rounded-md px-3 text-xs text-graphite transition-colors duration-150 hover:bg-ink-soft hover:text-ink motion-reduce:hidden"
+        >
+          {paused ? <Play size={14} weight="fill" aria-hidden /> : <Pause size={14} weight="fill" aria-hidden />}
+          {paused ? "Play" : "Pause"}
+        </button>
       </div>
 
       {/* Body: cross-fades between cycles; remounting on each cycle keeps loops clean */}

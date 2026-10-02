@@ -156,7 +156,7 @@ export function EvidencePreview() {
                 onFocus={() => setActive(n.id)}
                 onBlur={() => setActive(null)}
                 onClick={() => setActive((v) => (v === n.id ? null : n.id))}
-                className={`w-full rounded-md border px-4 py-3.5 text-left transition-colors duration-150 ${
+                className={`w-full rounded-md border px-4 py-3.5 text-left transition-[background-color,border-color,transform] duration-150 active:scale-[0.98] ${
                   active === n.id ? "border-seal bg-paper" : "border-transparent hover:bg-paper/60"
                 }`}
               >
