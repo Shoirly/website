@@ -318,3 +318,15 @@ Requested by the founders, overriding the brief's earlier "one orchestrated mome
 - **Press feedback:** buttons, architecture-diagram nodes, the evidence-preview notes and FAQ rows scale down slightly while pressed (100 to 150ms). Primary buttons get a single light sweep on hover.
 - **Deployment section:** three pulses flow from "your environment" to "Only this leaves", making "only proof leaves" literal. Pure CSS, hidden under reduced motion.
 - **Rejected in the audit:** animating calculator figures or ledger rows further (people are reading that data), changing the nav hover pill (high frequency, already fast), custom cursors or trails, and full-page moving backgrounds.
+
+## Smoother and quicker motion (3 Oct 2026)
+
+Feedback: animations felt very slow, and page transitions choppy and clunky. Measured on the live site first, then fixed.
+
+- **Page transitions:** I had been animating a blur filter on full-page snapshots, which can't stay on the compositor, plus about 0.8s of back-to-back exit and entry. Now it's transform and opacity only, with overlapping halves: the old page fades and lifts 10px in 170ms, and the new page rises 18px in 340ms starting 50ms in. The root cross-fade is 220ms. Measured: about 450ms in total (down from 810–840ms). Leaving home dropped from 6 janky frames with three ~56ms main-thread stalls to 1 janky frame and none.
+- **Hero grid:** the drift used to redraw the whole canvas on the main thread every frame. The grid lines are now a CSS background on a layer the compositor slides one cell and loops seamlessly. The canvas rides on that layer and only redraws while a cell is lit or fading. Measured idle on home: 60fps, 0 janky frames, 0 long animation frames.
+- **Heading reveals:** opacity and transform only (the clip-path is gone), finishing as the heading fully enters rather than a third of the way up the screen.
+- **Hero trail pacing:** about 2.3s per action (was about 3.2s), with snappier row entry, signature resolve (45ms per character), list scroll, coverage fill and pack settle. A loop is now about 16s.
+- **Springs:** the panel tilt and animated numbers are stiffer, still critically damped (no bounce), so they track quicker.
+- **Scene swaps:** "How it works" scenes cross-fade together (the old one leaves in 160ms while the new one arrives in 260ms) instead of waiting for the exit to finish first.
+- **Other timings:** accordion 240ms, header route sweep 450ms, scene stagger delays about a third shorter, the diagram's signal run 170ms per node, and the vendor-stage rules and bank checks paced tighter.

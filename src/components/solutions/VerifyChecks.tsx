@@ -18,7 +18,7 @@ export function VerifyChecks({ checks }: { checks: [string, string][] }) {
   useEffect(() => {
     if (!animated || !shown) return;
     const timers = Array.from({ length: checks.length * 2 }, (_, k) =>
-      window.setTimeout(() => setTick(k + 1), 200 + Math.floor(k / 2) * 650 + (k % 2) * 600),
+      window.setTimeout(() => setTick(k + 1), 150 + Math.floor(k / 2) * 450 + (k % 2) * 420),
     );
     return () => timers.forEach((t) => window.clearTimeout(t));
   }, [animated, shown, checks.length]);

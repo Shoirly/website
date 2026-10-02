@@ -124,8 +124,8 @@ export function ArchitectureDiagram() {
   // One orchestrated pass: light each node in order, once, then clear.
   useEffect(() => {
     if (!inView || reduce) return;
-    const timers = order.map((_, i) => window.setTimeout(() => setLit(i), 250 + i * 260));
-    timers.push(window.setTimeout(() => setLit(-1), 250 + order.length * 260 + 500));
+    const timers = order.map((_, i) => window.setTimeout(() => setLit(i), 150 + i * 170));
+    timers.push(window.setTimeout(() => setLit(-1), 150 + order.length * 170 + 400));
     return () => timers.forEach((t) => window.clearTimeout(t));
   }, [inView, reduce]);
 
@@ -197,7 +197,7 @@ export function ArchitectureDiagram() {
             initial={reduce ? false : { opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={reduce ? { opacity: 0, transition: { duration: 0 } } : { opacity: 0, y: -4 }}
-            transition={{ duration: 0.22, ease }}
+            transition={{ duration: 0.18, ease }}
           >
             <p className="font-mono text-xs text-graphite">
               {nodes[selected].n} of {order.length}
