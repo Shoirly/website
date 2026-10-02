@@ -18,12 +18,12 @@ export const pageSeo: Record<string, PageMetaInput> = {
   "/": { description: site.description, path: "/" },
   "/product": {
     title: "Product: how Shoirly works",
-    description: "Capture each agent action, sign it with who authorised it, check coverage, and share a per-customer evidence pack mapped to DORA.",
+    description: "Capture each agent action, sign it with who authorised it, check coverage, and share a per-customer evidence pack mapped to the controls your buyers check.",
     path: "/product",
   },
   "/solutions/agent-vendors": {
-    title: "For AI agent vendors: close deals with banks, insurers and payment firms",
-    description: "Security reviews at banks, insurers and payment firms stall on one question: what did your agent actually do? Answer it with signed, per-customer evidence mapped to DORA.",
+    title: "For AI agent companies: close deals with regulated buyers",
+    description: "Security reviews with regulated buyers stall on one question: what did your agent actually do? Answer it with signed, per-customer evidence, starting with DORA for EU financial services.",
     path: "/solutions/agent-vendors",
   },
   "/solutions/banks": {
@@ -44,17 +44,17 @@ export const pageSeo: Record<string, PageMetaInput> = {
   },
   "/about": {
     title: "About",
-    description: "Shoirly is a four-person team in Dublin building signed evidence for AI agents that act for banks.",
+    description: "Shoirly is a four-person team in Dublin building signed evidence for AI agents that act for regulated businesses.",
     path: "/about",
   },
   "/blog": {
     title: "Blog",
-    description: "Writing on AI agents, security reviews in financial services and DORA from the Shoirly team.",
+    description: "Writing on AI agents, security reviews and the rules regulated buyers work under, from the Shoirly team.",
     path: "/blog",
   },
   "/demo": {
     title: "Book a demo",
-    description: "See a sample evidence pack and how Shoirly fits into a bank's security review. Thirty minutes with the founding team.",
+    description: "See a sample evidence pack and how Shoirly fits into your buyer's security review. Thirty minutes with the founding team.",
     path: "/demo",
   },
   "/privacy": {

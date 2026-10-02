@@ -8,8 +8,8 @@ import { site } from "@/config/site";
 export const metadata: Metadata = pageMetadata(pageSeo["/demo"]);
 
 const agenda = [
-  ["Your bank deals", "Where your security reviews stall today, and what the bank has asked for."],
-  ["A sample evidence pack", "What a bank's risk team receives, and how verification will work."],
+  ["Your stuck deals", "Where security reviews stall today, and what your customers have asked for."],
+  ["A sample evidence pack", "What a risk team receives, and how verification will work."],
   ["Fit and next steps", "How Shoirly would connect to your agent, and what a pilot looks like."],
 ];
 
@@ -18,34 +18,34 @@ export default function DemoPage() {
     <section className="pb-20 pt-14 md:pb-28 md:pt-20">
       <Container className="grid grid-cols-1 gap-14 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-20">
         <div>
-          <h1 className="max-w-[16ch] text-4xl">See what a bank would see</h1>
+          <h1 className="max-w-[20ch] text-4xl">See what your buyer&apos;s risk team would see</h1>
           <p className="mt-5 max-w-[50ch] text-lg text-graphite">
             Thirty minutes with the founding team. Bring a deal that&apos;s stuck in security review, or just your
             questions.
           </p>
 
           <h2 className="mt-12 text-sm font-medium text-graphite">What we&apos;ll cover</h2>
-          {/* Orchestrated moment: the rules draw in sequence as the page opens (motion-safe CSS only). */}
-          <ol className="relative mt-4">
+          {/* Orchestrated moment: the rules draw in sequence as the page opens (motion-safe CSS only).
+              Numbering comes only from the list itself (styled 01, 02, 03), never duplicated in the text. */}
+          <div className="relative mt-4">
             <span
               aria-hidden
               className="absolute inset-x-0 top-0 h-px origin-left bg-ink motion-safe:animate-draw-x"
             />
-            {agenda.map(([t, d], i) => (
-              <li key={t} className="relative grid grid-cols-[2.5rem_1fr] py-5">
-                <span
-                  aria-hidden
-                  className="absolute inset-x-0 bottom-0 h-px origin-left bg-rule motion-safe:animate-draw-x"
-                  style={{ animationDelay: `${180 + i * 160}ms` }}
-                />
-                <span className="font-mono text-sm text-graphite">{String(i + 1).padStart(2, "0")}</span>
-                <span>
+            <ol className="list-[decimal-leading-zero] pl-10 marker:font-mono marker:text-sm marker:text-graphite">
+              {agenda.map(([t, d], i) => (
+                <li key={t} className="relative py-5">
+                  <span
+                    aria-hidden
+                    className="absolute -left-10 right-0 bottom-0 h-px origin-left bg-rule motion-safe:animate-draw-x"
+                    style={{ animationDelay: `${180 + i * 160}ms` }}
+                  />
                   <span className="block font-semibold">{t}</span>
                   <span className="mt-1 block text-graphite">{d}</span>
-                </span>
-              </li>
-            ))}
-          </ol>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
 
         <aside
