@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { pageMetadata, pageSeo } from "@/lib/metadata";
-import { CalendarBlank, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
-import { ButtonLink } from "@/components/ui/Button";
+import { CalendarBlank } from "@phosphor-icons/react/dist/ssr";
+import { BookingActions } from "@/components/demo/BookingActions";
 import { Container } from "@/components/ui/Layout";
 import { site } from "@/config/site";
 
@@ -62,18 +62,7 @@ export default function DemoPage() {
               ? "Send us a short note with your company and a couple of times that suit. We'll reply within one working day."
               : "Choose a slot that suits you. You'll get a calendar invite straight away."}
           </p>
-          <ButtonLink href={site.bookingUrl} size="lg" className="mt-7 w-full">
-            Book a demo
-          </ButtonLink>
-          {site.bookingIsMailto ? (
-            <p className="mt-4 flex items-center justify-center gap-2 text-sm text-graphite">
-              <EnvelopeSimple size={16} aria-hidden />
-              Opens your email app. Or write to{" "}
-              <a className="link" href={`mailto:${site.email}`}>
-                {site.email}
-              </a>
-            </p>
-          ) : null}
+          <BookingActions />
         </aside>
       </Container>
     </section>

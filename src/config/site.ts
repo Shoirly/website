@@ -5,6 +5,22 @@
 
 const email = "hello@shoirly.com";
 
+// Prefilled demo request, used by every "email us to book" link (mail app, Gmail, Outlook).
+const demoRequest = {
+  subject: "Shoirly demo request",
+  body: [
+    "Hi Shoirly team,",
+    "",
+    "We'd like to book a demo.",
+    "",
+    "Company:",
+    "Name and role:",
+    "A couple of times that suit (with time zone):",
+    "",
+    "Thanks,",
+  ].join("\n"),
+};
+
 export const site = {
   name: "Shoirly",
   url: "https://shoirly.com",
@@ -15,8 +31,9 @@ export const site = {
 
   // TODO(team): swap for the Cal.com booking link once it exists.
   // Every "Book a demo" button reads from here.
-  bookingUrl: `mailto:${email}?subject=${encodeURIComponent("Shoirly demo request")}`,
+  bookingUrl: `mailto:${email}?subject=${encodeURIComponent(demoRequest.subject)}&body=${encodeURIComponent(demoRequest.body)}`,
   bookingIsMailto: true,
+  demoRequest,
 
   social: {
     // TODO(team): add the real company LinkedIn URL, or remove the entry.
