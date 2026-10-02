@@ -54,7 +54,7 @@ export function Audiences() {
                 </li>
               ))}
             </ul>
-            <Link href={c.href} className="link mt-7 inline-block font-medium">
+            <Link href={c.href} className="link mt-5 inline-flex min-h-11 items-center font-medium">
               {c.link}
             </Link>
           </div>

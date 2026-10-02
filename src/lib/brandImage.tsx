@@ -1,57 +1,32 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
-/** Loads the static semibold cut of Schibsted Grotesk for next/og image routes. */
-export async function loadBrandFont() {
-  return readFile(join(process.cwd(), "src/assets/fonts/SchibstedGrotesk-SemiBold.ttf"));
+/** Static font cuts for next/og image routes (variable fonts aren't supported there). */
+export async function loadBrandFonts() {
+  const dir = join(process.cwd(), "src/assets/fonts");
+  const [display, text] = await Promise.all([
+    readFile(join(dir, "BricolageGrotesque-Bold.ttf")),
+    readFile(join(dir, "SchibstedGrotesk-SemiBold.ttf")),
+  ]);
+  return [
+    { name: "Bricolage", data: display, weight: 700 as const },
+    { name: "Schibsted", data: text, weight: 600 as const },
+  ];
+}
+
+/** A logo file from public/brand as a data URL, for use in <img> inside ImageResponse. */
+export async function loadLogoDataUrl(file: "logo.svg" | "logo-white.svg" | "mark.svg" = "logo.svg") {
+  const svg = await readFile(join(process.cwd(), "public/brand", file));
+  return `data:image/svg+xml;base64,${svg.toString("base64")}`;
 }
 
 export const brand = {
   paper: "#fcfdfc",
   ledger: "#eef2f0",
-  ink: "#0d1b1e",
+  ink: "#0f1b17",
   graphite: "#4d5c59",
-  seal: "#0a7350",
+  seal: "#3157f0",
 };
 
-/** Square mark: the wordmark's "s" in paper on ink, with the seal square from the wordmark's tittle. */
-export function MarkSquare({ size }: { size: number }) {
-  return (
-    <div
-      style={{
-        width: size,
-        height: size,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: brand.ink,
-        borderRadius: size * 0.2,
-        position: "relative",
-      }}
-    >
-      <div
-        style={{
-          fontFamily: "Schibsted",
-          fontSize: size * 0.82,
-          lineHeight: 1,
-          color: brand.paper,
-          marginTop: -size * 0.12,
-          letterSpacing: "-0.04em",
-        }}
-      >
-        s
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          right: size * 0.14,
-          top: size * 0.14,
-          width: size * 0.16,
-          height: size * 0.16,
-          background: "#2fb37f",
-          borderRadius: size * 0.02,
-        }}
-      />
-    </div>
-  );
-}
+/** logo.svg viewBox is 3115 x 971. */
+export const LOGO_RATIO = 3115 / 971;

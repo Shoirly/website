@@ -20,11 +20,14 @@ export function ScrambleHash({
   value,
   state,
   className = "",
+  stepMs = 34,
 }: {
   value: string;
   /** idle: dots, signing: noise resolving, signed: final value */
   state: "idle" | "signing" | "signed";
   className?: string;
+  /** Time per resolved character. */
+  stepMs?: number;
 }) {
   const [shown, setShown] = useState(value);
 
@@ -35,9 +38,9 @@ export function ScrambleHash({
       revealed += 1;
       setShown(value.slice(0, revealed) + noise(value.length - revealed));
       if (revealed >= value.length) window.clearInterval(id);
-    }, 34);
+    }, stepMs);
     return () => window.clearInterval(id);
-  }, [state, value]);
+  }, [state, value, stepMs]);
 
   const text = state === "idle" ? "·".repeat(value.length) : state === "signed" ? value : shown;
   return <span className={`font-mono tabular ${className}`}>{text}</span>;

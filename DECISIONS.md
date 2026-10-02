@@ -224,3 +224,76 @@ CLAUDE.md now carries the sharper positioning: EU financial services (banks lead
 ### Phase 0 and 1
 - The screenshot rule now refers to phases. Most of the positioning work had landed in the previous commit. The one change this brief adds is "designed to run where the agent runs" instead of "runs", applied to CLAUDE.md, the home deployment section and /security (last edit to /security before it goes off-limits). CLAUDE.md now says to keep "designed to" until deployments are live.
 - From Phase 2 on I don't touch blog files, /security, /privacy, /terms, the 404, /dora, /about, `src/lib/metadata.ts`, `opengraph-image.tsx`, `icon.tsx`, `apple-icon.tsx`, `sitemap.ts` or `robots.ts`.
+
+### Phase 2: hero animation
+- Pacing went from about 1.9s to about 3.2s per action (arrive 0.8s, authoriser lands 0.95s, signing 0.7s, signed 0.8s), so each action is readable. A full loop is about 22s, which is acceptable because the server-rendered first frame already shows the whole story.
+- The coverage meter now fills steadily (signed out of five). Before, it was signed out of visible, so it dropped each time a new action arrived, which read as a glitch. The percentage and count animate with the same spring as the calculator.
+- "Satisfying moments" are each single, non-looping, transform or opacity only: the authoriser slides in with a seal-wash highlight that fades; the signature resolves at 62ms per character, then the check mark stamps in (spring, slight rotation) with a single expanding ring; the chain node fills with the same ring; and the chain segment back to the previous record draws downward.
+- The pack resolves in two beats: a one-pass sheen across the outline while "Compiling", then the solid card settles, the "Verified" badge stamps in and the DORA tags follow in sequence.
+- Clean loops: the body fades out, then remounts empty under a new cycle key, so rows never visibly unwind or scroll back.
+- Pauses when less than 35% is in view, when the tab is hidden (Page Visibility via `useSyncExternalStore`), or with the Pause button (now a 44px target). Under reduced motion, the static finished frame shows and the Pause button is hidden.
+- Mount animations only run from cycle 1 onwards, so the server HTML (cycle 0) is the finished, fully visible frame.
+- A header status ("Recording", "Checking coverage", "Pack ready") narrates the state. It's text, not a decorative dot.
+
+### Phase 3: how it works and /product
+- One `ScrollStory` component powers both home ("How it works") and /product ("Four stages, one record"), so the two never drift apart.
+- The sticky scene follows one sample action, the €240 refund, through every stage: capture, authorise and sign, coverage check, pack. It reads as one record evolving rather than four unrelated cards. Scene entrances are one-shot CSS keyframes, motion-safe only, that replay when a scene remounts.
+- Scroll-driven: a rail beside the steps fills with `useScroll` progress, step markers fill as they're reached, and a four-segment bar above the sticky scene shows position. Under reduced motion, the rail is static and full and scene swaps are instant.
+- Mobile: a stacked sequence where each step carries its own static scene (animations disabled), on the same rail.
+- The brief now names the Shoirly proxy as the integration point, so it's recorded in CLAUDE.md and the copy says it plainly. SDK languages and frameworks remain a TODO.
+- /product architecture diagram: an environment boundary containing the request path (agent, proxy, tool) and the evidence pipeline (authoriser link, signature, chain, coverage check), with the evidence pack outside it and the crossing labelled "Only proof leaves". Nodes are 48px toggle buttons, and the explanation panel is a polite live region. It defaults to the proxy, the part people ask about first.
+- The diagram's pack text says only proof leaves and that this proof makes the pack verifiable. It doesn't say how readable records reach the bank; that's flagged TODO(team).
+- /product pack card uses "Example Bank", labelled "Illustrative customer" with an "Illustrative data" tag, so nobody reads it as a real customer.
+- Removed the superseded `HowItWorks`, `StepVisuals` and `PipelineDiagram` components.
+
+### Phase 4: calculator
+- One component, `src/components/calculator/StalledDealCalculator.tsx`, with `full` (home) and `compact` (/solutions/agent-vendors) variants. Compact puts the sliders in a 2x2 grid with results underneath.
+- Sliders stay native `<input type="range">`, for free keyboard support (arrows, Page Up/Down, Home/End) and screen-reader semantics. They feel tactile through CSS: a 44px tall hit area, a 6px track, and a thumb that grows with a seal halo on hover, grows further while dragging, and gets a double ring on keyboard focus. A small scale "pop" on the value confirms each change, and is skipped under reduced motion.
+- Before/after review time is two bars on the same 40-week scale, with no background track, as the taste skill asks. The "Today" bar is neutral and the "With evidence" bar is Seal.
+- The screen-reader live region updates 700ms after input settles, rather than on every step of a drag. Each slider keeps its `aria-valuetext`.
+- The assumption is now one line ("Estimate only..."), with "Book a demo" beside it on desktop and under it on mobile.
+- On the vendor page, the FAQ moved to the Ledger tone so the new calculator section and the FAQ don't sit as two consecutive Paper sections.
+
+### Phase 5: motion pass
+- One orchestrated moment per page I'm allowed to edit:
+  - Home: the hero trail.
+  - /product: the architecture diagram's single signal run, where nodes light in order once and the proof line draws across the boundary.
+  - /solutions/agent-vendors: a seal rule draws across each review stage in order, questionnaire to oversight.
+  - /solutions/banks: the three verification checks run and resolve one after another.
+  - /demo: the agenda rules draw as the page opens.
+- Other sections stay still. There's no generic fade-up anywhere.
+- `useRevealOnce` makes moments safe. The server renders the finished state, a moment only "arms" after hydration if the element is off-screen and motion is allowed, and content already on screen never replays.
+- react-bits: adapted StatusMark (trimmed to pending, running and done; recoloured) for the banks checks, because "checking, then verified" is exactly what it animates. Nothing else new was taken. The existing Magnet, DecryptedText, CountUp and SpotlightCard adaptations stay where they were.
+- Page transitions: `src/app/template.tsx` fades each new route in on client navigation (opacity only, 280ms). It skips the first load so first paint and LCP aren't delayed, and is instant under reduced motion. It wraps every route, including the ones other agents own, without editing their files.
+- Header: transparent border at the top of the page. After 8px of scroll (via Motion's `useScroll`, not a scroll listener) it gains a Rule border, a soft shadow and a backdrop blur. It doesn't shrink, because a height change would shift layout.
+- Desktop nav: a hover pill slides between items (shared `layoutId`), and a seal underline marks the current section and slides when the route changes. The header sits in `MotionConfig reducedMotion="user"`, so both snap instead of slide under reduced motion.
+- Smooth in-page scrolling stays the CSS `scroll-behavior: smooth` set under `prefers-reduced-motion: no-preference`, with `scroll-padding-top` clearing the sticky header.
+- Measured layout shift while scrolling every page I edited: 0.0000 on all five.
+
+### Phase 6: responsive pass (one round)
+- One round of screenshots (home, /product, both solutions pages, at 390px and 1440px) plus a tap-target measurement. No page overflowed sideways.
+- Tap targets: medium buttons are 44px below `lg` (40px from `lg` up, where input is a pointer). Also raised to 44px on phones: menu toggle, logo link, skip link, audience links, footer links and email, the mobile menu's email link, and the banks "Copy" button. Links inside running text are exempt, as WCAG 2.5.8 allows. Re-measured afterwards: none under 44px on the four pages.
+- Hero trail on phones: "Coverage check passed" shortens to "Check passed" and "actions" drops out of the count under 420px. The pack subtitle loses its signature count on phones, so the DORA tags no longer crowd the card's edge.
+- Story scenes: the label column narrows to 5.5rem on phones, so action and time values stop truncating.
+- Story step markers now sit level with each step title rather than the middle of the block.
+- Pack card: stat values never wrap ("1,284 of 1,284" stayed broken across lines on phones).
+- Calculator labels shortened to "Annual contract value" and "Weeks in security review", so they fit beside their values on phones.
+- Banks request template: removed hard line breaks mid-sentence, so it wraps naturally on phones and in email clients.
+- Architecture diagram: a wider boundary-crossing column, so "Only proof leaves" doesn't squeeze.
+
+## Real logo (2 Oct 2026)
+
+- The logo files moved from `/shoirly-logo` to `public/brand/` unchanged (including their C2PA content credentials metadata). The README moved with them as the usage reference.
+- `Logo.tsx` now renders `logo.svg` through `next/image` (unoptimized SVG, fixed dimensions, so no layout shift), with a `tone="dark"` option for `logo-white.svg`. No surface on the site is dark yet, so the white version is wired up but unused. The footer uses the wordmark at 48px. The old typographic wordmark is gone.
+- **Overruling the logo README in the header:** the README says to use the mark alone below about 48px tall. The header shows the full wordmark at 36px (about 116px wide), because a mark-only header loses the company name and a 48px wordmark would crowd a 64px header, especially on phones. At 36px the seal still renders at roughly two thirds of the logo's height. Revisit if the team prefers mark plus text, or a taller header.
+- Favicon set rendered from `mark.svg` in the browser at each exact size: `favicon.ico` (16, 32, 48), `icon.svg` (modern browsers), a 180px apple touch icon on white (iOS fills transparency with black), and 192 and 512px manifest icons with a new `manifest.ts`. The old font-drawn `icon.tsx` and `apple-icon.tsx` were removed.
+- The default OG image now uses `logo.svg` at 72px tall, with the headline in Bricolage and the subline in Schibsted, from static font cuts in `src/assets/fonts` (OFL licences included).
+- **Accent switched from green `#0A7350` to the logo's Seal blue `#3157F0`.** The logo's "o" is the brand's verification seal, in blue, so green "verified" ticks beside it meant two verification colours. Contrast: 5.5:1 on Paper, 5.0:1 on Ledger, 5.6:1 for white text on blue. Seal-deep `#2443C7` (7.6:1 on Paper) carries accent text, and Seal-wash `#E8EDFE` is the tint. The CLAUDE.md warning about "purple-to-blue gradient washes" isn't triggered, because this is one flat blue with no gradients.
+- **Ink switched to the logo's `#0F1B17`** (from `#0D1B1E`, a near-identical green-black). Shadows and the hero's ledger grid were retinted to match. The green-grey neutrals (Paper, Ledger, Rule, Graphite) stay, because they sit naturally with this ink.
+- **Headings switched to Bricolage Grotesque** (weight 650, optical sizing on), because Schibsted headings directly under a Bricolage wordmark read as two competing grotesques. Body stays Schibsted Grotesk and data stays IBM Plex Mono.
+- The favicon and OG files were previously off-limits to me because other agents own metadata. They changed only because the logo brief asked for it. Metadata text, sitemap and robots weren't touched.
+
+## Merging Hoplite's work (3 Oct 2026)
+
+- Hoplite's legal-drafts merge (`9295e13`: privacy, terms, 404) fast-forwarded cleanly onto my logo commit and builds. Its privacy draft also removed an unverified claim of mine ("does not set advertising cookies"), which is an improvement.
+- Hoplite's SEO branch (`hoplite/morgantina-f124b23c--seo`) couldn't merge as-is. It was branched before the logo work, so it deleted the logo-based `opengraph-image.tsx`, drew "shoirly" as plain text on its social cards, imported a font helper (`loadBrandFont`) that the logo commit had replaced, and conflicted with the legal merge's metadata in privacy and terms. I merged it with a merge commit, so it's revertable with `git revert -m 1`. I kept its design (`pageSeo` as the single source of titles and descriptions, a social image per page at `/og/...`, Organisation schema, and a sitemap built from `pageSeo`) and resolved the clashes: privacy and terms use `pageSeo`, with the legal merge's newer descriptions carried into it, and the per-page social image now uses the real logo and the Bricolage/Schibsted fonts.

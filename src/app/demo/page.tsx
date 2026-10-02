@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import { CalendarBlank, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Layout";
 import { site } from "@/config/site";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Book a demo",
-  description:
-    "See a sample evidence pack and how Shoirly fits into a bank's security review. Thirty minutes with the founding team.",
-  path: "/demo",
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/demo"]);
 
 const agenda = [
   ["Your bank deals", "Where your security reviews stall today, and what the bank has asked for."],
@@ -30,9 +25,19 @@ export default function DemoPage() {
           </p>
 
           <h2 className="mt-12 text-sm font-medium text-graphite">What we&apos;ll cover</h2>
-          <ol className="mt-4 border-t border-ink">
+          {/* Orchestrated moment: the rules draw in sequence as the page opens (motion-safe CSS only). */}
+          <ol className="relative mt-4">
+            <span
+              aria-hidden
+              className="absolute inset-x-0 top-0 h-px origin-left bg-ink motion-safe:animate-draw-x"
+            />
             {agenda.map(([t, d], i) => (
-              <li key={t} className="grid grid-cols-[2.5rem_1fr] border-b border-rule py-5">
+              <li key={t} className="relative grid grid-cols-[2.5rem_1fr] py-5">
+                <span
+                  aria-hidden
+                  className="absolute inset-x-0 bottom-0 h-px origin-left bg-rule motion-safe:animate-draw-x"
+                  style={{ animationDelay: `${180 + i * 160}ms` }}
+                />
                 <span className="font-mono text-sm text-graphite">{String(i + 1).padStart(2, "0")}</span>
                 <span>
                   <span className="block font-semibold">{t}</span>

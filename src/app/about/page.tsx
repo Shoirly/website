@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { PageHeader, Section } from "@/components/ui/Layout";
 
-export const metadata: Metadata = pageMetadata({
-  title: "About",
-  description: "Shoirly is a four-person team in Dublin building signed evidence for AI agents that act for banks.",
-  path: "/about",
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/about"]);
 
 // TODO(team): real names, roles, one-line backgrounds and photos for all four founders.
 const team = [

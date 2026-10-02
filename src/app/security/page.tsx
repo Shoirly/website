@@ -3,14 +3,9 @@ import { ArrowUpRight, LockSimple } from "@phosphor-icons/react/dist/ssr";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { PageHeader, Section } from "@/components/ui/Layout";
 import { site } from "@/config/site";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Security: how evidence is signed, where Shoirly runs, what leaves",
-  description:
-    "How Shoirly signs and chains evidence records, why it is designed to run where your agent runs, and why only signatures, hashes and coverage counts ever leave.",
-  path: "/security",
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/security"]);
 
 const signing = [
   {
