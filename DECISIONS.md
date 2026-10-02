@@ -234,3 +234,14 @@ CLAUDE.md now carries the sharper positioning: EU financial services (banks lead
 - Pauses when less than 35% is in view, when the tab is hidden (Page Visibility via `useSyncExternalStore`), or with the Pause button (now a 44px target). Under reduced motion, the static finished frame shows and the Pause button is hidden.
 - Mount animations only run from cycle 1 onwards, so the server HTML (cycle 0) is the finished, fully visible frame.
 - A header status ("Recording", "Checking coverage", "Pack ready") narrates the state. It's text, not a decorative dot.
+
+### Phase 3: how it works and /product
+- One `ScrollStory` component powers both home ("How it works") and /product ("Four stages, one record"), so the two never drift apart.
+- The sticky scene follows one sample action, the €240 refund, through every stage: capture, authorise and sign, coverage check, pack. It reads as one record evolving rather than four unrelated cards. Scene entrances are one-shot CSS keyframes, motion-safe only, that replay when a scene remounts.
+- Scroll-driven: a rail beside the steps fills with `useScroll` progress, step markers fill as they're reached, and a four-segment bar above the sticky scene shows position. Under reduced motion, the rail is static and full and scene swaps are instant.
+- Mobile: a stacked sequence where each step carries its own static scene (animations disabled), on the same rail.
+- The brief now names the Shoirly proxy as the integration point, so it's recorded in CLAUDE.md and the copy says it plainly. SDK languages and frameworks remain a TODO.
+- /product architecture diagram: an environment boundary containing the request path (agent, proxy, tool) and the evidence pipeline (authoriser link, signature, chain, coverage check), with the evidence pack outside it and the crossing labelled "Only proof leaves". Nodes are 48px toggle buttons, and the explanation panel is a polite live region. It defaults to the proxy, the part people ask about first.
+- The diagram's pack text says only proof leaves and that this proof makes the pack verifiable. It doesn't say how readable records reach the bank; that's flagged TODO(team).
+- /product pack card uses "Example Bank", labelled "Illustrative customer" with an "Illustrative data" tag, so nobody reads it as a real customer.
+- Removed the superseded `HowItWorks`, `StepVisuals` and `PipelineDiagram` components.

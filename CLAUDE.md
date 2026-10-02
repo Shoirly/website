@@ -15,6 +15,7 @@ Shoirly gives AI agent vendors independent, verifiable evidence of what their ag
   - Trust centres and vendor-risk tools run on documents. Our packs are live evidence they can carry.
 - **Positioning line:** "Vanta proves you have controls. We prove they held." Shoirly works alongside Vanta and trust centres. It does not replace them.
 - **Deployment:** Shoirly is designed to run where the agent runs (the vendor's cloud or the bank's). Say "designed to run", not "runs", until deployments are live. Raw data stays there. Only signatures, hashes and coverage counts leave. Line: "Your data never leaves. Only the proof does."
+- **Architecture:** the agent calls its tools through the Shoirly proxy. Each call is linked to its authoriser, signed, added to a chain, and counted by the coverage check. Only proof leaves the environment for the evidence pack. SDK languages and supported frameworks are still unknown (`TODO(team)`).
 - **Roadmap (never present as shipped):** hardware-isolated signing, eIDAS qualified timestamps, trust-centre integrations. Always mark these as not yet available.
 - **Stage:** early, taking on design partners. Say so plainly where it helps.
 - **Second audience:** risk, procurement and third-party oversight teams at banks, payment firms and insurers, who receive the evidence.
