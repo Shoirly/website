@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = pageMetadata({
   title: "Security: how evidence is signed, where Shoirly runs, what leaves",
   description:
-    "How Shoirly signs and chains evidence records, why it runs where your agent runs, and why only signatures, hashes and coverage counts ever leave.",
+    "How Shoirly signs and chains evidence records, why it is designed to run where your agent runs, and why only signatures, hashes and coverage counts ever leave.",
   path: "/security",
 });
 
@@ -96,7 +96,7 @@ export default function SecurityPage() {
               Where Shoirly runs
             </h2>
             <p className="mt-4 max-w-[42ch] text-lg text-graphite">
-              Shoirly runs where your agent runs: in your cloud, or in the bank&apos;s. Raw data stays there.
+              Shoirly is designed to run where your agent runs: in your cloud, or in the bank&apos;s. Raw data stays there.
             </p>
             <p className="mt-6 text-xl font-semibold">Your data never leaves. Only the proof does.</p>
             {/* TODO(team): list the supported deployment targets (clouds, regions, Kubernetes, etc.). */}

@@ -218,3 +218,9 @@ CLAUDE.md now carries the sharper positioning: EU financial services (banks lead
 - Metadata: a shared `pageMetadata()` helper sets the canonical and og:url together on https://shoirly.com. While checking, I found subpages had no og:image, because a page-level openGraph replaces the root social card. The helper now attaches the card and the Twitter image explicitly.
 - Nav and footer labels: "For banks, payment firms and insurers" in the Solutions menu (widened to fit), and "For financial firms" in the footer, where space is tight. The /solutions/banks URL is unchanged.
 - Fixed a dropdown quirk found in testing: hovering opened Solutions, and a click straight after closed it again.
+
+## Multi-phase brief (2 Oct 2026, later)
+
+### Phase 0 and 1
+- The screenshot rule now refers to phases. Most of the positioning work had landed in the previous commit. The one change this brief adds is "designed to run where the agent runs" instead of "runs", applied to CLAUDE.md, the home deployment section and /security (last edit to /security before it goes off-limits). CLAUDE.md now says to keep "designed to" until deployments are live.
+- From Phase 2 on I don't touch blog files, /security, /privacy, /terms, the 404, /dora, /about, `src/lib/metadata.ts`, `opengraph-image.tsx`, `icon.tsx`, `apple-icon.tsx`, `sitemap.ts` or `robots.ts`.

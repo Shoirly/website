@@ -13,7 +13,7 @@ export function Deployment() {
             Your data never leaves. Only the proof does.
           </h2>
           <p className="mt-5 max-w-[44ch] text-lg text-graphite">
-            Shoirly runs where your agent runs, in your cloud or your customer&apos;s. Action records and customer data
+            Shoirly is designed to run where your agent runs, in your cloud or your customer&apos;s. Action records and customer data
             stay there. Only signatures, hashes and coverage counts leave.
           </p>
           <p className="mt-6">
