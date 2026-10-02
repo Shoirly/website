@@ -1,0 +1,30 @@
+.body {
+  max-width: 65ch;
+  font-size: 1.125rem;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+
+.body > * + * { margin-top: 1.4em; }
+.body h2 { margin-top: 2.5em; font-size: var(--text-2xl); line-height: 1.25; }
+.body h3 { margin-top: 2em; font-size: var(--text-xl); line-height: 1.35; }
+.body h4 { margin-top: 1.8em; font-size: 1.125rem; font-weight: 600; }
+.body :is(h2, h3, h4) + * { margin-top: 0.8em; }
+.body :is(h2, h3, h4) { scroll-margin-top: 6rem; }
+.body :is(ul, ol) { padding-left: 1.4em; }
+.body ul { list-style: disc; }
+.body ol { list-style: decimal; }
+.body li + li { margin-top: 0.65em; }
+.body li::marker { color: var(--color-seal); }
+.body a { color: var(--color-seal-deep); text-decoration: underline; text-underline-offset: 0.2em; }
+.body blockquote { border-left: 3px solid var(--color-seal); padding: 0.5em 0 0.5em 1.25em; color: var(--color-graphite); }
+.body code { font-family: var(--font-mono); font-size: 0.85em; background: var(--color-ledger); padding: 0.15em 0.3em; border-radius: 3px; }
+.body pre { max-width: 100%; overflow-x: auto; border: 1px solid var(--color-rule); border-radius: 6px; background: var(--color-ledger); padding: 1.25rem; line-height: 1.7; overflow-wrap: normal; }
+.body pre code { padding: 0; background: none; }
+.tableScroll { max-width: 100%; overflow-x: auto; border: 1px solid var(--color-rule); border-radius: 6px; }
+.body table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9375rem; line-height: 1.65; }
+.body caption { padding: 1rem; text-align: left; font-weight: 600; }
+.body th { background: var(--color-ledger); font-weight: 600; }
+.body :is(th, td) { min-width: 10rem; padding: 0.9rem 1rem; vertical-align: top; border-bottom: 1px solid var(--color-rule); }
+.body tr:last-child td { border-bottom: none; }
+.body hr { border: 0; border-top: 1px solid var(--color-rule); margin-block: 2.5rem; }
