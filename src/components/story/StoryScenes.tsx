@@ -26,7 +26,7 @@ function SceneFrame({ label, children }: { label: string; children: ReactNode })
 
 function Field({ k, children, className = "" }: { k: string; children: ReactNode; className?: string }) {
   return (
-    <div className={`grid grid-cols-[7rem_minmax(0,1fr)] items-baseline gap-3 py-2 text-xs ${className}`}>
+    <div className={`grid grid-cols-[5.5rem_minmax(0,1fr)] items-baseline gap-3 py-2 text-xs sm:grid-cols-[7rem_minmax(0,1fr)] ${className}`}>
       <dt className="text-graphite">{k}</dt>
       <dd className="min-w-0 truncate text-ink">{children}</dd>
     </div>

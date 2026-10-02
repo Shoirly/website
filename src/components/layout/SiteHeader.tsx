@@ -183,7 +183,7 @@ function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose: () =>
             </ul>
             <p className="mt-8 text-sm text-graphite">
               Questions?{" "}
-              <a className="link" href={`mailto:${site.email}`}>
+              <a className="link inline-flex min-h-11 items-center" href={`mailto:${site.email}`}>
                 {site.email}
               </a>
             </p>
@@ -244,7 +244,7 @@ export function SiteHeader() {
     <>
       <a
         href="#main"
-        className="sr-only z-[60] rounded-md bg-ink px-4 py-2 text-sm text-paper focus:not-sr-only focus:fixed focus:left-4 focus:top-3"
+        className="sr-only z-[60] rounded-md bg-ink px-4 py-3 text-sm text-paper focus:not-sr-only focus:fixed focus:left-4 focus:top-2"
       >
         Skip to content
       </a>
@@ -306,7 +306,7 @@ export function SiteHeader() {
             </ButtonLink>
             <button
               type="button"
-              className="inline-flex size-10 items-center justify-center rounded-md text-ink hover:bg-ink-soft lg:hidden"
+              className="inline-flex size-11 items-center justify-center rounded-md text-ink hover:bg-ink-soft lg:hidden"
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
               aria-label={menuOpen ? "Close menu" : "Open menu"}

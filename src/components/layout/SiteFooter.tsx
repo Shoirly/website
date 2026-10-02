@@ -14,7 +14,7 @@ export function SiteFooter() {
             <p className="mt-4 max-w-[34ch] text-sm text-graphite">
               Signed evidence of what your AI agent did, and who approved it.
             </p>
-            <a className="link mt-6 inline-block text-sm" href={`mailto:${site.email}`}>
+            <a className="link mt-4 inline-flex min-h-11 items-center text-sm" href={`mailto:${site.email}`}>
               {site.email}
             </a>
           </div>
@@ -22,12 +22,12 @@ export function SiteFooter() {
             {site.footer.map((col) => (
               <div key={col.heading}>
                 <h2 className="text-sm font-semibold text-ink">{col.heading}</h2>
-                <ul className="mt-3 space-y-2">
+                <ul className="mt-2 lg:mt-3 lg:space-y-2">
                   {col.links.map((l) => (
                     <li key={l.href}>
                       <Link
                         href={l.href}
-                        className="text-sm text-graphite transition-colors duration-150 hover:text-ink"
+                        className="inline-flex min-h-11 items-center text-sm text-graphite transition-colors duration-150 hover:text-ink lg:min-h-0"
                       >
                         {l.label}
                       </Link>

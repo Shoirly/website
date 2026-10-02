@@ -136,7 +136,7 @@ export function ArchitectureDiagram() {
 
   return (
     <div ref={ref}>
-      <div className="grid grid-cols-1 items-center gap-3 lg:grid-cols-[minmax(0,1fr)_7.5rem_minmax(0,11rem)] lg:gap-0">
+      <div className="grid grid-cols-1 items-center gap-3 lg:grid-cols-[minmax(0,1fr)_9.5rem_minmax(0,10.5rem)] lg:gap-0">
         {/* The environment boundary */}
         <div
           role="group"

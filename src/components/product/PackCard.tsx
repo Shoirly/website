@@ -39,7 +39,7 @@ export function PackCard() {
         {stats.map((s) => (
           <div key={s.k}>
             <dt className="text-xs text-graphite">{s.k}</dt>
-            <dd className="mt-1 flex items-center gap-1.5 font-mono text-base font-medium tabular">
+            <dd className="mt-1 flex items-center gap-1.5 whitespace-nowrap font-mono text-[15px] font-medium tabular sm:text-base">
               {s.v}
               {s.ok ? <CheckCircle size={15} weight="fill" className="text-seal" aria-label="verified" /> : null}
             </dd>

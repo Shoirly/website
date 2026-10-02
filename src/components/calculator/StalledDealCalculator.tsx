@@ -148,7 +148,7 @@ export function StalledDealCalculator({ variant = "full" }: { variant?: "full" |
         display={String(deals)}
       />
       <Slider
-        label="Average contract value, per year"
+        label="Annual contract value"
         value={acv}
         min={20_000}
         max={500_000}
@@ -157,7 +157,7 @@ export function StalledDealCalculator({ variant = "full" }: { variant?: "full" |
         display={eur.format(acv)}
       />
       <Slider
-        label="Weeks stuck in security review"
+        label="Weeks in security review"
         value={weeks}
         min={2}
         max={MAX_WEEKS}

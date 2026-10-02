@@ -285,9 +285,18 @@ function TrailBody({
       {/* Coverage */}
       <div className="relative border-t border-rule bg-paper px-4 py-3">
         <div className="flex items-baseline justify-between gap-3 text-xs">
-          <span className="font-medium text-ink">{state.check ? "Coverage check passed" : "Coverage"}</span>
+          <span className="whitespace-nowrap font-medium text-ink">
+            {state.check ? (
+              <>
+                <span className="hidden min-[420px]:inline">Coverage check </span>
+                <span className="min-[420px]:hidden">Check </span>passed
+              </>
+            ) : (
+              "Coverage"
+            )}
+          </span>
           <span className="font-mono tabular text-graphite">
-            <AnimatedNumber value={state.signed} format={count} /> of {N} actions signed
+            <AnimatedNumber value={state.signed} format={count} /> of {N}<span className="hidden min-[420px]:inline"> actions</span> signed
             <AnimatedNumber value={coverage} format={pct} className="ml-2 inline-block w-[4ch] text-right font-medium text-ink" />
           </span>
         </div>
@@ -365,7 +374,7 @@ function TrailBody({
                 <div>
                   <p className="text-sm font-semibold leading-5">Evidence pack</p>
                   <p className="font-mono text-[11px] leading-4 text-graphite">
-                    Sample bank, Sep 2026, {N} of {N} signatures verified
+                    Sample bank, Sep 2026<span className="hidden sm:inline">, {N} of {N} signatures verified</span>
                   </p>
                 </div>
                 <motion.span

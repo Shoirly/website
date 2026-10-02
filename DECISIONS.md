@@ -269,3 +269,14 @@ CLAUDE.md now carries the sharper positioning: EU financial services (banks lead
 - Desktop nav: a hover pill slides between items (shared `layoutId`), and a seal underline marks the current section and slides when the route changes. The header sits in `MotionConfig reducedMotion="user"`, so both snap instead of slide under reduced motion.
 - Smooth in-page scrolling stays the CSS `scroll-behavior: smooth` set under `prefers-reduced-motion: no-preference`, with `scroll-padding-top` clearing the sticky header.
 - Measured layout shift while scrolling every page I edited: 0.0000 on all five.
+
+### Phase 6: responsive pass (one round)
+- One round of screenshots (home, /product, both solutions pages, at 390px and 1440px) plus a tap-target measurement. No page overflowed sideways.
+- Tap targets: medium buttons are 44px below `lg` (40px from `lg` up, where input is a pointer). Also raised to 44px on phones: menu toggle, logo link, skip link, audience links, footer links and email, the mobile menu's email link, and the banks "Copy" button. Links inside running text are exempt, as WCAG 2.5.8 allows. Re-measured afterwards: none under 44px on the four pages.
+- Hero trail on phones: "Coverage check passed" shortens to "Check passed" and "actions" drops out of the count under 420px. The pack subtitle loses its signature count on phones, so the DORA tags no longer crowd the card's edge.
+- Story scenes: the label column narrows to 5.5rem on phones, so action and time values stop truncating.
+- Story step markers now sit level with each step title rather than the middle of the block.
+- Pack card: stat values never wrap ("1,284 of 1,284" stayed broken across lines on phones).
+- Calculator labels shortened to "Annual contract value" and "Weeks in security review", so they fit beside their values on phones.
+- Banks request template: removed hard line breaks mid-sentence, so it wraps naturally on phones and in email clients.
+- Architecture diagram: a wider boundary-crossing column, so "Only proof leaves" doesn't squeeze.

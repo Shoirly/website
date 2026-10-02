@@ -26,7 +26,7 @@ export function Wordmark({ className = "" }: { className?: string }) {
 
 export function Logo({ className = "" }: { className?: string }) {
   return (
-    <Link href="/" className={`inline-flex rounded-sm ${className}`} aria-label="Shoirly home">
+    <Link href="/" className={`inline-flex min-h-11 items-center rounded-sm ${className}`} aria-label="Shoirly home">
       <Wordmark className="text-[1.5rem] leading-none" />
     </Link>
   );

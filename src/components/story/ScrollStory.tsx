@@ -30,16 +30,16 @@ function StepBlock({
 
   return (
     <li ref={ref} className="relative pl-12 lg:flex lg:min-h-[52vh] lg:items-center">
-      {/* Step marker, sitting on the rail */}
-      <span
-        aria-hidden
-        className={`absolute left-0 top-0 flex size-[23px] items-center justify-center rounded-full border font-mono text-[11px] tabular transition-colors duration-300 lg:top-1/2 lg:-translate-y-1/2 ${
-          reached ? "border-seal bg-seal text-paper" : "border-rule-strong bg-paper text-graphite"
-        }`}
-      >
-        {index + 1}
-      </span>
-      <div className="w-full lg:py-6">
+      <div className="relative w-full lg:py-6">
+        {/* Step marker on the rail, level with the step title */}
+        <span
+          aria-hidden
+          className={`absolute -left-12 top-1 flex size-[23px] items-center justify-center rounded-full border font-mono text-[11px] tabular transition-colors duration-300 lg:top-[calc(1.5rem+0.4rem)] ${
+            reached ? "border-seal bg-seal text-paper" : "border-rule-strong bg-paper text-graphite"
+          }`}
+        >
+          {index + 1}
+        </span>
         <h3
           className={`max-w-[24ch] text-2xl transition-colors duration-300 lg:text-[1.875rem] lg:leading-tight ${
             active ? "text-ink" : "lg:text-graphite"

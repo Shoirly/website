@@ -43,8 +43,7 @@ const template = `Subject: Evidence of agent actions for our customers
 
 Hello,
 
-As part of our ICT third-party oversight under DORA, we'd like
-evidence of the actions your AI agent takes for our customers.
+As part of our ICT third-party oversight under DORA, we'd like evidence of the actions your AI agent takes for our customers.
 
 For the period [start date] to [end date], please provide:
 
@@ -53,8 +52,7 @@ For the period [start date] to [end date], please provide:
 3. A coverage check showing whether any actions went unrecorded
 4. A way for us to verify the records independently
 
-A per-customer evidence pack (for example from Shoirly) would meet
-this request.
+A per-customer evidence pack (for example from Shoirly) would meet this request.
 
 Thank you,
 [Name], [Role]`;
