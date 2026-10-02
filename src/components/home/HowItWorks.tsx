@@ -69,7 +69,7 @@ export function HowItWorks({ steps }: { steps: Step[] }) {
           How it works
         </h2>
         <p className="mt-4 max-w-[52ch] text-lg text-graphite">
-          Four steps, from your agent&apos;s first action to a pack a bank can check for itself.
+          Four steps, from your agent&apos;s first action to a pack your customer&apos;s risk team can read.
         </p>
 
         <div className="mt-12 grid grid-cols-1 gap-16 lg:mt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">

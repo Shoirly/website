@@ -200,3 +200,21 @@ Compared at 1440px and 390px against the Secureframe and Sprinto captures.
 5. **The trust-centre flow was four generic boxes.** The connectors now say what passes along them (actions, signed packs, shared evidence), so the diagram explains something.
 
 Smaller fixes from the same pass: mobile overflow in the "Connect your agent" preview, uneven coverage labels on mobile, DORA article refs breaking mid-range, wide tabular commas in the calculator figures (now in Plex Mono), the social card's tittle position, and the hero pack's tags overflowing on phones.
+
+## Positioning update (2 Oct 2026)
+
+CLAUDE.md now carries the sharper positioning: EU financial services (banks lead, plus payment firms and insurers), verifiable evidence rather than logs, where we sit against certifications, guardrails and trust centres, deployment where the agent runs, the roadmap, and design-partner stage. Calls made while applying it:
+
+- The "what they get today" table moved to one shared source (`src/content/evidenceToday.ts`), so the home page and /solutions/banks always match. It gained the two new rows: contracts and service reviews, and AI agent certifications such as AIUC-1.
+- New home section "Your data never leaves. Only the proof does." sits after the evidence preview, as a boundary diagram (what stays, what leaves). It says only what the brief says leaves: signatures, hashes and coverage counts. It doesn't claim the evidence pack is built from those alone, because the pack shows readable records.
+- /security's earlier "we store / we don't store" lists were my guesses. They're replaced by the brief's deployment model: "Stays where your agent runs" and "Leaves". A new "Our hosted service" row covers what Shoirly itself holds.
+- The roadmap appears only on /security, under "What we're building next", with a "Not yet available" tag on each item.
+- Every "proves nothing went unrecorded" became "shows whether anything went unrecorded". The 404 joke changed too, because it implied an agent's actions never go unrecorded.
+- Copy that said banks can check evidence themselves now says they'll be able to once the verification guide is published. That covers the product page, the banks page, the security page, the home evidence preview and the audience split.
+- "Plugs into Vanta" became "packs you can share through Vanta or your trust centre" everywhere, and the old TODO about naming integrations was removed.
+- Product page: "Not a decision-maker" became "Not a guardrail", using the brief's line "Guardrail tools block actions. We prove them."
+- Vendor FAQ gained "We already log everything" and an AIUC-1 question, because those are the two objections the new positioning answers.
+- The stage line sits under the CTAs on the home hero and /solutions/agent-vendors, and as the first row of "Where we are today" on /security. On the home hero this deliberately breaks the taste skill's "no line under the CTAs" rule, because the brief asks for it there.
+- Metadata: a shared `pageMetadata()` helper sets the canonical and og:url together on https://shoirly.com. While checking, I found subpages had no og:image, because a page-level openGraph replaces the root social card. The helper now attaches the card and the Twitter image explicitly.
+- Nav and footer labels: "For banks, payment firms and insurers" in the Solutions menu (widened to fit), and "For financial firms" in the footer, where space is tight. The /solutions/banks URL is unchanged.
+- Fixed a dropdown quirk found in testing: hovering opened Solutions, and a click straight after closed it again.

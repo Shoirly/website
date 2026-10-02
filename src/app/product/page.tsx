@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { ConnectVisual, CoverageVisual, ShareVisual, SignVisual } from "@/components/home/StepVisuals";
 import { PipelineDiagram, type Stage } from "@/components/product/PipelineDiagram";
 import { PageHeader, Section } from "@/components/ui/Layout";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Product: how Shoirly works",
   description:
-    "Capture each agent action, sign it with who authorised it, prove coverage, and share a per-customer evidence pack mapped to DORA.",
-  alternates: { canonical: "/product" },
-};
+    "Capture each agent action, sign it with who authorised it, check coverage, and share a per-customer evidence pack mapped to DORA.",
+  path: "/product",
+});
 
 const stages: Stage[] = [
   {
@@ -50,7 +51,7 @@ const stages: Stage[] = [
   {
     key: "coverage",
     name: "Coverage check",
-    short: "Prove nothing is missing",
+    short: "Show whether anything is missing",
     detail: (
       <>
         <p>
@@ -73,8 +74,8 @@ const stages: Stage[] = [
           about, organised by the DORA areas its risk team reports against.
         </p>
         <p>
-          Share it through Vanta or your trust centre, or send it directly. The bank can check the signatures without
-          taking your word for it.
+          Share it through Vanta or your trust centre, or send it directly. Once our verification guide is published,
+          the bank will be able to check the signatures itself.
         </p>
       </>
     ),
@@ -98,11 +99,11 @@ const notThis = [
   },
   {
     title: "Not a gateway or observability tool",
-    body: "Logs tell you calls happened. Shoirly ties each action to its authorisation and proves the record is complete.",
+    body: "Logs tell you calls happened. Shoirly ties each action to its authorisation and shows whether anything went unrecorded.",
   },
   {
-    title: "Not a decision-maker",
-    body: "Shoirly doesn't approve or block what your agent does. It records what was allowed, by whom, and what happened.",
+    title: "Not a guardrail",
+    body: "Guardrail tools block actions. Shoirly doesn't approve or block anything. It proves what was allowed, by whom, and what happened.",
   },
 ];
 
@@ -111,7 +112,7 @@ export default function ProductPage() {
     <>
       <PageHeader
         title="Evidence of every action, from capture to the bank's desk"
-        lead="Four stages turn what your agent does into a pack a bank's risk team can read and check for itself."
+        lead="Four stages turn what your agent does into a pack a risk team at a bank, insurer or payment firm can read."
       />
 
       <Section labelledBy="pipeline-title">

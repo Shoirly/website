@@ -44,7 +44,7 @@ export default async function OpengraphImage() {
             Signed proof of what your AI agent did, and who approved it.
           </div>
           <div style={{ marginTop: 28, fontSize: 30, color: brand.graphite }}>
-            Per-customer evidence for bank security reviews, mapped to DORA.
+            Per-customer evidence for security reviews at banks, insurers and payment firms.
           </div>
         </div>
       </div>

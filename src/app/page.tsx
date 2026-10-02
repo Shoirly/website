@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { site } from "@/config/site";
+import { pageMetadata } from "@/lib/metadata";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { Audiences } from "@/components/home/Audiences";
+import { Deployment } from "@/components/home/Deployment";
 import { EvidencePreview } from "@/components/home/EvidencePreview";
 import { Hero } from "@/components/home/Hero";
 import { HowItWorks, type Step } from "@/components/home/HowItWorks";
@@ -9,9 +12,10 @@ import { StalledDealCalculator } from "@/components/home/StalledDealCalculator";
 import { ConnectVisual, CoverageVisual, ShareVisual, SignVisual } from "@/components/home/StepVisuals";
 import { TrustCentre } from "@/components/home/TrustCentre";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/" },
-};
+export const metadata: Metadata = pageMetadata({
+  description: site.description,
+  path: "/",
+});
 
 const steps: Step[] = [
   {
@@ -25,13 +29,13 @@ const steps: Step[] = [
     visual: <SignVisual />,
   },
   {
-    title: "A coverage check proves nothing went unrecorded",
+    title: "A coverage check shows whether anything went unrecorded",
     body: "Shoirly counts what your agent attempted against what it signed. If anything slipped through, the gap is visible, to you first.",
     visual: <CoverageVisual />,
   },
   {
     title: "Share a per-customer evidence pack, mapped to DORA",
-    body: "Each bank gets a pack about its own customers, organised by DORA area, delivered straight into your trust centre.",
+    body: "Each bank, insurer or payment firm gets a pack about its own customers, organised by DORA area, that you can share through Vanta or your trust centre.",
     visual: <ShareVisual />,
   },
 ];
@@ -43,6 +47,7 @@ export default function Home() {
       <Problem />
       <HowItWorks steps={steps} />
       <EvidencePreview />
+      <Deployment />
       <StalledDealCalculator />
       <TrustCentre />
       <Audiences />

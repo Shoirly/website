@@ -67,12 +67,12 @@ export function StalledDealCalculator() {
   const fmt = useCallback((n: number) => eur.format(Math.round(n / 1000) * 1000), []);
 
   return (
-    <Section labelledBy="calc-title">
+    <Section labelledBy="calc-title" className="border-t border-rule">
       <h2 id="calc-title" className="max-w-[22ch] text-3xl">
         What a stalled deal costs you
       </h2>
       <p className="mt-4 max-w-[52ch] text-lg text-graphite">
-        Bank security reviews often run for months. Put in your own numbers to see what the wait is worth.
+        Put in your own numbers to see what time in security review is worth to you.
       </p>
 
       <div className="mt-10 grid grid-cols-1 overflow-hidden rounded-md border border-rule lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">

@@ -137,8 +137,8 @@ export function ShareVisual() {
           ))}
         </ul>
         <div className="border-t border-rule pt-3">
-          <p className="text-[11px] text-graphite">Shared to</p>
-          <p className="mt-1 text-xs font-medium">Your trust centre, or straight to the bank&apos;s risk team</p>
+          <p className="text-[11px] text-graphite">Share it through</p>
+          <p className="mt-1 text-xs font-medium">Vanta or your trust centre, or send it to the risk team</p>
         </div>
       </div>
     </Frame>

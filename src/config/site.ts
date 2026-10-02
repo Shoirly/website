@@ -9,7 +9,7 @@ export const site = {
   name: "Shoirly",
   url: "https://shoirly.com",
   description:
-    "Signed, per-customer evidence of what your AI agent did and who approved it, mapped to DORA, so bank security reviews stop stalling your deals.",
+    "Signed, per-customer evidence of what your AI agent did and who approved it, mapped to DORA, so security reviews at banks, insurers and payment firms stop stalling your deals.",
   email,
   location: "Dublin, Ireland",
 
@@ -31,12 +31,12 @@ export const site = {
         {
           label: "For agent vendors",
           href: "/solutions/agent-vendors",
-          description: "Get through bank security review faster",
+          description: "Get through security review with financial institutions",
         },
         {
-          label: "For banks",
+          label: "For banks, payment firms and insurers",
           href: "/solutions/banks",
-          description: "What your risk team receives, and how to verify it",
+          description: "What your risk team receives, and how to ask for it",
         },
       ],
     },
@@ -59,7 +59,7 @@ export const site = {
       heading: "Solutions",
       links: [
         { label: "For agent vendors", href: "/solutions/agent-vendors" },
-        { label: "For banks", href: "/solutions/banks" },
+        { label: "For financial firms", href: "/solutions/banks" },
         { label: "DORA explained", href: "/dora" },
       ],
     },

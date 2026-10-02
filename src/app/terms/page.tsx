@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { LegalPage } from "@/components/layout/LegalPage";
 import { site } from "@/config/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Terms (draft)",
   description: "Draft terms of use for the Shoirly website.",
-  alternates: { canonical: "/terms" },
-  robots: { index: false, follow: true },
-};
+  path: "/terms",
+  noindex: true,
+});
 
 // TODO(team): replace with terms reviewed by a lawyer before launch.
 export default function TermsPage() {

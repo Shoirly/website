@@ -4,13 +4,20 @@ This file is the source of truth for the Shoirly marketing site. Read it fully b
 
 ## The company
 
-Shoirly gives AI agent vendors signed, per-customer evidence of what their agent did and who authorised each action. A coverage check proves nothing went unrecorded, and the output is mapped to the controls banks care about, starting with DORA.
+Shoirly gives AI agent vendors independent, verifiable evidence of what their agent did and who authorised each action. Vendors already say "we log everything". Shoirly makes those records provably complete and unedited, per customer: each action is signed and chained, a coverage check shows whether anything went unrecorded, and the output is mapped to the controls financial institutions care about, starting with DORA.
 
-- **Who buys:** AI agent startups (seed to Series B) selling into banks, insurers and payment firms in the EU and UK.
-- **Their pain:** deals stall in the bank's security review and vendor due diligence. A SOC 2 or ISO cert helps a bank shortlist a vendor, but on its own it usually isn't enough. Today the bank's evidence is contract clauses plus periodic service reviews. Nothing shows what the vendor's system actually did on a given day, for a given action.
-- **Why now:** DORA gives banks audit and information rights over their ICT third parties, and supervisors are paying close attention to AI. Banks will give agents more autonomy, but only inside defined risk tolerances, with proof the controls held.
-- **Positioning line:** "Vanta proves you have controls. We prove they held." Shoirly plugs into Vanta and trust centres. It does not replace them.
-- **Second audience:** risk, procurement and third-party oversight teams at banks, who receive the evidence.
+- **Who buys:** AI agent vendors selling into EU financial services: banks, payment firms and insurers. Banks stay the lead example in copy. Longer term this extends to any regulated or audited buyer, but don't market to those yet.
+- **Their pain:** deals stall in the buyer's security review and vendor due diligence. A SOC 2 or ISO cert helps a buyer shortlist a vendor, but on its own it usually isn't enough. Today the buyer's evidence is contract clauses plus periodic service reviews. Nothing shows what the vendor's system actually did on a given day, for a given action.
+- **Why now:** DORA gives financial entities audit and information rights over their ICT third parties, and supervisors are paying close attention to AI. Banks will give agents more autonomy, but only inside defined risk tolerances, with proof the controls held.
+- **Where we sit:**
+  - Certifications like SOC 2 and AIUC-1 show an agent passed tests at a point in time. We show what it did on Tuesday.
+  - Guardrail tools block actions. We prove them.
+  - Trust centres and vendor-risk tools run on documents. Our packs are live evidence they can carry.
+- **Positioning line:** "Vanta proves you have controls. We prove they held." Shoirly works alongside Vanta and trust centres. It does not replace them.
+- **Deployment:** Shoirly runs where the agent runs (the vendor's cloud or the bank's). Raw data stays there. Only signatures, hashes and coverage counts leave. Line: "Your data never leaves. Only the proof does."
+- **Roadmap (never present as shipped):** hardware-isolated signing, eIDAS qualified timestamps, trust-centre integrations. Always mark these as not yet available.
+- **Stage:** early, taking on design partners. Say so plainly where it helps.
+- **Second audience:** risk, procurement and third-party oversight teams at banks, payment firms and insurers, who receive the evidence.
 - **Context:** four-person founding team in Dublin, competing in Baseline's Pressure Cooker during Dublin AI Week (Oct 2026). Judges and investors will look at this site, so it has to read as a real, credible company.
 
 ### Honesty rules (non-negotiable)
@@ -18,7 +25,10 @@ Shoirly gives AI agent vendors signed, per-customer evidence of what their agent
 - No fake customer logos, testimonials, user counts, certifications or funding claims.
 - No invented technical specifics (SDK languages, hosting regions, cert status, uptime). Where a detail is unknown, write a sensible placeholder and mark it `TODO(team):` in code so it's easy to find.
 - Any number used to show cost or time saved is labelled as illustrative or as an estimate the visitor controls.
-- Compare against categories ("certs", "gateway logs", "questionnaires"), not named competitors, except the Vanta line above.
+- Compare against categories ("certs", "gateway logs", "questionnaires", "guardrail tools"), not named competitors, except the Vanta line above. Naming a standard such as SOC 2 or AIUC-1 is fine.
+- Never imply a shipped integration with Vanta or any other platform. Say "packs you can share through Vanta or your trust centre".
+- The coverage check "shows whether anything went unrecorded". Never say it "proves nothing went unrecorded".
+- Don't claim banks can verify evidence independently today. Say they will be able to once the verification guide is published.
 
 ## Site goals
 
@@ -30,12 +40,12 @@ Shoirly gives AI agent vendors signed, per-customer evidence of what their agent
 
 | Route | Purpose |
 |---|---|
-| `/` | Home. Hero, problem, how it works (animated), evidence pack preview, cost-of-a-stalled-deal calculator, works-with-your-trust-centre, for vendors / for banks split, final CTA |
+| `/` | Home. Hero, problem, how it works (animated), evidence pack preview, where it runs (only proof leaves), cost-of-a-stalled-deal calculator, works-with-your-trust-centre, for vendors / for banks split, final CTA |
 | `/product` | Deeper how-it-works: capture, sign, coverage check, evidence pack. Interactive diagram |
 | `/solutions/agent-vendors` | For the buyer: close bank deals faster |
-| `/solutions/banks` | For the receiving side: what a risk team gets and how to request it |
+| `/solutions/banks` | For the receiving side (banks, payment firms and insurers): what a risk team gets and how to request it |
 | `/dora` | Plain-English DORA explainer and how Shoirly evidence maps to it. Strong SEO page |
-| `/security` | Trust page: how evidence is signed and verified, data handling, what we store and don't. Unknowns marked TODO |
+| `/security` | Trust page: how evidence is signed and verified, where Shoirly runs and what leaves, what we're building next (roadmap, clearly not yet available). Unknowns marked TODO |
 | `/about` | Mission, team of four, Dublin |
 | `/blog` + `/blog/[slug]` | MDX blog |
 | `/demo` | Book a demo |
@@ -79,11 +89,13 @@ Voice: plain, confident, specific. Written for a founder or CTO at an agent star
 Starting copy (refine, don't replace the meaning):
 
 - **Hero headline:** Signed proof of what your AI agent did, and who approved it.
-- **Hero sub:** Shoirly gives AI agent vendors per-customer evidence of every action, mapped to DORA, so bank security reviews stop stalling your deals.
+- **Hero sub:** Shoirly gives AI agent vendors per-customer evidence of every action, mapped to DORA, so security reviews at banks, insurers and payment firms stop stalling your deals.
 - **CTAs:** "Book a demo" (primary), "See how it works" (secondary, scrolls to the walkthrough).
 - **Problem:** Banks want to let your agent do more. Their risk team needs proof it stayed inside the lines. A certificate says you have controls. It doesn't show what happened on Tuesday.
-- **How it works (a real sequence):** 1. Connect your agent. 2. Every action is signed and linked to who authorised it. 3. A coverage check proves nothing went unrecorded. 4. Share a per-customer evidence pack, mapped to DORA, straight into your trust centre.
+- **How it works (a real sequence):** 1. Connect your agent. 2. Every action is signed and linked to who authorised it. 3. A coverage check shows whether anything went unrecorded. 4. Share a per-customer evidence pack, mapped to DORA, through Vanta or your trust centre.
 - **Trust centre section:** Vanta proves you have controls. We prove they held.
+- **Deployment section:** Your data never leaves. Only the proof does.
+- **Stage line (near CTAs):** We're early and taking on design partners.
 
 ## Reference material
 

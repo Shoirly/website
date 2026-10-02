@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { CopyBlock } from "@/components/ui/CopyBlock";
+import { EvidenceLedger } from "@/components/ui/EvidenceLedger";
 import { PageHeader, Section } from "@/components/ui/Layout";
 
-export const metadata: Metadata = {
-  title: "For banks: evidence of what your vendor's AI agent did",
+export const metadata: Metadata = pageMetadata({
+  title: "For banks, payment firms and insurers: evidence of what your vendor's AI agent did",
   description:
-    "What a bank's risk, procurement and third-party oversight teams receive from vendors using Shoirly, how to verify it, and how to ask for it.",
-  alternates: { canonical: "/solutions/banks" },
-};
+    "What risk, procurement and third-party oversight teams at banks, payment firms and insurers receive from vendors using Shoirly, and how to ask for it.",
+  path: "/solutions/banks",
+});
 
 const receive = [
   {
     title: "A record of every action, for your customers only",
-    body: "What the agent did, when, and for which customer. Packs are scoped to your institution, so you never see another bank's data.",
+    body: "What the agent did, when, and for which customer. Packs are scoped to your institution, so you never see another institution's data.",
   },
   {
     title: "Who or what authorised it",
@@ -22,7 +24,7 @@ const receive = [
   },
   {
     title: "A coverage check",
-    body: "The number of actions the agent attempted against the number of signed records. A gap means something went unrecorded, and you can see it.",
+    body: "The number of actions the agent attempted against the number of signed records. It shows whether anything went unrecorded.",
   },
   {
     title: "A DORA mapping",
@@ -47,7 +49,7 @@ For the period [start date] to [end date], please provide:
 
 1. A record of each action the agent took for our customers
 2. Who or what authorised each action (person or policy version)
-3. A coverage check showing no actions went unrecorded
+3. A coverage check showing whether any actions went unrecorded
 4. A way for us to verify the records independently
 
 A per-customer evidence pack (for example from Shoirly) would meet
@@ -60,11 +62,26 @@ export default function BanksPage() {
   return (
     <>
       <PageHeader
-        title="See what your vendor's AI agent did, and check it yourself"
-        lead="For risk, procurement and third-party oversight teams. When a vendor uses Shoirly, you get signed, per-customer evidence instead of reassurance."
+        title="See what your vendor's AI agent did for your customers"
+        lead="For risk, procurement and third-party oversight teams at banks, payment firms and insurers. When a vendor uses Shoirly, you get signed, per-customer evidence instead of reassurance."
       />
 
-      <Section labelledBy="receive-title">
+      <Section labelledBy="today-title">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+          <div>
+            <h2 id="today-title" className="text-3xl">
+              What you rely on today
+            </h2>
+            <p className="mt-4 max-w-[40ch] text-lg text-graphite">
+              Each source answers a real question. None of them shows what your vendor&apos;s agent did on a given day,
+              for a given customer.
+            </p>
+          </div>
+          <EvidenceLedger label="Evidence your team gets from an AI agent vendor today" />
+        </div>
+      </Section>
+
+      <Section tone="ledger" labelledBy="receive-title">
         <h2 id="receive-title" className="max-w-[22ch] text-3xl">
           What your team receives
         </h2>
@@ -83,14 +100,15 @@ export default function BanksPage() {
         </p>
       </Section>
 
-      <Section tone="ledger" labelledBy="verify-title">
+      <Section labelledBy="verify-title">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
           <div>
             <h2 id="verify-title" className="text-3xl">
-              How you verify it
+              How verification will work
             </h2>
             <p className="mt-4 max-w-[40ch] text-lg text-graphite">
-              The point is that you don&apos;t have to take the vendor&apos;s word, or ours.
+              Once we publish our verification guide, your team will be able to check signatures and the chain
+              independently, without relying on the vendor&apos;s word or ours.
             </p>
             {/* TODO(team): link to verification docs or a verifier tool once it exists. */}
           </div>
@@ -105,7 +123,7 @@ export default function BanksPage() {
         </div>
       </Section>
 
-      <Section labelledBy="request-title">
+      <Section tone="ledger" labelledBy="request-title">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
           <div>
             <h2 id="request-title" className="text-3xl">

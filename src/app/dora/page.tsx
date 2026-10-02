@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { Faq, FaqJsonLd, type FaqItem } from "@/components/ui/Faq";
@@ -11,13 +12,13 @@ import { site } from "@/config/site";
  * claiming that Shoirly makes anyone "DORA compliant".
  */
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "DORA explained for AI agent vendors selling to banks",
   description:
-    "A plain-English guide to the EU Digital Operational Resilience Act (DORA): what it asks of banks, what that means for AI agent vendors, and the evidence that helps.",
-  alternates: { canonical: "/dora" },
-  openGraph: { type: "article" },
-};
+    "A plain-English guide to the EU Digital Operational Resilience Act (DORA): what it asks of banks, insurers and payment firms, what that means for AI agent vendors, and the evidence that helps.",
+  path: "/dora",
+  type: "article",
+});
 
 const pillars = [
   {
@@ -83,7 +84,7 @@ const mapping = [
     area: "Incident management",
     ref: "Art. 17-23",
     need: "Reconstruct what happened during an incident and report it accurately.",
-    evidence: "A signed timeline of agent actions, with a coverage check showing nothing is missing.",
+    evidence: "A signed timeline of agent actions, with a coverage check showing whether anything is missing.",
   },
 ];
 

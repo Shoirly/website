@@ -19,6 +19,9 @@ function SolutionsMenu({ pathname }: { pathname: string }) {
   const item = site.nav.find((n) => "children" in n);
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
+  // True while the menu is open because the pointer is over it, so a click
+  // during the hover doesn't immediately close what the hover just opened.
+  const hoverOpened = useRef(false);
   const menuId = useId();
   const reduce = useReducedMotion();
 
@@ -48,8 +51,14 @@ function SolutionsMenu({ pathname }: { pathname: string }) {
     <div
       ref={wrapRef}
       className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={() => {
+        hoverOpened.current = true;
+        setOpen(true);
+      }}
+      onMouseLeave={() => {
+        hoverOpened.current = false;
+        setOpen(false);
+      }}
       onBlur={(e) => {
         if (!wrapRef.current?.contains(e.relatedTarget as Node)) setOpen(false);
       }}
@@ -58,7 +67,14 @@ function SolutionsMenu({ pathname }: { pathname: string }) {
         type="button"
         aria-expanded={open}
         aria-controls={menuId}
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => {
+          if (hoverOpened.current) {
+            hoverOpened.current = false;
+            setOpen(true);
+            return;
+          }
+          setOpen((v) => !v);
+        }}
         className={`inline-flex h-10 items-center gap-1 rounded-md px-3 text-sm transition-colors duration-150 hover:text-ink ${
           active ? "text-ink" : "text-graphite"
         }`}
@@ -79,7 +95,7 @@ function SolutionsMenu({ pathname }: { pathname: string }) {
             animate={{ opacity: 1, y: 0 }}
             exit={reduce ? { opacity: 0, transition: { duration: 0 } } : { opacity: 0, y: -4 }}
             transition={{ duration: 0.18, ease }}
-            className="absolute left-1/2 top-full w-[320px] -translate-x-1/2 pt-2"
+            className="absolute left-1/2 top-full w-[372px] -translate-x-1/2 pt-2"
           >
             <ul className="rounded-md border border-rule bg-paper p-1.5 shadow-paper">
               {item.children.map((child) => (
