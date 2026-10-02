@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import Link from "next/link";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { PageHeader, Section } from "@/components/ui/Layout";
 import { formatDate, publishedPosts } from "@/content/blog";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Blog",
-  description: "Writing on AI agents, security reviews in financial services and DORA from the Shoirly team.",
-  path: "/blog",
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/blog"]);
 
 export default function BlogPage() {
   const posts = publishedPosts();

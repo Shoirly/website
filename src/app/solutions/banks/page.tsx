@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import Link from "next/link";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { CopyBlock } from "@/components/ui/CopyBlock";
 import { EvidenceLedger } from "@/components/ui/EvidenceLedger";
 import { PageHeader, Section } from "@/components/ui/Layout";
 
-export const metadata: Metadata = pageMetadata({
-  title: "For banks, payment firms and insurers: evidence of what your vendor's AI agent did",
-  description:
-    "What risk, procurement and third-party oversight teams at banks, payment firms and insurers receive from vendors using Shoirly, and how to ask for it.",
-  path: "/solutions/banks",
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/solutions/banks"]);
 
 const receive = [
   {

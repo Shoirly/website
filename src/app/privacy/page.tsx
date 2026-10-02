@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import { LegalPage } from "@/components/layout/LegalPage";
 import { site } from "@/config/site";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Privacy (draft)",
-  description: "Draft privacy notice for the Shoirly website.",
-  path: "/privacy",
-  noindex: true,
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/privacy"]);
 
 // TODO(team): replace with a privacy notice reviewed by a lawyer before launch.
 export default function PrivacyPage() {

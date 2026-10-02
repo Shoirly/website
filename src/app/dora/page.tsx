@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import Link from "next/link";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { Faq, FaqJsonLd, type FaqItem } from "@/components/ui/Faq";
@@ -12,13 +12,7 @@ import { site } from "@/config/site";
  * claiming that Shoirly makes anyone "DORA compliant".
  */
 
-export const metadata: Metadata = pageMetadata({
-  title: "DORA explained for AI agent vendors selling to banks",
-  description:
-    "A plain-English guide to the EU Digital Operational Resilience Act (DORA): what it asks of banks, insurers and payment firms, what that means for AI agent vendors, and the evidence that helps.",
-  path: "/dora",
-  type: "article",
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/dora"]);
 
 const pillars = [
   {

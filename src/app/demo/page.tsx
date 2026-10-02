@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import { CalendarBlank, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Layout";
 import { site } from "@/config/site";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Book a demo",
-  description:
-    "See a sample evidence pack and how Shoirly fits into a bank's security review. Thirty minutes with the founding team.",
-  path: "/demo",
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/demo"]);
 
 const agenda = [
   ["Your bank deals", "Where your security reviews stall today, and what the bank has asked for."],

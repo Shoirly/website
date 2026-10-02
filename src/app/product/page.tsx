@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import Link from "next/link";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { ConnectVisual, CoverageVisual, ShareVisual, SignVisual } from "@/components/home/StepVisuals";
 import { PipelineDiagram, type Stage } from "@/components/product/PipelineDiagram";
 import { PageHeader, Section } from "@/components/ui/Layout";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Product: how Shoirly works",
-  description:
-    "Capture each agent action, sign it with who authorised it, check coverage, and share a per-customer evidence pack mapped to DORA.",
-  path: "/product",
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/product"]);
 
 const stages: Stage[] = [
   {

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { site } from "@/config/site";
-import { pageMetadata } from "@/lib/metadata";
+import { organisationSchema, pageMetadata, pageSeo } from "@/lib/metadata";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { Audiences } from "@/components/home/Audiences";
 import { Deployment } from "@/components/home/Deployment";
@@ -12,10 +11,7 @@ import { StalledDealCalculator } from "@/components/home/StalledDealCalculator";
 import { ConnectVisual, CoverageVisual, ShareVisual, SignVisual } from "@/components/home/StepVisuals";
 import { TrustCentre } from "@/components/home/TrustCentre";
 
-export const metadata: Metadata = pageMetadata({
-  description: site.description,
-  path: "/",
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/"]);
 
 const steps: Step[] = [
   {
@@ -43,6 +39,7 @@ const steps: Step[] = [
 export default function Home() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organisationSchema).replace(/</g, "\\u003c") }} />
       <Hero />
       <Problem />
       <HowItWorks steps={steps} />

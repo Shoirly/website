@@ -1,6 +1,10 @@
+import type { Metadata } from "next";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import Link from "next/link";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Layout";
+
+export const metadata: Metadata = pageMetadata(pageSeo["/404"]);
 
 export default function NotFound() {
   return (
