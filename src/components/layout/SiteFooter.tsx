@@ -1,0 +1,54 @@
+import Link from "next/link";
+import { Wordmark } from "@/components/brand/Logo";
+import { Container } from "@/components/ui/Layout";
+import { site } from "@/config/site";
+
+export function SiteFooter() {
+  const year = new Date().getFullYear();
+  return (
+    <footer className="border-t border-rule bg-ledger">
+      <Container className="py-14 md:py-16">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.3fr_2fr]">
+          <div>
+            <Wordmark className="text-[1.75rem] leading-none" />
+            <p className="mt-4 max-w-[34ch] text-sm text-graphite">
+              Signed evidence of what your AI agent did, and who approved it.
+            </p>
+            <a className="link mt-6 inline-block text-sm" href={`mailto:${site.email}`}>
+              {site.email}
+            </a>
+          </div>
+          <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4">
+            {site.footer.map((col) => (
+              <div key={col.heading}>
+                <h2 className="text-sm font-semibold text-ink">{col.heading}</h2>
+                <ul className="mt-3 space-y-2">
+                  {col.links.map((l) => (
+                    <li key={l.href}>
+                      <Link
+                        href={l.href}
+                        className="text-sm text-graphite transition-colors duration-150 hover:text-ink"
+                      >
+                        {l.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
+        </div>
+        <div className="mt-14 flex flex-col gap-2 border-t border-rule pt-6 text-xs text-graphite sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            &copy; {year} {site.name}. Made in Dublin.
+          </p>
+          {site.social.linkedin ? (
+            <a className="hover:text-ink" href={site.social.linkedin} rel="noopener noreferrer" target="_blank">
+              LinkedIn
+            </a>
+          ) : null}
+        </div>
+      </Container>
+    </footer>
+  );
+}
