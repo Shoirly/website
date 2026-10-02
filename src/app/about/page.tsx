@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { PageHeader, Section } from "@/components/ui/Layout";
+import styles from "@/components/dora-about/ResponsivePage.module.css";
 
 export const metadata: Metadata = pageMetadata({
   title: "About",
@@ -17,9 +18,12 @@ const team = [
   { name: "Founder name", role: "Role", bio: "One line on background and what they own at Shoirly." },
 ];
 
+// Enable only after all four founders have real bios and photos.
+const showTeam = false;
+
 export default function AboutPage() {
   return (
-    <>
+    <div className={styles.page}>
       <PageHeader
         title="Agents should earn trust the way people do: by showing their work"
         lead="Shoirly exists so that banks can let AI agents do more, because they can see exactly what those agents did and who allowed it."
@@ -48,28 +52,30 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <Section tone="ledger" labelledBy="team-title">
-        <h2 id="team-title" className="text-3xl">
-          The team
-        </h2>
-        <p className="mt-4 max-w-[56ch] text-lg text-graphite">Four founders, based in Dublin.</p>
-        <ul className="mt-10 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-          {team.map((p, i) => (
-            <li key={i}>
-              <div
-                className="flex aspect-[4/5] items-end rounded-md border border-dashed border-rule-strong/70 bg-paper p-4"
-                role="img"
-                aria-label="Photo to come"
-              >
-                <span className="font-mono text-xs text-graphite">Photo to come</span>
-              </div>
-              <p className="mt-4 font-semibold">{p.name}</p>
-              <p className="text-sm text-seal-deep">{p.role}</p>
-              <p className="mt-2 text-sm text-graphite">{p.bio}</p>
-            </li>
-          ))}
-        </ul>
-      </Section>
+      {showTeam && (
+        <Section tone="ledger" labelledBy="team-title">
+          <h2 id="team-title" className="text-3xl">
+            The team
+          </h2>
+          <p className="mt-4 max-w-[56ch] text-lg text-graphite">Four founders, based in Dublin.</p>
+          <ul className="mt-10 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+            {team.map((p, i) => (
+              <li key={i}>
+                <div
+                  className="flex aspect-[4/5] items-end rounded-md border border-dashed border-rule-strong/70 bg-paper p-4"
+                  role="img"
+                  aria-label="Photo to come"
+                >
+                  <span className="font-mono text-xs text-graphite">Photo to come</span>
+                </div>
+                <p className="mt-4 font-semibold">{p.name}</p>
+                <p className="text-sm text-seal-deep">{p.role}</p>
+                <p className="mt-2 text-sm text-graphite">{p.bio}</p>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
 
       <Section labelledBy="where-title">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
@@ -90,6 +96,6 @@ export default function AboutPage() {
       </Section>
 
       <ClosingCta title="Talk to the people building it." />
-    </>
+    </div>
   );
 }

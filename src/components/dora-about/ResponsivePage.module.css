@@ -1,0 +1,49 @@
+.page h1 {
+  max-width: 24ch;
+}
+
+.page summary {
+  min-height: 44px;
+}
+
+@media (max-width: 767px) {
+  .page > header {
+    padding-block: 40px;
+  }
+
+  .page > section {
+    padding-block: 48px;
+  }
+
+  .page h1 {
+    font-size: 2rem;
+    line-height: 1.15;
+  }
+
+  .page h2 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+
+  .page h3 {
+    font-size: 1.375rem;
+    line-height: 1.3;
+  }
+
+  .page :global(.text-lg) {
+    font-size: 1.125rem;
+    line-height: 1.65;
+  }
+
+  .page :global(.gap-10) {
+    gap: 24px;
+  }
+
+  .page :global(.mt-10) {
+    margin-top: 32px;
+  }
+
+  .page summary {
+    gap: 16px;
+  }
+}
