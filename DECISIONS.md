@@ -1,0 +1,202 @@
+# Decisions
+
+Design and product calls made without asking, one line each with the reason. Newest sections at the bottom.
+
+## Design read
+
+Reading this as: a B2B landing site for AI-agent founders and bank risk teams, in a trust-first, document-and-evidence language, built on Tailwind v4 utilities, two deliberate typefaces and motion that is restrained except for the hero. Dials: variance 5, motion 5, density 4. Trust-first sits lower than the marketing default, and the one hero moment carries the motion.
+
+## Tokens
+
+### Colour (6 named values)
+
+| Name | Hex | Use |
+|---|---|---|
+| Paper | `#FCFDFC` | Page background. Off-white rather than pure white so the evidence pack card (pure paper) can sit above it. |
+| Ledger | `#EEF2F0` | Cool off-white for alternate sections, wells and the calculator panel. A slight green-grey cast ties it to the accent. |
+| Rule | `#D5DDDA` | Hairlines, borders and slider tracks. |
+| Graphite | `#4D5C59` | Secondary text. 6.9:1 on Paper. |
+| Ink | `#0D1B1E` | Primary text and the primary button. 17:1 on Paper. A deep blue-green black, not pure black. |
+| Seal | `#0A7350` | The single accent, reading as "verified": signatures, ticks, coverage meter, focus ring, links. White text on Seal is 5.9:1. |
+
+Supporting tints come from the same hues: `seal-wash` `#E2F1EA` (Seal at about 12% on Paper) for verified badges, and `ink-soft` (Ink at 8% alpha) for pressed states. There is no second hue. Errors use Ink plus a text label, not red, apart from the one "unrecorded" state in the hero, which uses a muted brick `#A4442B` because it has to read as a fault. I logged that exception here so it doesn't spread.
+
+Why green rather than blue: every compliance and bank site uses navy or blue, and "verified" maps naturally to green. Secureframe uses a bright mint on navy, so our Seal is a deeper, inkier green on a light page to stay clearly distinct.
+
+### Type
+
+- **Display and body: Schibsted Grotesk** (variable, 400 to 700). It's a newspaper grotesk with firm, slightly condensed forms. It reads as reporting and record rather than startup, and it isn't Inter.
+- **Data: IBM Plex Mono** (400, 500). Used for hashes, action records, timestamps and calculator figures. It has a document and ledger feel, and the tabular figures stop numbers jumping as they change.
+- Sentence case everywhere. No all-caps labels.
+
+Scale (rem at 16px root, with fluid clamps on the top three):
+
+| Token | Size / line height | Use |
+|---|---|---|
+| `text-xs` | 13 / 18 | Mono meta, legal |
+| `text-sm` | 15 / 22 | UI, nav, captions |
+| `text-base` | 17 / 28 | Body |
+| `text-lg` | 20 / 30 | Lead paragraphs |
+| `text-xl` | 24 / 32 | H3 |
+| `text-2xl` | clamp(28, 3.2vw, 36) / 1.15 | H2 small |
+| `text-3xl` | clamp(32, 4.4vw, 48) / 1.08 | H2 |
+| `text-4xl` | clamp(38, 5.6vw, 64) / 1.02 | H1 |
+
+Headings: weight 600, tracking -0.02em at H1 and -0.015em at H2. Body: weight 400, max 64ch.
+
+### Spacing
+
+4px base: 4, 8, 12, 16, 24, 32, 48, 64, 96, 128. Section padding is 96px desktop and 64px mobile (`py-16 md:py-24`). Content max width is 1200px with a 24px gutter (16px under 400px).
+
+### Radii (one rule, used everywhere)
+
+- 6px for cards, panels, buttons and inputs. Papers and receipts have slightly softened corners, not pills.
+- 4px for small tags and badges.
+- Full radius only for the slider thumb and the status tick (both are physically round).
+
+### Shadow
+
+Only on objects that are "paper" sitting on the page, which means the evidence pack card and the hero trail panel. Everything else uses a 1px Rule border or no container at all.
+
+- `shadow-paper`: `0 1px 2px rgb(13 27 30 / 0.05), 0 12px 32px -12px rgb(13 27 30 / 0.18)`, tinted with Ink rather than black.
+
+### Motion
+
+| Token | Value | Use |
+|---|---|---|
+| `dur-fast` | 150ms | Hover and press feedback |
+| `dur-base` | 240ms | Menus, tabs, small state changes |
+| `dur-slow` | 420ms | Section reveals, hero row entry |
+| `dur-story` | 700ms | Hero pack compile, step transitions |
+| `ease-out` | `cubic-bezier(0.22, 1, 0.36, 1)` | Default for entering |
+| `ease-in-out` | `cubic-bezier(0.65, 0, 0.35, 1)` | Morphs and position changes |
+| spring | stiffness 260, damping 30 | Magnetic CTA and calculator figures only |
+
+Under `prefers-reduced-motion`, everything shows its end state instantly. The hero shows a static, fully compiled frame. Only `transform` and `opacity` are animated, and every animated box has reserved dimensions so nothing shifts layout.
+
+## Home page wireframe (1440px)
+
+```
++------------------------------------------------------------------------------+
+| [Shoirly]   Product  Solutions v  DORA  Security  Blog  About   [Book a demo] |  64px
++------------------------------------------------------------------------------+
+|                                                                              |
+|  Signed proof of what your AI        +-----------------------------------+   |
+|  agent did, and who approved it.     | Evidence trail      [pause]       |   |
+|                                      | > Refund EUR 240 to cust. #4471   |   |
+|  Shoirly gives AI agent vendors      |   approved by: refunds policy v3  |   |
+|  per-customer evidence of every      |   sig 9f3a..c21e  [tick]          |   |
+|  action, mapped to DORA, so bank     | > Read KYC file                   |   |
+|  security reviews stop stalling...   |   ...  chain o--o--o--o           |   |
+|                                      | Coverage [=============== ] 100%  |   |
+|  [Book a demo]  See how it works     |  -> compiles into                 |   |
+|                                      |  [Evidence pack: Customer #4471]  |   |
+|                                      |  DORA: ICT risk, 3rd party, logs  |   |
+|                                      +-----------------------------------+   |
++------------------------------------------------------------------------------+
+| PROBLEM (Ledger tint)                                                        |
+|  Banks want to let your agent do more. Their risk team needs proof it        |
+|  stayed inside the lines.                       (large editorial statement)  |
+|                                                                              |
+|  What they get today          What it shows        What it misses            |
+|  ------------------------------------------------------------------------    |
+|  Certificates (SOC 2, ISO)    Controls exist        What happened Tuesday    |
+|  Questionnaires               What you say          What the system did      |
+|  Gateway logs                 That calls happened   Who approved them        |
++------------------------------------------------------------------------------+
+| HOW IT WORKS (sticky)                                                        |
+|  +----------------------+     01 Connect your agent                          |
+|  | sticky visual that   |     02 Every action is signed and linked ...       |
+|  | changes with each    |     03 A coverage check proves nothing ...         |
+|  | step as you scroll   |     04 Share a per-customer evidence pack ...      |
+|  +----------------------+                                                    |
++------------------------------------------------------------------------------+
+| WHAT THE EVIDENCE LOOKS LIKE                                                 |
+|  Heading + one line                                                          |
+|           +----------------------------------------+                         |
+|  note ----| Evidence pack  Customer #4471  Sep 2026|---- note                |
+|           | Coverage 100%  1,284 actions  0 gaps   |                         |
+|  note ----| record rows with signature + approver  |---- note                |
+|           | DORA mapping table                     |                         |
+|           +----------------------------------------+                         |
++------------------------------------------------------------------------------+
+| COST OF A STALLED DEAL (Ledger panel)                                        |
+|  [sliders: deals, ACV, weeks stuck]   |  Revenue delayed this year EUR x     |
+|                                       |  Cut review to N weeks: EUR y back   |
+|  Estimate based on your inputs. Illustrative only.                           |
++------------------------------------------------------------------------------+
+| WORKS WITH YOUR TRUST CENTRE                                                 |
+|        Vanta proves you have controls. We prove they held.                   |
+|   Your agent --> Shoirly --> Vanta / trust centre --> Bank risk team         |
++------------------------------------------------------------------------------+
+| FOR VENDORS                        |  FOR BANKS                              |
+|  Close bank deals faster           |  Evidence you can verify yourself       |
+|  3 short points, link              |  3 short points, link                   |
++------------------------------------------------------------------------------+
+| Final CTA: Show a bank what your agent did.          [Book a demo]           |
++------------------------------------------------------------------------------+
+| Footer: wordmark, 4 columns, hello@shoirly.com, Made in Dublin, legal        |
++------------------------------------------------------------------------------+
+```
+
+Mobile (390px): the hero stacks copy above the trail, and the trail shows its 3 most recent rows. The problem ledger becomes stacked definition blocks. In how it works, the visual stops sticking and sits inline above each step. The calculator stacks with the result under the sliders. The vendor and bank split stacks.
+
+## Review against CLAUDE.md "avoid" list (before code)
+
+| Avoid | First draft | Revision |
+|---|---|---|
+| All-caps eyebrow labels above every heading | The wireframe had PROBLEM, HOW IT WORKS and similar labels as section tags | Those are wireframe annotations only. No eyebrows ship. Headings stand alone. |
+| One highlighted word in a headline | I'd considered colouring "held" in the Vanta line in Seal | Dropped. The whole line is Ink. Emphasis comes from size and placement. |
+| Identical rounded cards with the same grey shadow | Vendor and bank columns were drawn as two cards | Revised to two open columns split by a single vertical Rule, with no card boxes. Shadow is reserved for the two paper objects. |
+| Gradient blobs as decoration | None planned | Kept none. The hero background is plain Paper with a faint ledger grid at 4% only behind the trail panel. |
+| `A · B · C` meta strings | The pack header had "Customer #4471 · Sep 2026 · 1,284 actions" | Revised to a small labelled key/value grid, which is how a real record would show it. |
+| `→` on every link | The draft had arrows on every "Learn more" link | Arrows only on the secondary hero link, as a down-arrow that signals a scroll jump. Text links are underlined instead. |
+| 01/02/03 markers unless a real sequence | How it works uses 01 to 04 | Kept, because it's a real sequence. Nowhere else uses numbers. |
+| Purple-to-blue washes | Seal green on Paper | Fine. |
+| Fade-up on every section | The draft had whileInView on all sections | Revised: no generic section fade. Motion only in the hero, the how-it-works step change, calculator figures and the trust-centre flow line drawing once. |
+| Hover wobble on every card | None | Hover is a colour/border change only. The magnetic pull is on the one hero CTA. |
+
+Extra checks from the taste skill:
+
+- I was going to add a logo wall under the hero. Removed it on honesty grounds, since there are no customers to show. The problem section moves up into that slot.
+- The draft had a 3-column feature grid for "what you get". Removed, because the evidence pack preview shows it directly instead.
+- Duplicate CTA intent: the only conversion label is "Book a demo" (nav, hero, final CTA, footer). The secondary is "See how it works", which scrolls the page.
+
+## Decisions log
+
+- Light theme only for v0. CLAUDE.md asks for "light, trustworthy enterprise", and a dark mode would double the visual QA before the judging. The taste skill's dark-mode default is overridden by the brief.
+- Icons: Phosphor (`@phosphor-icons/react`), one family, regular weight. Allowed by the taste skill and has the seal, signature and certificate glyphs.
+- No stock photography and no image generation. The product's visuals are its evidence records, rendered as real working components rather than screenshots. Team photos on /about are placeholders marked `TODO(team)`, because inventing faces would break the honesty rules.
+- No customer logos, counts, testimonials, certification badges or uptime anywhere. Trust comes from showing the evidence format and how verification works.
+- Only "motion" for animation. No GSAP and no WebGL, so react-bits components that need them were rejected.
+- The hero trail uses invented but plausible sample actions and customer numbers, labelled "Sample data" in the panel so nobody reads it as a live customer.
+
+## Build decisions (2 Oct 2026)
+
+- Next.js 16.3 (App Router, Turbopack), Tailwind v4 with tokens in `@theme` in `globals.css`, `motion` 14, `@next/mdx`. These were the current versions from `create-next-app@latest`.
+- Fonts load through `next/font/google`, so nothing is fetched at runtime. A static semibold cut of Schibsted Grotesk sits in `src/assets/fonts` (OFL licence included) only for the favicon and Open Graph image routes, because `next/og` can't use variable fonts.
+- Wordmark: lowercase "shoirly" with the tittle of the i drawn as a small Seal-green square, read as a stamp on a record. The favicon is the "s" on Ink with the same square. On Ink the square uses a lighter green (`#2fb37f`) because Seal disappears on a dark ground. That tint appears only in the icon.
+- Booking: every "Book a demo" button goes to `/demo`. The button on `/demo` uses `site.bookingUrl`, a mailto for now. When the Cal.com link exists, change one line in `src/config/site.ts`.
+- Blog metadata lives in a typed registry (`src/content/blog/index.ts`) instead of MDX frontmatter, so drafts can be filtered without loading posts and typos fail the build. Drafts render at their URL with a visible "Draft" banner and `noindex`, and stay out of the listing and the sitemap.
+- With no published posts, the blog listing shows an empty state that points to the DORA guide, rather than an empty list.
+- Privacy and terms pages are `noindex` and carry a visible "draft, not in force" banner.
+- The hero server-renders the finished state (pack compiled). No-JS visitors, crawlers and reduced-motion users get the whole story in one frame. With motion on, it holds that frame briefly, then replays from the start. The loop pauses off-screen and has a Pause button.
+- I dropped BlurText on the hero headline. Animating the largest text on the page delays LCP, and the brief wants one hero moment, which is the trail.
+- The "How it works" visual is sticky on desktop and inline above each step on mobile, where sticky panels feel cramped.
+- The DORA guide includes Article and FAQPage structured data for search. Each FAQ answer has a plain-text version for the JSON-LD.
+- The `/solutions/banks` page has a copyable "evidence request" template. It gives a bank's risk team something to do, and it pulls vendors towards us.
+- Inner pages use one consistent left-aligned header (title, lead, optional CTA) so the site reads as one system. The home page is the only place with a split hero.
+- Responsive grids always declare a single shrinkable column (`grid-cols-1`) below their breakpoint. Without it, long mono strings pushed mobile layouts sideways.
+- Work happens on a `v0-site` branch rather than straight on `main`, so the first review can happen in a pull request.
+
+## Review pass: five weakest things on the home page versus research/
+
+Compared at 1440px and 390px against the Secureframe and Sprinto captures.
+
+1. **The hero headline ran to four lines** and overpowered the trail. Both references keep it to two or three. Capped the size at 56px and widened the measure to three lines.
+2. **"How it works" had about 2,000px of dead space** on desktop, and inactive steps were faded to look disabled. Step height went from 64vh to 46vh, inactive steps now use Graphite (still readable at 6.9:1), and the visual sits level with the first step.
+3. **The calculator's results sat under the sliders**, off-screen while dragging at 1440px, next to an empty left column. Now it's one panel with sliders left and results right on desktop, and stacked on mobile.
+4. **The hero's pack slot was an empty dashed box** for most of the loop. It's now a faded outline of the pack ("Waiting for 100%") that turns solid and verified at full coverage. I also found that rows were anchored to the bottom, so each loop opened with one row under a large empty grid. Rows now fill from the top and scroll once the panel is full.
+5. **The trust-centre flow was four generic boxes.** The connectors now say what passes along them (actions, signed packs, shared evidence), so the diagram explains something.
+
+Smaller fixes from the same pass: mobile overflow in the "Connect your agent" preview, uneven coverage labels on mobile, DORA article refs breaking mid-range, wide tabular commas in the calculator figures (now in Plex Mono), the social card's tittle position, and the hero pack's tags overflowing on phones.

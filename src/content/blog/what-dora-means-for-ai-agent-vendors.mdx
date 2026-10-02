@@ -1,0 +1,56 @@
+{/* DRAFT. TODO(team): review for accuracy, add an author, then set draft: false in src/content/blog/index.ts. */}
+
+If you sell an AI agent to banks in the EU, you have probably already met DORA, even if nobody used the name. It shows up as a longer questionnaire, a new contract schedule, or a risk team that wants to know exactly what your agent will be allowed to do.
+
+This post explains where that comes from, and what you can do about it.
+
+## DORA in one paragraph
+
+The Digital Operational Resilience Act, Regulation (EU) 2022/2554, has applied since 17 January 2025. It sets common rules for how financial firms manage technology risk: their own systems, their incidents, their testing, and the technology suppliers they depend on. That last part, ICT third-party risk, is where you come in.
+
+## Why it lands on you
+
+DORA's obligations sit with the bank. But a bank cannot hand off responsibility for risk that comes from a supplier. It has to understand, monitor and be able to evidence how its suppliers behave, and it does that through you.
+
+In practice that means three things.
+
+1. **You go in the register.** Banks must keep a register of information on their contracts with ICT third-party providers. Expect detailed questions about what your service does, which of the bank's functions it supports, and where data goes.
+2. **Your contract gets longer.** DORA lists terms these contracts must contain. Where your agent supports a critical or important function, they include rights of access, inspection and audit, and a plan for exit.
+3. **Oversight continues after signature.** The bank has to keep showing its supervisor that the risk is under control, so the questions don't stop at go-live.
+
+## Why agents get extra scrutiny
+
+A traditional SaaS tool shows a human some information and the human acts. An agent acts. It issues a refund, reads a file, changes a limit.
+
+Risk teams are generally willing to let agents do more, but only within defined tolerances, and only with proof those tolerances held. That is a different question from "do you have controls?" It is "show me what happened."
+
+## What usually gets offered, and what's missing
+
+Most vendors answer with some mix of:
+
+- **Certifications** such as SOC 2 or ISO 27001. Useful for getting shortlisted. They describe controls over a past period, not what happened for this bank last week.
+- **Questionnaire answers.** They record what you say your system does.
+- **Logs.** They show calls happened. They rarely show who authorised each action, and they can't prove nothing is missing.
+
+None of these is wrong. They just answer a different question from the one a risk team is now asking.
+
+## What helps
+
+Evidence that answers "what did the agent do, and who allowed it?" has a few properties:
+
+- **Per action.** Each thing the agent did is recorded individually.
+- **Attributed.** Each record names the person or the policy version that allowed it.
+- **Tamper-evident.** Records are signed and chained, so edits and deletions show.
+- **Complete, provably.** A coverage check compares what the agent attempted with what was recorded.
+- **Per customer.** Each bank sees evidence about its own customers, organised by the DORA areas it reports against.
+
+That is what we are building at Shoirly. Whether or not you use us, those properties are a useful test for any evidence you plan to put in front of a bank.
+
+## A practical checklist before your next bank deal
+
+- Know whether the bank treats your service as supporting a critical or important function. It changes the contract terms.
+- Prepare a short description of exactly what actions your agent can take, and what authorises each one.
+- Decide how you would show a bank what your agent did for its customers over a given month.
+- Read the audit and access clauses in your draft contract with that answer in mind.
+
+*This post is general information, not legal advice.*

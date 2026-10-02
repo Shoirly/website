@@ -1,0 +1,271 @@
+@import "tailwindcss";
+
+/* Design tokens. Source of truth is DECISIONS.md; keep the two in step. */
+@theme {
+  --color-paper: #fcfdfc;
+  --color-ledger: #eef2f0;
+  --color-rule: #d5ddda;
+  --color-graphite: #4d5c59;
+  --color-ink: #0d1b1e;
+  --color-seal: #0a7350;
+
+  /* Tints of the same hues, not new colours */
+  --color-seal-wash: #e2f1ea;
+  --color-seal-deep: #075c40;
+  --color-ink-soft: rgb(13 27 30 / 0.06);
+  --color-rule-strong: #8a9a96;
+  /* Single exception: the "unrecorded" fault state in the hero. */
+  --color-fault: #a4442b;
+
+  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.125rem;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.375rem;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.75rem;
+  --text-lg: 1.25rem;
+  --text-lg--line-height: 1.875rem;
+  --text-xl: 1.5rem;
+  --text-xl--line-height: 2rem;
+  --text-2xl: clamp(1.75rem, 1.2rem + 1.6vw, 2.25rem);
+  --text-2xl--line-height: 1.15;
+  --text-3xl: clamp(2rem, 1.2rem + 2.6vw, 3rem);
+  --text-3xl--line-height: 1.08;
+  --text-4xl: clamp(2.375rem, 1.3rem + 3.6vw, 4rem);
+  --text-4xl--line-height: 1.04;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+
+  --shadow-paper: 0 1px 2px rgb(13 27 30 / 0.05), 0 12px 32px -12px rgb(13 27 30 / 0.18);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  h1 {
+    letter-spacing: -0.022em;
+  }
+
+  h2 {
+    letter-spacing: -0.016em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-seal-wash);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-seal);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Underlined text links: the house style instead of arrows on every link. */
+@utility link {
+  color: var(--color-ink);
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-rule-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  transition: text-decoration-color 150ms var(--ease-out), color 150ms var(--ease-out);
+
+  &:hover {
+    color: var(--color-seal-deep);
+    text-decoration-color: currentColor;
+  }
+}
+
+/* Faint ledger grid used once, behind the hero trail. */
+@utility ledger-grid {
+  background-image:
+    linear-gradient(to right, rgb(13 27 30 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(13 27 30 / 0.045) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Long-form prose for the blog and legal pages. */
+@utility prose-shoirly {
+  max-width: 68ch;
+  color: var(--color-ink);
+
+  & > * + * {
+    margin-top: 1.25em;
+  }
+  & h2 {
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
+    margin-top: 2.2em;
+  }
+  & h3 {
+    font-size: var(--text-xl);
+    line-height: var(--text-xl--line-height);
+    margin-top: 1.8em;
+  }
+  & h2 + *,
+  & h3 + * {
+    margin-top: 0.75em;
+  }
+  & p,
+  & li {
+    color: color-mix(in oklab, var(--color-ink) 88%, var(--color-graphite));
+  }
+  & ul {
+    list-style: disc;
+    padding-left: 1.25em;
+  }
+  & ol {
+    list-style: decimal;
+    padding-left: 1.4em;
+  }
+  & li + li {
+    margin-top: 0.4em;
+  }
+  & li::marker {
+    color: var(--color-rule-strong);
+  }
+  & a {
+    text-decoration-line: underline;
+    text-decoration-color: var(--color-rule-strong);
+    text-underline-offset: 0.22em;
+  }
+  & a:hover {
+    color: var(--color-seal-deep);
+    text-decoration-color: currentColor;
+  }
+  & strong {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  & blockquote {
+    border-left: 2px solid var(--color-seal);
+    padding-left: 1.1em;
+    color: var(--color-graphite);
+  }
+  & code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--color-ledger);
+    padding: 0.1em 0.35em;
+    border-radius: var(--radius-sm);
+  }
+  & table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+  & th {
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-ink);
+    padding: 0.5em 0.75em 0.5em 0;
+  }
+  & td {
+    border-bottom: 1px solid var(--color-rule);
+    padding: 0.6em 0.75em 0.6em 0;
+    vertical-align: top;
+  }
+}
+
+/* Range input used by the calculator. Track is Rule-strong for 3:1 UI contrast;
+   the filled part is driven by --fill (0-100%). */
+@utility range {
+  appearance: none;
+  width: 100%;
+  height: 28px;
+  background: transparent;
+  cursor: pointer;
+  --fill: 50%;
+
+  &::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(to right, var(--color-seal) var(--fill), var(--color-rule-strong) var(--fill));
+  }
+  &::-moz-range-track {
+    height: 4px;
+    border-radius: 999px;
+    background: var(--color-rule-strong);
+  }
+  &::-moz-range-progress {
+    height: 4px;
+    border-radius: 999px;
+    background: var(--color-seal);
+  }
+  &::-webkit-slider-thumb {
+    appearance: none;
+    margin-top: -8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    background: var(--color-paper);
+    border: 2px solid var(--color-seal);
+    box-shadow: 0 1px 3px rgb(13 27 30 / 0.2);
+    transition: transform 150ms var(--ease-out);
+  }
+  &::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    background: var(--color-paper);
+    border: 2px solid var(--color-seal);
+    box-shadow: 0 1px 3px rgb(13 27 30 / 0.2);
+  }
+  &:active::-webkit-slider-thumb {
+    transform: scale(1.12);
+  }
+  &:focus-visible {
+    outline: none;
+  }
+  &:focus-visible::-webkit-slider-thumb {
+    outline: 2px solid var(--color-seal);
+    outline-offset: 3px;
+  }
+  &:focus-visible::-moz-range-thumb {
+    outline: 2px solid var(--color-seal);
+    outline-offset: 3px;
+  }
+}
