@@ -10,8 +10,8 @@ const flows = ["Actions", "Signed packs", "Shared evidence"];
 const nodes = [
   { name: "Your agent", detail: "Acts for your bank customers" },
   { name: "Shoirly", detail: "Records, signs, checks coverage", accent: true },
-  { name: "Vanta or your trust centre", detail: "Where buyers already look" },
-  { name: "The bank's risk team", detail: "Reviews and verifies" },
+  { name: "Vanta or your trust centre", detail: "Shared where buyers already look" },
+  { name: "Your customer's risk team", detail: "Reviews the evidence" },
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -28,10 +28,10 @@ export function TrustCentre() {
         Vanta proves you have controls. We prove they held.
       </h2>
       <p className="mt-4 max-w-[56ch] text-lg text-graphite">
-        Shoirly plugs into Vanta and the trust centre you already use. It adds the evidence they can&apos;t produce
-        on their own, and it doesn&apos;t replace them.
+        Trust centres and vendor-risk tools run on documents. Shoirly packs are live evidence you can share through
+        Vanta or your trust centre. They add to what&apos;s there; they don&apos;t replace it.
       </p>
-      {/* TODO(team): confirm which trust-centre products we integrate with today and name them here. */}
+      {/* Trust-centre integrations are roadmap (see /security). Only say packs can be shared through Vanta or a trust centre. */}
 
       <ol
         ref={ref}

@@ -5,7 +5,7 @@ const columns = [
   {
     id: "vendors",
     who: "For AI agent vendors",
-    title: "Get through bank security review faster",
+    title: "Get through security review faster",
     points: [
       "Answer \"what did your agent do?\" with records, not reassurances.",
       "Give each bank evidence about its own customers, ready before they ask.",
@@ -16,8 +16,8 @@ const columns = [
   },
   {
     id: "banks",
-    who: "For banks and insurers",
-    title: "Evidence you can check yourself",
+    who: "For banks, payment firms and insurers",
+    title: "Evidence of what happened, not reassurance",
     points: [
       "See each action your vendor's agent took for your customers, and who approved it.",
       "A coverage check shows whether anything went unrecorded.",
@@ -54,7 +54,7 @@ export function Audiences() {
                 </li>
               ))}
             </ul>
-            <Link href={c.href} className="link mt-7 inline-block font-medium">
+            <Link href={c.href} className="link mt-5 inline-flex min-h-11 items-center font-medium">
               {c.link}
             </Link>
           </div>

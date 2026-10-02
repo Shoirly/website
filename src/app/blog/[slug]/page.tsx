@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ClosingCta } from "@/components/layout/ClosingCta";
@@ -18,13 +19,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
-  return {
+  return pageMetadata({
     title: post.title,
     description: post.description,
-    alternates: { canonical: `/blog/${post.slug}` },
-    openGraph: { type: "article", publishedTime: post.date },
-    robots: post.draft ? { index: false, follow: false } : undefined,
-  };
+    path: `/blog/${post.slug}`,
+    type: "article",
+    publishedTime: post.date,
+    noindex: post.draft,
+  });
 }
 
 export default async function PostPage({ params }: Props) {

@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import { Check, Minus } from "@phosphor-icons/react/dist/ssr";
+import { ArrowUpRight, LockSimple } from "@phosphor-icons/react/dist/ssr";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { PageHeader, Section } from "@/components/ui/Layout";
 import { site } from "@/config/site";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Security: how evidence is signed, verified and handled",
-  description:
-    "How Shoirly signs and chains evidence records, how banks verify them, what data we store and what we don't.",
-  alternates: { canonical: "/security" },
-};
+export const metadata: Metadata = pageMetadata(pageSeo["/security"]);
 
 const signing = [
   {
@@ -26,23 +22,33 @@ const signing = [
   },
   {
     title: "Verify",
-    body: "A bank can check signatures and the chain itself, without relying on the vendor's word or on ours.",
+    body: "Once we publish the verification guide, banks will be able to check signatures and the chain independently.",
   },
 ];
 
-// TODO(team): confirm every line in both lists against the actual architecture.
-const stored = [
-  "Action records: action type, time, the customer reference you choose, and the authoriser",
-  "Signatures and chain references for each record",
-  "Coverage counts per period",
-  "Who in your team and your customers' teams can access which packs",
+const stays = [
+  "Action records and everything in them",
+  "Customer data and identifiers",
+  "Prompts, model inputs and outputs",
+  "Who approved each action: names and policy versions",
 ];
 
-const notStored = [
-  "Your model weights, prompts or system instructions",
-  "Full conversation transcripts, unless you choose to attach them",
-  "Card numbers, passwords or authentication secrets",
-  "Data about one bank's customers in another bank's pack",
+const leaves = ["Signatures", "Hashes", "Coverage counts"];
+
+// Roadmap. Never present these as shipped.
+const next = [
+  {
+    title: "Hardware-isolated signing",
+    body: "Signing inside a hardware-isolated environment, so signing keys can't be extracted or used outside it.",
+  },
+  {
+    title: "eIDAS qualified timestamps",
+    body: "Timestamps from an EU qualified trust service provider, giving each record legally recognised proof of time.",
+  },
+  {
+    title: "Trust-centre integrations",
+    body: "Publishing packs directly to trust centres and vendor-risk tools. Today you share packs through Vanta or your trust centre yourself.",
+  },
 ];
 
 export default function SecurityPage() {
@@ -50,7 +56,7 @@ export default function SecurityPage() {
     <>
       <PageHeader
         title="Evidence is only useful if it can be trusted"
-        lead="We hold ourselves to the standard we ask of agents: say what happens, show it, and let others check. Here's how records are protected and what we keep."
+        lead="We hold ourselves to the standard we ask of agents: say what happens, show it, and let others check. Here's how records are protected, where Shoirly runs and what leaves."
       />
 
       <Section labelledBy="signing-title">
@@ -78,35 +84,46 @@ export default function SecurityPage() {
         </p>
       </Section>
 
-      <Section tone="ledger" labelledBy="data-title">
-        <h2 id="data-title" className="max-w-[24ch] text-3xl">
-          What we store, and what we don&apos;t
-        </h2>
-        <p className="mt-4 max-w-[60ch] text-lg text-graphite">
-          We keep what&apos;s needed to prove what happened, and as little else as possible.
-        </p>
-        <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-14">
+      <Section tone="ledger" labelledBy="where-title">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
           <div>
-            <h3 className="text-xl">We store</h3>
-            <ul className="mt-5 space-y-4">
-              {stored.map((s) => (
-                <li key={s} className="grid grid-cols-[1.25rem_1fr] gap-3">
-                  <Check size={18} className="mt-1 text-seal" aria-hidden />
-                  {s}
-                </li>
-              ))}
-            </ul>
+            <h2 id="where-title" className="text-3xl">
+              Where Shoirly runs
+            </h2>
+            <p className="mt-4 max-w-[42ch] text-lg text-graphite">
+              Shoirly is designed to run where your agent runs: in your cloud, or in the bank&apos;s. Raw data stays there.
+            </p>
+            <p className="mt-6 text-xl font-semibold">Your data never leaves. Only the proof does.</p>
+            {/* TODO(team): list the supported deployment targets (clouds, regions, Kubernetes, etc.). */}
           </div>
-          <div>
-            <h3 className="text-xl">We don&apos;t store</h3>
-            <ul className="mt-5 space-y-4">
-              {notStored.map((s) => (
-                <li key={s} className="grid grid-cols-[1.25rem_1fr] gap-3 text-graphite">
-                  <Minus size={18} className="mt-1" aria-hidden />
-                  {s}
-                </li>
-              ))}
-            </ul>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+            <div className="rounded-md border-2 border-dashed border-rule-strong/70 bg-paper p-5">
+              <h3 className="flex items-center gap-2 text-lg">
+                <LockSimple size={18} aria-hidden className="text-graphite" /> Stays where your agent runs
+              </h3>
+              <ul className="mt-4 space-y-3 text-graphite">
+                {stays.map((s) => (
+                  <li key={s} className="border-t border-rule pt-3 first:border-t-0 first:pt-0">
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-md border border-rule bg-paper p-5 shadow-paper">
+              <h3 className="flex items-center gap-2 text-lg">
+                <ArrowUpRight size={18} aria-hidden className="text-seal" /> Leaves
+              </h3>
+              <ul className="mt-4 space-y-3">
+                {leaves.map((l) => (
+                  <li key={l} className="border-t border-rule pt-3 font-mono text-sm first:border-t-0 first:pt-0">
+                    {l}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-xs text-graphite">
+                Enough to show records are unedited and whether any are missing. None of their contents.
+              </p>
+            </div>
           </div>
         </div>
       </Section>
@@ -118,18 +135,23 @@ export default function SecurityPage() {
           </h2>
           <dl className="divide-y divide-rule border-y border-rule">
             <div className="grid grid-cols-1 gap-2 py-5 sm:grid-cols-[11rem_1fr] sm:gap-6">
+              <dt className="font-semibold">Stage</dt>
+              <dd className="text-graphite">We&apos;re early and taking on design partners.</dd>
+            </div>
+            <div className="grid grid-cols-1 gap-2 py-5 sm:grid-cols-[11rem_1fr] sm:gap-6">
               <dt className="font-semibold">Certifications</dt>
               <dd className="text-graphite">
                 {/* TODO(team): confirm certification status and any audit timeline. */}
-                We&apos;re an early-stage company and don&apos;t hold SOC 2 or ISO 27001 certification yet. When we
-                start an audit, we&apos;ll say so here.
+                We don&apos;t hold SOC 2 or ISO 27001 certification yet. When we start an audit, we&apos;ll say so
+                here.
               </dd>
             </div>
             <div className="grid grid-cols-1 gap-2 py-5 sm:grid-cols-[11rem_1fr] sm:gap-6">
-              <dt className="font-semibold">Hosting and data location</dt>
+              <dt className="font-semibold">Our hosted service</dt>
               <dd className="text-graphite">
-                {/* TODO(team): add hosting provider and regions. */}
-                We&apos;ll publish our hosting regions and subprocessors here before the first customer goes live.
+                {/* TODO(team): add hosting provider, regions and subprocessors for the service that receives proofs. */}
+                The signatures, hashes and coverage counts that leave your environment are held by Shoirly. We&apos;ll
+                publish where that service is hosted, and our subprocessors, before the first customer goes live.
               </dd>
             </div>
             <div className="grid grid-cols-1 gap-2 py-5 sm:grid-cols-[11rem_1fr] sm:gap-6">
@@ -147,9 +169,29 @@ export default function SecurityPage() {
         </div>
       </Section>
 
+      <Section tone="ledger" labelledBy="next-title">
+        <h2 id="next-title" className="max-w-[24ch] text-3xl">
+          What we&apos;re building next
+        </h2>
+        <p className="mt-4 max-w-[56ch] text-lg text-graphite">
+          On our roadmap. None of these is available yet, and we&apos;ll say clearly when one is.
+        </p>
+        <ul className="mt-10 grid grid-cols-1 gap-x-10 gap-y-8 md:grid-cols-3">
+          {next.map((n) => (
+            <li key={n.title} className="border-t border-ink pt-5">
+              <span className="inline-block rounded-sm border border-rule-strong/70 px-1.5 py-0.5 text-xs text-graphite">
+                Not yet available
+              </span>
+              <h3 className="mt-3 text-xl">{n.title}</h3>
+              <p className="mt-2 text-graphite">{n.body}</p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
       <ClosingCta
         title="Want the detail for your security review?"
-        body="Book a call and we'll walk your team through signing, verification and data handling."
+        body="Book a call and we'll walk your team through signing, deployment and what leaves your environment."
       />
     </>
   );

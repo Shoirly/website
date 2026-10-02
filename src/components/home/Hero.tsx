@@ -13,8 +13,8 @@ export function Hero() {
             Signed proof of what your AI agent did, and who approved it.
           </h1>
           <p className="mt-6 max-w-[46ch] text-lg text-graphite">
-            Shoirly gives AI agent vendors per-customer evidence of every action, mapped to DORA, so bank security
-            reviews stop stalling your deals.
+            Shoirly gives AI agent vendors per-customer evidence of every action, mapped to DORA, so security reviews
+            at banks, insurers and payment firms stop stalling your deals.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
             <Magnetic>
@@ -34,6 +34,7 @@ export function Hero() {
               />
             </a>
           </div>
+          <p className="mt-6 text-sm text-graphite">We&apos;re early and taking on design partners.</p>
         </div>
         <EvidenceTrail />
       </Container>

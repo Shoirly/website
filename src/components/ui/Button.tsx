@@ -8,13 +8,13 @@ const base =
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-[background-color,color,border-color,transform] duration-150 ease-out active:translate-y-px select-none";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-ink text-paper hover:bg-[#21363a]",
+  primary: "bg-ink text-paper hover:bg-[#22332d]",
   secondary: "border border-ink/80 text-ink hover:bg-ink-soft",
   quiet: "text-ink hover:text-seal-deep underline decoration-rule-strong underline-offset-[0.22em] hover:decoration-current",
 };
 
 const sizes: Record<Size, string> = {
-  md: "h-10 px-4 text-sm",
+  md: "h-11 px-4 text-sm lg:h-10",
   lg: "h-12 px-5 text-base",
 };
 

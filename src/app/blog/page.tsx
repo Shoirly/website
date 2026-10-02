@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import Link from "next/link";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { PageHeader, Section } from "@/components/ui/Layout";
 import { formatDate, publishedPosts } from "@/content/blog";
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description: "Writing on AI agents, bank security reviews and DORA from the Shoirly team.",
-  alternates: { canonical: "/blog" },
-};
+export const metadata: Metadata = pageMetadata(pageSeo["/blog"]);
 
 export default function BlogPage() {
   const posts = publishedPosts();
@@ -17,7 +14,7 @@ export default function BlogPage() {
     <>
       <PageHeader
         title="Blog"
-        lead="Notes on AI agents, bank security reviews and DORA, for founders selling into financial services."
+        lead="Notes on AI agents, security reviews and DORA, for founders selling into banks, payment firms and insurers."
       />
       <Section labelledBy="posts-title">
         <h2 id="posts-title" className="sr-only">

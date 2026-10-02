@@ -52,7 +52,7 @@ export function EvidencePreview() {
         What the evidence looks like
       </h2>
       <p className="mt-4 max-w-[54ch] text-lg text-graphite">
-        A pack your customer&apos;s risk team can read in minutes and check for themselves.
+        A pack your customer&apos;s risk team can read in minutes, with any gaps already counted.
       </p>
 
       <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-14">

@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { PageHeader, Section } from "@/components/ui/Layout";
 
-export const metadata: Metadata = {
-  title: "About",
-  description: "Shoirly is a four-person team in Dublin building signed evidence for AI agents that act for banks.",
-  alternates: { canonical: "/about" },
-};
+export const metadata: Metadata = pageMetadata(pageSeo["/about"]);
 
 // TODO(team): real names, roles, one-line backgrounds and photos for all four founders.
 const team = [
@@ -40,8 +37,8 @@ export default function AboutPage() {
               and good products wait.
             </p>
             <p className="text-ink">
-              We think the fix is simple to describe: sign every action, link it to who authorised it, prove nothing is
-              missing, and hand the bank evidence it can check for itself.
+              We think the fix is simple to describe: sign every action, link it to who authorised it, show whether
+              anything is missing, and hand the bank evidence it can check for itself.
             </p>
           </div>
         </div>
