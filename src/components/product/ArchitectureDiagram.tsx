@@ -80,7 +80,7 @@ function NodeButton({
       type="button"
       aria-pressed={selected}
       onClick={() => onSelect(id)}
-      className={`group relative flex min-h-12 w-full items-center gap-2.5 rounded-md border px-3 py-2.5 text-left text-sm transition-[border-color,background-color,box-shadow] duration-200 ${
+      className={`group relative flex min-h-12 w-full items-center gap-2.5 rounded-md border px-3 py-2.5 text-left text-sm transition-[border-color,background-color,box-shadow,transform] duration-200 active:scale-[0.97] active:duration-100 ${
         selected
           ? "border-seal bg-seal-wash text-seal-deep shadow-[0_0_0_3px_var(--color-seal-wash)]"
           : tone === "shoirly"

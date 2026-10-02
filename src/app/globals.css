@@ -325,3 +325,162 @@
     }
   }
 }
+
+/* ------------------------------------------------------------------
+   Page transitions (View Transitions API via React <ViewTransition> in
+   src/app/template.tsx). The outgoing page recedes, the incoming page
+   rises into place; the header stays anchored; the footer/background
+   (the root snapshot) cross-fades. Browsers without support swap
+   instantly and template.tsx falls back to a short fade.
+   ------------------------------------------------------------------ */
+::view-transition {
+  pointer-events: none;
+}
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 420ms;
+  animation-timing-function: var(--ease-in-out);
+}
+::view-transition-old(.page) {
+  transform-origin: 50% 0;
+  animation: page-recede 380ms var(--ease-in-out) both;
+}
+::view-transition-new(.page) {
+  transform-origin: 50% 0;
+  animation: page-rise 640ms var(--ease-out) 120ms both;
+}
+@keyframes page-recede {
+  to {
+    opacity: 0;
+    transform: translateY(-24px) scale(0.975);
+    filter: blur(8px);
+  }
+}
+@keyframes page-rise {
+  from {
+    opacity: 0;
+    transform: translateY(56px) scale(0.985);
+    filter: blur(10px);
+  }
+  60% {
+    filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(.page),
+  ::view-transition-new(.page) {
+    animation: none;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 160ms;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Section headings reveal as they scroll into view: pure CSS,
+   scroll-driven, no JavaScript. Only where supported and motion is
+   welcome; elsewhere headings are simply static.
+   ------------------------------------------------------------------ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    main section h2:not(.sr-only) {
+      animation: heading-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 28%;
+    }
+  }
+}
+@keyframes heading-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0 0 -20% 0);
+  }
+}
+
+/* ------------------------------------------------------------------
+   <details> accordions open and close smoothly where the browser can
+   animate to an auto height; elsewhere they toggle instantly.
+   ------------------------------------------------------------------ */
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    details::details-content {
+      block-size: 0;
+      opacity: 0;
+      overflow: clip;
+      transition:
+        block-size 320ms var(--ease-out),
+        opacity 240ms var(--ease-out),
+        content-visibility 320ms allow-discrete;
+    }
+    details[open]::details-content {
+      block-size: auto;
+      opacity: 1;
+    }
+  }
+}
+
+/* Home "only proof leaves": pulses travel from the environment to the card.
+   Vertical on phones, horizontal from sm. Hidden entirely under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .proof-pulse {
+    animation: proof-down 2.4s var(--ease-in-out) infinite;
+  }
+  @media (min-width: 640px) {
+    .proof-pulse {
+      animation-name: proof-across;
+    }
+  }
+}
+@keyframes proof-down {
+  0% {
+    opacity: 0;
+    translate: -50% 0;
+  }
+  20%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    translate: -50% 44px;
+  }
+}
+@keyframes proof-across {
+  0% {
+    opacity: 0;
+    translate: 0 -50%;
+  }
+  20%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    translate: 52px -50%;
+  }
+}
