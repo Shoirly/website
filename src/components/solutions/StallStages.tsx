@@ -29,7 +29,7 @@ export function StallStages({ stages }: { stages: Stage[] }) {
             className="absolute inset-x-0 top-0 h-[3px] origin-left bg-seal"
             initial={false}
             animate={{ scaleX: shown ? 1 : 0 }}
-            transition={animated && shown ? { duration: 0.55, ease, delay: 0.15 + i * 0.32 } : { duration: 0 }}
+            transition={animated && shown ? { duration: 0.4, ease, delay: 0.1 + i * 0.2 } : { duration: 0 }}
           />
           <p className="font-mono text-xs text-graphite">
             {String(i + 1).padStart(2, "0")} {s.stage}

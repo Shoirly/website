@@ -30,7 +30,7 @@ export default function Template({ children }: { children: ReactNode }) {
       <motion.div
         initial={fallbackFade ? { opacity: 0 } : false}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
       >
         {children}
       </motion.div>

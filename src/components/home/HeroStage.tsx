@@ -15,7 +15,7 @@ import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTran
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 // Critically damped (damping ratio ~1): follows the pointer without overshoot.
-const spring = { stiffness: 150, damping: 26, mass: 1 };
+const spring = { stiffness: 320, damping: 36, mass: 1 };
 
 export function HeroStage({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);

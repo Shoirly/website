@@ -48,9 +48,9 @@
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 
   /* One-shot entrance animations for story scenes. Always used with motion-safe: */
-  --animate-rise-in: rise-in 0.5s var(--ease-out) both;
-  --animate-stamp-in: stamp-in 0.55s var(--ease-out) both;
-  --animate-draw-x: draw-x 0.6s var(--ease-out) both;
+  --animate-rise-in: rise-in 0.38s var(--ease-out) both;
+  --animate-stamp-in: stamp-in 0.42s var(--ease-out) both;
+  --animate-draw-x: draw-x 0.45s var(--ease-out) both;
 
   @keyframes rise-in {
     from {
@@ -348,37 +348,31 @@
 }
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 420ms;
-  animation-timing-function: var(--ease-in-out);
+  animation-duration: 220ms;
+  animation-timing-function: var(--ease-out);
 }
+/* Transform and opacity only (compositor-friendly; no blur filters), and the two
+   halves overlap: the old page is mostly gone by the time the new one moves in. */
 ::view-transition-old(.page) {
-  transform-origin: 50% 0;
-  animation: page-recede 380ms var(--ease-in-out) both;
+  animation: page-out 170ms cubic-bezier(0.4, 0, 1, 1) both;
 }
 ::view-transition-new(.page) {
-  transform-origin: 50% 0;
-  animation: page-rise 640ms var(--ease-out) 120ms both;
+  animation: page-in 340ms var(--ease-out) 50ms both;
 }
-@keyframes page-recede {
+@keyframes page-out {
   to {
     opacity: 0;
-    transform: translateY(-24px) scale(0.975);
-    filter: blur(8px);
+    transform: translateY(-10px);
   }
 }
-@keyframes page-rise {
+@keyframes page-in {
   from {
     opacity: 0;
-    transform: translateY(56px) scale(0.985);
-    filter: blur(10px);
-  }
-  60% {
-    filter: blur(0);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
     transform: none;
-    filter: blur(0);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -402,20 +396,18 @@
     main section h2:not(.sr-only) {
       animation: heading-reveal linear both;
       animation-timeline: view();
-      animation-range: entry 5% cover 28%;
+      animation-range: entry 0% entry 80%;
     }
   }
 }
 @keyframes heading-reveal {
   from {
     opacity: 0;
-    transform: translateY(18px);
-    clip-path: inset(0 0 100% 0);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
     transform: none;
-    clip-path: inset(0 0 -20% 0);
   }
 }
 
@@ -433,9 +425,9 @@
       opacity: 0;
       overflow: clip;
       transition:
-        block-size 320ms var(--ease-out),
-        opacity 240ms var(--ease-out),
-        content-visibility 320ms allow-discrete;
+        block-size 240ms var(--ease-out),
+        opacity 180ms var(--ease-out),
+        content-visibility 240ms allow-discrete;
     }
     details[open]::details-content {
       block-size: auto;
@@ -482,5 +474,19 @@
   100% {
     opacity: 0;
     translate: 52px -50%;
+  }
+}
+
+/* Hero ledger grid drift: the compositor slides the grid layer one cell
+   diagonally and loops (the pattern repeats every cell, so the loop is seamless). */
+@media (prefers-reduced-motion: no-preference) {
+  .ledger-drift {
+    animation: ledger-drift 7s linear infinite;
+    will-change: transform;
+  }
+}
+@keyframes ledger-drift {
+  to {
+    transform: translate(calc(var(--cell) * -1), calc(var(--cell) * -1));
   }
 }

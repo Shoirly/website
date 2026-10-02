@@ -334,7 +334,7 @@ export function SiteHeader() {
           className="pointer-events-none absolute inset-x-0 -bottom-px h-0.5 origin-left bg-seal"
           initial={navCount === 0 ? false : { scaleX: 0, opacity: 1 }}
           animate={{ scaleX: 1, opacity: 0 }}
-          transition={{ scaleX: { duration: 0.75, ease }, opacity: { duration: 0.35, delay: 0.7 } }}
+          transition={{ scaleX: { duration: 0.45, ease }, opacity: { duration: 0.25, delay: 0.4 } }}
         />
       </header>
       <MobileMenu open={menuOpen} onClose={closeMenu} pathname={pathname} />
