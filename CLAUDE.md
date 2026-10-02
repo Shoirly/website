@@ -101,11 +101,13 @@ Starting copy (refine, don't replace the meaning):
 
 - Inspiration sites: https://secureframe.com and https://sprinto.com (capture with the playwright-cli skill, save to `research/`, which is gitignored).
 - Components: https://github.com/DavidHDev/react-bits (clone to a sibling folder `../react-bits`, not into this repo).
-- Skills to use: design-taste-frontend, high-end-visual-design, web-design-guidelines (for audits), playwright-cli (for screenshots and self-review), image-to-code (when given a mockup or logo).
+- Skills to use: design-taste-frontend, high-end-visual-design, web-design-guidelines (for audits), playwright-cli (for screenshots, only when a prompt asks), image-to-code (when given a mockup or logo).
 
 ## Working rules
 
 - Log every design and product decision you make without asking in `DECISIONS.md` (one line each, with the reason).
-- After any visual change, screenshot the affected pages with playwright-cli at 1440px and 390px, look at them, and fix what looks off before finishing.
+- Only take screenshots when a prompt explicitly asks for them. Default to none.
+- When asked, screenshot only the pages you changed, at 1440px only, once. Fix obvious problems in one round, then stop. No repeated screenshot-fix loops.
+- Copy and content changes never need screenshots. Build and lint are enough.
 - Run `npm run build` and `npm run lint` before declaring a task done. Fix all errors.
 - Commit at the end of each task with a clear message. Don't push unless asked.
