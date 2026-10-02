@@ -253,3 +253,19 @@ CLAUDE.md now carries the sharper positioning: EU financial services (banks lead
 - The screen-reader live region updates 700ms after input settles, rather than on every step of a drag. Each slider keeps its `aria-valuetext`.
 - The assumption is now one line ("Estimate only..."), with "Book a demo" beside it on desktop and under it on mobile.
 - On the vendor page, the FAQ moved to the Ledger tone so the new calculator section and the FAQ don't sit as two consecutive Paper sections.
+
+### Phase 5: motion pass
+- One orchestrated moment per page I'm allowed to edit:
+  - Home: the hero trail.
+  - /product: the architecture diagram's single signal run, where nodes light in order once and the proof line draws across the boundary.
+  - /solutions/agent-vendors: a seal rule draws across each review stage in order, questionnaire to oversight.
+  - /solutions/banks: the three verification checks run and resolve one after another.
+  - /demo: the agenda rules draw as the page opens.
+- Other sections stay still. There's no generic fade-up anywhere.
+- `useRevealOnce` makes moments safe. The server renders the finished state, a moment only "arms" after hydration if the element is off-screen and motion is allowed, and content already on screen never replays.
+- react-bits: adapted StatusMark (trimmed to pending, running and done; recoloured) for the banks checks, because "checking, then verified" is exactly what it animates. Nothing else new was taken. The existing Magnet, DecryptedText, CountUp and SpotlightCard adaptations stay where they were.
+- Page transitions: `src/app/template.tsx` fades each new route in on client navigation (opacity only, 280ms). It skips the first load so first paint and LCP aren't delayed, and is instant under reduced motion. It wraps every route, including the ones other agents own, without editing their files.
+- Header: transparent border at the top of the page. After 8px of scroll (via Motion's `useScroll`, not a scroll listener) it gains a Rule border, a soft shadow and a backdrop blur. It doesn't shrink, because a height change would shift layout.
+- Desktop nav: a hover pill slides between items (shared `layoutId`), and a seal underline marks the current section and slides when the route changes. The header sits in `MotionConfig reducedMotion="user"`, so both snap instead of slide under reduced motion.
+- Smooth in-page scrolling stays the CSS `scroll-behavior: smooth` set under `prefers-reduced-motion: no-preference`, with `scroll-padding-top` clearing the sticky header.
+- Measured layout shift while scrolling every page I edited: 0.0000 on all five.

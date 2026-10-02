@@ -30,9 +30,19 @@ export default function DemoPage() {
           </p>
 
           <h2 className="mt-12 text-sm font-medium text-graphite">What we&apos;ll cover</h2>
-          <ol className="mt-4 border-t border-ink">
+          {/* Orchestrated moment: the rules draw in sequence as the page opens (motion-safe CSS only). */}
+          <ol className="relative mt-4">
+            <span
+              aria-hidden
+              className="absolute inset-x-0 top-0 h-px origin-left bg-ink motion-safe:animate-draw-x"
+            />
             {agenda.map(([t, d], i) => (
-              <li key={t} className="grid grid-cols-[2.5rem_1fr] border-b border-rule py-5">
+              <li key={t} className="relative grid grid-cols-[2.5rem_1fr] py-5">
+                <span
+                  aria-hidden
+                  className="absolute inset-x-0 bottom-0 h-px origin-left bg-rule motion-safe:animate-draw-x"
+                  style={{ animationDelay: `${180 + i * 160}ms` }}
+                />
                 <span className="font-mono text-sm text-graphite">{String(i + 1).padStart(2, "0")}</span>
                 <span>
                   <span className="block font-semibold">{t}</span>

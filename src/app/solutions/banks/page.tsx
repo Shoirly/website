@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { CopyBlock } from "@/components/ui/CopyBlock";
 import { EvidenceLedger } from "@/components/ui/EvidenceLedger";
+import { VerifyChecks } from "@/components/solutions/VerifyChecks";
 import { PageHeader, Section } from "@/components/ui/Layout";
 
 export const metadata: Metadata = pageMetadata({
@@ -32,7 +33,7 @@ const receive = [
   },
 ];
 
-const checks = [
+const checks: [string, string][] = [
   ["Signatures", "Each record is signed. A changed record no longer matches its signature."],
   ["Chain", "Each record references the one before it. A deleted record leaves a visible break."],
   ["Coverage", "Attempted actions are counted against signed records, so completeness is checked rather than assumed."],
@@ -112,14 +113,7 @@ export default function BanksPage() {
             </p>
             {/* TODO(team): link to verification docs or a verifier tool once it exists. */}
           </div>
-          <dl className="divide-y divide-rule border-y border-rule">
-            {checks.map(([k, v]) => (
-              <div key={k} className="grid grid-cols-1 gap-2 py-5 sm:grid-cols-[9rem_1fr] sm:gap-6">
-                <dt className="font-semibold">{k}</dt>
-                <dd className="text-graphite">{v}</dd>
-              </div>
-            ))}
-          </dl>
+          <VerifyChecks checks={checks} />
         </div>
       </Section>
 

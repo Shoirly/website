@@ -3,6 +3,7 @@ import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { StalledDealCalculator } from "@/components/calculator/StalledDealCalculator";
 import { ClosingCta } from "@/components/layout/ClosingCta";
+import { StallStages } from "@/components/solutions/StallStages";
 import { ButtonLink } from "@/components/ui/Button";
 import { Faq, FaqJsonLd, type FaqItem } from "@/components/ui/Faq";
 import { PageHeader, Section } from "@/components/ui/Layout";
@@ -122,17 +123,7 @@ export default function AgentVendorsPage() {
         <p className="mt-4 max-w-[56ch] text-lg text-graphite">
           The questions change as a deal moves through a bank. The answer doesn&apos;t have to.
         </p>
-        <ol className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-md border border-rule bg-rule md:grid-cols-2">
-          {stages.map((s, i) => (
-            <li key={s.stage} className="bg-paper p-6 sm:p-8">
-              <p className="font-mono text-xs text-graphite">
-                {String(i + 1).padStart(2, "0")} {s.stage}
-              </p>
-              <p className="mt-4 text-xl font-semibold">&ldquo;{s.asks}&rdquo;</p>
-              <p className="mt-3 text-graphite">{s.answer}</p>
-            </li>
-          ))}
-        </ol>
+        <StallStages stages={stages} />
       </Section>
 
       <Section tone="ledger" labelledBy="get-title">
