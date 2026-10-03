@@ -18,7 +18,7 @@ export default function AboutPage() {
     <>
       <PageHeader
         title="Agents should earn trust the way people do: by showing their work"
-        lead="Shoirly exists so that banks can let AI agents do more, because they can see exactly what those agents did and who allowed it."
+        lead="Shoirly exists so that regulated businesses can let AI agents do more, because they can see exactly what those agents did and who allowed it."
       />
 
       <Section labelledBy="why-title">
@@ -28,8 +28,9 @@ export default function AboutPage() {
           </h2>
           <div className="space-y-5 text-lg text-graphite">
             <p>
-              AI agents are starting to act inside banks: refunding, reviewing, updating, flagging. Banks are willing to
-              give them more autonomy, but only inside defined limits, and only with proof the limits held.
+              AI agents are starting to act inside regulated businesses, for example refunding, reviewing and updating
+              accounts at banks. Those buyers are willing to give agents more autonomy, but only inside defined limits,
+              and only with proof the limits held.
             </p>
             <p>
               Today that proof is thin. Certificates show a vendor has controls. Questionnaires record what a vendor
@@ -38,7 +39,7 @@ export default function AboutPage() {
             </p>
             <p className="text-ink">
               We think the fix is simple to describe: sign every action, link it to who authorised it, show whether
-              anything is missing, and hand the bank evidence it can check for itself.
+              anything is missing, and hand the buyer evidence it can check for itself.
             </p>
           </div>
         </div>
@@ -74,8 +75,8 @@ export default function AboutPage() {
           </h2>
           <div className="space-y-5 text-lg text-graphite">
             <p>
-              Dublin sits close to the banks, insurers and payment firms we build for, and to the EU supervisors whose
-              rules shape what they need.
+              Dublin sits close to the regulated businesses we&apos;re starting with, banks, insurers and payment firms,
+              and to the EU supervisors whose rules shape what they need.
             </p>
             <p>
               In October 2026 we&apos;re taking part in Baseline&apos;s Pressure Cooker during Dublin AI Week. If

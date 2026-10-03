@@ -22,7 +22,7 @@ export default function BlogPage() {
     <>
       <PageHeader
         title="Blog"
-        lead="Notes on AI agents, security reviews and DORA, for founders selling into banks, payment firms and insurers."
+        lead="Notes on AI agents, security reviews and the rules regulated buyers work under, for founders selling to them."
       >
         <Link href="/blog/rss.xml" className="link text-sm">Subscribe via RSS</Link>
       </PageHeader>
@@ -34,11 +34,11 @@ export default function BlogPage() {
           <div className="max-w-[65ch] rounded-lg border border-rule bg-ledger p-6 md:p-10">
             <p className="text-xl font-semibold">First posts are on the way</p>
             <p className="mt-3 text-graphite">
-              In the meantime, our{" "}
+              In the meantime, for example, our{" "}
               <Link href="/dora" className="link">
                 plain-English guide to DORA
               </Link>{" "}
-              covers what banks will ask of AI agent vendors.
+              covers what EU banks ask of AI agent vendors.
             </p>
           </div>
         ) : (

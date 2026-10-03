@@ -5,18 +5,35 @@
 
 const email = "hello@shoirly.com";
 
+// Prefilled demo request, used by every "email us to book" link (mail app, Gmail, Outlook).
+const demoRequest = {
+  subject: "Shoirly demo request",
+  body: [
+    "Hi Shoirly team,",
+    "",
+    "We'd like to book a demo.",
+    "",
+    "Company:",
+    "Name and role:",
+    "A couple of times that suit (with time zone):",
+    "",
+    "Thanks,",
+  ].join("\n"),
+};
+
 export const site = {
   name: "Shoirly",
   url: "https://shoirly.com",
   description:
-    "Signed, per-customer evidence of what your AI agent did and who approved it, mapped to DORA, so security reviews at banks, insurers and payment firms stop stalling your deals.",
+    "Signed, per-customer evidence of what your AI agent did and who approved it, so security reviews with regulated buyers stop stalling your deals. Starting with financial services.",
   email,
   location: "Dublin, Ireland",
 
   // TODO(team): swap for the Cal.com booking link once it exists.
   // Every "Book a demo" button reads from here.
-  bookingUrl: `mailto:${email}?subject=${encodeURIComponent("Shoirly demo request")}`,
+  bookingUrl: `mailto:${email}?subject=${encodeURIComponent(demoRequest.subject)}&body=${encodeURIComponent(demoRequest.body)}`,
   bookingIsMailto: true,
+  demoRequest,
 
   social: {
     // TODO(team): add the real company LinkedIn URL, or remove the entry.
@@ -31,7 +48,7 @@ export const site = {
         {
           label: "For agent vendors",
           href: "/solutions/agent-vendors",
-          description: "Get through security review with financial institutions",
+          description: "Get through security review with regulated buyers",
         },
         {
           label: "For banks, payment firms and insurers",

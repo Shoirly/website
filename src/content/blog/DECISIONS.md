@@ -10,3 +10,4 @@
 - Serve excerpt-based RSS at `/blog/rss.xml` and generate title-specific 1200 × 630 social cards using the existing brand font.
 - Keep decision notes here rather than changing root `DECISIONS.md`, which is outside the user's edit scope.
 - Preserve the base branch's central blog SEO and use its final logo and font loaders for post images when merging the branding update.
+- Preserve the base's regulated-buyer index wording and derive the RSS description from central blog SEO; the DORA article remains finance-specific.

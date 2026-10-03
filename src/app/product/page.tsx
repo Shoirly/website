@@ -28,14 +28,14 @@ const steps: StoryStep[] = [
   },
   {
     title: "Compile a pack per customer",
-    body: "For each bank, insurer or payment firm, Shoirly compiles a pack for the period they ask about, organised by DORA area. Share it through Vanta or your trust centre, or send it directly.",
+    body: "For each customer, Shoirly compiles a pack for the period they ask about, organised by the controls their risk team checks, starting with DORA. Share it through Vanta or your trust centre, or send it directly.",
     scene: <ScenePack />,
   },
 ];
 
 const recordFields = [
   ["Action", "What the agent did, in plain words, with the inputs that matter."],
-  ["Customer", "Which of the bank's customers it was for. Packs are split on this."],
+  ["Customer", "Which customer it was for. Packs are split on this."],
   ["Authorised by", "The person who approved it, or the policy and version that allowed it."],
   ["Time", "When it happened, in UTC."],
   ["Signature", "Proof the record hasn't changed since it was written."],
@@ -61,8 +61,8 @@ export default function ProductPage() {
   return (
     <>
       <PageHeader
-        title="Evidence of every action, from capture to the bank's desk"
-        lead="Four stages turn what your agent does into a pack a risk team at a bank, insurer or payment firm can read."
+        title="Evidence of every action, from capture to your buyer's risk team"
+        lead="Four stages turn what your agent does into a pack a regulated buyer's risk team can read."
       />
 
       <ScrollStory
@@ -92,7 +92,7 @@ export default function ProductPage() {
             </h2>
             <p className="mt-4 max-w-[42ch] text-lg text-graphite">
               One pack per customer, per period. A risk team sees what was covered, whether every signature verifies,
-              whether anything went unrecorded, and which DORA areas it supports.
+              whether anything went unrecorded, and which control areas it supports, for example DORA for EU banks.
             </p>
             <p className="mt-6 text-sm text-graphite">The example on this page uses illustrative data.</p>
           </div>
@@ -107,7 +107,7 @@ export default function ProductPage() {
               What&apos;s in a record
             </h2>
             <p className="mt-4 max-w-[40ch] text-lg text-graphite">
-              Every action becomes one record with the same six fields, so a bank reads them the same way every time.
+              Every action becomes one record with the same six fields, so a risk team reads them the same way every time.
             </p>
           </div>
           <dl className="grid grid-cols-1 gap-x-10 gap-y-7 sm:grid-cols-2">
@@ -134,9 +134,9 @@ export default function ProductPage() {
           ))}
         </div>
         <p className="mt-12 text-graphite">
-          Selling into EU financial services?{" "}
+          For example, if you sell to EU banks or insurers,{" "}
           <Link href="/dora" className="link">
-            Read our plain-English guide to DORA
+            read our plain-English guide to DORA
           </Link>
           .
         </p>

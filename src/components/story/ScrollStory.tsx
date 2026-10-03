@@ -96,20 +96,20 @@ export function ScrollStory({
                       className="block h-full origin-left rounded-full bg-seal"
                       initial={false}
                       animate={{ scaleX: i <= active ? 1 : 0 }}
-                      transition={{ duration: reduce ? 0 : 0.45, ease }}
+                      transition={{ duration: reduce ? 0 : 0.3, ease }}
                     />
                   </li>
                 ))}
               </ol>
               <div className="relative mt-4 h-[340px]">
-                <AnimatePresence mode="wait" initial={false}>
+                <AnimatePresence initial={false}>
                   <motion.div
                     key={active}
                     className="absolute inset-0"
-                    initial={reduce ? false : { opacity: 0, y: 14 }}
+                    initial={reduce ? false : { opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={reduce ? { opacity: 0, transition: { duration: 0 } } : { opacity: 0, y: -10 }}
-                    transition={{ duration: 0.32, ease }}
+                    exit={reduce ? { opacity: 0, transition: { duration: 0 } } : { opacity: 0, y: -6, transition: { duration: 0.16 } }}
+                    transition={{ duration: 0.26, ease }}
                   >
                     {steps[active].scene}
                   </motion.div>

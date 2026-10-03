@@ -21,7 +21,7 @@ export function AnimatedNumber({
   const ref = useRef<HTMLSpanElement>(null);
   const reduce = useReducedMotion();
   const mv = useMotionValue(value);
-  const spring = useSpring(mv, { stiffness: 140, damping: 26 });
+  const spring = useSpring(mv, { stiffness: 260, damping: 34 });
 
   useEffect(() => {
     if (reduce) {

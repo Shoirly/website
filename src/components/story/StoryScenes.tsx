@@ -45,14 +45,14 @@ export function SceneCapture() {
         <ArrowRight size={14} aria-hidden className="text-graphite" />
         <span className="rounded-md border border-rule bg-ledger px-2 py-2.5">Payments API</span>
       </div>
-      <div className="rounded-md border border-rule p-3 motion-safe:animate-rise-in motion-safe:[animation-delay:150ms]">
+      <div className="rounded-md border border-rule p-3 motion-safe:animate-rise-in motion-safe:[animation-delay:100ms]">
         <p className="text-[11px] font-medium text-graphite">Captured as the call passes through</p>
         <dl className="mt-1 divide-y divide-rule">
           <Field k="Action">
             <span className="font-mono">{action.action}</span>
           </Field>
           <Field k="Customer">
-            <span className="font-mono">#4471, sample bank</span>
+            <span className="font-mono">#4471, sample customer</span>
           </Field>
           <Field k="Time">
             <span className="font-mono">2026-09-14 {action.time} UTC</span>
@@ -70,21 +70,21 @@ export function SceneSign() {
         <Field k="Action">
           <span className="font-mono">{action.action}</span>
         </Field>
-        <Field k="Authorised by" className="motion-safe:animate-rise-in motion-safe:[animation-delay:120ms]">
+        <Field k="Authorised by" className="motion-safe:animate-rise-in motion-safe:[animation-delay:80ms]">
           <span className="inline-flex items-center gap-1.5">
             <ShieldCheck size={13} aria-hidden /> {action.approver}
           </span>
         </Field>
-        <Field k="Signature" className="motion-safe:animate-rise-in motion-safe:[animation-delay:320ms]">
+        <Field k="Signature" className="motion-safe:animate-rise-in motion-safe:[animation-delay:200ms]">
           <span className="font-mono">{action.signature}</span>
         </Field>
-        <Field k="Follows" className="motion-safe:animate-rise-in motion-safe:[animation-delay:480ms]">
+        <Field k="Follows" className="motion-safe:animate-rise-in motion-safe:[animation-delay:300ms]">
           <span className="inline-flex items-center gap-1.5 font-mono">
             <LinkSimple size={13} aria-hidden /> {previous.signature}
           </span>
         </Field>
       </dl>
-      <p className="inline-flex w-fit items-center gap-1.5 rounded-sm bg-seal-wash px-2 py-1 text-xs font-medium text-seal-deep motion-safe:animate-stamp-in motion-safe:[animation-delay:650ms]">
+      <p className="inline-flex w-fit items-center gap-1.5 rounded-sm bg-seal-wash px-2 py-1 text-xs font-medium text-seal-deep motion-safe:animate-stamp-in motion-safe:[animation-delay:420ms]">
         <CheckCircle size={14} weight="fill" aria-hidden /> Signed and chained
       </p>
     </SceneFrame>
@@ -120,7 +120,7 @@ export function SceneCoverage() {
           <div
             key={k}
             className="motion-safe:animate-rise-in"
-            style={{ animationDelay: `${200 + i * 120}ms` }}
+            style={{ animationDelay: `${140 + i * 80}ms` }}
           >
             <dt className="text-[11px] text-graphite">{k}</dt>
             <dd className="mt-1 font-mono text-xl font-medium tabular">{v}</dd>
@@ -138,10 +138,10 @@ export function ScenePack() {
       <div className="rounded-md border border-rule p-4 motion-safe:animate-rise-in">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <p className="text-sm font-semibold">Sample bank</p>
+            <p className="text-sm font-semibold">Sample customer</p>
             <p className="font-mono text-[11px] text-graphite">1-30 Sep 2026, 1,284 actions</p>
           </div>
-          <span className="inline-flex items-center gap-1 rounded-sm bg-seal-wash px-1.5 py-0.5 text-[11px] font-medium text-seal-deep motion-safe:animate-stamp-in motion-safe:[animation-delay:350ms]">
+          <span className="inline-flex items-center gap-1 rounded-sm bg-seal-wash px-1.5 py-0.5 text-[11px] font-medium text-seal-deep motion-safe:animate-stamp-in motion-safe:[animation-delay:240ms]">
             <SealCheck size={13} weight="fill" aria-hidden /> Verified
           </span>
         </div>

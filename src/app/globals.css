@@ -48,9 +48,9 @@
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 
   /* One-shot entrance animations for story scenes. Always used with motion-safe: */
-  --animate-rise-in: rise-in 0.5s var(--ease-out) both;
-  --animate-stamp-in: stamp-in 0.55s var(--ease-out) both;
-  --animate-draw-x: draw-x 0.6s var(--ease-out) both;
+  --animate-rise-in: rise-in 0.38s var(--ease-out) both;
+  --animate-stamp-in: stamp-in 0.42s var(--ease-out) both;
+  --animate-draw-x: draw-x 0.45s var(--ease-out) both;
 
   @keyframes rise-in {
     from {
@@ -323,5 +323,170 @@
     &::-moz-range-thumb {
       transition: none;
     }
+  }
+}
+
+/* ------------------------------------------------------------------
+   Page transitions (View Transitions API via React <ViewTransition> in
+   src/app/template.tsx). The outgoing page recedes, the incoming page
+   rises into place; the header stays anchored; the footer/background
+   (the root snapshot) cross-fades. Browsers without support swap
+   instantly and template.tsx falls back to a short fade.
+   ------------------------------------------------------------------ */
+::view-transition {
+  pointer-events: none;
+}
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+  animation-timing-function: var(--ease-out);
+}
+/* Transform and opacity only (compositor-friendly; no blur filters), and the two
+   halves overlap: the old page is mostly gone by the time the new one moves in. */
+::view-transition-old(.page) {
+  animation: page-out 170ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+::view-transition-new(.page) {
+  animation: page-in 340ms var(--ease-out) 50ms both;
+}
+@keyframes page-out {
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(.page),
+  ::view-transition-new(.page) {
+    animation: none;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 160ms;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Section headings reveal as they scroll into view: pure CSS,
+   scroll-driven, no JavaScript. Only where supported and motion is
+   welcome; elsewhere headings are simply static.
+   ------------------------------------------------------------------ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    main section h2:not(.sr-only) {
+      animation: heading-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+  }
+}
+@keyframes heading-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   <details> accordions open and close smoothly where the browser can
+   animate to an auto height; elsewhere they toggle instantly.
+   ------------------------------------------------------------------ */
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    details::details-content {
+      block-size: 0;
+      opacity: 0;
+      overflow: clip;
+      transition:
+        block-size 240ms var(--ease-out),
+        opacity 180ms var(--ease-out),
+        content-visibility 240ms allow-discrete;
+    }
+    details[open]::details-content {
+      block-size: auto;
+      opacity: 1;
+    }
+  }
+}
+
+/* Home "only proof leaves": pulses travel from the environment to the card.
+   Vertical on phones, horizontal from sm. Hidden entirely under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .proof-pulse {
+    animation: proof-down 2.4s var(--ease-in-out) infinite;
+  }
+  @media (min-width: 640px) {
+    .proof-pulse {
+      animation-name: proof-across;
+    }
+  }
+}
+@keyframes proof-down {
+  0% {
+    opacity: 0;
+    translate: -50% 0;
+  }
+  20%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    translate: -50% 44px;
+  }
+}
+@keyframes proof-across {
+  0% {
+    opacity: 0;
+    translate: 0 -50%;
+  }
+  20%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    translate: 52px -50%;
+  }
+}
+
+/* Hero ledger grid drift: the compositor slides the grid layer one cell
+   diagonally and loops (the pattern repeats every cell, so the loop is seamless). */
+@media (prefers-reduced-motion: no-preference) {
+  .ledger-drift {
+    animation: ledger-drift 7s linear infinite;
+    will-change: transform;
+  }
+}
+@keyframes ledger-drift {
+  to {
+    transform: translate(calc(var(--cell) * -1), calc(var(--cell) * -1));
   }
 }

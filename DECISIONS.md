@@ -297,3 +297,128 @@ CLAUDE.md now carries the sharper positioning: EU financial services (banks lead
 
 - Hoplite's legal-drafts merge (`9295e13`: privacy, terms, 404) fast-forwarded cleanly onto my logo commit and builds. Its privacy draft also removed an unverified claim of mine ("does not set advertising cookies"), which is an improvement.
 - Hoplite's SEO branch (`hoplite/morgantina-f124b23c--seo`) couldn't merge as-is. It was branched before the logo work, so it deleted the logo-based `opengraph-image.tsx`, drew "shoirly" as plain text on its social cards, imported a font helper (`loadBrandFont`) that the logo commit had replaced, and conflicted with the legal merge's metadata in privacy and terms. I merged it with a merge commit, so it's revertable with `git revert -m 1`. I kept its design (`pageSeo` as the single source of titles and descriptions, a social image per page at `/og/...`, Organisation schema, and a sitemap built from `pageSeo`) and resolved the clashes: privacy and terms use `pageSeo`, with the legal merge's newer descriptions carried into it, and the per-page social image now uses the real logo and the Bricolage/Schibsted fonts.
+
+## Demo booking fix (3 Oct 2026)
+
+- On the live /demo page, the button was a correct mailto link, with nothing covering it and no script errors. It "did nothing" because mailto links fail silently on devices with no email app set up, which is common on Windows and in browsers without a mail handler.
+- The button still opens the visitor's email app, now with a prefilled subject and a short message (company, name and role, a couple of times). Right under it, always visible: open the same message in Gmail or Outlook on the web (new tab), or copy `hello@shoirly.com`. After a click, a polite live hint says to use those options if nothing opened.
+- The prefilled message lives in `site.demoRequest` in `src/config/site.ts`, so every email booking link uses the same text. When the Cal.com link replaces the mailto (`bookingIsMailto: false`), the card falls back to a single "Book a demo" button.
+
+## More alive, more modern (3 Oct 2026)
+
+Requested by the founders, overriding the brief's earlier "one orchestrated moment per page" restraint. CLAUDE.md is updated to match. I ran the `find-animation-opportunities` audit first, then applied `apple-design` for layering.
+
+- **Page transitions:** React `<ViewTransition>` in `src/app/template.tsx` drives the browser View Transitions API on every route change. The old page recedes (lifts 24px, scales to 0.975, blurs and fades, 380ms). The new page rises (from 56px below with a blur that clears, 640ms on `--ease-out`, starting 120ms later). The header carries `view-transition-name: site-header` and stays anchored, and the footer and background cross-fade. Clicks pass through during the animation. Reduced motion gets a 160ms cross-fade. Browsers without the API fall back to the earlier opacity fade. Neither runs on first load.
+- **Route sweep and reading progress:** a seal-blue line sweeps across the header's bottom edge on each navigation, and a 2px reading-progress line rides the same edge (scroll-linked, no listener).
+- **Header material:** lighter translucency with a stronger blur and saturation once scrolled, per Apple's "translucent chrome, content scrolls underneath".
+- **Hero, ShapeGrid:** adapted from react-bits as `LedgerGrid`. A canvas grid drifts slowly, cells under the pointer light up seal-blue and fade, and an occasional cell lights on its own on the panel's side. It's masked to sit behind the panel, not the headline, so readability is untouched. It's DPR-aware, draws grid lines as strokes rather than per cell, runs only while on screen with the tab visible, and draws one static frame under reduced motion.
+- **Hero, layered depth:** `HeroStage` stacks three layers, each moving a different amount: an evidence sheet behind (turned 2.5°), the live trail panel (tilting ±5° toward the pointer on a critically damped spring), and the logo seal in front of the pack corner (desktop only). The layers separate slightly on scroll. Tilt runs only for fine, hover-capable pointers. The seal is the unmodified `mark.svg` (no shadow, rotation or recolour, per the logo README).
+- **Headings:** `main section h2` reveal with a pure-CSS scroll-driven animation (`animation-timeline: view()`). It's progressive enhancement: no JavaScript, absent where unsupported or under reduced motion. Being global CSS, it also applies to the pages other agents own, for consistency, without touching their files.
+- **FAQ accordions:** open and close smoothly via `::details-content` and `interpolate-size: allow-keywords`, instantly where unsupported.
+- **Press feedback:** buttons, architecture-diagram nodes, the evidence-preview notes and FAQ rows scale down slightly while pressed (100 to 150ms). Primary buttons get a single light sweep on hover.
+- **Deployment section:** three pulses flow from "your environment" to "Only this leaves", making "only proof leaves" literal. Pure CSS, hidden under reduced motion.
+- **Rejected in the audit:** animating calculator figures or ledger rows further (people are reading that data), changing the nav hover pill (high frequency, already fast), custom cursors or trails, and full-page moving backgrounds.
+
+## Smoother and quicker motion (3 Oct 2026)
+
+Feedback: animations felt very slow, and page transitions choppy and clunky. Measured on the live site first, then fixed.
+
+- **Page transitions:** I had been animating a blur filter on full-page snapshots, which can't stay on the compositor, plus about 0.8s of back-to-back exit and entry. Now it's transform and opacity only, with overlapping halves: the old page fades and lifts 10px in 170ms, and the new page rises 18px in 340ms starting 50ms in. The root cross-fade is 220ms. Measured: about 450ms in total (down from 810–840ms). Leaving home dropped from 6 janky frames with three ~56ms main-thread stalls to 1 janky frame and none.
+- **Hero grid:** the drift used to redraw the whole canvas on the main thread every frame. The grid lines are now a CSS background on a layer the compositor slides one cell and loops seamlessly. The canvas rides on that layer and only redraws while a cell is lit or fading. Measured idle on home: 60fps, 0 janky frames, 0 long animation frames.
+- **Heading reveals:** opacity and transform only (the clip-path is gone), finishing as the heading fully enters rather than a third of the way up the screen.
+- **Hero trail pacing:** about 2.3s per action (was about 3.2s), with snappier row entry, signature resolve (45ms per character), list scroll, coverage fill and pack settle. A loop is now about 16s.
+- **Springs:** the panel tilt and animated numbers are stiffer, still critically damped (no bounce), so they track quicker.
+- **Scene swaps:** "How it works" scenes cross-fade together (the old one leaves in 160ms while the new one arrives in 260ms) instead of waiting for the exit to finish first.
+- **Other timings:** accordion 240ms, header route sweep 450ms, scene stagger delays about a third shorter, the diagram's signal run 170ms per node, and the vendor-stage rules and bank checks paced tighter.
+
+## Wording sweep: any regulated buyer, finance as where we start (3 Oct 2026)
+
+Rule now in CLAUDE.md: default wording is "your customers", "regulated buyers" or "your buyer's risk team". Banks, insurers and DORA appear only as examples (at most one finance example per section, phrased "for example" or "starting with"), or on finance-specific pages. Searched all of `src` for bank, banks, banking, insurer(s), DORA and financial, plus payment firm, fintech, insurance and lender. Every change, by place:
+
+**Site-wide (config and metadata)**
+- Site description (meta and default social card): "...so security reviews with regulated buyers stop stalling your deals. Starting with financial services."
+- Solutions menu, "For agent vendors" description: "Get through security review with regulated buyers"
+- /product meta description: "...share a per-customer evidence pack mapped to the controls your buyers check."
+- /solutions/agent-vendors meta title: "For AI agent companies: close deals with regulated buyers"
+- /solutions/agent-vendors meta description: "Security reviews with regulated buyers stall on one question... starting with DORA for EU financial services."
+- /about meta description: "...signed evidence for AI agents that act for regulated businesses."
+- /blog meta description: "Writing on AI agents, security reviews and the rules regulated buyers work under, from the Shoirly team."
+- /demo meta description: "...how Shoirly fits into your buyer's security review..."
+- Default closing CTA (used on most pages): "Show your buyer what your agent did."
+
+**Home**
+- Hero subline: "Shoirly gives AI agent companies per-customer evidence of every action, mapped to the controls regulated buyers check, so security reviews stop stalling your deals." The hero's one finance example is the DORA tags on its sample pack.
+- Hero trail: "Sample bank" became "Sample customer" (outline and resolved pack), and the screen-reader caption now says "for one customer, tagged with the control areas it covers (DORA, in this sample)".
+- Problem heading: "Your customers want to let your agent do more. Their risk team needs proof it stayed inside the lines."
+- Problem ledger label: "What your buyer's risk team gets today"
+- Ledger rows (shared with /solutions/banks): Certificates now misses "Whether they held for this customer last Tuesday."; AI agent certifications now misses "What it did for this customer."
+- How it works, step 1: "...records each action it takes for a customer."
+- How it works, step 4 title: "Share a per-customer evidence pack, mapped to their controls"
+- How it works, step 4 body: "Each customer gets a pack about its own accounts, organised by the controls its risk team checks (for example, DORA areas for EU banks). Share it through Vanta or your trust centre."
+- How it works scenes: "#4471, sample bank" became "#4471, sample customer", and the pack scene's "Sample bank" became "Sample customer".
+- Evidence preview, note 1: "Each buyer gets evidence about its own customers only, for the period it asks about."
+- Evidence preview, note 4: title "Mapped to their controls", body "Organised by the areas the buyer's risk team already reports against, for example DORA for EU banks."
+- Evidence preview, sample pack: "Sample bank" became "Sample customer", the heading is now "Control mapping (DORA, in this sample)", and the first row reads "...did for this customer, action by action."
+- Deployment diagram: "Your cloud, or your customer's" (label and caption).
+- Calculator first slider (home and vendors page): "Deals with regulated buyers"
+- Trust-centre flow, first node: "Acts for your customers"
+- Audiences, vendor column: "Give each buyer evidence about its own customers, ready before they ask."
+- Audiences, receiving column label: "For risk teams at regulated buyers", with point 3 "Organised by the controls you report against, starting with DORA for EU financial services." It still links to /solutions/banks.
+
+**/product**
+- Title: "Evidence of every action, from capture to your buyer's risk team"
+- Lead: "Four stages turn what your agent does into a pack a regulated buyer's risk team can read."
+- Story step 4: "For each customer, Shoirly compiles a pack for the period they ask about, organised by the controls their risk team checks, starting with DORA..."
+- Architecture node "Tool or system": "...a CRM, a ticketing tool or, for example, a bank's payments API..."
+- Architecture boundary label (visible and screen reader): "Your environment: your cloud or your customer's"
+- What a pack contains: "...and which control areas it supports, for example DORA for EU banks."
+- Pack card: "Example Bank" became "Example Co.", and "DORA areas covered" became "Controls covered (DORA, for example)".
+- What's in a record: "Customer: Which customer it was for." and the lead "...so a risk team reads them the same way every time."
+- Where Shoirly fits: "For example, if you sell to EU banks or insurers, read our plain-English guide to DORA."
+
+**/solutions/agent-vendors**
+- Lead: "Regulated buyers want what your agent does..."
+- Where deals stall lead: "The questions change as a deal moves through your buyer's review."
+- Stage 03 (Contract): "...a concrete way to meet your buyer's audit and access rights, for example under DORA."
+- What you get lead: "...and every customer gets its own pack."
+- What you get, per-customer packs: "...mapped to its controls, starting with DORA."
+- FAQ "We already have SOC 2...": the question ends "Why would a regulated buyer need more?" and the answer says "buyer" throughout (on screen and in the search-engine data).
+- FAQ "We already log everything": "Because your buyer has to take your word..." (both versions).
+- FAQ "Our customers are in the UK, not the EU" became "Is this only for financial services?", answered "No. Every regulated buyer asks the same practical question... DORA, for EU financial services, is where we're starting." The TODO now asks which frameworks and regions come next.
+
+**/demo**
+- Headline: "See what your buyer's risk team would see" (your wording).
+- Agenda: "Your stuck deals: Where security reviews stall today, and what your customers have asked for." / "A sample evidence pack: What a risk team receives, and how verification will work." / "Fit and next steps": unchanged, it already matched your wording.
+- Agenda numbering: the list was numbered by the list itself and also carried "01/02/03" as text, so anything that shows list numbers (reader views, some browsers, screen readers) got both. Now the numbering comes only from the list, styled as 01, 02, 03 (`decimal-leading-zero` markers in mono). I also moved the decorative top rule out of the `<ol>`, where a bare `<span>` wasn't valid HTML.
+
+**Other numbering fix:** /solutions/agent-vendors stage cards had the same double numbering (a list plus "01 Security questionnaire" text). The 01 to 04 labels stay visible but are hidden from assistive tech, so the list's own numbering is the only one announced.
+
+**/about**
+- Lead: "Shoirly exists so that regulated businesses can let AI agents do more..."
+- Why we're building this, paragraph 1: "AI agents are starting to act inside regulated businesses, for example refunding, reviewing and updating accounts at banks. Those buyers are willing to give agents more autonomy..."
+- Paragraph 3: "...and hand the buyer evidence it can check for itself."
+- Made in Dublin: "Dublin sits close to the regulated businesses we're starting with, banks, insurers and payment firms, and to the EU supervisors..."
+
+**/blog listing (not a post)**
+- Lead: "Notes on AI agents, security reviews and the rules regulated buyers work under, for founders selling to them."
+- Empty state: "In the meantime, for example, our plain-English guide to DORA covers what EU banks ask of AI agent vendors."
+
+**/security**
+- Verify step: "...your customers will be able to check signatures and the chain independently."
+- Signing note: "...a verification guide for buyers' risk teams."
+- Where Shoirly runs: "...in your cloud, or in your customer's."
+
+**Code comments only (not visible):** sample data ("real customer, person or company"), the ledger source comment, the stage-grid comment, and the diagram TODO ("reach the customer").
+
+**CLAUDE.md**
+- Who buys: "AI agent companies selling to any regulated buyer. Finance... is where we start, not the whole company." Removed "Banks stay the lead example".
+- New "Default wording" rule, as above.
+- Company intro, Why now, Deployment, Second audience, the honesty rule on verification, site-map lines for home, vendors, /solutions/banks and /dora (the last two marked finance-specific), calculator, voice, hero sub, problem and how-it-works copy all generalised to match.
+
+**Deliberately left unchanged:**
+- /dora and /solutions/banks, including their page metadata: finance-specific by design.
+- The finance blog post and its registry entry ("What DORA means for AI agent vendors selling to banks").
+- Nav "DORA", Solutions "For banks, payment firms and insurers", and footer "For financial firms" / "DORA explained". These are names of the finance-specific pages they link to.
+- /terms "including our DORA guide": it names that page.
+- URLs, code identifiers and comments that refer to the finance pages (`/solutions/banks`, `id: "banks"`, `dora` variables), and the DORA mapping TODOs, which are about the sample's DORA example.
+- The hero trail's sample actions (a refund, a KYC file read, a credit-limit change). They're the hero section's single finance example, labelled "Sample data".

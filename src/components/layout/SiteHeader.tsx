@@ -225,7 +225,9 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
-  const { scrollY } = useScroll();
+  const { scrollY, scrollYProgress } = useScroll();
+  // Counts client-side navigations; the route sweep only plays after the first load.
+  const [navCount, setNavCount] = useState(0);
   // Border, blur and a soft shadow appear once the page scrolls under the header.
   useMotionValueEvent(scrollY, "change", (y) => {
     const next = y > 8;
@@ -238,6 +240,7 @@ export function SiteHeader() {
   if (pathname !== lastPath) {
     setLastPath(pathname);
     setMenuOpen(false);
+    setNavCount((c) => c + 1);
   }
 
   return (
@@ -250,9 +253,11 @@ export function SiteHeader() {
       </a>
       <MotionConfig reducedMotion="user">
       <header
+        // Anchored during page transitions (see ::view-transition-*(site-header) in globals.css).
+        style={{ viewTransitionName: "site-header" }}
         className={`sticky top-0 z-50 border-b transition-[border-color,background-color,box-shadow] duration-300 ease-out ${
           scrolled || menuOpen
-            ? "border-rule bg-paper/90 shadow-[0_8px_24px_-18px_rgb(15_27_23/0.35)] backdrop-blur-md supports-[not(backdrop-filter:blur(1px))]:bg-paper"
+            ? "border-rule/80 bg-paper/75 shadow-[0_8px_24px_-18px_rgb(15_27_23/0.35)] backdrop-blur-xl backdrop-saturate-150 supports-[not(backdrop-filter:blur(1px))]:bg-paper"
             : "border-transparent bg-paper"
         }`}
       >
@@ -316,6 +321,21 @@ export function SiteHeader() {
             </button>
           </div>
         </div>
+        {/* Reading progress along the bottom edge */}
+        <motion.span
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 -bottom-px h-0.5 origin-left bg-seal/70"
+          style={{ scaleX: scrollYProgress }}
+        />
+        {/* A sweep across the bottom edge on every page change */}
+        <motion.span
+          key={pathname}
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 -bottom-px h-0.5 origin-left bg-seal"
+          initial={navCount === 0 ? false : { scaleX: 0, opacity: 1 }}
+          animate={{ scaleX: 1, opacity: 0 }}
+          transition={{ scaleX: { duration: 0.45, ease }, opacity: { duration: 0.25, delay: 0.4 } }}
+        />
       </header>
       <MobileMenu open={menuOpen} onClose={closeMenu} pathname={pathname} />
       </MotionConfig>

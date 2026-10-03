@@ -32,7 +32,7 @@ type Frame =
   | { kind: "fade" };
 
 const N = sampleActions.length;
-const PHASE_MS: Record<Phase, number> = { 0: 800, 1: 950, 2: 700, 3: 800 };
+const PHASE_MS: Record<Phase, number> = { 0: 560, 1: 680, 2: 520, 3: 560 };
 
 const frames: Frame[] = [
   ...sampleActions.flatMap((_, index) =>
@@ -46,9 +46,9 @@ const PACK_FRAME = frames.length - 2;
 
 function frameDuration(f: Frame, firstPass: boolean) {
   if (f.kind === "action") return PHASE_MS[f.phase];
-  if (f.kind === "check") return 1300;
-  if (f.kind === "pack") return firstPass ? 2800 : 5200;
-  return 650;
+  if (f.kind === "check") return 950;
+  if (f.kind === "pack") return firstPass ? 2400 : 4200;
+  return 420;
 }
 
 type TrailState = {
@@ -124,7 +124,7 @@ function Pulse({ show, animateIn, className }: { show: boolean; animateIn: boole
           className={`pointer-events-none absolute rounded-full border border-seal ${className}`}
           initial={{ scale: 1, opacity: 0.6 }}
           animate={{ scale: 2.6, opacity: 0 }}
-          transition={{ duration: 0.8, ease }}
+          transition={{ duration: 0.6, ease }}
         />
       ) : null}
     </AnimatePresence>
@@ -148,9 +148,9 @@ function TrailRow({
 
   return (
     <motion.li
-      initial={animateIn ? { opacity: 0, y: 18 } : false}
+      initial={animateIn ? { opacity: 0, y: 14 } : false}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease }}
+      transition={{ duration: 0.4, ease }}
       className="relative h-[80px] shrink-0 pl-8"
     >
       {/* Chain link back to the previous record: grey base, seal overlay drawn when this record is signed */}
@@ -161,7 +161,7 @@ function TrailRow({
             className="absolute left-[7px] top-[-53px] h-[71px] w-px origin-top bg-seal"
             initial={false}
             animate={{ scaleY: signed ? 1 : 0 }}
-            transition={{ duration: animateIn ? 0.55 : 0, ease }}
+            transition={{ duration: animateIn ? 0.4 : 0, ease }}
           />
         </>
       ) : null}
@@ -187,7 +187,7 @@ function TrailRow({
           className="relative flex min-w-0 items-center gap-1.5 rounded-sm py-0.5 pl-0.5 pr-1.5 text-graphite"
           initial={false}
           animate={{ opacity: authorised ? 1 : 0, x: authorised ? 0 : -8 }}
-          transition={{ duration: animateIn ? 0.5 : 0, ease }}
+          transition={{ duration: animateIn ? 0.35 : 0, ease }}
         >
           <AnimatePresence initial={false}>
             {authorised && animateIn ? (
@@ -197,7 +197,7 @@ function TrailRow({
                 className="absolute inset-0 rounded-sm bg-seal-wash"
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 0 }}
-                transition={{ duration: 1.2, delay: 0.25, ease }}
+                transition={{ duration: 0.9, delay: 0.15, ease }}
               />
             ) : null}
           </AnimatePresence>
@@ -216,7 +216,7 @@ function TrailRow({
           <ScrambleHash
             value={action.signature.slice(0, 8)}
             state={sigState}
-            stepMs={62}
+            stepMs={45}
             className={`transition-colors duration-300 ${signed ? "text-ink" : "text-graphite"}`}
           />
           <span className="relative size-[14px]">
@@ -268,7 +268,7 @@ function TrailBody({
           className="absolute inset-x-4 top-0 flex flex-col"
           initial={false}
           animate={{ y: -scrolled * ROW_H }}
-          transition={{ duration: animateIn ? 0.7 : 0, ease: [0.65, 0, 0.35, 1] }}
+          transition={{ duration: animateIn ? 0.5 : 0, ease: [0.65, 0, 0.35, 1] }}
         >
           {rows.map((a, i) => (
             <TrailRow
@@ -305,7 +305,7 @@ function TrailBody({
             className="h-full origin-left rounded-full bg-seal"
             initial={false}
             animate={{ scaleX: coverage / 100 }}
-            transition={{ duration: animateIn ? 0.8 : 0, ease }}
+            transition={{ duration: animateIn ? 0.55 : 0, ease }}
           />
           <AnimatePresence initial={false}>
             {state.check && animateIn ? (
@@ -315,7 +315,7 @@ function TrailBody({
                 className="absolute inset-0 bg-seal-wash"
                 initial={{ opacity: 0.9 }}
                 animate={{ opacity: 0 }}
-                transition={{ duration: 0.9, ease }}
+                transition={{ duration: 0.6, ease }}
               />
             ) : null}
           </AnimatePresence>
@@ -329,7 +329,7 @@ function TrailBody({
             <div className="flex items-start justify-between gap-3">
               <div>
                 <p className="text-sm font-semibold leading-5 text-graphite">Evidence pack</p>
-                <p className="font-mono text-[11px] leading-4 text-graphite">Sample bank, Sep 2026</p>
+                <p className="font-mono text-[11px] leading-4 text-graphite">Sample customer, Sep 2026</p>
               </div>
               <span className="whitespace-nowrap text-[11px] text-graphite">
                 {state.check ? "Compiling" : "Waiting for 100%"}
@@ -355,7 +355,7 @@ function TrailBody({
                 className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-paper/90 to-transparent"
                 initial={{ x: "-110%" }}
                 animate={{ x: "330%" }}
-                transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
+                transition={{ duration: 0.85, ease: [0.65, 0, 0.35, 1] }}
               />
             ) : null}
           </AnimatePresence>
@@ -368,20 +368,20 @@ function TrailBody({
               className="absolute inset-3 flex flex-col justify-between rounded-md border border-rule bg-paper px-3.5 py-3 shadow-paper"
               initial={animateIn ? { opacity: 0, y: 10, scale: 0.97 } : false}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.7, ease }}
+              transition={{ duration: 0.45, ease }}
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-sm font-semibold leading-5">Evidence pack</p>
                   <p className="font-mono text-[11px] leading-4 text-graphite">
-                    Sample bank, Sep 2026<span className="hidden sm:inline">, {N} of {N} signatures verified</span>
+                    Sample customer, Sep 2026<span className="hidden sm:inline">, {N} of {N} signatures verified</span>
                   </p>
                 </div>
                 <motion.span
                   className="flex items-center gap-1 rounded-sm bg-seal-wash px-1.5 py-0.5 text-[11px] font-medium text-seal-deep"
                   initial={animateIn ? { opacity: 0, scale: 1.5, rotate: -12 } : false}
                   animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                  transition={{ type: "spring", stiffness: 420, damping: 18, delay: animateIn ? 0.35 : 0 }}
+                  transition={{ type: "spring", stiffness: 480, damping: 20, delay: animateIn ? 0.22 : 0 }}
                 >
                   <SealCheck size={13} weight="fill" aria-hidden />
                   Verified
@@ -394,7 +394,7 @@ function TrailBody({
                     className="rounded-sm border border-rule px-1.5 py-0.5 text-[11px] leading-4 text-graphite"
                     initial={animateIn ? { opacity: 0, y: 4 } : false}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, ease, delay: animateIn ? 0.5 + i * 0.09 : 0 }}
+                    transition={{ duration: 0.3, ease, delay: animateIn ? 0.32 + i * 0.06 : 0 }}
                   >
                     DORA: {d}
                   </motion.li>
@@ -449,8 +449,8 @@ export function EvidenceTrail() {
       <figcaption id="trail-caption" className="sr-only">
         Animated sample of an evidence trail. Five agent actions, such as a €240 refund and a credit limit change,
         are each linked to the policy or person who approved them, signed, and chained together. Coverage reaches
-        100 percent and the trail compiles into an evidence pack for one bank customer, tagged with the DORA areas
-        it covers.
+        100 percent and the trail compiles into an evidence pack for one customer, tagged with the control areas it
+        covers (DORA, in this sample).
       </figcaption>
 
       {/* Header */}
@@ -460,22 +460,22 @@ export function EvidenceTrail() {
           <span className="rounded-sm bg-ledger px-1.5 py-0.5 font-mono text-[11px] leading-4 text-graphite">
             Sample data
           </span>
-          <span aria-hidden className="hidden truncate text-xs text-graphite sm:inline">
-            {reduce ? "" : status}
+          {/* Same text on server and client (avoids a hydration mismatch); hidden by CSS under reduced motion */}
+          <span aria-hidden className="hidden truncate text-xs text-graphite motion-safe:sm:inline">
+            {status}
           </span>
         </div>
-        {!reduce ? (
-          <button
-            type="button"
-            onClick={() => setPaused((p) => !p)}
-            aria-pressed={paused}
-            aria-label={paused ? "Play animation" : "Pause animation"}
-            className="inline-flex h-11 items-center gap-1.5 rounded-md px-3 text-xs text-graphite transition-colors duration-150 hover:bg-ink-soft hover:text-ink"
-          >
-            {paused ? <Play size={14} weight="fill" aria-hidden /> : <Pause size={14} weight="fill" aria-hidden />}
-            {paused ? "Play" : "Pause"}
-          </button>
-        ) : null}
+        {/* Always rendered (server and client match); hidden by CSS under reduced motion */}
+        <button
+          type="button"
+          onClick={() => setPaused((p) => !p)}
+          aria-pressed={paused}
+          aria-label={paused ? "Play animation" : "Pause animation"}
+          className="inline-flex h-11 items-center gap-1.5 rounded-md px-3 text-xs text-graphite transition-colors duration-150 hover:bg-ink-soft hover:text-ink motion-reduce:hidden"
+        >
+          {paused ? <Play size={14} weight="fill" aria-hidden /> : <Pause size={14} weight="fill" aria-hidden />}
+          {paused ? "Play" : "Pause"}
+        </button>
       </div>
 
       {/* Body: cross-fades between cycles; remounting on each cycle keeps loops clean */}
@@ -483,7 +483,7 @@ export function EvidenceTrail() {
         aria-hidden
         initial={false}
         animate={{ opacity: state.fading ? 0 : 1 }}
-        transition={{ duration: 0.55, ease }}
+        transition={{ duration: 0.4, ease }}
       >
         <TrailBody key={cycle} state={state} capacity={capacity} animateIn={animateIn} />
       </motion.div>

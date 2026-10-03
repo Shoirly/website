@@ -23,7 +23,7 @@ const nodes: Record<NodeId, { n: number; label: string; title: string; body: str
     n: 3,
     label: "Tool or system",
     title: "The tool or system",
-    body: "The API or system the agent acts on: payments, core banking, a CRM. It receives the call exactly as your agent sent it.",
+    body: "The API or system the agent acts on: a CRM, a ticketing tool or, for example, a bank's payments API. It receives the call exactly as your agent sent it.",
   },
   auth: {
     n: 4,
@@ -53,7 +53,7 @@ const nodes: Record<NodeId, { n: number; label: string; title: string; body: str
     n: 8,
     label: "Evidence pack",
     title: "Only proof leaves",
-    // TODO(team): explain how readable records reach the bank alongside the proof, once settled.
+    // TODO(team): explain how readable records reach the customer alongside the proof, once settled.
     body: "Only signatures, hashes and coverage counts leave your environment. That proof is what makes each per-customer evidence pack verifiable. Share packs through Vanta or your trust centre.",
   },
 };
@@ -80,7 +80,7 @@ function NodeButton({
       type="button"
       aria-pressed={selected}
       onClick={() => onSelect(id)}
-      className={`group relative flex min-h-12 w-full items-center gap-2.5 rounded-md border px-3 py-2.5 text-left text-sm transition-[border-color,background-color,box-shadow] duration-200 ${
+      className={`group relative flex min-h-12 w-full items-center gap-2.5 rounded-md border px-3 py-2.5 text-left text-sm transition-[border-color,background-color,box-shadow,transform] duration-200 active:scale-[0.97] active:duration-100 ${
         selected
           ? "border-seal bg-seal-wash text-seal-deep shadow-[0_0_0_3px_var(--color-seal-wash)]"
           : tone === "shoirly"
@@ -124,8 +124,8 @@ export function ArchitectureDiagram() {
   // One orchestrated pass: light each node in order, once, then clear.
   useEffect(() => {
     if (!inView || reduce) return;
-    const timers = order.map((_, i) => window.setTimeout(() => setLit(i), 250 + i * 260));
-    timers.push(window.setTimeout(() => setLit(-1), 250 + order.length * 260 + 500));
+    const timers = order.map((_, i) => window.setTimeout(() => setLit(i), 150 + i * 170));
+    timers.push(window.setTimeout(() => setLit(-1), 150 + order.length * 170 + 400));
     return () => timers.forEach((t) => window.clearTimeout(t));
   }, [inView, reduce]);
 
@@ -140,10 +140,10 @@ export function ArchitectureDiagram() {
         {/* The environment boundary */}
         <div
           role="group"
-          aria-label="Inside your environment: your cloud or the bank's"
+          aria-label="Inside your environment: your cloud or your customer's"
           className="rounded-md border-2 border-dashed border-rule-strong/70 bg-ledger/50 p-4 sm:p-5"
         >
-          <p className="text-xs font-medium text-graphite">Your environment: your cloud or the bank&apos;s</p>
+          <p className="text-xs font-medium text-graphite">Your environment: your cloud or your customer&apos;s</p>
 
           {/* Request path */}
           <div className="mt-4 grid grid-cols-1 items-center gap-2 sm:grid-cols-[minmax(0,1fr)_1.5rem_minmax(0,1fr)_1.5rem_minmax(0,1fr)]">
@@ -197,7 +197,7 @@ export function ArchitectureDiagram() {
             initial={reduce ? false : { opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={reduce ? { opacity: 0, transition: { duration: 0 } } : { opacity: 0, y: -4 }}
-            transition={{ duration: 0.22, ease }}
+            transition={{ duration: 0.18, ease }}
           >
             <p className="font-mono text-xs text-graphite">
               {nodes[selected].n} of {order.length}
