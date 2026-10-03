@@ -3,14 +3,9 @@ import { ArrowRight, ArrowUpRight, LockSimple } from "@phosphor-icons/react/dist
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { PageHeader, Section } from "@/components/ui/Layout";
 import { site } from "@/config/site";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Security: how evidence is signed, where Shoirly runs, what leaves",
-  description:
-    "How Shoirly signs and chains evidence records, why it is designed to run where your agent runs, and why only signatures, hashes and coverage counts ever leave.",
-  path: "/security",
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/security"]);
 
 const signing = [
   {
@@ -27,7 +22,7 @@ const signing = [
   },
   {
     title: "Verify",
-    body: "Check the signatures and links, then review the coverage check, which shows whether anything went unrecorded. Banks will be able to verify independently once the verification guide is published.",
+    body: "Check the signatures and links, then review the coverage check, which shows whether anything went unrecorded. Your customers will be able to verify independently once the verification guide is published.",
   },
 ];
 
@@ -118,7 +113,7 @@ export default function SecurityPage() {
           {/* TODO(team): publish the signing algorithm, key management approach and a verification guide. */}
           <p className="mt-3 text-sm text-graphite">
             The signing algorithm, key management details and independent verification guide are not yet published.
-            We won&apos;t ask bank teams to take those details on trust.
+            We won&apos;t ask buyers&apos; risk teams to take those details on trust.
           </p>
         </aside>
       </Section>
@@ -130,7 +125,7 @@ export default function SecurityPage() {
               Where Shoirly runs
             </h2>
             <p className="mt-4 max-w-[42ch] text-lg text-graphite">
-              Shoirly is designed to run where your agent runs: in your cloud, or in the bank&apos;s. Raw data stays there.
+              Shoirly is designed to run where your agent runs: in your cloud, or in your customer&apos;s. Raw data stays there.
             </p>
             <p className="mt-6 text-xl font-semibold">Your data never leaves. Only the proof does.</p>
             {/* TODO(team): list the supported deployment targets (clouds, regions, Kubernetes, etc.). */}

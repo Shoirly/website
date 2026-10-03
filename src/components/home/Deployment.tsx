@@ -25,14 +25,14 @@ export function Deployment() {
 
         <figure aria-labelledby="deploy-caption" className="grid grid-cols-1 items-center gap-4 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,13rem)]">
           <figcaption id="deploy-caption" className="sr-only">
-            Inside your cloud or the bank&apos;s: your agent, Shoirly, and the action records and customer data, which
+            Inside your cloud or your customer&apos;s: your agent, Shoirly, and the action records and customer data, which
             stay put. Only signatures, hashes and coverage counts leave.
           </figcaption>
 
           {/* Boundary: where the agent runs */}
           <div className="rounded-md border-2 border-dashed border-rule-strong/70 bg-ledger/60 p-4 sm:p-5">
             <p className="flex items-center gap-1.5 text-xs font-medium text-graphite">
-              <LockSimple size={14} aria-hidden /> Your cloud, or the bank&apos;s
+              <LockSimple size={14} aria-hidden /> Your cloud, or your customer&apos;s
             </p>
             <ul className="mt-4 grid grid-cols-1 gap-2.5">
               <li className="flex items-center gap-2.5 rounded-md border border-rule bg-paper px-3 py-2.5 text-sm">
@@ -50,8 +50,17 @@ export function Deployment() {
             </ul>
           </div>
 
-          <div aria-hidden className="flex justify-center text-seal">
-            <ArrowRight size={22} className="rotate-90 sm:rotate-0" />
+          {/* Proof leaving the environment: three pulses flow towards the card (motion-safe CSS only) */}
+          <div aria-hidden className="relative flex h-14 w-full justify-center text-seal sm:h-auto sm:w-16 sm:self-stretch">
+            <span className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-seal/25 sm:inset-x-0 sm:inset-y-auto sm:left-0 sm:top-1/2 sm:h-px sm:w-full sm:translate-x-0" />
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                className="proof-pulse absolute left-1/2 top-0 size-1.5 -translate-x-1/2 rounded-full bg-seal opacity-0 sm:left-0 sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-0"
+                style={{ animationDelay: `${i * 0.8}s` }}
+              />
+            ))}
+            <ArrowRight size={18} className="absolute bottom-0 left-1/2 -translate-x-1/2 rotate-90 bg-paper sm:bottom-auto sm:left-auto sm:right-0 sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-0 sm:rotate-0" />
           </div>
 
           {/* What leaves */}

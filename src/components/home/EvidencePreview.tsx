@@ -12,7 +12,7 @@ const notes: { id: Region; title: string; body: string }[] = [
   {
     id: "header",
     title: "One pack per customer",
-    body: "Each bank gets evidence about its own customers only, for the period it asks about.",
+    body: "Each buyer gets evidence about its own customers only, for the period it asks about.",
   },
   {
     id: "approval",
@@ -26,13 +26,13 @@ const notes: { id: Region; title: string; body: string }[] = [
   },
   {
     id: "dora",
-    title: "Mapped to DORA",
-    body: "Organised by the areas the bank's risk team already reports against.",
+    title: "Mapped to their controls",
+    body: "Organised by the areas the buyer's risk team already reports against, for example DORA for EU banks.",
   },
 ];
 
 const dora = [
-  { area: "ICT third-party risk", ref: "Art. 28-30", what: "What the provider's system did for this bank, action by action." },
+  { area: "ICT third-party risk", ref: "Art. 28-30", what: "What the provider's system did for this customer, action by action." },
   { area: "ICT risk management", ref: "Art. 5-16", what: "Attributable actions with their authorisation and a tamper-evident record." },
   { area: "Incident management", ref: "Art. 17-23", what: "A signed timeline to reconstruct events if something goes wrong." },
 ];
@@ -66,7 +66,7 @@ export function EvidencePreview() {
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
                   <p className="font-mono text-xs text-graphite">Evidence pack, sample data</p>
-                  <h3 className="mt-1 text-xl">Sample bank</h3>
+                  <h3 className="mt-1 text-xl">Sample customer</h3>
                 </div>
                 <span className="inline-flex items-center gap-1.5 rounded-sm bg-seal-wash px-2 py-1 text-xs font-medium text-seal-deep">
                   <SealCheck size={15} weight="fill" aria-hidden /> All records verify
@@ -130,7 +130,7 @@ export function EvidencePreview() {
 
             {/* DORA */}
             <div className={`mt-6 -mx-2 p-2 ${regionClass(active, "dora")}`}>
-              <p className="text-xs font-semibold">DORA mapping</p>
+              <p className="text-xs font-semibold">Control mapping (DORA, in this sample)</p>
               <dl className="mt-3 space-y-3">
                 {dora.map((d) => (
                   <div key={d.area} className="grid grid-cols-1 gap-x-4 gap-y-0.5 text-xs sm:grid-cols-[15rem_1fr]">
@@ -156,7 +156,7 @@ export function EvidencePreview() {
                 onFocus={() => setActive(n.id)}
                 onBlur={() => setActive(null)}
                 onClick={() => setActive((v) => (v === n.id ? null : n.id))}
-                className={`w-full rounded-md border px-4 py-3.5 text-left transition-colors duration-150 ${
+                className={`w-full rounded-md border px-4 py-3.5 text-left transition-[background-color,border-color,transform] duration-150 active:scale-[0.98] ${
                   active === n.id ? "border-seal bg-paper" : "border-transparent hover:bg-paper/60"
                 }`}
               >

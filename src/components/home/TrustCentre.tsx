@@ -8,7 +8,7 @@ import { Section } from "@/components/ui/Layout";
 const flows = ["Actions", "Signed packs", "Shared evidence"];
 
 const nodes = [
-  { name: "Your agent", detail: "Acts for your bank customers" },
+  { name: "Your agent", detail: "Acts for your customers" },
   { name: "Shoirly", detail: "Records, signs, checks coverage", accent: true },
   { name: "Vanta or your trust centre", detail: "Shared where buyers already look" },
   { name: "Your customer's risk team", detail: "Reviews the evidence" },

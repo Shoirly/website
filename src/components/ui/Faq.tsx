@@ -9,7 +9,7 @@ export function Faq({ items }: { items: FaqItem[] }) {
     <div className="border-t border-ink">
       {items.map((item) => (
         <details key={item.q} className="group border-b border-rule">
-          <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-lg font-medium [&::-webkit-details-marker]:hidden">
+          <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-lg font-medium transition-[color,transform] duration-150 hover:text-seal-deep active:scale-[0.99] [&::-webkit-details-marker]:hidden">
             {item.q}
             <Plus
               size={18}

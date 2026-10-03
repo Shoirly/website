@@ -1,17 +1,14 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import Link from "next/link";
+import { StalledDealCalculator } from "@/components/calculator/StalledDealCalculator";
 import { ClosingCta } from "@/components/layout/ClosingCta";
+import { StallStages } from "@/components/solutions/StallStages";
 import { ButtonLink } from "@/components/ui/Button";
 import { Faq, FaqJsonLd, type FaqItem } from "@/components/ui/Faq";
 import { PageHeader, Section } from "@/components/ui/Layout";
 
-export const metadata: Metadata = pageMetadata({
-  title: "For AI agent vendors: close deals with banks, insurers and payment firms",
-  description:
-    "Security reviews at banks, insurers and payment firms stall on one question: what did your agent actually do? Answer it with signed, per-customer evidence mapped to DORA.",
-  path: "/solutions/agent-vendors",
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/solutions/agent-vendors"]);
 
 const stages = [
   {
@@ -27,7 +24,7 @@ const stages = [
   {
     stage: "Contract",
     asks: "What audit and information rights do we get?",
-    answer: "Offer per-customer evidence packs on a schedule, a concrete way to meet the bank's DORA access and audit expectations.",
+    answer: "Offer per-customer evidence packs on a schedule, a concrete way to meet your buyer's audit and access rights, for example under DORA.",
   },
   {
     stage: "Ongoing oversight",
@@ -38,28 +35,28 @@ const stages = [
 
 const faq: FaqItem[] = [
   {
-    q: "We already have SOC 2. Why would a bank need more?",
+    q: "We already have SOC 2. Why would a regulated buyer need more?",
     a: (
       <p>
-        SOC 2 tells a bank you have sensible controls over a past audit period. It helps you get shortlisted. It
-        doesn&apos;t show what your agent did for that bank&apos;s customers last week, which is the question a risk
+        SOC 2 tells a buyer you have sensible controls over a past audit period. It helps you get shortlisted. It
+        doesn&apos;t show what your agent did for that buyer&apos;s customers last week, which is the question a risk
         team asks before it lets an agent act with more autonomy.
       </p>
     ),
     plain:
-      "SOC 2 shows you have sensible controls over a past audit period. It doesn't show what your agent did for a bank's customers last week, which is what a risk team asks before giving an agent more autonomy.",
+      "SOC 2 shows you have sensible controls over a past audit period. It doesn't show what your agent did for a buyer's customers last week, which is what a risk team asks before giving an agent more autonomy.",
   },
   {
     q: "We already log everything. Why isn't that enough?",
     a: (
       <p>
-        Because the bank has to take your word that the logs are complete and unchanged. Shoirly signs and chains each
+        Because your buyer has to take your word that the logs are complete and unchanged. Shoirly signs and chains each
         record, and a coverage check shows whether anything went unrecorded, so your logs become evidence someone else
         can rely on.
       </p>
     ),
     plain:
-      "Because the bank has to take your word that the logs are complete and unchanged. Shoirly signs and chains each record, and a coverage check shows whether anything went unrecorded.",
+      "Because your buyer has to take your word that the logs are complete and unchanged. Shoirly signs and chains each record, and a coverage check shows whether anything went unrecorded.",
   },
   {
     q: "We have an AI agent certification such as AIUC-1. Isn't that the same thing?",
@@ -88,16 +85,16 @@ const faq: FaqItem[] = [
     plain: "No. Trust centres run on documents. Shoirly packs are live evidence you can share through Vanta or the trust centre you already use.",
   },
   {
-    q: "Our customers are in the UK, not the EU. Is this still useful?",
+    q: "Is this only for financial services?",
     a: (
       <p>
-        Yes. DORA is EU law, but UK banks work under their own operational resilience and outsourcing rules and ask the
-        same practical question: what did your system do, and who allowed it? The evidence is the same; the mapping
-        changes. {/* TODO(team): confirm whether we offer a UK-specific mapping. */}
+        No. Every regulated buyer asks the same practical question: what did your system do, and who allowed it? The
+        evidence is the same; only the mapping changes. DORA, for EU financial services, is where we&apos;re starting.
+        {/* TODO(team): confirm which other frameworks and regions (e.g. UK operational resilience) we map to next. */}
       </p>
     ),
     plain:
-      "Yes. UK banks work under their own operational resilience and outsourcing rules and ask the same practical question. The evidence is the same; the mapping changes.",
+      "No. Every regulated buyer asks the same practical question: what did your system do, and who allowed it? The evidence is the same; only the mapping changes. DORA, for EU financial services, is where we're starting.",
   },
 ];
 
@@ -106,7 +103,7 @@ export default function AgentVendorsPage() {
     <>
       <PageHeader
         title="Get through security review without the stall"
-        lead="Banks, insurers and payment firms want what your agent does. Their risk teams need proof it stayed inside the lines. Shoirly gives you that proof, per customer, before they ask."
+        lead="Regulated buyers want what your agent does. Their risk teams need proof it stayed inside the lines. Shoirly gives you that proof, per customer, before they ask."
       >
         <ButtonLink href="/demo" size="lg">
           Book a demo
@@ -119,19 +116,9 @@ export default function AgentVendorsPage() {
           Where deals stall, and what you can show instead
         </h2>
         <p className="mt-4 max-w-[56ch] text-lg text-graphite">
-          The questions change as a deal moves through a bank. The answer doesn&apos;t have to.
+          The questions change as a deal moves through your buyer&apos;s review. The answer doesn&apos;t have to.
         </p>
-        <ol className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-md border border-rule bg-rule md:grid-cols-2">
-          {stages.map((s, i) => (
-            <li key={s.stage} className="bg-paper p-6 sm:p-8">
-              <p className="font-mono text-xs text-graphite">
-                {String(i + 1).padStart(2, "0")} {s.stage}
-              </p>
-              <p className="mt-4 text-xl font-semibold">&ldquo;{s.asks}&rdquo;</p>
-              <p className="mt-3 text-graphite">{s.answer}</p>
-            </li>
-          ))}
-        </ol>
+        <StallStages stages={stages} />
       </Section>
 
       <Section tone="ledger" labelledBy="get-title">
@@ -141,7 +128,7 @@ export default function AgentVendorsPage() {
               What you get
             </h2>
             <p className="mt-4 max-w-[44ch] text-lg text-graphite">
-              One integration with your agent. After that, evidence builds up on its own, and every bank gets its own
+              One integration with your agent. After that, evidence builds up on its own, and every customer gets its own
               pack.
             </p>
             <p className="mt-6">
@@ -154,7 +141,7 @@ export default function AgentVendorsPage() {
             {[
               ["Signed records of every action", "Linked to the person or policy that authorised it."],
               ["A coverage check", "Shows whether anything your agent attempted went unrecorded."],
-              ["Per-customer evidence packs", "Each customer sees its own records only, mapped to DORA."],
+              ["Per-customer evidence packs", "Each customer sees its own records only, mapped to its controls, starting with DORA."],
               ["Ready to share", "Packs you can share through Vanta or your trust centre, next to your certifications."],
             ].map(([t, d]) => (
               <li key={t} className="border-t border-rule pt-5">
@@ -166,7 +153,19 @@ export default function AgentVendorsPage() {
         </div>
       </Section>
 
-      <Section labelledBy="faq-title">
+      <Section labelledBy="cost-title">
+        <h2 id="cost-title" className="max-w-[24ch] text-3xl">
+          What the wait costs you
+        </h2>
+        <p className="mt-4 max-w-[52ch] text-lg text-graphite">
+          Your numbers, your estimate. Move the sliders to see what time in security review is worth.
+        </p>
+        <div className="mt-10">
+          <StalledDealCalculator variant="compact" />
+        </div>
+      </Section>
+
+      <Section tone="ledger" labelledBy="faq-title">
         <h2 id="faq-title" className="text-3xl">
           Questions vendors ask
         </h2>

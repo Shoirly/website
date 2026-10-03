@@ -28,7 +28,7 @@ export function CopyBlock({ label, text }: { label: string; text: string }) {
         <button
           type="button"
           onClick={copy}
-          className="inline-flex h-8 items-center gap-1.5 rounded-md px-2.5 text-sm text-ink transition-colors duration-150 hover:bg-ink-soft"
+          className="-my-1.5 inline-flex h-11 items-center gap-1.5 rounded-md px-3 text-sm text-ink transition-colors duration-150 hover:bg-ink-soft sm:my-0 sm:h-8 sm:px-2.5"
         >
           {status === "copied" ? <Check size={15} aria-hidden /> : <Copy size={15} aria-hidden />}
           {status === "copied" ? "Copied" : status === "failed" ? "Select and copy" : "Copy"}

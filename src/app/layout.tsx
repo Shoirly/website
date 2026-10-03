@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Schibsted_Grotesk } from "next/font/google";
+import { Bricolage_Grotesque, IBM_Plex_Mono, Schibsted_Grotesk } from "next/font/google";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { site } from "@/config/site";
@@ -8,6 +8,14 @@ import "./globals.css";
 const schibsted = Schibsted_Grotesk({
   subsets: ["latin", "latin-ext"],
   variable: "--font-schibsted",
+  display: "swap",
+});
+
+// Headings: the family the wordmark is drawn from (see public/brand/README.md).
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin", "latin-ext"],
+  axes: ["opsz"],
+  variable: "--font-bricolage",
   display: "swap",
 });
 
@@ -42,7 +50,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-IE" className={`${schibsted.variable} ${plexMono.variable}`}>
+    <html lang="en-IE" className={`${schibsted.variable} ${bricolage.variable} ${plexMono.variable}`}>
       <body className="flex min-h-dvh flex-col">
         <SiteHeader />
         <main id="main" className="flex-1">

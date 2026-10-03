@@ -14,7 +14,7 @@ export function Spotlight({ children, className = "" }: { children: ReactNode; c
   const x = useMotionValue(-400);
   const y = useMotionValue(-400);
   const o = useSpring(0, { stiffness: 200, damping: 30 });
-  const bg = useMotionTemplate`radial-gradient(420px circle at ${x}px ${y}px, rgb(10 115 80 / 0.07), transparent 70%)`;
+  const bg = useMotionTemplate`radial-gradient(420px circle at ${x}px ${y}px, rgb(49 87 240 / 0.07), transparent 70%)`;
 
   return (
     <div

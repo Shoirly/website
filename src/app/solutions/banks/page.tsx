@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import Link from "next/link";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { CopyBlock } from "@/components/ui/CopyBlock";
 import { EvidenceLedger } from "@/components/ui/EvidenceLedger";
+import { VerifyChecks } from "@/components/solutions/VerifyChecks";
 import { PageHeader, Section } from "@/components/ui/Layout";
 
-export const metadata: Metadata = pageMetadata({
-  title: "For banks, payment firms and insurers: evidence of what your vendor's AI agent did",
-  description:
-    "What risk, procurement and third-party oversight teams at banks, payment firms and insurers receive from vendors using Shoirly, and how to ask for it.",
-  path: "/solutions/banks",
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/solutions/banks"]);
 
 const receive = [
   {
@@ -32,7 +28,7 @@ const receive = [
   },
 ];
 
-const checks = [
+const checks: [string, string][] = [
   ["Signatures", "Each record is signed. A changed record no longer matches its signature."],
   ["Chain", "Each record references the one before it. A deleted record leaves a visible break."],
   ["Coverage", "Attempted actions are counted against signed records, so completeness is checked rather than assumed."],
@@ -42,8 +38,7 @@ const template = `Subject: Evidence of agent actions for our customers
 
 Hello,
 
-As part of our ICT third-party oversight under DORA, we'd like
-evidence of the actions your AI agent takes for our customers.
+As part of our ICT third-party oversight under DORA, we'd like evidence of the actions your AI agent takes for our customers.
 
 For the period [start date] to [end date], please provide:
 
@@ -52,8 +47,7 @@ For the period [start date] to [end date], please provide:
 3. A coverage check showing whether any actions went unrecorded
 4. A way for us to verify the records independently
 
-A per-customer evidence pack (for example from Shoirly) would meet
-this request.
+A per-customer evidence pack (for example from Shoirly) would meet this request.
 
 Thank you,
 [Name], [Role]`;
@@ -112,14 +106,7 @@ export default function BanksPage() {
             </p>
             {/* TODO(team): link to verification docs or a verifier tool once it exists. */}
           </div>
-          <dl className="divide-y divide-rule border-y border-rule">
-            {checks.map(([k, v]) => (
-              <div key={k} className="grid grid-cols-1 gap-2 py-5 sm:grid-cols-[9rem_1fr] sm:gap-6">
-                <dt className="font-semibold">{k}</dt>
-                <dd className="text-graphite">{v}</dd>
-              </div>
-            ))}
-          </dl>
+          <VerifyChecks checks={checks} />
         </div>
       </Section>
 
