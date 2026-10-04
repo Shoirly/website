@@ -161,7 +161,7 @@ function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose: () =>
           transition={{ duration: 0.2, ease }}
           className="sh-dark fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-sh-bg lg:hidden"
         >
-          <nav aria-label="Mobile" className="px-4 pb-10 pt-4 min-[400px]:px-6">
+          <nav aria-label="Mobile" className="px-[var(--sh-gutter)] pb-10 pt-4">
             <ul className="divide-y divide-sh-border border-b border-sh-border">
               {links.map((l) => (
                 <motion.li
@@ -180,6 +180,9 @@ function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose: () =>
                 </motion.li>
               ))}
             </ul>
+            <ButtonLink href="/demo" size="lg" className="mt-8 w-full sm:hidden" onClick={onClose}>
+              Book a demo
+            </ButtonLink>
             <p className="mt-8 text-sm text-sh-muted">
               Questions?{" "}
               <a className="link inline-flex min-h-11 items-center" href={`mailto:${site.email}`}>
@@ -276,7 +279,7 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <ButtonLink href="/demo" size="md" className="max-[359px]:px-3">
+            <ButtonLink href="/demo" size="md" className="max-sm:hidden">
               Book a demo
             </ButtonLink>
             <button
