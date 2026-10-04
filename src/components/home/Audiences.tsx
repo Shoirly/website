@@ -41,15 +41,15 @@ export function Audiences() {
             className={
               i === 0
                 ? "pb-12 md:pb-0 md:pr-12 lg:pr-16"
-                : "border-t border-rule pt-12 md:border-l md:border-t-0 md:pl-12 md:pt-0 lg:pl-16"
+                : "border-t border-sh-border pt-12 md:border-l md:border-t-0 md:pl-12 md:pt-0 lg:pl-16"
             }
           >
-            <p className="text-sm font-medium text-seal-deep">{c.who}</p>
+            <p className="text-sm font-medium text-sh-accent-text">{c.who}</p>
             <h3 className="mt-3 max-w-[20ch] text-2xl">{c.title}</h3>
             <ul className="mt-6 space-y-3">
               {c.points.map((p) => (
-                <li key={p} className="grid grid-cols-[1rem_1fr] gap-3 text-graphite">
-                  <span aria-hidden className="mt-[0.7em] h-px w-3 bg-rule-strong" />
+                <li key={p} className="grid grid-cols-[1rem_1fr] gap-3 text-sh-muted">
+                  <span aria-hidden className="mt-[0.7em] h-px w-3 bg-sh-border-strong" />
                   {p}
                 </li>
               ))}

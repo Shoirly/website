@@ -15,7 +15,7 @@ export function Hero() {
           <h1 id="hero-title" className="max-w-[20ch] text-[clamp(2.25rem,1.25rem+3vw,3.5rem)] leading-[1.05]">
             Signed proof of what your AI agent did, and who approved it.
           </h1>
-          <p className="mt-6 max-w-[46ch] text-lg text-graphite">
+          <p className="mt-6 max-w-[46ch] text-lg text-sh-muted">
             Shoirly gives AI agent companies per-customer evidence of every action, mapped to the controls regulated
             buyers check, so security reviews stop stalling your deals.
           </p>
@@ -27,7 +27,7 @@ export function Hero() {
             </Magnetic>
             <a
               href="#how-it-works"
-              className="group inline-flex h-12 items-center gap-2 text-base font-medium text-ink"
+              className="group inline-flex h-12 items-center gap-2 text-base font-medium text-sh-text"
             >
               See how it works
               <ArrowDown
@@ -37,7 +37,7 @@ export function Hero() {
               />
             </a>
           </div>
-          <p className="mt-6 text-sm text-graphite">We&apos;re early and taking on design partners.</p>
+          <p className="mt-6 text-sm text-sh-muted">We&apos;re early and taking on design partners.</p>
         </div>
         <HeroStage>
           <EvidenceTrail />

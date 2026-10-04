@@ -76,7 +76,7 @@ export function HeroStage({ children }: { children: ReactNode }) {
       {/* Back layer: a second evidence sheet, offset and turned slightly */}
       <motion.div
         aria-hidden
-        className="ledger-grid absolute inset-0 translate-x-4 translate-y-4 rotate-[2.5deg] rounded-md border border-rule bg-ledger shadow-paper"
+        className="ledger-grid absolute inset-0 translate-x-4 translate-y-4 rotate-[2.5deg] rounded-md border border-sh-border bg-sh-bg-subtle shadow-paper"
         style={{ x: backX, y: backY }}
       />
 

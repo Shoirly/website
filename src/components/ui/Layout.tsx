@@ -17,7 +17,7 @@ export function Section({ children, className = "", tone = "paper", id, labelled
     <section
       id={id}
       aria-labelledby={labelledBy}
-      className={`py-16 md:py-24 ${tone === "ledger" ? "bg-ledger" : ""} ${className}`}
+      className={`py-16 md:py-24 ${tone === "ledger" ? "bg-sh-bg-subtle" : ""} ${className}`}
     >
       <Container>{children}</Container>
     </section>
@@ -35,10 +35,10 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <header className="border-b border-rule pb-12 pt-14 md:pb-16 md:pt-20">
+    <header className="border-b border-sh-border pb-12 pt-14 md:pb-16 md:pt-20">
       <Container>
         <h1 className="max-w-[20ch] text-4xl">{title}</h1>
-        {lead ? <p className="mt-5 max-w-[60ch] text-lg text-graphite">{lead}</p> : null}
+        {lead ? <p className="mt-5 max-w-[60ch] text-lg text-sh-muted">{lead}</p> : null}
         {children ? <div className="mt-8">{children}</div> : null}
       </Container>
     </header>

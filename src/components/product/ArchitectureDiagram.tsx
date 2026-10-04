@@ -82,15 +82,15 @@ function NodeButton({
       onClick={() => onSelect(id)}
       className={`group relative flex min-h-12 w-full items-center gap-2.5 rounded-md border px-3 py-2.5 text-left text-sm transition-[border-color,background-color,box-shadow,transform] duration-200 active:scale-[0.97] active:duration-100 ${
         selected
-          ? "border-seal bg-seal-wash text-seal-deep shadow-[0_0_0_3px_var(--color-seal-wash)]"
+          ? "border-sh-accent bg-sh-accent-soft text-sh-accent-text shadow-[0_0_0_3px_var(--color-sh-accent-soft)]"
           : tone === "shoirly"
-            ? "border-seal/50 bg-paper hover:border-seal"
-            : "border-rule bg-paper hover:border-rule-strong"
+            ? "border-sh-accent/50 bg-sh-bg hover:border-sh-accent"
+            : "border-sh-border bg-sh-bg hover:border-sh-border-strong"
       }`}
     >
       <span
         className={`flex size-5 shrink-0 items-center justify-center rounded-full font-mono text-[10px] tabular transition-colors duration-200 ${
-          selected || lit ? "bg-seal text-paper" : "bg-ledger text-graphite group-hover:text-ink"
+          selected || lit ? "bg-sh-accent text-sh-bg" : "bg-sh-bg-subtle text-sh-muted group-hover:text-sh-text"
         }`}
       >
         {node.n}
@@ -103,7 +103,7 @@ function NodeButton({
 function Arrow({ down = false, className = "" }: { down?: boolean; className?: string }) {
   const Icon = down ? ArrowDown : ArrowRight;
   return (
-    <span aria-hidden className={`flex items-center justify-center text-rule-strong ${className}`}>
+    <span aria-hidden className={`flex items-center justify-center text-sh-border-strong ${className}`}>
       <Icon size={16} />
     </span>
   );
@@ -141,9 +141,9 @@ export function ArchitectureDiagram() {
         <div
           role="group"
           aria-label="Inside your environment: your cloud or your customer's"
-          className="rounded-md border-2 border-dashed border-rule-strong/70 bg-ledger/50 p-4 sm:p-5"
+          className="rounded-md border-2 border-dashed border-sh-border-strong/70 bg-sh-bg-subtle/50 p-4 sm:p-5"
         >
-          <p className="text-xs font-medium text-graphite">Your environment: your cloud or your customer&apos;s</p>
+          <p className="text-xs font-medium text-sh-muted">Your environment: your cloud or your customer&apos;s</p>
 
           {/* Request path */}
           <div className="mt-4 grid grid-cols-1 items-center gap-2 sm:grid-cols-[minmax(0,1fr)_1.5rem_minmax(0,1fr)_1.5rem_minmax(0,1fr)]">
@@ -155,8 +155,8 @@ export function ArchitectureDiagram() {
           </div>
 
           <div className="my-2 flex justify-center sm:my-3">
-            <span className="inline-flex items-center gap-1.5 text-[11px] text-graphite">
-              <ArrowDown size={14} aria-hidden className="text-rule-strong" /> Each captured call
+            <span className="inline-flex items-center gap-1.5 text-[11px] text-sh-muted">
+              <ArrowDown size={14} aria-hidden className="text-sh-border-strong" /> Each captured call
             </span>
           </div>
 
@@ -174,23 +174,23 @@ export function ArchitectureDiagram() {
 
         {/* Crossing the boundary */}
         <div className="flex flex-col items-center justify-center gap-1 py-1 text-center lg:px-2">
-          <span className="font-mono text-[11px] leading-4 text-seal-deep">Only proof leaves</span>
-          <Arrow down className="text-seal lg:hidden" />
+          <span className="font-mono text-[11px] leading-4 text-sh-accent-text">Only proof leaves</span>
+          <Arrow down className="text-sh-accent lg:hidden" />
           <motion.span
             aria-hidden
-            className="hidden h-px w-full origin-left bg-seal lg:block"
+            className="hidden h-px w-full origin-left bg-sh-accent lg:block"
             initial={false}
             animate={{ scaleX: reduce || lit === -1 || lit >= order.length - 1 ? 1 : 0.15 }}
             transition={{ duration: reduce ? 0 : 0.4, ease }}
           />
-          <span className="text-[11px] leading-4 text-graphite">signatures, hashes, coverage counts</span>
+          <span className="text-[11px] leading-4 text-sh-muted">signatures, hashes, coverage counts</span>
         </div>
 
         <div>{node("pack")}</div>
       </div>
 
       {/* Explanation of the selected node */}
-      <div className="mt-6 min-h-[132px] rounded-md border border-rule bg-paper p-5 sm:p-6" aria-live="polite">
+      <div className="mt-6 min-h-[132px] rounded-md border border-sh-border bg-sh-bg p-5 sm:p-6" aria-live="polite">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={selected}
@@ -199,15 +199,15 @@ export function ArchitectureDiagram() {
             exit={reduce ? { opacity: 0, transition: { duration: 0 } } : { opacity: 0, y: -4 }}
             transition={{ duration: 0.18, ease }}
           >
-            <p className="font-mono text-xs text-graphite">
+            <p className="font-mono text-xs text-sh-muted">
               {nodes[selected].n} of {order.length}
             </p>
             <h3 className="mt-1 text-xl">{nodes[selected].title}</h3>
-            <p className="mt-2 max-w-[68ch] text-graphite">{nodes[selected].body}</p>
+            <p className="mt-2 max-w-[68ch] text-sh-muted">{nodes[selected].body}</p>
           </motion.div>
         </AnimatePresence>
       </div>
-      <p className="mt-3 text-sm text-graphite">Select any part of the diagram to see what it does.</p>
+      <p className="mt-3 text-sm text-sh-muted">Select any part of the diagram to see what it does.</p>
     </div>
   );
 }

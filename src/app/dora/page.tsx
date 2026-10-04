@@ -157,7 +157,7 @@ export default function DoraPage() {
         title="DORA, explained for AI agent vendors"
         lead="The EU's Digital Operational Resilience Act changes what banks must know about their technology suppliers. Here's what it asks, what it means when you sell an AI agent to a bank, and what evidence helps."
       >
-        <p className="text-sm text-graphite">Plain-English guide. Not legal advice.</p>
+        <p className="text-sm text-sh-muted">Plain-English guide. Not legal advice.</p>
       </PageHeader>
 
       <Section labelledBy="what-title">
@@ -167,10 +167,10 @@ export default function DoraPage() {
               What DORA is
             </h2>
           </div>
-          <div className="space-y-5 text-lg text-graphite">
+          <div className="space-y-5 text-lg text-sh-muted">
             <p>
               DORA, formally Regulation (EU) 2022/2554, sets one set of rules for how financial firms in the EU manage
-              technology risk. It has applied since <strong className="font-semibold text-ink">17 January 2025</strong>.
+              technology risk. It has applied since <strong className="font-semibold text-sh-text">17 January 2025</strong>.
             </p>
             <p>
               It covers about twenty kinds of financial entity, including banks, insurers, payment and e-money
@@ -185,15 +185,15 @@ export default function DoraPage() {
         <h2 id="pillars-title" className="max-w-[22ch] text-3xl">
           The five areas DORA covers
         </h2>
-        <ol className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-md border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">
+        <ol className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-md border border-sh-border bg-sh-border sm:grid-cols-2 lg:grid-cols-3">
           {pillars.map((p, i) => (
             <li
               key={p.name}
-              className={`bg-paper p-6 ${i === 3 ? "ring-2 ring-inset ring-seal" : ""} ${i === 4 ? "sm:col-span-2" : ""}`}
+              className={`bg-sh-bg p-6 ${i === 3 ? "ring-2 ring-inset ring-sh-accent" : ""} ${i === 4 ? "sm:col-span-2" : ""}`}
             >
-              <p className="font-mono text-xs text-graphite">{p.ref}</p>
+              <p className="font-mono text-xs text-sh-muted">{p.ref}</p>
               <h3 className="mt-2 text-xl">{p.name}</h3>
-              <p className="mt-2 text-graphite">{p.body}</p>
+              <p className="mt-2 text-sh-muted">{p.body}</p>
             </li>
           ))}
         </ol>
@@ -205,32 +205,32 @@ export default function DoraPage() {
         </h2>
         <div className="mt-10 grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-2">
           {asks.map((a) => (
-            <div key={a.title} className="border-t border-ink pt-5">
+            <div key={a.title} className="border-t border-sh-text pt-5">
               <h3 className="text-xl">{a.title}</h3>
-              <p className="mt-2 text-graphite">{a.body}</p>
+              <p className="mt-2 text-sh-muted">{a.body}</p>
             </div>
           ))}
         </div>
       </Section>
 
-      <section aria-labelledby="map-title" className="bg-ledger py-16 md:py-24">
+      <section aria-labelledby="map-title" className="bg-sh-bg-subtle py-16 md:py-24">
         <Container>
           <h2 id="map-title" className="max-w-[24ch] text-3xl">
             How Shoirly evidence maps to DORA
           </h2>
-          <p className="mt-4 max-w-[60ch] text-lg text-graphite">
+          <p className="mt-4 max-w-[60ch] text-lg text-sh-muted">
             Shoirly supports the bank&apos;s obligations. It doesn&apos;t discharge them. The mapping below is
             indicative.
           </p>
           <ul className="mt-10 space-y-4 md:hidden">
             {mapping.map((m) => (
-              <li key={m.area} className="rounded-md border border-rule bg-paper p-5">
+              <li key={m.area} className="rounded-md border border-sh-border bg-sh-bg p-5">
                 <h3>{m.area}</h3>
-                <p className="mt-1 font-mono text-xs text-graphite">{m.ref}</p>
+                <p className="mt-1 font-mono text-xs text-sh-muted">{m.ref}</p>
                 <dl className="mt-5 space-y-4">
                   <div>
                     <dt className="font-semibold">What the bank needs</dt>
-                    <dd className="mt-1 text-graphite">{m.need}</dd>
+                    <dd className="mt-1 text-sh-muted">{m.need}</dd>
                   </div>
                   <div>
                     <dt className="font-semibold">Shoirly evidence</dt>
@@ -240,11 +240,11 @@ export default function DoraPage() {
               </li>
             ))}
           </ul>
-          <div className="mt-10 hidden rounded-md border border-rule bg-paper md:block">
+          <div className="mt-10 hidden rounded-md border border-sh-border bg-sh-bg md:block">
             <table className="w-full table-fixed border-collapse text-left text-sm">
               <caption className="sr-only">DORA areas, what banks need, and the Shoirly evidence that supports it</caption>
               <thead>
-                <tr className="border-b border-ink">
+                <tr className="border-b border-sh-text">
                   <th scope="col" className="px-5 py-4 font-semibold">
                     DORA area
                   </th>
@@ -256,21 +256,21 @@ export default function DoraPage() {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-rule">
+              <tbody className="divide-y divide-sh-border">
                 {mapping.map((m) => (
                   <tr key={m.area} className="align-top">
                     <th scope="row" className="px-5 py-4 font-medium">
                       {m.area}
-                      <span className="mt-0.5 block font-mono text-xs font-normal text-graphite">{m.ref}</span>
+                      <span className="mt-0.5 block font-mono text-xs font-normal text-sh-muted">{m.ref}</span>
                     </th>
-                    <td className="px-5 py-4 text-graphite">{m.need}</td>
+                    <td className="px-5 py-4 text-sh-muted">{m.need}</td>
                     <td className="px-5 py-4">{m.evidence}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="mt-6 text-graphite">
+          <p className="mt-6 text-sh-muted">
             Want to see it as a bank would?
           </p>
           <Link href="/solutions/banks" className="link inline-flex min-h-11 items-center py-2">

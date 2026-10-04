@@ -108,14 +108,14 @@ export default function AgentVendorsPage() {
         <ButtonLink href="/demo" size="lg">
           Book a demo
         </ButtonLink>
-        <p className="mt-5 text-sm text-graphite">We&apos;re early and taking on design partners.</p>
+        <p className="mt-5 text-sm text-sh-muted">We&apos;re early and taking on design partners.</p>
       </PageHeader>
 
       <Section labelledBy="where-title">
         <h2 id="where-title" className="max-w-[24ch] text-3xl">
           Where deals stall, and what you can show instead
         </h2>
-        <p className="mt-4 max-w-[56ch] text-lg text-graphite">
+        <p className="mt-4 max-w-[56ch] text-lg text-sh-muted">
           The questions change as a deal moves through your buyer&apos;s review. The answer doesn&apos;t have to.
         </p>
         <StallStages stages={stages} />
@@ -127,7 +127,7 @@ export default function AgentVendorsPage() {
             <h2 id="get-title" className="text-3xl">
               What you get
             </h2>
-            <p className="mt-4 max-w-[44ch] text-lg text-graphite">
+            <p className="mt-4 max-w-[44ch] text-lg text-sh-muted">
               One integration with your agent. After that, evidence builds up on its own, and every customer gets its own
               pack.
             </p>
@@ -144,9 +144,9 @@ export default function AgentVendorsPage() {
               ["Per-customer evidence packs", "Each customer sees its own records only, mapped to the controls it reports against."],
               ["Ready to share", "Packs you can share through Vanta or your trust centre, next to your certifications."],
             ].map(([t, d]) => (
-              <li key={t} className="border-t border-rule pt-5">
+              <li key={t} className="border-t border-sh-border pt-5">
                 <p className="font-semibold">{t}</p>
-                <p className="mt-1 text-graphite">{d}</p>
+                <p className="mt-1 text-sh-muted">{d}</p>
               </li>
             ))}
           </ul>
@@ -157,7 +157,7 @@ export default function AgentVendorsPage() {
         <h2 id="cost-title" className="max-w-[24ch] text-3xl">
           What the wait costs you
         </h2>
-        <p className="mt-4 max-w-[52ch] text-lg text-graphite">
+        <p className="mt-4 max-w-[52ch] text-lg text-sh-muted">
           Your numbers, your estimate. Move the sliders to see what time in security review is worth.
         </p>
         <div className="mt-10">

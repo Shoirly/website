@@ -31,7 +31,7 @@ export function VerifyChecks({ checks }: { checks: [string, string][] }) {
   };
 
   return (
-    <dl ref={ref} className="divide-y divide-rule border-y border-rule">
+    <dl ref={ref} className="divide-y divide-sh-border border-y border-sh-border">
       {checks.map(([k, v], i) => (
         <div
           key={k}
@@ -39,7 +39,7 @@ export function VerifyChecks({ checks }: { checks: [string, string][] }) {
         >
           <StatusMark status={statusFor(i)} className="mt-0.5" />
           <dt className="font-semibold">{k}</dt>
-          <dd className="col-start-2 text-graphite sm:col-start-auto">{v}</dd>
+          <dd className="col-start-2 text-sh-muted sm:col-start-auto">{v}</dd>
         </div>
       ))}
     </dl>

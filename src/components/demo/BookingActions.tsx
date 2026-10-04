@@ -26,7 +26,7 @@ const webmail = [
 ];
 
 const secondary =
-  "inline-flex min-h-11 items-center justify-center gap-1.5 rounded-md border border-rule-strong/60 bg-paper px-3 text-sm text-ink transition-colors duration-150 hover:border-ink/60 hover:bg-ink-soft";
+  "inline-flex min-h-11 items-center justify-center gap-1.5 rounded-md border border-sh-border-strong/60 bg-sh-bg px-3 text-sm text-sh-text transition-colors duration-150 hover:border-sh-text/60 hover:bg-sh-ink-soft";
 
 export function BookingActions() {
   const [clicked, setClicked] = useState(false);
@@ -61,14 +61,14 @@ export function BookingActions() {
         <EnvelopeSimple size={18} aria-hidden />
         Book a demo
       </ButtonLink>
-      <p className="mt-3 text-center text-sm text-graphite" aria-live="polite">
+      <p className="mt-3 text-center text-sm text-sh-muted" aria-live="polite">
         {clicked
           ? "Nothing opened? Use one of the options below instead."
           : "Opens your email app with a short message ready to send."}
       </p>
 
-      <div className="mt-5 border-t border-rule pt-5">
-        <p className="text-sm text-graphite">Or write from your browser</p>
+      <div className="mt-5 border-t border-sh-border pt-5">
+        <p className="text-sm text-sh-muted">Or write from your browser</p>
         <div className="mt-3 grid grid-cols-2 gap-2">
           {webmail.map((w) => (
             <a key={w.label} href={w.href} target="_blank" rel="noopener noreferrer" className={secondary}>

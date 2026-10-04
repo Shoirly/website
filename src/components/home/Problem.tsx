@@ -9,7 +9,7 @@ export function Problem() {
           <h2 id="problem-title" className="max-w-[24ch] text-2xl lg:text-[2.5rem] lg:leading-[1.1]">
             Your customers want to let your agent do more. Their risk team needs proof it stayed inside the lines.
           </h2>
-          <p className="mt-6 max-w-[44ch] text-lg text-graphite">
+          <p className="mt-6 max-w-[44ch] text-lg text-sh-muted">
             You already log everything. But a certificate says you have controls, and a log is only as complete as
             you say it is. Neither shows what happened on Tuesday, so the security review stalls, and your deal
             waits with it.

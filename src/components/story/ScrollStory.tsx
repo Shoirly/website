@@ -35,20 +35,20 @@ function StepBlock({
         <span
           aria-hidden
           className={`absolute -left-12 top-1 flex size-[23px] items-center justify-center rounded-full border font-mono text-[11px] tabular transition-colors duration-300 lg:top-[calc(1.5rem+0.4rem)] ${
-            reached ? "border-seal bg-seal text-paper" : "border-rule-strong bg-paper text-graphite"
+            reached ? "border-sh-accent bg-sh-accent text-sh-bg" : "border-sh-border-strong bg-sh-bg text-sh-muted"
           }`}
         >
           {index + 1}
         </span>
         <h3
           className={`max-w-[24ch] text-2xl transition-colors duration-300 lg:text-[1.875rem] lg:leading-tight ${
-            active ? "text-ink" : "lg:text-graphite"
+            active ? "text-sh-text" : "lg:text-sh-muted"
           }`}
         >
           <span className="sr-only">Step {index + 1}: </span>
           {step.title}
         </h3>
-        <div className="mt-3 max-w-[46ch] text-lg text-graphite">{step.body}</div>
+        <div className="mt-3 max-w-[46ch] text-lg text-sh-muted">{step.body}</div>
         {/* Mobile: each step carries its own scene, static */}
         <div className="mt-6 min-h-[300px] lg:hidden [&_*]:animate-none!">{step.scene}</div>
       </div>
@@ -83,7 +83,7 @@ export function ScrollStory({
         <h2 id={`${id}-title`} className="max-w-[22ch] text-3xl">
           {heading}
         </h2>
-        <p className="mt-4 max-w-[52ch] text-lg text-graphite">{intro}</p>
+        <p className="mt-4 max-w-[52ch] text-lg text-sh-muted">{intro}</p>
 
         <div className="mt-12 grid grid-cols-1 gap-16 lg:mt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
           {/* Desktop: sticky scene */}
@@ -91,9 +91,9 @@ export function ScrollStory({
             <div className="sticky top-[calc(50vh-190px)]">
               <ol className="grid grid-cols-4 gap-2">
                 {steps.map((s, i) => (
-                  <li key={s.title} className="h-1 overflow-hidden rounded-full bg-rule">
+                  <li key={s.title} className="h-1 overflow-hidden rounded-full bg-sh-border">
                     <motion.span
-                      className="block h-full origin-left rounded-full bg-seal"
+                      className="block h-full origin-left rounded-full bg-sh-accent"
                       initial={false}
                       animate={{ scaleX: i <= active ? 1 : 0 }}
                       transition={{ duration: reduce ? 0 : 0.3, ease }}
@@ -120,9 +120,9 @@ export function ScrollStory({
 
           {/* Steps, with a rail that fills as you scroll */}
           <div className="relative">
-            <div aria-hidden className="absolute bottom-0 left-[11px] top-0 w-px bg-rule lg:bottom-[26vh] lg:top-[26vh]">
+            <div aria-hidden className="absolute bottom-0 left-[11px] top-0 w-px bg-sh-border lg:bottom-[26vh] lg:top-[26vh]">
               <motion.div
-                className="h-full w-full origin-top bg-seal"
+                className="h-full w-full origin-top bg-sh-accent"
                 style={{ scaleY: reduce ? 1 : scrollYProgress }}
               />
             </div>

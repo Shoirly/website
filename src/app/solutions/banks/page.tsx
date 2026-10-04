@@ -67,7 +67,7 @@ export default function BanksPage() {
             <h2 id="today-title" className="text-3xl">
               What you rely on today
             </h2>
-            <p className="mt-4 max-w-[40ch] text-lg text-graphite">
+            <p className="mt-4 max-w-[40ch] text-lg text-sh-muted">
               Each source answers a real question. None of them shows what your vendor&apos;s agent did on a given day,
               for a given customer.
             </p>
@@ -82,13 +82,13 @@ export default function BanksPage() {
         </h2>
         <div className="mt-10 grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-2">
           {receive.map((r) => (
-            <div key={r.title} className="border-t border-ink pt-5">
+            <div key={r.title} className="border-t border-sh-text pt-5">
               <h3 className="text-xl">{r.title}</h3>
-              <p className="mt-2 text-graphite">{r.body}</p>
+              <p className="mt-2 text-sh-muted">{r.body}</p>
             </div>
           ))}
         </div>
-        <p className="mt-10 text-graphite">
+        <p className="mt-10 text-sh-muted">
           <Link href="/#evidence-title" className="link">
             See a sample evidence pack
           </Link>
@@ -101,7 +101,7 @@ export default function BanksPage() {
             <h2 id="verify-title" className="text-3xl">
               How verification will work
             </h2>
-            <p className="mt-4 max-w-[40ch] text-lg text-graphite">
+            <p className="mt-4 max-w-[40ch] text-lg text-sh-muted">
               Once we publish our verification guide, your team will be able to check signatures and the chain
               independently, without relying on the vendor&apos;s word or ours.
             </p>
@@ -117,11 +117,11 @@ export default function BanksPage() {
             <h2 id="request-title" className="text-3xl">
               How to ask a vendor for it
             </h2>
-            <p className="mt-4 max-w-[40ch] text-lg text-graphite">
+            <p className="mt-4 max-w-[40ch] text-lg text-sh-muted">
               Use this wording in a due diligence request, a contract schedule or a periodic review. Edit it to suit
               your process.
             </p>
-            <p className="mt-6 text-graphite">
+            <p className="mt-6 text-sh-muted">
               In EU financial services, for example, DORA sets the third-party rules.{" "}
               <Link href="/dora" className="link">
                 Read our plain-English guide

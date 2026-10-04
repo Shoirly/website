@@ -31,9 +31,9 @@ export default function BlogPage() {
           Posts
         </h2>
         {posts.length === 0 ? (
-          <div className="max-w-[65ch] rounded-lg border border-rule bg-ledger p-6 md:p-10">
+          <div className="max-w-[65ch] rounded-lg border border-sh-border bg-sh-bg-subtle p-6 md:p-10">
             <p className="text-xl font-semibold">First posts are on the way</p>
-            <p className="mt-3 text-graphite">
+            <p className="mt-3 text-sh-muted">
               In the meantime, for example, our{" "}
               <Link href="/dora" className="link">
                 plain-English guide to DORA

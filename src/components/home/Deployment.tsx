@@ -12,7 +12,7 @@ export function Deployment() {
           <h2 id="deploy-title" className="max-w-[18ch] text-3xl">
             Your data never leaves. Only the proof does.
           </h2>
-          <p className="mt-5 max-w-[44ch] text-lg text-graphite">
+          <p className="mt-5 max-w-[44ch] text-lg text-sh-muted">
             Shoirly is designed to run where your agent runs, in your cloud or your customer&apos;s. Action records and customer data
             stay there. Only signatures, hashes and coverage counts leave.
           </p>
@@ -30,50 +30,50 @@ export function Deployment() {
           </figcaption>
 
           {/* Boundary: where the agent runs */}
-          <div className="rounded-md border-2 border-dashed border-rule-strong/70 bg-ledger/60 p-4 sm:p-5">
-            <p className="flex items-center gap-1.5 text-xs font-medium text-graphite">
+          <div className="rounded-md border-2 border-dashed border-sh-border-strong/70 bg-sh-bg-subtle/60 p-4 sm:p-5">
+            <p className="flex items-center gap-1.5 text-xs font-medium text-sh-muted">
               <LockSimple size={14} aria-hidden /> Your cloud, or your customer&apos;s
             </p>
             <ul className="mt-4 grid grid-cols-1 gap-2.5">
-              <li className="flex items-center gap-2.5 rounded-md border border-rule bg-paper px-3 py-2.5 text-sm">
-                <Robot size={18} aria-hidden className="text-graphite" /> Your agent
+              <li className="flex items-center gap-2.5 rounded-md border border-sh-border bg-sh-bg px-3 py-2.5 text-sm">
+                <Robot size={18} aria-hidden className="text-sh-muted" /> Your agent
               </li>
-              <li className="flex items-center gap-2.5 rounded-md border border-seal/50 bg-seal-wash/70 px-3 py-2.5 text-sm font-medium text-seal-deep">
+              <li className="flex items-center gap-2.5 rounded-md border border-sh-accent/50 bg-sh-accent-soft/70 px-3 py-2.5 text-sm font-medium text-sh-accent-text">
                 <SealCheck size={18} aria-hidden /> Shoirly
               </li>
-              <li className="flex items-center gap-2.5 rounded-md border border-rule bg-paper px-3 py-2.5 text-sm">
-                <Database size={18} aria-hidden className="text-graphite" />
+              <li className="flex items-center gap-2.5 rounded-md border border-sh-border bg-sh-bg px-3 py-2.5 text-sm">
+                <Database size={18} aria-hidden className="text-sh-muted" />
                 <span>
-                  Records and customer data <span className="text-graphite">stay here</span>
+                  Records and customer data <span className="text-sh-muted">stay here</span>
                 </span>
               </li>
             </ul>
           </div>
 
           {/* Proof leaving the environment: three pulses flow towards the card (motion-safe CSS only) */}
-          <div aria-hidden className="relative flex h-14 w-full justify-center text-seal sm:h-auto sm:w-16 sm:self-stretch">
-            <span className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-seal/25 sm:inset-x-0 sm:inset-y-auto sm:left-0 sm:top-1/2 sm:h-px sm:w-full sm:translate-x-0" />
+          <div aria-hidden className="relative flex h-14 w-full justify-center text-sh-accent sm:h-auto sm:w-16 sm:self-stretch">
+            <span className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-sh-accent/25 sm:inset-x-0 sm:inset-y-auto sm:left-0 sm:top-1/2 sm:h-px sm:w-full sm:translate-x-0" />
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
-                className="proof-pulse absolute left-1/2 top-0 size-1.5 -translate-x-1/2 rounded-full bg-seal opacity-0 sm:left-0 sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-0"
+                className="proof-pulse absolute left-1/2 top-0 size-1.5 -translate-x-1/2 rounded-full bg-sh-accent opacity-0 sm:left-0 sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-0"
                 style={{ animationDelay: `${i * 0.8}s` }}
               />
             ))}
-            <ArrowRight size={18} className="absolute bottom-0 left-1/2 -translate-x-1/2 rotate-90 bg-paper sm:bottom-auto sm:left-auto sm:right-0 sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-0 sm:rotate-0" />
+            <ArrowRight size={18} className="absolute bottom-0 left-1/2 -translate-x-1/2 rotate-90 bg-sh-bg sm:bottom-auto sm:left-auto sm:right-0 sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-0 sm:rotate-0" />
           </div>
 
           {/* What leaves */}
-          <div className="rounded-md border border-rule bg-paper p-4 shadow-paper sm:p-5">
-            <p className="text-xs font-medium text-graphite">Only this leaves</p>
+          <div className="rounded-md border border-sh-border bg-sh-bg p-4 shadow-paper sm:p-5">
+            <p className="text-xs font-medium text-sh-muted">Only this leaves</p>
             <ul className="mt-3 space-y-2">
               {leaves.map((l) => (
-                <li key={l} className="font-mono text-sm text-ink">
+                <li key={l} className="font-mono text-sm text-sh-text">
                   {l}
                 </li>
               ))}
             </ul>
-            <p className="mt-4 border-t border-rule pt-3 text-xs text-graphite">
+            <p className="mt-4 border-t border-sh-border pt-3 text-xs text-sh-muted">
               Enough to show records are unedited and whether any are missing. None of their contents.
             </p>
           </div>

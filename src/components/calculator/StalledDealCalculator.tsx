@@ -65,7 +65,7 @@ function Slider({ label, value, min, max, step, onChange, display, hint }: Slide
         onChange={(e) => onChange(Number(e.target.value))}
       />
       {hint ? (
-        <p id={`${id}-hint`} className="text-xs text-graphite">
+        <p id={`${id}-hint`} className="text-xs text-sh-muted">
           {hint}
         </p>
       ) : null}
@@ -77,16 +77,16 @@ function Slider({ label, value, min, max, step, onChange, display, hint }: Slide
 function ReviewTimeBars({ before, after }: { before: number; after: number }) {
   const reduce = useReducedMotion();
   const rows = [
-    { label: "Today", weeks: before, className: "bg-rule-strong" },
-    { label: "With evidence", weeks: after, className: "bg-seal" },
+    { label: "Today", weeks: before, className: "bg-sh-border-strong" },
+    { label: "With evidence", weeks: after, className: "bg-sh-accent" },
   ];
   return (
     <figure>
-      <figcaption className="text-sm text-graphite">Time in security review</figcaption>
+      <figcaption className="text-sm text-sh-muted">Time in security review</figcaption>
       <div className="mt-3 space-y-2.5">
         {rows.map((r) => (
           <div key={r.label} className="grid grid-cols-[6.5rem_minmax(0,1fr)_4.5rem] items-center gap-3 text-xs">
-            <span className="text-graphite">{r.label}</span>
+            <span className="text-sh-muted">{r.label}</span>
             <span className="relative h-2.5">
               <motion.span
                 aria-hidden
@@ -96,7 +96,7 @@ function ReviewTimeBars({ before, after }: { before: number; after: number }) {
                 transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 170, damping: 26 }}
               />
             </span>
-            <span className="text-right font-mono tabular text-ink">
+            <span className="text-right font-mono tabular text-sh-text">
               {r.weeks} {r.weeks === 1 ? "week" : "weeks"}
             </span>
           </div>
@@ -181,17 +181,17 @@ export function StalledDealCalculator({ variant = "full" }: { variant?: "full" |
   const results = (
     <>
       <div>
-        <p className="text-sm text-graphite">Revenue delayed this year</p>
+        <p className="text-sm text-sh-muted">Revenue delayed this year</p>
         <p className={`mt-1 font-mono font-medium leading-tight tracking-[-0.03em] ${compact ? "text-[1.75rem]" : "text-[2.25rem]"}`}>
           <AnimatedNumber value={delayed} format={fmt} />
         </p>
       </div>
       <div>
-        <p className="text-sm text-graphite">
+        <p className="text-sm text-sh-muted">
           Brought forward with {weeksSaved} {weeksSaved === 1 ? "week" : "weeks"} less review
         </p>
         <p
-          className={`mt-1 font-mono font-medium leading-tight tracking-[-0.03em] text-seal-deep ${compact ? "text-[1.75rem]" : "text-[2.25rem]"}`}
+          className={`mt-1 font-mono font-medium leading-tight tracking-[-0.03em] text-sh-accent-text ${compact ? "text-[1.75rem]" : "text-[2.25rem]"}`}
         >
           <AnimatedNumber value={recovered} format={fmt} />
         </p>
@@ -202,18 +202,18 @@ export function StalledDealCalculator({ variant = "full" }: { variant?: "full" |
   return (
     <div>
       <div
-        className={`grid grid-cols-1 overflow-hidden rounded-md border border-rule ${
+        className={`grid grid-cols-1 overflow-hidden rounded-md border border-sh-border ${
           compact ? "" : "lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]"
         }`}
       >
         <div
-          className={`grid grid-cols-1 gap-6 bg-ledger p-5 sm:p-8 ${compact ? "sm:grid-cols-2 sm:gap-x-10" : "gap-7"}`}
+          className={`grid grid-cols-1 gap-6 bg-sh-bg-subtle p-5 sm:p-8 ${compact ? "sm:grid-cols-2 sm:gap-x-10" : "gap-7"}`}
         >
           {sliders}
         </div>
 
         <div
-          className={`flex flex-col gap-8 border-t border-rule bg-paper p-5 sm:p-8 ${
+          className={`flex flex-col gap-8 border-t border-sh-border bg-sh-bg p-5 sm:p-8 ${
             compact ? "" : "justify-center lg:border-l lg:border-t-0"
           }`}
         >
@@ -225,7 +225,7 @@ export function StalledDealCalculator({ variant = "full" }: { variant?: "full" |
       </div>
 
       <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
-        <p className="max-w-[72ch] text-xs text-graphite">{ASSUMPTION}</p>
+        <p className="max-w-[72ch] text-xs text-sh-muted">{ASSUMPTION}</p>
         <ButtonLink href="/demo" size="md" className="shrink-0 self-start sm:self-auto">
           Book a demo
         </ButtonLink>

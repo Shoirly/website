@@ -121,7 +121,7 @@ function Pulse({ show, animateIn, className }: { show: boolean; animateIn: boole
         <motion.span
           key="pulse"
           aria-hidden
-          className={`pointer-events-none absolute rounded-full border border-seal ${className}`}
+          className={`pointer-events-none absolute rounded-full border border-sh-accent ${className}`}
           initial={{ scale: 1, opacity: 0.6 }}
           animate={{ scale: 2.6, opacity: 0 }}
           transition={{ duration: 0.6, ease }}
@@ -156,9 +156,9 @@ function TrailRow({
       {/* Chain link back to the previous record: grey base, seal overlay drawn when this record is signed */}
       {index > 0 ? (
         <>
-          <span className="absolute left-[7px] top-[-53px] h-[71px] w-px bg-rule" />
+          <span className="absolute left-[7px] top-[-53px] h-[71px] w-px bg-sh-border" />
           <motion.span
-            className="absolute left-[7px] top-[-53px] h-[71px] w-px origin-top bg-seal"
+            className="absolute left-[7px] top-[-53px] h-[71px] w-px origin-top bg-sh-accent"
             initial={false}
             animate={{ scaleY: signed ? 1 : 0 }}
             transition={{ duration: animateIn ? 0.4 : 0, ease }}
@@ -170,21 +170,21 @@ function TrailRow({
       <span className="absolute left-[3px] top-[18px] size-[9px]">
         <span
           className={`absolute inset-0 rounded-full border transition-colors duration-300 ${
-            signed ? "border-seal bg-seal" : "border-rule-strong bg-paper"
+            signed ? "border-sh-accent bg-sh-accent" : "border-sh-border-strong bg-sh-bg"
           }`}
         />
         <Pulse show={signed} animateIn={animateIn} className="inset-0" />
       </span>
 
       <div className="flex items-baseline justify-between gap-3 pt-3">
-        <p className="truncate font-mono text-[13px] font-medium leading-5 text-ink">{action.action}</p>
-        <span className="hidden shrink-0 font-mono text-[11px] text-graphite sm:inline">{action.time}</span>
+        <p className="truncate font-mono text-[13px] font-medium leading-5 text-sh-text">{action.action}</p>
+        <span className="hidden shrink-0 font-mono text-[11px] text-sh-muted sm:inline">{action.time}</span>
       </div>
 
       <div className="mt-2 flex items-center justify-between gap-3 text-xs">
         {/* Authoriser link: slides in, with a brief seal highlight as it lands */}
         <motion.span
-          className="relative flex min-w-0 items-center gap-1.5 rounded-sm py-0.5 pl-0.5 pr-1.5 text-graphite"
+          className="relative flex min-w-0 items-center gap-1.5 rounded-sm py-0.5 pl-0.5 pr-1.5 text-sh-muted"
           initial={false}
           animate={{ opacity: authorised ? 1 : 0, x: authorised ? 0 : -8 }}
           transition={{ duration: animateIn ? 0.35 : 0, ease }}
@@ -194,14 +194,14 @@ function TrailRow({
               <motion.span
                 key="flash"
                 aria-hidden
-                className="absolute inset-0 rounded-sm bg-seal-wash"
+                className="absolute inset-0 rounded-sm bg-sh-accent-soft"
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 0 }}
                 transition={{ duration: 0.9, delay: 0.15, ease }}
               />
             ) : null}
           </AnimatePresence>
-          <ArrowElbowDownRight size={12} aria-hidden className="relative shrink-0 text-rule-strong" />
+          <ArrowElbowDownRight size={12} aria-hidden className="relative shrink-0 text-sh-border-strong" />
           {action.approverKind === "person" ? (
             <User size={13} aria-hidden className="relative shrink-0" />
           ) : (
@@ -212,19 +212,19 @@ function TrailRow({
 
         {/* Signature: resolves from noise, then the check mark stamps in */}
         <span className="flex shrink-0 items-center gap-1.5">
-          <span className="hidden text-graphite min-[420px]:inline">sig</span>
+          <span className="hidden text-sh-muted min-[420px]:inline">sig</span>
           <ScrambleHash
             value={action.signature.slice(0, 8)}
             state={sigState}
             stepMs={45}
-            className={`transition-colors duration-300 ${signed ? "text-ink" : "text-graphite"}`}
+            className={`transition-colors duration-300 ${signed ? "text-sh-text" : "text-sh-muted"}`}
           />
           <span className="relative size-[14px]">
             <AnimatePresence initial={false}>
               {signed ? (
                 <motion.span
                   key="tick"
-                  className="absolute inset-0 text-seal"
+                  className="absolute inset-0 text-sh-accent"
                   initial={animateIn ? { scale: 0.3, rotate: -25, opacity: 0 } : false}
                   animate={{ scale: 1, rotate: 0, opacity: 1 }}
                   transition={{ type: "spring", stiffness: 520, damping: 22 }}
@@ -260,7 +260,7 @@ function TrailBody({
       {/* Rows */}
       <div className="ledger-grid relative h-[240px] overflow-hidden px-4 sm:h-[320px]">
         <div
-          className={`pointer-events-none absolute inset-x-0 top-0 z-10 h-6 bg-gradient-to-b from-paper to-transparent transition-opacity duration-300 ${
+          className={`pointer-events-none absolute inset-x-0 top-0 z-10 h-6 bg-gradient-to-b from-sh-bg to-transparent transition-opacity duration-300 ${
             scrolled > 0 ? "opacity-100" : "opacity-0"
           }`}
         />
@@ -283,9 +283,9 @@ function TrailBody({
       </div>
 
       {/* Coverage */}
-      <div className="relative border-t border-rule bg-paper px-4 py-3">
+      <div className="relative border-t border-sh-border bg-sh-bg px-4 py-3">
         <div className="flex items-baseline justify-between gap-3 text-xs">
-          <span className="whitespace-nowrap font-medium text-ink">
+          <span className="whitespace-nowrap font-medium text-sh-text">
             {state.check ? (
               <>
                 <span className="hidden min-[420px]:inline">Coverage check </span>
@@ -295,14 +295,14 @@ function TrailBody({
               "Coverage"
             )}
           </span>
-          <span className="font-mono tabular text-graphite">
+          <span className="font-mono tabular text-sh-muted">
             <AnimatedNumber value={state.signed} format={count} /> of {N}<span className="hidden min-[420px]:inline"> actions</span> signed
-            <AnimatedNumber value={coverage} format={pct} className="ml-2 inline-block w-[4ch] text-right font-medium text-ink" />
+            <AnimatedNumber value={coverage} format={pct} className="ml-2 inline-block w-[4ch] text-right font-medium text-sh-text" />
           </span>
         </div>
-        <div className="relative mt-2 h-1 overflow-hidden rounded-full bg-rule/70">
+        <div className="relative mt-2 h-1 overflow-hidden rounded-full bg-sh-border/70">
           <motion.div
-            className="h-full origin-left rounded-full bg-seal"
+            className="h-full origin-left rounded-full bg-sh-accent"
             initial={false}
             animate={{ scaleX: coverage / 100 }}
             transition={{ duration: animateIn ? 0.55 : 0, ease }}
@@ -312,7 +312,7 @@ function TrailBody({
               <motion.span
                 key="flash"
                 aria-hidden
-                className="absolute inset-0 bg-seal-wash"
+                className="absolute inset-0 bg-sh-accent-soft"
                 initial={{ opacity: 0.9 }}
                 animate={{ opacity: 0 }}
                 transition={{ duration: 0.6, ease }}
@@ -323,15 +323,15 @@ function TrailBody({
       </div>
 
       {/* Pack: a faded outline while the trail builds, a solid verified card once it resolves */}
-      <div className="relative h-[168px] border-t border-rule bg-ledger/60 p-3 sm:h-[150px]">
-        <div className="relative h-full overflow-hidden rounded-md border border-dashed border-rule-strong/60">
+      <div className="relative h-[168px] border-t border-sh-border bg-sh-bg-subtle/60 p-3 sm:h-[150px]">
+        <div className="relative h-full overflow-hidden rounded-md border border-dashed border-sh-border-strong/60">
           <div className="flex h-full flex-col justify-between px-3.5 py-3 opacity-60">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-sm font-semibold leading-5 text-graphite">Evidence pack</p>
-                <p className="font-mono text-[11px] leading-4 text-graphite">Sample customer, Sep 2026</p>
+                <p className="text-sm font-semibold leading-5 text-sh-muted">Evidence pack</p>
+                <p className="font-mono text-[11px] leading-4 text-sh-muted">Sample customer, Sep 2026</p>
               </div>
-              <span className="whitespace-nowrap text-[11px] text-graphite">
+              <span className="whitespace-nowrap text-[11px] text-sh-muted">
                 {state.check ? "Compiling" : "Waiting for 100%"}
               </span>
             </div>
@@ -339,7 +339,7 @@ function TrailBody({
               {samplePackControls.map((d) => (
                 <li
                   key={d}
-                  className="rounded-sm border border-dashed border-rule-strong/60 px-1.5 py-0.5 text-[11px] leading-4 text-graphite"
+                  className="rounded-sm border border-dashed border-sh-border-strong/60 px-1.5 py-0.5 text-[11px] leading-4 text-sh-muted"
                 >
                   {d}
                 </li>
@@ -352,7 +352,7 @@ function TrailBody({
               <motion.span
                 key="sheen"
                 aria-hidden
-                className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-paper/90 to-transparent"
+                className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-sh-bg/90 to-transparent"
                 initial={{ x: "-110%" }}
                 animate={{ x: "330%" }}
                 transition={{ duration: 0.85, ease: [0.65, 0, 0.35, 1] }}
@@ -365,7 +365,7 @@ function TrailBody({
           {state.pack ? (
             <motion.div
               key="pack"
-              className="absolute inset-3 flex flex-col justify-between rounded-md border border-rule bg-paper px-3.5 py-3 shadow-paper"
+              className="absolute inset-3 flex flex-col justify-between rounded-md border border-sh-border bg-sh-bg px-3.5 py-3 shadow-paper"
               initial={animateIn ? { opacity: 0, y: 10, scale: 0.97 } : false}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.45, ease }}
@@ -373,12 +373,12 @@ function TrailBody({
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-sm font-semibold leading-5">Evidence pack</p>
-                  <p className="font-mono text-[11px] leading-4 text-graphite">
+                  <p className="font-mono text-[11px] leading-4 text-sh-muted">
                     Sample customer, Sep 2026<span className="hidden sm:inline">, {N} of {N} signatures verified</span>
                   </p>
                 </div>
                 <motion.span
-                  className="flex items-center gap-1 rounded-sm bg-seal-wash px-1.5 py-0.5 text-[11px] font-medium text-seal-deep"
+                  className="flex items-center gap-1 rounded-sm bg-sh-accent-soft px-1.5 py-0.5 text-[11px] font-medium text-sh-accent-text"
                   initial={animateIn ? { opacity: 0, scale: 1.5, rotate: -12 } : false}
                   animate={{ opacity: 1, scale: 1, rotate: 0 }}
                   transition={{ type: "spring", stiffness: 480, damping: 20, delay: animateIn ? 0.22 : 0 }}
@@ -391,7 +391,7 @@ function TrailBody({
                 {samplePackControls.map((d, i) => (
                   <motion.li
                     key={d}
-                    className="rounded-sm border border-rule px-1.5 py-0.5 text-[11px] leading-4 text-graphite"
+                    className="rounded-sm border border-sh-border px-1.5 py-0.5 text-[11px] leading-4 text-sh-muted"
                     initial={animateIn ? { opacity: 0, y: 4 } : false}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, ease, delay: animateIn ? 0.32 + i * 0.06 : 0 }}
@@ -443,7 +443,7 @@ export function EvidenceTrail() {
   return (
     <figure
       ref={rootRef}
-      className="relative overflow-hidden rounded-md border border-rule bg-paper shadow-paper"
+      className="relative overflow-hidden rounded-md border border-sh-border bg-sh-bg shadow-paper"
       aria-labelledby="trail-caption"
     >
       <figcaption id="trail-caption" className="sr-only">
@@ -454,14 +454,14 @@ export function EvidenceTrail() {
       </figcaption>
 
       {/* Header */}
-      <div className="flex h-12 items-center justify-between gap-3 border-b border-rule pl-4 pr-1.5">
+      <div className="flex h-12 items-center justify-between gap-3 border-b border-sh-border pl-4 pr-1.5">
         <div className="flex min-w-0 items-center gap-2.5">
           <span className="text-sm font-semibold">Evidence trail</span>
-          <span className="rounded-sm bg-ledger px-1.5 py-0.5 font-mono text-[11px] leading-4 text-graphite">
+          <span className="rounded-sm bg-sh-bg-subtle px-1.5 py-0.5 font-mono text-[11px] leading-4 text-sh-muted">
             Sample data
           </span>
           {/* Same text on server and client (avoids a hydration mismatch); hidden by CSS under reduced motion */}
-          <span aria-hidden className="hidden truncate text-xs text-graphite motion-safe:sm:inline">
+          <span aria-hidden className="hidden truncate text-xs text-sh-muted motion-safe:sm:inline">
             {status}
           </span>
         </div>
@@ -471,7 +471,7 @@ export function EvidenceTrail() {
           onClick={() => setPaused((p) => !p)}
           aria-pressed={paused}
           aria-label={paused ? "Play animation" : "Pause animation"}
-          className="inline-flex h-11 items-center gap-1.5 rounded-md px-3 text-xs text-graphite transition-colors duration-150 hover:bg-ink-soft hover:text-ink motion-reduce:hidden"
+          className="inline-flex h-11 items-center gap-1.5 rounded-md px-3 text-xs text-sh-muted transition-colors duration-150 hover:bg-sh-ink-soft hover:text-sh-text motion-reduce:hidden"
         >
           {paused ? <Play size={14} weight="fill" aria-hidden /> : <Pause size={14} weight="fill" aria-hidden />}
           {paused ? "Play" : "Pause"}

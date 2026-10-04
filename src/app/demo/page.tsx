@@ -19,29 +19,29 @@ export default function DemoPage() {
       <Container className="grid grid-cols-1 gap-14 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-20">
         <div>
           <h1 className="max-w-[20ch] text-4xl">See what your buyer&apos;s risk team would see</h1>
-          <p className="mt-5 max-w-[50ch] text-lg text-graphite">
+          <p className="mt-5 max-w-[50ch] text-lg text-sh-muted">
             Thirty minutes with the founding team. Bring a deal that&apos;s stuck in security review, or just your
             questions.
           </p>
 
-          <h2 className="mt-12 text-sm font-medium text-graphite">What we&apos;ll cover</h2>
+          <h2 className="mt-12 text-sm font-medium text-sh-muted">What we&apos;ll cover</h2>
           {/* Orchestrated moment: the rules draw in sequence as the page opens (motion-safe CSS only).
               Numbering comes only from the list itself (styled 01, 02, 03), never duplicated in the text. */}
           <div className="relative mt-4">
             <span
               aria-hidden
-              className="absolute inset-x-0 top-0 h-px origin-left bg-ink motion-safe:animate-draw-x"
+              className="absolute inset-x-0 top-0 h-px origin-left bg-sh-text motion-safe:animate-draw-x"
             />
-            <ol className="list-[decimal-leading-zero] pl-10 marker:font-mono marker:text-sm marker:text-graphite">
+            <ol className="list-[decimal-leading-zero] pl-10 marker:font-mono marker:text-sm marker:text-sh-muted">
               {agenda.map(([t, d], i) => (
                 <li key={t} className="relative py-5">
                   <span
                     aria-hidden
-                    className="absolute -left-10 right-0 bottom-0 h-px origin-left bg-rule motion-safe:animate-draw-x"
+                    className="absolute -left-10 right-0 bottom-0 h-px origin-left bg-sh-border motion-safe:animate-draw-x"
                     style={{ animationDelay: `${180 + i * 160}ms` }}
                   />
                   <span className="block font-semibold">{t}</span>
-                  <span className="mt-1 block text-graphite">{d}</span>
+                  <span className="mt-1 block text-sh-muted">{d}</span>
                 </li>
               ))}
             </ol>
@@ -50,14 +50,14 @@ export default function DemoPage() {
 
         <aside
           aria-labelledby="book-title"
-          className="h-fit rounded-md border border-rule bg-ledger p-6 sm:p-8 lg:sticky lg:top-24"
+          className="h-fit rounded-md border border-sh-border bg-sh-bg-subtle p-6 sm:p-8 lg:sticky lg:top-24"
         >
-          <CalendarBlank size={28} className="text-seal" aria-hidden />
+          <CalendarBlank size={28} className="text-sh-accent" aria-hidden />
           <h2 id="book-title" className="mt-4 text-2xl">
             Pick a time
           </h2>
           {/* TODO(team): replace with an embedded Cal.com scheduler once site.bookingUrl points to Cal.com. */}
-          <p className="mt-3 text-graphite">
+          <p className="mt-3 text-sh-muted">
             {site.bookingIsMailto
               ? "Send us a short note with your company and a couple of times that suit. We'll reply within one working day."
               : "Choose a slot that suits you. You'll get a calendar invite straight away."}

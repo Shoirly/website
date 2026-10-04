@@ -76,7 +76,7 @@ export default function ProductPage() {
         <h2 id="architecture-title" className="max-w-[24ch] text-3xl">
           How the pieces fit
         </h2>
-        <p className="mt-4 max-w-[60ch] text-lg text-graphite">
+        <p className="mt-4 max-w-[60ch] text-lg text-sh-muted">
           Shoirly is designed to run where your agent runs. Raw data stays in your environment. Only proof leaves.
         </p>
         <div className="mt-10">
@@ -90,11 +90,11 @@ export default function ProductPage() {
             <h2 id="pack-title" className="text-3xl">
               What a pack contains
             </h2>
-            <p className="mt-4 max-w-[42ch] text-lg text-graphite">
+            <p className="mt-4 max-w-[42ch] text-lg text-sh-muted">
               One pack per customer, per period. A risk team sees what was covered, whether every signature verifies,
               whether anything went unrecorded, and which control areas it supports, for example DORA for EU banks.
             </p>
-            <p className="mt-6 text-sm text-graphite">The example on this page uses illustrative data.</p>
+            <p className="mt-6 text-sm text-sh-muted">The example on this page uses illustrative data.</p>
           </div>
           <PackCard />
         </div>
@@ -106,15 +106,15 @@ export default function ProductPage() {
             <h2 id="record-title" className="text-3xl">
               What&apos;s in a record
             </h2>
-            <p className="mt-4 max-w-[40ch] text-lg text-graphite">
+            <p className="mt-4 max-w-[40ch] text-lg text-sh-muted">
               Every action becomes one record with the same six fields, so a risk team reads them the same way every time.
             </p>
           </div>
           <dl className="grid grid-cols-1 gap-x-10 gap-y-7 sm:grid-cols-2">
             {recordFields.map(([k, v]) => (
-              <div key={k} className="border-t border-ink pt-4">
+              <div key={k} className="border-t border-sh-text pt-4">
                 <dt className="font-semibold">{k}</dt>
-                <dd className="mt-1.5 text-graphite">{v}</dd>
+                <dd className="mt-1.5 text-sh-muted">{v}</dd>
               </div>
             ))}
           </dl>
@@ -125,15 +125,15 @@ export default function ProductPage() {
         <h2 id="scope-title" className="max-w-[22ch] text-3xl">
           Where Shoirly fits, and where it doesn&apos;t
         </h2>
-        <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-0 md:divide-x md:divide-rule">
+        <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-0 md:divide-x md:divide-sh-border">
           {notThis.map((n, i) => (
             <div key={n.title} className={i === 0 ? "md:pr-8" : i === 1 ? "md:px-8" : "md:pl-8"}>
               <h3 className="text-xl">{n.title}</h3>
-              <p className="mt-3 text-graphite">{n.body}</p>
+              <p className="mt-3 text-sh-muted">{n.body}</p>
             </div>
           ))}
         </div>
-        <p className="mt-12 text-graphite">
+        <p className="mt-12 text-sh-muted">
           For example, if you sell to EU banks or insurers,{" "}
           <Link href="/dora" className="link">
             read our plain-English guide to DORA

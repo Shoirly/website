@@ -10,13 +10,13 @@ export function ClosingCta({
   body?: string;
 }) {
   return (
-    <section aria-labelledby="closing-cta" className="border-t border-rule py-16 md:py-24">
+    <section aria-labelledby="closing-cta" className="border-t border-sh-border py-16 md:py-24">
       <Container className="grid grid-cols-1 items-end gap-8 md:grid-cols-[1fr_auto]">
         <div>
           <h2 id="closing-cta" className="max-w-[22ch] text-3xl">
             {title}
           </h2>
-          <p className="mt-4 max-w-[52ch] text-lg text-graphite">{body}</p>
+          <p className="mt-4 max-w-[52ch] text-lg text-sh-muted">{body}</p>
         </div>
         <ButtonLink href="/demo" size="lg">
           Book a demo

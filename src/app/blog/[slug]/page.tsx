@@ -71,15 +71,15 @@ export default async function PostPage({ params }: Props) {
               All posts
             </Link>
             {post.draft ? (
-              <p className="mt-6 rounded-md border border-fault/40 bg-fault/5 px-4 py-3 text-sm text-fault">
+              <p className="mt-6 rounded-md border border-sh-danger/40 bg-sh-danger/5 px-4 py-3 text-sm text-sh-danger">
                 Editorial draft. Only available in local development, never in production, RSS or search listings.
               </p>
             ) : null}
             <header>
-              <p className="mt-8 text-sm font-semibold text-seal-deep">{post.topic}</p>
+              <p className="mt-8 text-sm font-semibold text-sh-accent-text">{post.topic}</p>
               <h1 className="mt-4 text-4xl">{post.title}</h1>
-              <p className="mt-5 text-lg text-graphite">{post.description}</p>
-              <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 border-b border-rule pb-8 text-sm text-graphite">
+              <p className="mt-5 text-lg text-sh-muted">{post.description}</p>
+              <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 border-b border-sh-border pb-8 text-sm text-sh-muted">
                 <time dateTime={post.date}>{formatDate(post.date)}</time>
                 <span>{await readingTime(post.slug)}</span>
                 <span>{post.author}</span>
@@ -88,10 +88,10 @@ export default async function PostPage({ params }: Props) {
             <div className={`${styles.body} mt-10`}>
               <Body components={articleComponents} />
             </div>
-            <aside aria-label="About the author" className="mt-12 border-y border-rule py-8">
-              <p className="text-sm text-graphite">Written by</p>
+            <aside aria-label="About the author" className="mt-12 border-y border-sh-border py-8">
+              <p className="text-sm text-sh-muted">Written by</p>
               <h2 className="mt-2 text-xl">{post.author}</h2>
-              <p className="mt-3 text-graphite">{post.authorBio}</p>
+              <p className="mt-3 text-sh-muted">{post.authorBio}</p>
               <Link href="/about" className="link mt-4 inline-block text-sm">Meet the team</Link>
             </aside>
             {related.length ? (

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { CheckCircle, SealCheck, ShieldCheck, User } from "@phosphor-icons/react";
-import { Spotlight } from "@/components/fx/Spotlight";
 import { Section } from "@/components/ui/Layout";
 import { sampleActions } from "@/content/sample";
 
@@ -40,7 +39,7 @@ const mapping = [
 
 function regionClass(active: Region | null, id: Region) {
   return `rounded-[5px] transition-[box-shadow,background-color] duration-200 ${
-    active === id ? "bg-seal-wash/50 shadow-[0_0_0_2px_var(--color-seal)]" : "shadow-[0_0_0_0_transparent]"
+    active === id ? "bg-sh-accent-soft/50 shadow-[0_0_0_2px_var(--color-sh-accent)]" : "shadow-[0_0_0_0_transparent]"
   }`;
 }
 
@@ -52,24 +51,24 @@ export function EvidencePreview() {
       <h2 id="evidence-title" className="max-w-[22ch] text-3xl">
         What the evidence looks like
       </h2>
-      <p className="mt-4 max-w-[54ch] text-lg text-graphite">
+      <p className="mt-4 max-w-[54ch] text-lg text-sh-muted">
         A pack your customer&apos;s risk team can read in minutes, with any gaps already counted.
       </p>
 
       <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-14">
-        <Spotlight className="rounded-md">
+        <div>
           <article
             aria-label="Sample evidence pack"
-            className="relative rounded-md border border-rule bg-paper p-5 shadow-paper sm:p-8"
+            className="relative rounded-md border border-sh-border bg-sh-bg p-5 shadow-paper sm:p-8"
           >
             {/* Header */}
             <div className={`-m-2 p-2 ${regionClass(active, "header")}`}>
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
-                  <p className="font-mono text-xs text-graphite">Evidence pack, sample data</p>
+                  <p className="font-mono text-xs text-sh-muted">Evidence pack, sample data</p>
                   <h3 className="mt-1 text-xl">Sample customer</h3>
                 </div>
-                <span className="inline-flex items-center gap-1.5 rounded-sm bg-seal-wash px-2 py-1 text-xs font-medium text-seal-deep">
+                <span className="inline-flex items-center gap-1.5 rounded-sm bg-sh-accent-soft px-2 py-1 text-xs font-medium text-sh-accent-text">
                   <SealCheck size={15} weight="fill" aria-hidden /> All records verify
                 </span>
               </div>
@@ -81,8 +80,8 @@ export function EvidencePreview() {
                   ["Pack ID", "ep_7f21c9"],
                 ].map(([k, v]) => (
                   <div key={k}>
-                    <dt className="text-graphite">{k}</dt>
-                    <dd className="mt-0.5 font-mono text-ink">{v}</dd>
+                    <dt className="text-sh-muted">{k}</dt>
+                    <dd className="mt-0.5 font-mono text-sh-text">{v}</dd>
                   </div>
                 ))}
               </dl>
@@ -90,14 +89,14 @@ export function EvidencePreview() {
 
             {/* Coverage */}
             <div className={`mt-7 -mx-2 p-2 ${regionClass(active, "coverage")}`}>
-              <dl className="grid grid-cols-3 gap-4 border-y border-rule py-4">
+              <dl className="grid grid-cols-3 gap-4 border-y border-sh-border py-4">
                 {[
                   ["Attempted", "1,284"],
                   ["Signed", "1,284"],
                   ["Unrecorded", "0"],
                 ].map(([k, v]) => (
                   <div key={k}>
-                    <dt className="text-xs text-graphite">{k}</dt>
+                    <dt className="text-xs text-sh-muted">{k}</dt>
                     <dd className="mt-1 font-mono text-lg font-medium tabular sm:text-xl">{v}</dd>
                   </div>
                 ))}
@@ -107,12 +106,12 @@ export function EvidencePreview() {
             {/* Records */}
             <div className={`mt-6 -mx-2 p-2 ${regionClass(active, "approval")}`}>
               <p className="text-xs font-semibold">Records (4 of 1,284 shown)</p>
-              <ul className="mt-3 divide-y divide-rule">
+              <ul className="mt-3 divide-y divide-sh-border">
                 {sampleActions.slice(0, 4).map((a) => (
                   <li key={a.id} className="grid grid-cols-1 gap-x-4 gap-y-1 py-2.5 text-xs sm:grid-cols-[4.5rem_1fr_minmax(0,13rem)_auto] sm:items-center">
-                    <span className="font-mono text-graphite">{a.time}</span>
-                    <span className="truncate font-mono text-ink">{a.action}</span>
-                    <span className="flex min-w-0 items-center gap-1.5 text-graphite">
+                    <span className="font-mono text-sh-muted">{a.time}</span>
+                    <span className="truncate font-mono text-sh-text">{a.action}</span>
+                    <span className="flex min-w-0 items-center gap-1.5 text-sh-muted">
                       {a.approverKind === "person" ? (
                         <User size={13} aria-hidden className="shrink-0" />
                       ) : (
@@ -120,9 +119,9 @@ export function EvidencePreview() {
                       )}
                       <span className="truncate">{a.approver}</span>
                     </span>
-                    <span className="flex items-center gap-1 font-mono text-graphite">
+                    <span className="flex items-center gap-1 font-mono text-sh-muted">
                       {a.signature.slice(0, 6)}
-                      <CheckCircle size={13} weight="fill" className="text-seal" aria-label="verified" />
+                      <CheckCircle size={13} weight="fill" className="text-sh-accent" aria-label="verified" />
                     </span>
                   </li>
                 ))}
@@ -135,16 +134,16 @@ export function EvidencePreview() {
               <dl className="mt-3 space-y-3">
                 {mapping.map((d) => (
                   <div key={d.area} className="grid grid-cols-1 gap-x-4 gap-y-0.5 text-xs sm:grid-cols-[15rem_1fr]">
-                    <dt className="text-ink">
-                      {d.area} <span className="whitespace-nowrap font-mono text-graphite">{d.ref}</span>
+                    <dt className="text-sh-text">
+                      {d.area} <span className="whitespace-nowrap font-mono text-sh-muted">{d.ref}</span>
                     </dt>
-                    <dd className="text-graphite">{d.what}</dd>
+                    <dd className="text-sh-muted">{d.what}</dd>
                   </div>
                 ))}
               </dl>
             </div>
           </article>
-        </Spotlight>
+        </div>
 
         <ul className="grid grid-cols-1 content-start gap-2 sm:grid-cols-2 lg:grid-cols-1" aria-label="What to look for">
           {notes.map((n) => (
@@ -158,17 +157,17 @@ export function EvidencePreview() {
                 onBlur={() => setActive(null)}
                 onClick={() => setActive((v) => (v === n.id ? null : n.id))}
                 className={`w-full rounded-md border px-4 py-3.5 text-left transition-[background-color,border-color,transform] duration-150 active:scale-[0.98] ${
-                  active === n.id ? "border-seal bg-paper" : "border-transparent hover:bg-paper/60"
+                  active === n.id ? "border-sh-accent bg-sh-bg" : "border-transparent hover:bg-sh-bg/60"
                 }`}
               >
                 <span className="block font-semibold">{n.title}</span>
-                <span className="mt-1 block text-sm text-graphite">{n.body}</span>
+                <span className="mt-1 block text-sm text-sh-muted">{n.body}</span>
               </button>
             </li>
           ))}
         </ul>
       </div>
-      <p className="mt-8 max-w-[70ch] text-xs text-graphite">
+      <p className="mt-8 max-w-[70ch] text-xs text-sh-muted">
         Sample pack. Names, figures and the mapping are illustrative.
         {/* TODO(team): have the DORA references reviewed before launch. */}
       </p>

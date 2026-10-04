@@ -89,7 +89,7 @@ export function StatusMark({
       style={{ "--sm-stroke": strokeWidth } as CSSProperties}
     >
       <svg
-        className="overflow-visible text-rule-strong transition-colors duration-200 group-data-[status=done]:text-seal group-data-[status=running]:text-seal"
+        className="overflow-visible text-sh-border-strong transition-colors duration-200 group-data-[status=done]:text-sh-accent group-data-[status=running]:text-sh-accent"
         viewBox="0 0 24 24"
         width={size}
         height={size}

@@ -82,8 +82,8 @@ function SolutionsMenu({ pathname }: { pathname: string }) {
           }
           setOpen((v) => !v);
         }}
-        className={`inline-flex h-10 items-center gap-1 rounded-md px-3 text-sm transition-colors duration-150 hover:text-ink ${
-          active ? "text-ink" : "text-graphite"
+        className={`inline-flex h-10 items-center gap-1 rounded-md px-3 text-sm transition-colors duration-150 hover:text-sh-text ${
+          active ? "text-sh-text" : "text-sh-muted"
         }`}
       >
         {item.label}
@@ -104,16 +104,16 @@ function SolutionsMenu({ pathname }: { pathname: string }) {
             transition={{ duration: 0.18, ease }}
             className="absolute left-1/2 top-full w-[372px] -translate-x-1/2 pt-2"
           >
-            <ul className="rounded-md border border-rule bg-paper p-1.5 shadow-paper">
+            <ul className="rounded-md border border-sh-border bg-sh-bg p-1.5 shadow-paper">
               {item.children.map((child) => (
                 <li key={child.href}>
                   <Link
                     href={child.href}
                     onClick={() => setOpen(false)}
-                    className="block rounded-[5px] px-3 py-2.5 transition-colors duration-150 hover:bg-ledger"
+                    className="block rounded-[5px] px-3 py-2.5 transition-colors duration-150 hover:bg-sh-bg-subtle"
                   >
-                    <span className="block text-sm font-medium text-ink">{child.label}</span>
-                    <span className="mt-0.5 block text-xs text-graphite">{child.description}</span>
+                    <span className="block text-sm font-medium text-sh-text">{child.label}</span>
+                    <span className="mt-0.5 block text-xs text-sh-muted">{child.description}</span>
                   </Link>
                 </li>
               ))}
@@ -159,10 +159,10 @@ function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose: () =>
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: reduce ? 0 : 0.15 } }}
           transition={{ duration: 0.2, ease }}
-          className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-paper lg:hidden"
+          className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-sh-bg lg:hidden"
         >
           <nav aria-label="Mobile" className="px-4 pb-10 pt-4 min-[400px]:px-6">
-            <ul className="divide-y divide-rule border-b border-rule">
+            <ul className="divide-y divide-sh-border border-b border-sh-border">
               {links.map((l, i) => (
                 <motion.li
                   key={l.href}
@@ -174,14 +174,14 @@ function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose: () =>
                     href={l.href}
                     onClick={onClose}
                     aria-current={isActive(pathname, l.href) ? "page" : undefined}
-                    className="flex min-h-14 items-center text-xl font-medium text-ink aria-[current=page]:text-seal-deep"
+                    className="flex min-h-14 items-center text-xl font-medium text-sh-text aria-[current=page]:text-sh-accent-text"
                   >
                     {l.label}
                   </Link>
                 </motion.li>
               ))}
             </ul>
-            <p className="mt-8 text-sm text-graphite">
+            <p className="mt-8 text-sm text-sh-muted">
               Questions?{" "}
               <a className="link inline-flex min-h-11 items-center" href={`mailto:${site.email}`}>
                 {site.email}
@@ -204,7 +204,7 @@ function NavMarks({ hovered, active }: { hovered: boolean; active: boolean }) {
         <motion.span
           layoutId="nav-hover"
           aria-hidden
-          className="absolute inset-0 rounded-md bg-ink-soft"
+          className="absolute inset-0 rounded-md bg-sh-ink-soft"
           transition={pillSpring}
         />
       ) : null}
@@ -212,7 +212,7 @@ function NavMarks({ hovered, active }: { hovered: boolean; active: boolean }) {
         <motion.span
           layoutId="nav-active"
           aria-hidden
-          className="absolute inset-x-3 -bottom-[13px] h-0.5 rounded-full bg-seal"
+          className="absolute inset-x-3 -bottom-[13px] h-0.5 rounded-full bg-sh-accent"
           transition={pillSpring}
         />
       ) : null}
@@ -247,7 +247,7 @@ export function SiteHeader() {
     <>
       <a
         href="#main"
-        className="sr-only z-[60] rounded-md bg-ink px-4 py-3 text-sm text-paper focus:not-sr-only focus:fixed focus:left-4 focus:top-2"
+        className="sr-only z-[60] rounded-md bg-sh-text px-4 py-3 text-sm text-sh-bg focus:not-sr-only focus:fixed focus:left-4 focus:top-2"
       >
         Skip to content
       </a>
@@ -257,8 +257,8 @@ export function SiteHeader() {
         style={{ viewTransitionName: "site-header" }}
         className={`sticky top-0 z-50 border-b transition-[border-color,background-color,box-shadow] duration-300 ease-out ${
           scrolled || menuOpen
-            ? "border-rule/80 bg-paper/75 shadow-[0_8px_24px_-18px_rgb(15_27_23/0.35)] backdrop-blur-xl backdrop-saturate-150 supports-[not(backdrop-filter:blur(1px))]:bg-paper"
-            : "border-transparent bg-paper"
+            ? "border-sh-border bg-sh-bg"
+            : "border-transparent bg-sh-bg"
         }`}
       >
         <div className="mx-auto flex h-16 w-full max-w-[1200px] items-center justify-between gap-6 px-4 min-[400px]:px-6">
@@ -295,7 +295,7 @@ export function SiteHeader() {
                     <Link
                       href={item.href}
                       aria-current={isActive(pathname, item.href) ? "page" : undefined}
-                      className="relative inline-flex h-10 items-center rounded-md px-3 text-sm text-graphite transition-colors duration-150 hover:text-ink aria-[current=page]:text-ink"
+                      className="relative inline-flex h-10 items-center rounded-md px-3 text-sm text-sh-muted transition-colors duration-150 hover:text-sh-text aria-[current=page]:text-sh-text"
                     >
                       {item.label}
                     </Link>
@@ -311,7 +311,7 @@ export function SiteHeader() {
             </ButtonLink>
             <button
               type="button"
-              className="inline-flex size-11 items-center justify-center rounded-md text-ink hover:bg-ink-soft lg:hidden"
+              className="inline-flex size-11 items-center justify-center rounded-md text-sh-text hover:bg-sh-ink-soft lg:hidden"
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
               aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -324,14 +324,14 @@ export function SiteHeader() {
         {/* Reading progress along the bottom edge */}
         <motion.span
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 -bottom-px h-0.5 origin-left bg-seal/70"
+          className="pointer-events-none absolute inset-x-0 -bottom-px h-0.5 origin-left bg-sh-accent/70"
           style={{ scaleX: scrollYProgress }}
         />
         {/* A sweep across the bottom edge on every page change */}
         <motion.span
           key={pathname}
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 -bottom-px h-0.5 origin-left bg-seal"
+          className="pointer-events-none absolute inset-x-0 -bottom-px h-0.5 origin-left bg-sh-accent"
           initial={navCount === 0 ? false : { scaleX: 0, opacity: 1 }}
           animate={{ scaleX: 1, opacity: 0 }}
           transition={{ scaleX: { duration: 0.45, ease }, opacity: { duration: 0.25, delay: 0.4 } }}

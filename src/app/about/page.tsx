@@ -59,7 +59,7 @@ export default function AboutPage() {
           <h2 id="why-title" className="text-3xl">
             Why we&apos;re building this
           </h2>
-          <div className="space-y-5 text-lg text-graphite">
+          <div className="space-y-5 text-lg text-sh-muted">
             <p>
               AI agents are starting to act inside regulated businesses: refunding, reviewing, updating, escalating.
               Those businesses are willing to give agents more autonomy, but only inside defined limits, and only with
@@ -70,7 +70,7 @@ export default function AboutPage() {
               says. Neither shows what the agent did on a given day, for a given customer. So security reviews drag on,
               and good products wait.
             </p>
-            <p className="text-ink">
+            <p className="text-sh-text">
               We think the fix is simple to describe: sign every action, link it to who authorised it, show whether
               anything is missing, and hand the buyer evidence it can check for itself.
             </p>
@@ -83,7 +83,7 @@ export default function AboutPage() {
         <h2 id="team-title" className="text-3xl">
           The team
         </h2>
-        <p className="mt-4 max-w-[56ch] text-lg text-graphite">Four founders, based in Dublin.</p>
+        <p className="mt-4 max-w-[56ch] text-lg text-sh-muted">Four founders, based in Dublin.</p>
         <ul className="mt-10 grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-2 md:gap-y-14">
           {team.map((p) => (
             <li key={p.name} className="grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-5 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:gap-6">
@@ -94,21 +94,21 @@ export default function AboutPage() {
                   width={340}
                   height={425}
                   sizes="(min-width: 640px) 136px, 104px"
-                  className="aspect-[4/5] w-full rounded-md border border-rule object-cover"
+                  className="aspect-[4/5] w-full rounded-md border border-sh-border object-cover"
                 />
               ) : (
                 <div
-                  className="flex aspect-[4/5] items-end rounded-md border border-dashed border-rule-strong/70 bg-paper p-3"
+                  className="flex aspect-[4/5] items-end rounded-md border border-dashed border-sh-border-strong/70 bg-sh-bg p-3"
                   role="img"
                   aria-label={`Photo of ${p.name} to come`}
                 >
-                  <span className="font-mono text-[11px] text-graphite">Photo to come</span>
+                  <span className="font-mono text-[11px] text-sh-muted">Photo to come</span>
                 </div>
               )}
               <div>
                 <h3 className="text-xl">{p.name}</h3>
-                <p className="mt-0.5 text-sm font-medium text-seal-deep">{p.role}</p>
-                <p className="mt-3 text-graphite">{p.bio}</p>
+                <p className="mt-0.5 text-sm font-medium text-sh-accent-text">{p.role}</p>
+                <p className="mt-3 text-sh-muted">{p.bio}</p>
               </div>
             </li>
           ))}
@@ -121,7 +121,7 @@ export default function AboutPage() {
           <h2 id="where-title" className="text-3xl">
             Made in Dublin
           </h2>
-          <div className="space-y-5 text-lg text-graphite">
+          <div className="space-y-5 text-lg text-sh-muted">
             <p>
               Dublin sits close to the regulated businesses we&apos;re starting with, banks, insurers and payment firms,
               and to the EU supervisors whose rules shape what they need.
