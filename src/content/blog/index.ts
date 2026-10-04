@@ -28,7 +28,7 @@ export const posts: PostMeta[] = [
     date: "2026-10-02",
     // TODO(team): set the real author before publishing.
     author: "The Shoirly team",
-    authorBio: "A four-person founding team in Dublin, building action-level evidence for AI agent vendors selling into financial services.",
+    authorBio: "A four-person founding team in Dublin, building action-level evidence for AI agent companies selling to regulated buyers, starting with financial services.",
     topic: "DORA",
     featured: true,
     draft: true,

@@ -472,3 +472,10 @@ Feedback: the first sweep didn't fix every page. It had deliberately left /solut
 - Code identifiers and URLs (`/solutions/banks`, `id: "banks"`).
 
 **CLAUDE.md:** the finance-specific carve-out is now /dora and finance blog posts only; added "about one finance example per page" and "sample data stays industry-neutral"; the site-map line for /solutions/banks, the nav and footer description, and the hero sample-action concept all match.
+
+## Merged the three open PRs (4 Oct 2026)
+
+- Merged hoplite/dora-about-responsive, hoplite/security-evidence and blog/polish-and-dora-draft into v0-site with merge commits. All three had already merged v0-site into themselves and resolved their own conflicts, so none conflicted.
+- Checked after merging: About only shows the team when every founder has a bio and photo, and all four do. The security rewrite stays honest (roadmap as "we plan to", unconfirmed details marked as not yet published). Blog tests pass (3 of 3). Type-check, lint and build are clean, every route returns 200, there is no mobile overflow and there are no console errors.
+- Behaviour change from the blog PR: drafts now 404 in production rather than rendering with a draft banner, so the DORA post is not reachable on the live site until it is published.
+- Wording fix after merging: the blog author bio said "for AI agent vendors selling into financial services"; it now says "for AI agent companies selling to regulated buyers, starting with financial services".
