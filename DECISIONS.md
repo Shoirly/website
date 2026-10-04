@@ -422,3 +422,11 @@ Rule now in CLAUDE.md: default wording is "your customers", "regulated buyers" o
 - /terms "including our DORA guide": it names that page.
 - URLs, code identifiers and comments that refer to the finance pages (`/solutions/banks`, `id: "banks"`, `dora` variables), and the DORA mapping TODOs, which are about the sample's DORA example.
 - The hero trail's sample actions (a refund, a KYC file read, a credit-limit change). They're the hero section's single finance example, labelled "Sample data".
+
+## About: real founder bios (4 Oct 2026)
+
+- Added the four founders' names, roles and bios exactly as supplied. They are biographical facts, so the "finance only as an example" wording rule doesn't apply to them.
+- The bios run 40 to 50 words, so the team section is now a 2x2 grid (one column on phones), each founder a row with a 4:5 portrait beside name, role and bio, instead of four narrow columns. Names are `h3` under the section's `h2`.
+- Each founder has an optional `photo` (a file in `public/team/`, shown through `next/image`). Until it's set, a labelled "Photo to come" placeholder shows.
+- Liam's surname was given as "[Surname]", so the page shows "Liam" with a TODO(team) until it's confirmed.
+- Hoplite's open "DORA/About responsive" PR sets `showTeam = false` "until all four founders have real bios and photos". When that PR is merged, the team section should stay visible (or flip to true once the photos are in).
