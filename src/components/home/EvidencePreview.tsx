@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle, SealCheck, ShieldCheck, User } from "@phosphor-icons/react";
+import { TickGlyph } from "@/components/brand/CroppedMark";
 import { Section } from "@/components/ui/Layout";
 import { sampleActions } from "@/content/sample";
 
@@ -38,8 +38,8 @@ const mapping = [
 ];
 
 function regionClass(active: Region | null, id: Region) {
-  return `rounded-[5px] transition-[box-shadow,background-color] duration-200 ${
-    active === id ? "bg-sh-accent-soft/50 shadow-[0_0_0_2px_var(--color-sh-accent)]" : "shadow-[0_0_0_0_transparent]"
+  return `rounded-sm outline-2 transition-[outline-color,background-color] duration-[var(--sh-dur-fast)] ${
+    active === id ? "bg-sh-accent-soft outline-sh-accent" : "outline-transparent"
   }`;
 }
 
@@ -47,7 +47,7 @@ export function EvidencePreview() {
   const [active, setActive] = useState<Region | null>(null);
 
   return (
-    <Section tone="ledger" labelledBy="evidence-title">
+    <Section tone="ink" labelledBy="evidence-title">
       <h2 id="evidence-title" className="max-w-[22ch] text-3xl">
         What the evidence looks like
       </h2>
@@ -56,10 +56,10 @@ export function EvidencePreview() {
       </p>
 
       <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-14">
-        <div>
+        <div className="brackets">
           <article
             aria-label="Sample evidence pack"
-            className="relative rounded-md border border-sh-border bg-sh-bg p-5 shadow-paper sm:p-8"
+            className="relative rounded-md border border-sh-border bg-sh-surface p-5 sm:p-8"
           >
             {/* Header */}
             <div className={`-m-2 p-2 ${regionClass(active, "header")}`}>
@@ -69,7 +69,7 @@ export function EvidencePreview() {
                   <h3 className="mt-1 text-xl">Sample customer</h3>
                 </div>
                 <span className="inline-flex items-center gap-1.5 rounded-sm bg-sh-accent-soft px-2 py-1 text-xs font-medium text-sh-accent-text">
-                  <SealCheck size={15} weight="fill" aria-hidden /> All records verify
+                  <TickGlyph className="size-3.5" /> All records verify
                 </span>
               </div>
               <dl className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 text-xs sm:grid-cols-4">
@@ -111,17 +111,10 @@ export function EvidencePreview() {
                   <li key={a.id} className="grid grid-cols-1 gap-x-4 gap-y-1 py-2.5 text-xs sm:grid-cols-[4.5rem_1fr_minmax(0,13rem)_auto] sm:items-center">
                     <span className="font-mono text-sh-muted">{a.time}</span>
                     <span className="truncate font-mono text-sh-text">{a.action}</span>
-                    <span className="flex min-w-0 items-center gap-1.5 text-sh-muted">
-                      {a.approverKind === "person" ? (
-                        <User size={13} aria-hidden className="shrink-0" />
-                      ) : (
-                        <ShieldCheck size={13} aria-hidden className="shrink-0" />
-                      )}
-                      <span className="truncate">{a.approver}</span>
-                    </span>
+                    <span className="truncate text-sh-muted">{a.approver}</span>
                     <span className="flex items-center gap-1 font-mono text-sh-muted">
                       {a.signature.slice(0, 6)}
-                      <CheckCircle size={13} weight="fill" className="text-sh-accent" aria-label="verified" />
+                      <TickGlyph className="size-3 text-sh-accent-text" label="verified" />
                     </span>
                   </li>
                 ))}
@@ -156,8 +149,8 @@ export function EvidencePreview() {
                 onFocus={() => setActive(n.id)}
                 onBlur={() => setActive(null)}
                 onClick={() => setActive((v) => (v === n.id ? null : n.id))}
-                className={`w-full rounded-md border px-4 py-3.5 text-left transition-[background-color,border-color,transform] duration-150 active:scale-[0.98] ${
-                  active === n.id ? "border-sh-accent bg-sh-bg" : "border-transparent hover:bg-sh-bg/60"
+                className={`w-full rounded-md border px-4 py-3.5 text-left transition-[background-color,border-color] duration-[var(--sh-dur-fast)] ${
+                  active === n.id ? "border-sh-accent bg-sh-surface" : "border-transparent hover:bg-sh-surface"
                 }`}
               >
                 <span className="block font-semibold">{n.title}</span>

@@ -137,7 +137,6 @@
   letter-spacing: var(--sh-tracking-label);
   line-height: 1.4;
   color: var(--sh-accent-text);
-  text-transform: lowercase;
 }
 
 /* Signature panel shape: one clipped corner, top-right (BRAND.md section 6). */

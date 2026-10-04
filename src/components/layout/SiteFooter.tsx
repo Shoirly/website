@@ -6,7 +6,7 @@ import { site } from "@/config/site";
 export function SiteFooter() {
   const year = new Date().getFullYear();
   return (
-    <footer className="sh-dark">
+    <footer className="sh-dark border-t border-sh-border">
       <Container className="py-14 md:py-16">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.3fr_2fr]">
           <div>

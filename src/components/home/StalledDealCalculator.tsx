@@ -3,7 +3,7 @@ import { Section } from "@/components/ui/Layout";
 
 export function StalledDealCalculator() {
   return (
-    <Section labelledBy="calc-title" className="border-t border-sh-border">
+    <Section tone="ledger" labelledBy="calc-title">
       <h2 id="calc-title" className="max-w-[22ch] text-3xl">
         What a stalled deal costs you
       </h2>

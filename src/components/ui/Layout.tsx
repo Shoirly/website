@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
 
 export function Container({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`mx-auto w-full max-w-[1200px] px-4 min-[400px]:px-6 ${className}`}>{children}</div>;
+  return <div className={`mx-auto w-full max-w-[var(--sh-container)] px-[var(--sh-gutter)] ${className}`}>{children}</div>;
 }
 
 type SectionProps = {
   children: ReactNode;
   className?: string;
-  tone?: "paper" | "ledger";
+  tone?: "paper" | "ledger" | "ink";
   id?: string;
   labelledBy?: string;
 };
@@ -17,7 +17,7 @@ export function Section({ children, className = "", tone = "paper", id, labelled
     <section
       id={id}
       aria-labelledby={labelledBy}
-      className={`py-16 md:py-24 ${tone === "ledger" ? "bg-sh-bg-subtle" : ""} ${className}`}
+      className={`py-[var(--sh-section-y)] ${tone === "ledger" ? "bg-sh-bg-subtle" : tone === "ink" ? "sh-dark" : ""} ${className}`}
     >
       <Container>{children}</Container>
     </section>

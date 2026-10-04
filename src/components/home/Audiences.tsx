@@ -4,7 +4,7 @@ import { Section } from "@/components/ui/Layout";
 const columns = [
   {
     id: "vendors",
-    who: "For AI agent vendors",
+    who: "for AI agent companies",
     title: "Get through security review faster",
     points: [
       "Answer \"what did your agent do?\" with records, not reassurances.",
@@ -16,7 +16,7 @@ const columns = [
   },
   {
     id: "banks",
-    who: "For risk teams at regulated buyers",
+    who: "for risk teams at regulated buyers",
     title: "Evidence of what happened, not reassurance",
     points: [
       "See each action your vendor's agent took for your customers, and who approved it.",
@@ -44,12 +44,12 @@ export function Audiences() {
                 : "border-t border-sh-border pt-12 md:border-l md:border-t-0 md:pl-12 md:pt-0 lg:pl-16"
             }
           >
-            <p className="text-sm font-medium text-sh-accent-text">{c.who}</p>
+            <p className="label">{c.who}</p>
             <h3 className="mt-3 max-w-[20ch] text-2xl">{c.title}</h3>
             <ul className="mt-6 space-y-3">
               {c.points.map((p) => (
-                <li key={p} className="grid grid-cols-[1rem_1fr] gap-3 text-sh-muted">
-                  <span aria-hidden className="mt-[0.7em] h-px w-3 bg-sh-border-strong" />
+                <li key={p} className="flex gap-3 text-sh-muted">
+                  <span aria-hidden className="square-bullet mt-[0.6em]" />
                   {p}
                 </li>
               ))}

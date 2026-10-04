@@ -4,9 +4,9 @@ import { Section } from "@/components/ui/Layout";
 export function Problem() {
   return (
     <Section tone="ledger" labelledBy="problem-title">
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
         <div>
-          <h2 id="problem-title" className="max-w-[24ch] text-2xl lg:text-[2.5rem] lg:leading-[1.1]">
+          <h2 id="problem-title" className="max-w-[24ch] text-3xl">
             Your customers want to let your agent do more. Their risk team needs proof it stayed inside the lines.
           </h2>
           <p className="mt-6 max-w-[44ch] text-lg text-sh-muted">
