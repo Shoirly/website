@@ -24,7 +24,7 @@ export const sampleActions: SampleAction[] = [
   {
     id: "a2",
     time: "09:41:12",
-    action: "Read KYC file, customer #4471",
+    action: "Read account history, customer #4471",
     approver: "Case owner R. Kavanagh",
     approverKind: "person",
     signature: "4be20d9a17f6",
@@ -32,15 +32,15 @@ export const sampleActions: SampleAction[] = [
   {
     id: "a3",
     time: "09:42:30",
-    action: "Update credit limit to €3,000",
-    approver: "Credit officer S. Okafor",
+    action: "Upgrade account to Business plan",
+    approver: "Account manager S. Okafor",
     approverKind: "person",
     signature: "c71e58b3a0d2",
   },
   {
     id: "a4",
     time: "09:42:31",
-    action: "Send arrears notice by email",
+    action: "Send renewal notice by email",
     approver: "Customer comms policy v7",
     approverKind: "policy",
     signature: "08d4f2e96c1b",
@@ -48,15 +48,17 @@ export const sampleActions: SampleAction[] = [
   {
     id: "a5",
     time: "09:43:02",
-    action: "Flag transaction #88213 for review",
-    approver: "Fraud rules v12",
+    action: "Escalate case #88213 for review",
+    approver: "Escalation rules v12",
     approverKind: "policy",
     signature: "e5a9037bd84c",
   },
 ];
 
 /**
- * DORA areas the sample pack is tagged with. Indicative only.
- * TODO(team): have the DORA mapping reviewed by someone qualified before launch.
+ * Framework-neutral control areas the sample pack is tagged with. Where a
+ * specific framework is shown, DORA is the example (see EvidencePreview and
+ * PackCard). Indicative only.
+ * TODO(team): have the DORA references reviewed by someone qualified before launch.
  */
-export const samplePackDora = ["ICT third-party risk", "ICT risk management", "Incident management"];
+export const samplePackControls = ["Third-party oversight", "Access and authorisation", "Incident response"];

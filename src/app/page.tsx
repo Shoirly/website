@@ -31,7 +31,7 @@ const steps: StoryStep[] = [
   },
   {
     title: "Share a per-customer evidence pack, mapped to their controls",
-    body: "Each customer gets a pack about its own accounts, organised by the controls its risk team checks (for example, DORA areas for EU banks). Share it through Vanta or your trust centre.",
+    body: "Each customer gets a pack about its own accounts, organised by the controls its risk team checks. Share it through Vanta or your trust centre.",
     scene: <ScenePack />,
   },
 ];

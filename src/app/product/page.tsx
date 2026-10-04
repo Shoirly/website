@@ -28,7 +28,7 @@ const steps: StoryStep[] = [
   },
   {
     title: "Compile a pack per customer",
-    body: "For each customer, Shoirly compiles a pack for the period they ask about, organised by the controls their risk team checks, starting with DORA. Share it through Vanta or your trust centre, or send it directly.",
+    body: "For each customer, Shoirly compiles a pack for the period they ask about, organised by the controls their risk team checks. Share it through Vanta or your trust centre, or send it directly.",
     scene: <ScenePack />,
   },
 ];

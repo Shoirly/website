@@ -57,9 +57,9 @@ export default function AboutPage() {
           </h2>
           <div className="space-y-5 text-lg text-graphite">
             <p>
-              AI agents are starting to act inside regulated businesses, for example refunding, reviewing and updating
-              accounts at banks. Those buyers are willing to give agents more autonomy, but only inside defined limits,
-              and only with proof the limits held.
+              AI agents are starting to act inside regulated businesses: refunding, reviewing, updating, escalating.
+              Those businesses are willing to give agents more autonomy, but only inside defined limits, and only with
+              proof the limits held.
             </p>
             <p>
               Today that proof is thin. Certificates show a vendor has controls. Questionnaires record what a vendor

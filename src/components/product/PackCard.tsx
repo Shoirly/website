@@ -8,10 +8,11 @@ export function PackCard() {
     { k: "Signatures verified", v: "1,284 of 1,284", ok: true },
     { k: "Unrecorded", v: "0" },
   ];
-  const dora = [
-    { area: "ICT third-party risk", ref: "Art. 28-30" },
-    { area: "ICT risk management", ref: "Art. 5-16" },
-    { area: "Incident management", ref: "Art. 17-23" },
+  // Framework-neutral control areas; the references show DORA as the example framework.
+  const controls = [
+    { area: "Third-party oversight", ref: "DORA 28-30" },
+    { area: "Access and authorisation", ref: "DORA 5-16" },
+    { area: "Incident response", ref: "DORA 17-23" },
   ];
 
   return (
@@ -48,9 +49,9 @@ export function PackCard() {
       </dl>
 
       <div className="border-t border-rule px-5 py-4 sm:px-6">
-        <p className="text-xs font-semibold">Controls covered (DORA, for example)</p>
+        <p className="text-xs font-semibold">Controls covered (DORA references, as an example)</p>
         <ul className="mt-3 flex flex-wrap gap-2">
-          {dora.map((d) => (
+          {controls.map((d) => (
             <li key={d.area} className="rounded-sm border border-rule px-2 py-1 text-xs">
               {d.area} <span className="font-mono text-graphite">{d.ref}</span>
             </li>

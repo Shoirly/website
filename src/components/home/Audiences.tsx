@@ -21,7 +21,7 @@ const columns = [
     points: [
       "See each action your vendor's agent took for your customers, and who approved it.",
       "A coverage check shows whether anything went unrecorded.",
-      "Organised by the controls you report against, starting with DORA for EU financial services.",
+      "Organised by the controls you already report against, for third-party oversight and audit.",
     ],
     href: "/solutions/banks",
     link: "What your risk team receives",

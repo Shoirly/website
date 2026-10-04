@@ -141,7 +141,7 @@ export default function AgentVendorsPage() {
             {[
               ["Signed records of every action", "Linked to the person or policy that authorised it."],
               ["A coverage check", "Shows whether anything your agent attempted went unrecorded."],
-              ["Per-customer evidence packs", "Each customer sees its own records only, mapped to its controls, starting with DORA."],
+              ["Per-customer evidence packs", "Each customer sees its own records only, mapped to the controls it reports against."],
               ["Ready to share", "Packs you can share through Vanta or your trust centre, next to your certifications."],
             ].map(([t, d]) => (
               <li key={t} className="border-t border-rule pt-5">

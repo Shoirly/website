@@ -431,3 +431,44 @@ Rule now in CLAUDE.md: default wording is "your customers", "regulated buyers" o
 - Liam's surname confirmed as Maher.
 - Photos: each original was cropped to a consistent 4:5 head-and-shoulders frame (similar head height and eye line; Laura's head sits a little larger because her original is too small to frame wider), resized to 680x850, saved as progressive JPEG (52-78 KB, down from up to 9 MB) with all metadata stripped (phone photos can carry location). Josephine's was a phone screenshot; the crop removes the iOS "Crop" button. The originals stay in `/team-photos/`, which is gitignored so full-size images and camera metadata never reach the repo.
 - Hoplite's open "DORA/About responsive" PR sets `showTeam = false` "until all four founders have real bios and photos". When that PR is merged, the team section should stay visible (or flip to true once the photos are in).
+
+## Second ICP sweep: not bank-focused anywhere (4 Oct 2026)
+
+Feedback: the first sweep didn't fix every page. It had deliberately left /solutions/banks and the nav labels (as instructed at the time), and it hadn't touched the sample data, which was banking throughout (KYC files, credit limits, arrears notices, a "Collections assistant") and appears on most pages. This pass treats the bank flavour itself as the problem, not just the words. Only /dora and finance blog posts stay finance-specific, and pages now carry about one finance example each rather than one per section.
+
+**Sample data (hero trail, How it works, evidence previews)**
+- Actions are now an industry-neutral customer-operations agent: "Refund €240 to customer #4471" (unchanged), "Read account history, customer #4471" (was "Read KYC file"), "Upgrade account to Business plan" (was "Update credit limit to €3,000"), "Send renewal notice by email" (was "Send arrears notice"), and "Escalate case #88213 for review" (was "Flag transaction #88213").
+- Authorisers: "Account manager S. Okafor" (was "Credit officer"), "Escalation rules v12" (was "Fraud rules v12").
+- Pack tags in the hero and the How it works scene are now framework-neutral control areas, "Third-party oversight", "Access and authorisation" and "Incident response", replacing "DORA: ICT third-party risk" and the rest. The hero now has no finance reference at all.
+- Home evidence preview: agent "Customer ops agent" (was "Collections assistant"). The mapping table uses the neutral areas with "DORA 28-30" and similar as reference numbers, headed "Control mapping (shown against DORA as an example)". The footnote reads "the mapping", not "the DORA mapping".
+- /product pack card: the same neutral areas, headed "Controls covered (DORA references, as an example)".
+- Capture scene: "Billing API" (was "Payments API").
+
+**Fewer finance examples per page**
+- Home How it works, step 4: dropped "(for example, DORA areas for EU banks)". Home's one finance example is now the evidence preview.
+- Home audiences, receiving column point 3: "Organised by the controls you already report against, for third-party oversight and audit."
+- /product story step 4: dropped "starting with DORA". The architecture diagram node is now "a CRM, a ticketing tool or a billing system" (was "a bank's payments API"), and the agent node says "updating an account" (was "a credit limit"). The page keeps one example: the pack section's DORA references and the DORA guide link.
+- /solutions/agent-vendors "What you get": "...mapped to the controls it reports against." The page keeps the contract stage's "for example under DORA" and the "Is this only for financial services?" FAQ.
+- /about "Why we're building this": "AI agents are starting to act inside regulated businesses: refunding, reviewing, updating, escalating." The page keeps "Made in Dublin"'s "starting with banks, insurers and payment firms" and Liam's bio, which is fact.
+
+**/solutions/banks is now for any regulated buyer's risk team (URL unchanged)**
+- Meta title: "For buyers' risk teams: evidence of what your vendor's AI agent did". Description: "...teams at regulated businesses receive from AI agent vendors using Shoirly... Starting with financial services."
+- Lead: "For risk, procurement and third-party oversight teams at regulated businesses, starting with banks, insurers and payment firms..."
+- "A DORA mapping" became "A mapping to your controls": "Evidence organised by the areas your team already reports against, such as third-party oversight, access and incident response."
+- Request template: "As part of our third-party oversight, we'd like evidence..." (was "our ICT third-party oversight under DORA").
+- DORA guide link: "In EU financial services, for example, DORA sets the third-party rules. Read our plain-English guide."
+- I kept the `/solutions/banks` URL so existing links don't break. It can move to something like `/solutions/risk-teams` with a redirect if you want the URL to match.
+
+**Navigation**
+- Solutions menu: "For AI agent companies" (was "For agent vendors") and "For buyers' risk teams" (was "For banks, payment firms and insurers").
+- Removed "DORA" from the main nav. It was a finance-only item on every page. The guide stays one click away in the footer and from the product, blog and buyers' pages.
+- Footer: Product / Solutions (For AI agent companies, For buyers' risk teams) / Resources (Blog, DORA guide (EU finance)) / Company (About, Privacy, Terms). "For financial firms" is gone.
+
+**Left as is**
+- /dora (content and metadata): it's a guide to an EU finance law, so finance-specific by nature.
+- The finance blog post and its registry entry.
+- /terms "including our DORA guide": it names that page.
+- Liam's bio (Bank of America, banks): biographical fact.
+- Code identifiers and URLs (`/solutions/banks`, `id: "banks"`).
+
+**CLAUDE.md:** the finance-specific carve-out is now /dora and finance blog posts only; added "about one finance example per page" and "sample data stays industry-neutral"; the site-map line for /solutions/banks, the nav and footer description, and the hero sample-action concept all match.

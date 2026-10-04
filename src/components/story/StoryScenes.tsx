@@ -1,6 +1,6 @@
 import { ArrowRight, CheckCircle, LinkSimple, SealCheck, ShieldCheck } from "@phosphor-icons/react/dist/ssr";
 import type { ReactNode } from "react";
-import { sampleActions, samplePackDora } from "@/content/sample";
+import { sampleActions, samplePackControls } from "@/content/sample";
 
 /*
  * Scenes for the scroll story. Each follows the same sample action (a €240
@@ -43,7 +43,7 @@ export function SceneCapture() {
           Shoirly proxy
         </span>
         <ArrowRight size={14} aria-hidden className="text-graphite" />
-        <span className="rounded-md border border-rule bg-ledger px-2 py-2.5">Payments API</span>
+        <span className="rounded-md border border-rule bg-ledger px-2 py-2.5">Billing API</span>
       </div>
       <div className="rounded-md border border-rule p-3 motion-safe:animate-rise-in motion-safe:[animation-delay:100ms]">
         <p className="text-[11px] font-medium text-graphite">Captured as the call passes through</p>
@@ -146,9 +146,9 @@ export function ScenePack() {
           </span>
         </div>
         <ul className="mt-4 flex flex-wrap gap-1.5">
-          {samplePackDora.map((d) => (
+          {samplePackControls.map((d) => (
             <li key={d} className="rounded-sm border border-rule px-1.5 py-0.5 text-[11px] text-graphite">
-              DORA: {d}
+              {d}
             </li>
           ))}
         </ul>
