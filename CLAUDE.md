@@ -61,24 +61,23 @@ Nav: Product, Solutions (For AI agent companies, For buyers' risk teams), Securi
 - Next.js (App Router, TypeScript), Tailwind CSS, `motion` (Framer Motion) for animation, MDX for the blog.
 - Deployed on Vercel at shoirly.com (DNS on Cloudflare; shoirly.ie redirects to .com).
 - One config file, `src/config/site.ts`, holds the contact email (hello@shoirly.com), booking URL (`TODO(team)`, use a mailto until we have Cal.com), social links and nav. No hardcoded contact details anywhere else.
-- **Logo (final):** files live in `public/brand/` (read its `README.md` for usage rules). `src/components/brand/Logo.tsx` is the only place the logo is drawn: `logo.svg` on light backgrounds, `logo-white.svg` on dark ones. The favicon set, apple touch icon and manifest icons come from `mark.svg`, and every page's social image (`src/lib/ogImage.tsx`, served from `/og/...`) uses `logo.svg`. Page titles and descriptions live in `pageSeo` in `src/lib/metadata.ts`. Don't redraw, recolour or stretch the logo. The header shows the full wordmark at 36px, a deliberate exception to the README's "mark only below ~48px" rule (see DECISIONS.md).
-- Use react-bits (cloned for reference, see below) selectively. Copy individual components into `src/components/fx/`, adapt them to our tokens, credit the source in a comment. Never pull in the whole library.
+- **Logo and brand assets:** `src/components/brand/Logo.tsx` (copied from `shoirly-brand/Logo.tsx`) is the only place the logo is drawn; `src/components/brand/CroppedMark.tsx` reuses its geometry for the cropped-mark motif and the verified tick. Logo files are in `public/brand/`; the favicon set, apple-touch-icon, PWA icons and `og-image.png` are in `public/`, wired up in `src/app/layout.tsx`, `src/app/manifest.ts` and `src/lib/metadata.ts` (every page shares the one OG image). Page titles and descriptions live in `pageSeo` in `src/lib/metadata.ts`. Don't redraw, recolour or stretch the logo.
 - Quality floor: Lighthouse 90+ on all four scores, semantic HTML, keyboard focus visible, `prefers-reduced-motion` respected everywhere, no layout shift from animations, works from 360px to 1920px.
 
 ## Design direction
 
-Light, trustworthy enterprise, in the family of secureframe.com and sprinto.com, but with its own identity. Study those sites for structure, rhythm and polish. Never copy their copy, assets, illustrations or exact layouts.
+**`shoirly-brand/BRAND.md` is the design source of truth.** Read it in full before any visual change. It overrides anything in this file, `DECISIONS.md` or the existing code that conflicts with it. Older design entries in `DECISIONS.md` (green/blue "seal" palette, Bricolage and Schibsted type, the animated hero) are history and no longer apply.
 
-The subject is evidence: signatures, chains of custody, receipts, audit files, a verified seal. Draw the visual language from that world rather than from generic SaaS. The one memorable element should be the hero's evidence animation. Keep everything around it calm and disciplined.
+How it is wired in this codebase:
 
-- **Palette:** mostly white and a cool off-white, deep ink for text, one confident accent that reads as "verified". Ink `#0F1B17` and the accent, Seal blue `#3157F0`, come from the logo; the full token set is in `DECISIONS.md` and `src/app/globals.css`. Avoid purple-to-blue gradient washes (every compliance site uses them) and the defaults listed below.
-- **Type:** headings in Bricolage Grotesque (the family the wordmark is drawn from), body in Schibsted Grotesk, data in IBM Plex Mono. A clear type scale. Sentence case everywhere.
-- **Motion (updated 3 Oct 2026: the founders want the site to feel more alive and modern):** a living hero (the evidence-trail animation, a cursor-reactive drifting ledger grid behind it, layered depth that tilts with the pointer), eye-catching page transitions (View Transitions: the old page recedes, the new page rises, the header stays anchored), scroll-linked storytelling, scroll-driven heading reveals, and tactile press and hover feedback. Still: transform and opacity only, zero layout shift, everything paused off-screen, a calm static fallback under reduced motion, no cursor gimmicks, no full-page moving backgrounds, no hover wobble on cards. Smooth, eased, critically damped springs unless a gesture carried momentum.
-- **Avoid these generated-site tells:** all-caps eyebrow labels above every heading, one highlighted word in a headline, identical rounded cards with the same grey shadow, gradient blobs as decoration, `A · B · C` meta strings, `→` on every link, numbered 01/02/03 markers unless the content really is a sequence (how it works is a sequence, so it can use them).
+- **Tokens:** `src/app/tokens.css` is a verbatim copy of `shoirly-brand/tokens.css`. `src/app/globals.css` maps the `--sh-*` variables into Tailwind as `sh-*` classes (`bg-sh-bg`, `bg-sh-bg-subtle`, `text-sh-text`, `text-sh-muted`, `border-sh-border`, `bg-sh-accent`, `text-sh-accent-text`...), the type scale (`text-display`, `text-4xl` = H1 ... `text-xs` = mono label) and radii (`rounded-sm` 2px, `rounded-md` 4px). Ink sections add the `sh-dark` class so the semantic tokens flip. No raw hex values, font names or arbitrary spacing in components; if a value is missing, add it as a token first.
+- **Fonts:** Space Mono (display, H1, H2), IBM Plex Sans (body, H3, H4), IBM Plex Mono (labels, data), loaded with `next/font/google` in `src/app/layout.tsx`.
+- **Motifs and helpers in `globals.css`:** `label` (lowercase mono label, written in lowercase in the source), `chamfer` (the clipped top-right corner), `brackets` (corner brackets around one focal element), `square-bullet`, `link`, and `tick-draw` / `tick-fill` for the hero's one signature moment.
+- **Motion:** BRAND.md section 9. Colour and border transitions only; the hero tick draw is the single signature moment. No scroll fade-ins, scale, lift, parallax or scripted sequences.
 
-### Hero animation concept
+### Hero
 
-A live "evidence trail": a stream of agent actions from an industry-neutral customer-operations agent (e.g. "Refund €240 to customer #4471", "Read account history", "Upgrade account to Business plan") flows in. Each action gets linked to the human or policy that authorised it, receives a signature, and joins a tamper-evident chain. A coverage meter fills to 100%. The trail compiles into a per-customer evidence pack card labelled with the control areas it covers (framework-neutral; DORA only as an example elsewhere). One tasteful loop, pausable, static frame under reduced motion.
+Per BRAND.md section 10: lowercase mono label, the pitch line as the headline, one lead sentence, "Book a demo" plus "See how it works". On the right, the evidence card (one sample action from `src/content/sample.ts`, clearly marked as sample data) over the cropped oversized mark, whose tick draws in once on load.
 
 ### Cost-of-a-stalled-deal calculator
 
@@ -86,11 +85,11 @@ Sliders for deals with regulated buyers, average contract value, and weeks stuck
 
 ## Copy
 
-Voice: plain, confident, specific. Written for a founder or CTO at an agent startup, credible to a regulated buyer's head of third-party risk (for example, at a bank). British/Irish spelling. No em dashes. No hype words ("revolutionary", "seamless", "unlock", "supercharge").
+Voice (see also BRAND.md section 11): plain, confident, specific. Written for a founder or CTO at an agent startup, credible to a regulated buyer's head of third-party risk (for example, at a bank). British/Irish spelling. No em dashes. No hype words ("revolutionary", "seamless", "unlock", "supercharge").
 
 Starting copy (refine, don't replace the meaning):
 
-- **Hero headline:** Signed proof of what your AI agent did, and who approved it.
+- **Hero headline (the brand pitch line):** Certs show your AI agent passed tests. Shoirly shows what it actually did.
 - **Hero sub:** Shoirly gives AI agent companies per-customer evidence of every action, mapped to the controls regulated buyers check, so security reviews stop stalling your deals.
 - **CTAs:** "Book a demo" (primary), "See how it works" (secondary, scrolls to the walkthrough).
 - **Problem:** Your customers want to let your agent do more. Their risk team needs proof it stayed inside the lines. A certificate says you have controls. It doesn't show what happened on Tuesday.
@@ -101,9 +100,8 @@ Starting copy (refine, don't replace the meaning):
 
 ## Reference material
 
-- Inspiration sites: https://secureframe.com and https://sprinto.com (capture with the playwright-cli skill, save to `research/`, which is gitignored).
-- Components: https://github.com/DavidHDev/react-bits (clone to a sibling folder `../react-bits`, not into this repo).
-- Skills to use: design-taste-frontend, high-end-visual-design, web-design-guidelines (for audits), playwright-cli (for screenshots, only when a phase asks), image-to-code (when given a mockup or logo).
+- Brand pack: `shoirly-brand/` (BRAND.md, tokens, logo component and SVG).
+- Skills to use: design-taste-frontend, web-design-guidelines (for audits), playwright-cli (for screenshots, only when a phase asks), image-to-code (when given a mockup). Where a skill's defaults conflict with BRAND.md, BRAND.md wins.
 
 ## Working rules
 

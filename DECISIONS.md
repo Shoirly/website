@@ -2,6 +2,8 @@
 
 Design and product calls made without asking, one line each with the reason. Newest sections at the bottom.
 
+> **Superseded design (4 Oct 2026):** the site was rebranded to `shoirly-brand/BRAND.md`, which is now the design source of truth. Every design entry below that predates "Rebrand to the new brand pack" (the green and then blue "Seal" palette, Paper/Ink tokens, Bricolage Grotesque and Schibsted Grotesk, the seal logo, the animated hero, ledger grid, scroll story and other motion) is kept as history only and no longer applies.
+
 ## Design read
 
 Reading this as: a B2B landing site for AI-agent founders and bank risk teams, in a trust-first, document-and-evidence language, built on Tailwind v4 utilities, two deliberate typefaces and motion that is restrained except for the hero. Dials: variance 5, motion 5, density 4. Trust-first sits lower than the marketing default, and the one hero moment carries the motion.
@@ -479,3 +481,64 @@ Feedback: the first sweep didn't fix every page. It had deliberately left /solut
 - Checked after merging: About only shows the team when every founder has a bio and photo, and all four do. The security rewrite stays honest (roadmap as "we plan to", unconfirmed details marked as not yet published). Blog tests pass (3 of 3). Type-check, lint and build are clean, every route returns 200, there is no mobile overflow and there are no console errors.
 - Behaviour change from the blog PR: drafts now 404 in production rather than rendering with a draft banner, so the DORA post is not reachable on the live site until it is published.
 - Wording fix after merging: the blog author bio said "for AI agent vendors selling into financial services"; it now says "for AI agent companies selling to regulated buyers, starting with financial services".
+
+## Rebrand to the new brand pack (4 Oct 2026)
+
+Brief: rebuild the site on `shoirly-brand/BRAND.md`, which overrides CLAUDE.md, this file and the old code. Commits: foundations, logo and assets, home, security, blog, then the remaining pages.
+
+**Foundations**
+- `shoirly-brand/tokens.css` is copied verbatim to `src/app/tokens.css` and imported by `globals.css`, which maps every `--sh-*` variable into Tailwind and keeps the variable names. The old Tailwind colour names were renamed mechanically across the codebase: paper to `sh-bg`, ledger to `sh-bg-subtle`, rule to `sh-border`, rule-strong to `sh-border-strong`, ink to `sh-text`, graphite to `sh-muted`, seal to `sh-accent`, seal-deep to `sh-accent-text`, seal-wash to `sh-accent-soft`, fault to `sh-danger`.
+- The brand type scale is mapped onto Tailwind's size names (`text-4xl` = H1, `text-3xl` = H2, `text-2xl` = H3, `text-xl` = H4, `text-lg` = lead, `text-base` = body, `text-sm` = small, `text-xs` = mono label, plus `text-micro` and `text-display`), so existing markup picked up brand sizes without per-file edits.
+- `Container` uses `--sh-container` and `--sh-gutter`; `Section` uses `--sh-section-y` and gained an `ink` tone (`.sh-dark`).
+- Fonts load through `next/font/google`. Their CSS variables feed `--sh-font-display/body/mono`, keeping the tokens' fallbacks.
+- The `label` utility doesn't force lowercase with CSS, because that would turn "AI" into "ai". Labels are written lowercase in the source instead ("for AI agent companies").
+- Literal `#ffffff` remains only in `layout.tsx` `themeColor` and `manifest.ts`, because Next metadata and the web manifest can't read CSS variables. Both are commented as `--sh-white`. `Logo.tsx` keeps the brand file's own hex constants.
+- The blog title size is `text-[1.375rem]`, because BRAND.md specifies 22px for it and there's no token for 22px.
+
+**Logo and assets**
+- `Logo.tsx` was copied from the brand pack unchanged, apart from exporting the mark's two path constants (`MARK_FRAME`, `MARK_TICK`). `CroppedMark.tsx` reuses them for the cropped oversized mark and the verified tick (`TickGlyph`), so the mark is never redrawn by hand.
+- Logo SVGs went to `public/brand/`. The favicon set, apple-touch-icon, PWA icons and `og-image.png` went to `public/`, and `favicon.ico` was generated from the brand's 16px and 32px PNGs for older browsers.
+- **Static social image.** Every page and blog post now uses the brand's single `og-image.png`. The per-page generated images (`/og/...`, `/blog/[slug]/og`, `ogImage.tsx`, `brandImage.tsx`) were deleted, because they were drawn with the old fonts and logo. The trade-off is that posts no longer get title-specific social cards. These could be rebuilt later with the brand fonts if wanted.
+- Deleted: the seal logo files, `src/app/icon.svg`, `apple-icon.png`, the old `favicon.ico`, and `src/assets/fonts` (the Bricolage and Schibsted static cuts).
+
+**Home (BRAND.md section 10)**
+- **Headline.** The hero headline is now the brand pitch line, "Certs show your AI agent passed tests. Shoirly shows what it actually did." It replaces "Signed proof of what your AI agent did, and who approved it." The lead sentence, buttons and "We're early" line are unchanged.
+- **Evidence card.** It shows sample action 1 from `src/content/sample.ts` (the €240 refund, approved by "Refunds policy v3"), not BRAND.md's illustrative `refund.issue` / `j.murphy` row, so it matches the rest of the site's sample data. It's marked "sample data".
+- **Hero motion.** The rows don't type in (BRAND.md makes that optional), so the tick drawing in is the only moment. Under reduced motion, the tick shows already filled.
+- **Cropped mark.** It sits behind the card and bleeds off the right edge. On mobile it stays behind the card.
+- **Section order and rhythm:** hero (white), problem (gray-25), how it works (white), evidence preview (ink, inside corner brackets), deployment (white), calculator (gray-25), Vanta line (white), audiences (gray-25), security teaser (white), closing CTA (ink), footer (ink). That's two ink sections plus the footer.
+- **How it works** is an audit-trail list: four numbered steps, square nodes, the last one filled blue. The four animated scenes are no longer on home.
+- **Security teaser** reuses /security's own heading and lead (lightly reworded to point at the page), with a secondary "Read the security overview" button, so there's one primary button per view.
+- **Closing CTA** is now ink with the page's second cropped mark on every page that uses it. The mark is hidden below 768px so it never sits behind the text or button. A hairline separates it from the ink footer.
+- **Deleted:** the hero tilt stage (`HeroStage`), the cursor grid (`LedgerGrid`), the magnetic button, the scramble hash, the animated evidence trail, and the deployment proof pulses.
+
+**Security** follows BRAND.md's documentation pattern. It has a sticky "on this page" list on desktop and a single 68ch column. The chain figure is a vertical audit trail, the signing steps are numbered in mono, and roadmap items carry a mono "not yet available" tag. All copy and TODOs are unchanged.
+
+**Blog**
+- The index is a list (mono date and reading time, 22px Plex Sans title, one-line summary, topic and author) instead of a featured card plus grid. `featuredPost()` stays exported because the blog tests use it.
+- Posts use a 68ch column, a mono topic label, square list markers and gray-950 code blocks. `Article.module.css` now uses tokens only.
+
+**Everything else**
+- **/product:** the scroll-driven sticky story became `StageList`, a static audit-trail list with each stage's scene beside it. The intro "Scroll to follow a single €240 refund..." became "Follow a single €240 refund...".
+- **Motion removed (BRAND.md section 9):**
+  - the architecture diagram's signal run and its panel slide
+  - the review-stage rule draw-ins and the verify-check spinners (`StatusMark`, `useRevealOnce` deleted)
+  - the demo agenda draw-ins
+  - the calculator count-ups and value pop (`AnimatedNumber` deleted; its bars are now static widths)
+  - press-scale on the FAQ and diagram buttons
+  - the header menu slide and stagger
+  - the route sweep, reading-progress bar and hover pill (removed in the logo commit)
+
+  The FAQ plus icon still turns to a cross when open, but instantly, as a state marker.
+- **Shapes and icons:**
+  - Round markers are now square.
+  - Padlock, shield, robot and seal-check icons are gone. Verified states use the tick from the mark.
+  - The person and policy icons in evidence rows were dropped, since the approver text already says which it is.
+  - Key panels (hero evidence card, pack card, "only proof leaves", demo booking panel) carry the chamfer. Founder photos have square corners.
+- Inner page headers have a lowercase mono label for orientation (product, security, blog, about, guide, the two solutions pages, book a demo, 404).
+- `ResponsivePage.module.css` spacing now uses `--sh-space-*`.
+- **Kept on purpose:** /security's "A digital signature acts like a seal on the record". It's existing copy using "seal" as a metaphor for signing, not old-brand imagery.
+
+**Not used yet:** the construction-line and node-graph motifs (both optional in BRAND.md).
+
+**Placeholders:** none added. The existing "Photo to come" frames on /about and the `TODO(team)` notes on /security and the evidence preview are unchanged.
