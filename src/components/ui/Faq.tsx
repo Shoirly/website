@@ -9,12 +9,12 @@ export function Faq({ items }: { items: FaqItem[] }) {
     <div className="border-t border-sh-text">
       {items.map((item) => (
         <details key={item.q} className="group border-b border-sh-border">
-          <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-lg font-medium transition-[color,transform] duration-150 hover:text-sh-accent-text active:scale-[0.99] [&::-webkit-details-marker]:hidden">
+          <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-lg font-medium transition-colors duration-[var(--sh-dur-fast)] hover:text-sh-accent-text [&::-webkit-details-marker]:hidden">
             {item.q}
             <Plus
               size={18}
               aria-hidden
-              className="mt-1.5 shrink-0 text-sh-muted transition-transform duration-200 group-open:rotate-45"
+              className="mt-1.5 shrink-0 text-sh-muted group-open:rotate-45"
             />
           </summary>
           <div className="max-w-[68ch] pb-6 text-sh-muted">{item.a}</div>

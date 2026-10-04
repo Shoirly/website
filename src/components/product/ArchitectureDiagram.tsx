@@ -1,8 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
 import { ArrowDown, ArrowRight } from "@phosphor-icons/react";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 type NodeId = "agent" | "proxy" | "tool" | "auth" | "sign" | "chain" | "coverage" | "pack";
 
@@ -59,18 +58,15 @@ const nodes: Record<NodeId, { n: number; label: string; title: string; body: str
 };
 
 const order: NodeId[] = ["agent", "proxy", "tool", "auth", "sign", "chain", "coverage", "pack"];
-const ease = [0.22, 1, 0.36, 1] as const;
 
 function NodeButton({
   id,
   selected,
-  lit,
   onSelect,
   tone = "default",
 }: {
   id: NodeId;
   selected: boolean;
-  lit: boolean;
   onSelect: (id: NodeId) => void;
   tone?: "default" | "shoirly";
 }) {
@@ -80,17 +76,17 @@ function NodeButton({
       type="button"
       aria-pressed={selected}
       onClick={() => onSelect(id)}
-      className={`group relative flex min-h-12 w-full items-center gap-2.5 rounded-md border px-3 py-2.5 text-left text-sm transition-[border-color,background-color,box-shadow,transform] duration-200 active:scale-[0.97] active:duration-100 ${
+      className={`group relative flex min-h-12 w-full items-center gap-2.5 rounded-md border px-3 py-2.5 text-left text-sm transition-[border-color,background-color] duration-[var(--sh-dur-fast)] ${
         selected
-          ? "border-sh-accent bg-sh-accent-soft text-sh-accent-text shadow-[0_0_0_3px_var(--color-sh-accent-soft)]"
+          ? "border-sh-accent bg-sh-accent-soft text-sh-accent-text"
           : tone === "shoirly"
-            ? "border-sh-accent/50 bg-sh-bg hover:border-sh-accent"
+            ? "border-sh-accent bg-sh-bg"
             : "border-sh-border bg-sh-bg hover:border-sh-border-strong"
       }`}
     >
       <span
-        className={`flex size-5 shrink-0 items-center justify-center rounded-full font-mono text-[10px] tabular transition-colors duration-200 ${
-          selected || lit ? "bg-sh-accent text-sh-bg" : "bg-sh-bg-subtle text-sh-muted group-hover:text-sh-text"
+        className={`flex size-5 shrink-0 items-center justify-center font-mono text-micro tabular transition-colors duration-[var(--sh-dur-fast)] ${
+          selected ? "bg-sh-accent text-sh-on-accent" : "bg-sh-bg-subtle text-sh-muted group-hover:text-sh-text"
         }`}
       >
         {node.n}
@@ -111,39 +107,25 @@ function Arrow({ down = false, className = "" }: { down?: boolean; className?: s
 
 /**
  * Interactive architecture diagram for /product. Nodes are toggle buttons;
- * the panel below explains the selected one in plain language. On first view
- * a single "signal" runs through the nodes in order, then settles on the proxy.
+ * the panel below explains the selected one in plain language. Static: no
+ * entrance or signal animation (BRAND.md 9).
  */
 export function ArchitectureDiagram() {
   const [selected, setSelected] = useState<NodeId>("proxy");
-  const [lit, setLit] = useState(-1);
-  const reduce = useReducedMotion();
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.4 });
-
-  // One orchestrated pass: light each node in order, once, then clear.
-  useEffect(() => {
-    if (!inView || reduce) return;
-    const timers = order.map((_, i) => window.setTimeout(() => setLit(i), 150 + i * 170));
-    timers.push(window.setTimeout(() => setLit(-1), 150 + order.length * 170 + 400));
-    return () => timers.forEach((t) => window.clearTimeout(t));
-  }, [inView, reduce]);
-
-  const isLit = (id: NodeId) => lit >= order.indexOf(id) && lit !== -1;
   const node = (id: NodeId, tone?: "default" | "shoirly") => (
-    <NodeButton id={id} selected={selected === id} lit={isLit(id)} onSelect={setSelected} tone={tone} />
+    <NodeButton id={id} selected={selected === id} onSelect={setSelected} tone={tone} />
   );
 
   return (
-    <div ref={ref}>
+    <div>
       <div className="grid grid-cols-1 items-center gap-3 lg:grid-cols-[minmax(0,1fr)_9.5rem_minmax(0,10.5rem)] lg:gap-0">
         {/* The environment boundary */}
         <div
           role="group"
           aria-label="Inside your environment: your cloud or your customer's"
-          className="rounded-md border-2 border-dashed border-sh-border-strong/70 bg-sh-bg-subtle/50 p-4 sm:p-5"
+          className="border border-dashed border-sh-border-strong bg-sh-bg p-4 sm:p-5"
         >
-          <p className="text-xs font-medium text-sh-muted">Your environment: your cloud or your customer&apos;s</p>
+          <p className="font-mono text-xs text-sh-muted">your environment: your cloud or your customer&apos;s</p>
 
           {/* Request path */}
           <div className="mt-4 grid grid-cols-1 items-center gap-2 sm:grid-cols-[minmax(0,1fr)_1.5rem_minmax(0,1fr)_1.5rem_minmax(0,1fr)]">
@@ -155,7 +137,7 @@ export function ArchitectureDiagram() {
           </div>
 
           <div className="my-2 flex justify-center sm:my-3">
-            <span className="inline-flex items-center gap-1.5 text-[11px] text-sh-muted">
+            <span className="inline-flex items-center gap-1.5 text-micro text-sh-muted">
               <ArrowDown size={14} aria-hidden className="text-sh-border-strong" /> Each captured call
             </span>
           </div>
@@ -174,38 +156,24 @@ export function ArchitectureDiagram() {
 
         {/* Crossing the boundary */}
         <div className="flex flex-col items-center justify-center gap-1 py-1 text-center lg:px-2">
-          <span className="font-mono text-[11px] leading-4 text-sh-accent-text">Only proof leaves</span>
+          <span className="font-mono text-micro leading-4 text-sh-accent-text">Only proof leaves</span>
           <Arrow down className="text-sh-accent lg:hidden" />
-          <motion.span
-            aria-hidden
-            className="hidden h-px w-full origin-left bg-sh-accent lg:block"
-            initial={false}
-            animate={{ scaleX: reduce || lit === -1 || lit >= order.length - 1 ? 1 : 0.15 }}
-            transition={{ duration: reduce ? 0 : 0.4, ease }}
-          />
-          <span className="text-[11px] leading-4 text-sh-muted">signatures, hashes, coverage counts</span>
+          <span aria-hidden className="hidden h-px w-full bg-sh-accent lg:block" />
+          <span className="text-micro leading-4 text-sh-muted">signatures, hashes, coverage counts</span>
         </div>
 
         <div>{node("pack")}</div>
       </div>
 
       {/* Explanation of the selected node */}
-      <div className="mt-6 min-h-[132px] rounded-md border border-sh-border bg-sh-bg p-5 sm:p-6" aria-live="polite">
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={selected}
-            initial={reduce ? false : { opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduce ? { opacity: 0, transition: { duration: 0 } } : { opacity: 0, y: -4 }}
-            transition={{ duration: 0.18, ease }}
-          >
+      <div className="mt-6 min-h-32 rounded-md border border-sh-border bg-sh-surface p-5 sm:p-6" aria-live="polite">
+        <div>
             <p className="font-mono text-xs text-sh-muted">
               {nodes[selected].n} of {order.length}
             </p>
             <h3 className="mt-1 text-xl">{nodes[selected].title}</h3>
             <p className="mt-2 max-w-[68ch] text-sh-muted">{nodes[selected].body}</p>
-          </motion.div>
-        </AnimatePresence>
+        </div>
       </div>
       <p className="mt-3 text-sm text-sh-muted">Select any part of the diagram to see what it does.</p>
     </div>

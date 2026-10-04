@@ -1,13 +1,10 @@
 "use client";
 
-import { motion, useAnimate, useReducedMotion } from "motion/react";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
-import { AnimatedNumber } from "@/components/fx/AnimatedNumber";
+import { useCallback, useEffect, useId, useState } from "react";
 import { ButtonLink } from "@/components/ui/Button";
 
 const eur = new Intl.NumberFormat("en-IE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
 const MAX_WEEKS = 40;
-const ease = [0.22, 1, 0.36, 1] as const;
 
 type SliderProps = {
   label: string;
@@ -23,19 +20,6 @@ type SliderProps = {
 function Slider({ label, value, min, max, step, onChange, display, hint }: SliderProps) {
   const id = useId();
   const fill = ((value - min) / (max - min)) * 100;
-  const reduce = useReducedMotion();
-  const [scope, animate] = useAnimate<HTMLOutputElement>();
-  const first = useRef(true);
-
-  // A small "pop" on the value when it changes: feedback that the input registered.
-  useEffect(() => {
-    if (first.current) {
-      first.current = false;
-      return;
-    }
-    if (reduce || !scope.current) return;
-    animate(scope.current, { scale: [1.08, 1] }, { duration: 0.22, ease });
-  }, [value, reduce, animate, scope]);
 
   return (
     <div>
@@ -43,10 +27,7 @@ function Slider({ label, value, min, max, step, onChange, display, hint }: Slide
         <label htmlFor={id} className="text-sm font-medium">
           {label}
         </label>
-        <output
-          ref={scope}
-          htmlFor={id}
-          className="inline-block origin-right font-mono text-base font-medium tabular"
+        <output htmlFor={id} className="font-mono text-base font-medium tabular"
         >
           {display}
         </output>
@@ -75,7 +56,6 @@ function Slider({ label, value, min, max, step, onChange, display, hint }: Slide
 
 /** Before/after review time as two bars on the same scale, no background track. */
 function ReviewTimeBars({ before, after }: { before: number; after: number }) {
-  const reduce = useReducedMotion();
   const rows = [
     { label: "Today", weeks: before, className: "bg-sh-border-strong" },
     { label: "With evidence", weeks: after, className: "bg-sh-accent" },
@@ -88,12 +68,10 @@ function ReviewTimeBars({ before, after }: { before: number; after: number }) {
           <div key={r.label} className="grid grid-cols-[6.5rem_minmax(0,1fr)_4.5rem] items-center gap-3 text-xs">
             <span className="text-sh-muted">{r.label}</span>
             <span className="relative h-2.5">
-              <motion.span
+              <span
                 aria-hidden
-                className={`absolute inset-y-0 left-0 w-full origin-left rounded-full ${r.className}`}
-                initial={false}
-                animate={{ scaleX: Math.max(0.02, r.weeks / MAX_WEEKS) }}
-                transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 170, damping: 26 }}
+                className={`absolute inset-y-0 left-0 ${r.className}`}
+                style={{ width: `${Math.max(2, (r.weeks / MAX_WEEKS) * 100)}%` }}
               />
             </span>
             <span className="text-right font-mono tabular text-sh-text">
@@ -182,8 +160,8 @@ export function StalledDealCalculator({ variant = "full" }: { variant?: "full" |
     <>
       <div>
         <p className="text-sm text-sh-muted">Revenue delayed this year</p>
-        <p className={`mt-1 font-mono font-medium leading-tight tracking-[-0.03em] ${compact ? "text-[1.75rem]" : "text-[2.25rem]"}`}>
-          <AnimatedNumber value={delayed} format={fmt} />
+        <p className={`mt-1 font-mono font-medium leading-tight ${compact ? "text-2xl" : "text-3xl"}`}>
+          {fmt(delayed)}
         </p>
       </div>
       <div>
@@ -191,9 +169,9 @@ export function StalledDealCalculator({ variant = "full" }: { variant?: "full" |
           Brought forward with {weeksSaved} {weeksSaved === 1 ? "week" : "weeks"} less review
         </p>
         <p
-          className={`mt-1 font-mono font-medium leading-tight tracking-[-0.03em] text-sh-accent-text ${compact ? "text-[1.75rem]" : "text-[2.25rem]"}`}
+          className={`mt-1 font-mono font-medium leading-tight text-sh-accent-text ${compact ? "text-2xl" : "text-3xl"}`}
         >
-          <AnimatedNumber value={recovered} format={fmt} />
+          {fmt(recovered)}
         </p>
       </div>
     </>

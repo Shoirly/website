@@ -1,4 +1,4 @@
-import { CheckCircle, SealCheck } from "@phosphor-icons/react/dist/ssr";
+import { TickGlyph } from "@/components/brand/CroppedMark";
 
 /** Illustrative evidence pack summary card for /product. Every value is example data and says so. */
 export function PackCard() {
@@ -18,7 +18,7 @@ export function PackCard() {
   return (
     <article
       aria-label="Illustrative evidence pack"
-      className="overflow-hidden rounded-md border border-sh-border bg-sh-bg shadow-paper"
+      className="chamfer overflow-hidden rounded-md border border-sh-border bg-sh-surface"
     >
       <header className="flex flex-wrap items-start justify-between gap-4 border-b border-sh-border px-5 py-4 sm:px-6">
         <div>
@@ -27,11 +27,11 @@ export function PackCard() {
           <p className="text-xs text-sh-muted">Illustrative customer</p>
         </div>
         <div className="flex flex-col items-end gap-2">
-          <span className="rounded-sm border border-dashed border-sh-border-strong px-1.5 py-0.5 text-[11px] text-sh-muted">
+          <span className="rounded-sm border border-dashed border-sh-border-strong px-1.5 py-0.5 text-micro text-sh-muted">
             Illustrative data
           </span>
-          <span className="inline-flex items-center gap-1 rounded-sm bg-sh-accent-soft px-1.5 py-0.5 text-[11px] font-medium text-sh-accent-text">
-            <SealCheck size={13} weight="fill" aria-hidden /> All signatures verify
+          <span className="inline-flex items-center gap-1 rounded-sm bg-sh-accent-soft px-1.5 py-0.5 text-micro font-medium text-sh-accent-text">
+            <TickGlyph className="size-3" /> All signatures verify
           </span>
         </div>
       </header>
@@ -40,9 +40,9 @@ export function PackCard() {
         {stats.map((s) => (
           <div key={s.k}>
             <dt className="text-xs text-sh-muted">{s.k}</dt>
-            <dd className="mt-1 flex items-center gap-1.5 whitespace-nowrap font-mono text-[15px] font-medium tabular sm:text-base">
+            <dd className="mt-1 flex items-center gap-1.5 whitespace-nowrap font-mono text-sm font-medium tabular sm:text-base">
               {s.v}
-              {s.ok ? <CheckCircle size={15} weight="fill" className="text-sh-accent" aria-label="verified" /> : null}
+              {s.ok ? <TickGlyph className="size-3.5 text-sh-accent-text" label="verified" /> : null}
             </dd>
           </div>
         ))}
@@ -59,7 +59,7 @@ export function PackCard() {
         </ul>
       </div>
 
-      <footer className="flex flex-wrap justify-between gap-2 border-t border-sh-border bg-sh-bg-subtle px-5 py-3 font-mono text-[11px] text-sh-muted sm:px-6">
+      <footer className="flex flex-wrap justify-between gap-2 border-t border-sh-border bg-sh-bg-subtle px-5 py-3 font-mono text-micro text-sh-muted sm:px-6">
         <span>Pack ep_example_7f21</span>
         <span>Generated 1 Oct 2026</span>
       </footer>

@@ -57,6 +57,7 @@ export default function BanksPage() {
   return (
     <>
       <PageHeader
+        label="for buyers’ risk teams"
         title="See what your vendor's AI agent did for your customers"
         lead="For risk, procurement and third-party oversight teams at regulated businesses, starting with banks, insurers and payment firms. When a vendor uses Shoirly, you get signed, per-customer evidence instead of reassurance."
       />

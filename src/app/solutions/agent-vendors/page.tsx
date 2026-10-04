@@ -102,6 +102,7 @@ export default function AgentVendorsPage() {
   return (
     <>
       <PageHeader
+        label="for AI agent companies"
         title="Get through security review without the stall"
         lead="Regulated buyers want what your agent does. Their risk teams need proof it stayed inside the lines. Shoirly gives you that proof, per customer, before they ask."
       >

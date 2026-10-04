@@ -34,7 +34,7 @@ export function CopyBlock({ label, text }: { label: string; text: string }) {
           {status === "copied" ? "Copied" : status === "failed" ? "Select and copy" : "Copy"}
         </button>
       </div>
-      <pre className="overflow-x-auto whitespace-pre-wrap p-4 font-mono text-[13px] leading-6 text-sh-text sm:p-5">
+      <pre className="overflow-x-auto whitespace-pre-wrap p-4 font-mono text-xs leading-6 text-sh-text sm:p-5">
         {text}
       </pre>
       <span className="sr-only" aria-live="polite">

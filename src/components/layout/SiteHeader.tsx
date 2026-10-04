@@ -98,9 +98,9 @@ function SolutionsMenu({ pathname }: { pathname: string }) {
         {open ? (
           <motion.div
             id={menuId}
-            initial={reduce ? false : { opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduce ? { opacity: 0, transition: { duration: 0 } } : { opacity: 0, y: -4 }}
+            initial={reduce ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={reduce ? { opacity: 0, transition: { duration: 0 } } : { opacity: 0 }}
             transition={{ duration: 0.18, ease }}
             className="absolute left-1/2 top-full w-[372px] -translate-x-1/2 pt-2"
           >
@@ -163,12 +163,11 @@ function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose: () =>
         >
           <nav aria-label="Mobile" className="px-4 pb-10 pt-4 min-[400px]:px-6">
             <ul className="divide-y divide-sh-border border-b border-sh-border">
-              {links.map((l, i) => (
+              {links.map((l) => (
                 <motion.li
                   key={l.href}
-                  initial={reduce ? false : { opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.24, ease, delay: reduce ? 0 : 0.03 * i }}
+                  initial={false}
+                  animate={{ opacity: 1 }}
                 >
                   <Link
                     href={l.href}
@@ -206,7 +205,7 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { scrollY } = useScroll();
-  // Border, blur and a soft shadow appear once the page scrolls under the header.
+  // The bottom border appears once the page scrolls under the header (BRAND.md 8).
   useMotionValueEvent(scrollY, "change", (y) => {
     const next = y > 8;
     if (next !== scrolled) setScrolled(next);
@@ -232,7 +231,7 @@ export function SiteHeader() {
       <header
         // Anchored during page transitions (see ::view-transition-*(site-header) in globals.css).
         style={{ viewTransitionName: "site-header" }}
-        className={`sticky top-0 z-50 border-b transition-[border-color,background-color,box-shadow] duration-300 ease-out ${
+        className={`sticky top-0 z-50 border-b transition-[border-color] duration-[var(--sh-dur-fast)] ${
           scrolled || menuOpen
             ? "border-sh-border bg-sh-bg"
             : "border-transparent bg-sh-bg"

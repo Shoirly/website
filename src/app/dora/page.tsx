@@ -154,6 +154,7 @@ export default function DoraPage() {
     <div className={styles.page}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <PageHeader
+        label="guide"
         title="DORA, explained for AI agent vendors"
         lead="The EU's Digital Operational Resilience Act changes what banks must know about their technology suppliers. Here's what it asks, what it means when you sell an AI agent to a bank, and what evidence helps."
       >

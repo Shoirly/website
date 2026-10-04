@@ -50,6 +50,7 @@ export default function AboutPage() {
   return (
     <div className={styles.page}>
       <PageHeader
+        label="about"
         title="Agents should earn trust the way people do: by showing their work"
         lead="Shoirly exists so that regulated businesses can let AI agents do more, because they can see exactly what those agents did and who allowed it."
       />
@@ -94,15 +95,15 @@ export default function AboutPage() {
                   width={340}
                   height={425}
                   sizes="(min-width: 640px) 136px, 104px"
-                  className="aspect-[4/5] w-full rounded-md border border-sh-border object-cover"
+                  className="aspect-[4/5] w-full border border-sh-border object-cover"
                 />
               ) : (
                 <div
-                  className="flex aspect-[4/5] items-end rounded-md border border-dashed border-sh-border-strong/70 bg-sh-bg p-3"
+                  className="flex aspect-[4/5] items-end border border-dashed border-sh-border-strong bg-sh-bg p-3"
                   role="img"
                   aria-label={`Photo of ${p.name} to come`}
                 >
-                  <span className="font-mono text-[11px] text-sh-muted">Photo to come</span>
+                  <span className="font-mono text-micro text-sh-muted">Photo to come</span>
                 </div>
               )}
               <div>

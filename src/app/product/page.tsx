@@ -4,13 +4,13 @@ import Link from "next/link";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { ArchitectureDiagram } from "@/components/product/ArchitectureDiagram";
 import { PackCard } from "@/components/product/PackCard";
-import { ScrollStory, type StoryStep } from "@/components/story/ScrollStory";
+import { StageList, type Stage } from "@/components/story/StageList";
 import { SceneCapture, ScenePack, SceneCoverage, SceneSign } from "@/components/story/StoryScenes";
 import { PageHeader, Section } from "@/components/ui/Layout";
 
 export const metadata: Metadata = pageMetadata(pageSeo["/product"]);
 
-const steps: StoryStep[] = [
+const steps: Stage[] = [
   {
     title: "Capture every tool call",
     body: "Your agent calls its tools through the Shoirly proxy. Each call is captured as it passes: what was attempted, for which customer, and when. Your agent's decisions stay its own.",
@@ -61,14 +61,15 @@ export default function ProductPage() {
   return (
     <>
       <PageHeader
+        label="product"
         title="Evidence of every action, from capture to your buyer's risk team"
         lead="Four stages turn what your agent does into a pack a regulated buyer's risk team can read."
       />
 
-      <ScrollStory
+      <StageList
         id="stages"
         heading="Four stages, one record"
-        intro="Scroll to follow a single €240 refund through each stage."
+        intro="Follow a single €240 refund through each stage."
         steps={steps}
       />
 
@@ -113,7 +114,10 @@ export default function ProductPage() {
           <dl className="grid grid-cols-1 gap-x-10 gap-y-7 sm:grid-cols-2">
             {recordFields.map(([k, v]) => (
               <div key={k} className="border-t border-sh-text pt-4">
-                <dt className="font-semibold">{k}</dt>
+                <dt className="flex items-center gap-2 font-semibold">
+                  <span aria-hidden className="square-bullet" />
+                  {k}
+                </dt>
                 <dd className="mt-1.5 text-sh-muted">{v}</dd>
               </div>
             ))}

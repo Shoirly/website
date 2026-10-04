@@ -3,16 +3,16 @@
 }
 
 .page summary {
-  min-height: 44px;
+  min-height: 44px; /* touch target (BRAND.md 8) */
 }
 
 @media (max-width: 767px) {
   .page > header {
-    padding-block: 40px;
+    padding-block: var(--sh-space-10);
   }
 
   .page > section {
-    padding-block: 48px;
+    padding-block: var(--sh-space-12);
   }
 
   .page h1 {
@@ -36,14 +36,14 @@
   }
 
   .page :global(.gap-10) {
-    gap: 24px;
+    gap: var(--sh-space-6);
   }
 
   .page :global(.mt-10) {
-    margin-top: 32px;
+    margin-top: var(--sh-space-8);
   }
 
   .page summary {
-    gap: 16px;
+    gap: var(--sh-space-4);
   }
 }
