@@ -1,6 +1,6 @@
 /**
  * Sample data for product illustrations. Every surface that renders this labels
- * it "Sample data". None of it describes a real customer, person or bank.
+ * it "Sample data". None of it describes a real customer, person or company.
  */
 
 export type SampleAction = {

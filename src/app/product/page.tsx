@@ -1,91 +1,41 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import Link from "next/link";
 import { ClosingCta } from "@/components/layout/ClosingCta";
-import { ConnectVisual, CoverageVisual, ShareVisual, SignVisual } from "@/components/home/StepVisuals";
-import { PipelineDiagram, type Stage } from "@/components/product/PipelineDiagram";
+import { ArchitectureDiagram } from "@/components/product/ArchitectureDiagram";
+import { PackCard } from "@/components/product/PackCard";
+import { ScrollStory, type StoryStep } from "@/components/story/ScrollStory";
+import { SceneCapture, ScenePack, SceneCoverage, SceneSign } from "@/components/story/StoryScenes";
 import { PageHeader, Section } from "@/components/ui/Layout";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Product: how Shoirly works",
-  description:
-    "Capture each agent action, sign it with who authorised it, check coverage, and share a per-customer evidence pack mapped to DORA.",
-  path: "/product",
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/product"]);
 
-const stages: Stage[] = [
+const steps: StoryStep[] = [
   {
-    key: "capture",
-    name: "Capture",
-    short: "Record every action",
-    detail: (
-      <>
-        <p>
-          Connect Shoirly to your agent and it records each action the agent takes on behalf of a bank&apos;s
-          customer: what was attempted, for which customer, and when.
-        </p>
-        <p>Your agent keeps making its own decisions. Shoirly adds the record; it doesn&apos;t change the behaviour.</p>
-        {/* TODO(team): describe the integration method (SDK languages, proxy, supported frameworks) once fixed. */}
-      </>
-    ),
-    visual: <ConnectVisual />,
+    title: "Capture every tool call",
+    body: "Your agent calls its tools through the Shoirly proxy. Each call is captured as it passes: what was attempted, for which customer, and when. Your agent's decisions stay its own.",
+    scene: <SceneCapture />,
   },
   {
-    key: "sign",
-    name: "Sign",
-    short: "Link to who authorised it",
-    detail: (
-      <>
-        <p>
-          Each record names what allowed the action: a named person who approved it, or the exact version of the
-          policy that permitted it. Then it&apos;s signed.
-        </p>
-        <p>
-          Records are chained, each one referencing the one before it, so a deleted or edited record breaks the chain
-          and shows.
-        </p>
-      </>
-    ),
-    visual: <SignVisual />,
+    title: "Link it to who authorised it, then sign it",
+    body: "Each action is linked to the person who approved it or the policy version that allowed it. The record is signed and chained to the one before, so edits and deletions show.",
+    scene: <SceneSign />,
   },
   {
-    key: "coverage",
-    name: "Coverage check",
-    short: "Show whether anything is missing",
-    detail: (
-      <>
-        <p>
-          A log can only show what it caught. The coverage check compares what your agent attempted with what was
-          signed, so a missing record is a visible gap rather than a silent one.
-        </p>
-        <p>You see a gap first, with time to fix it before any bank does.</p>
-      </>
-    ),
-    visual: <CoverageVisual />,
+    title: "Check coverage",
+    body: "Shoirly counts the calls that passed through the proxy against the signed records, so it shows whether anything went unrecorded. You see a gap first, with time to fix it.",
+    scene: <SceneCoverage />,
   },
   {
-    key: "pack",
-    name: "Evidence pack",
-    short: "Share per customer",
-    detail: (
-      <>
-        <p>
-          For each bank, Shoirly compiles a pack covering only that bank&apos;s customers, for the period it asks
-          about, organised by the DORA areas its risk team reports against.
-        </p>
-        <p>
-          Share it through Vanta or your trust centre, or send it directly. Once our verification guide is published,
-          the bank will be able to check the signatures itself.
-        </p>
-      </>
-    ),
-    visual: <ShareVisual />,
+    title: "Compile a pack per customer",
+    body: "For each customer, Shoirly compiles a pack for the period they ask about, organised by the controls their risk team checks, starting with DORA. Share it through Vanta or your trust centre, or send it directly.",
+    scene: <ScenePack />,
   },
 ];
 
 const recordFields = [
   ["Action", "What the agent did, in plain words, with the inputs that matter."],
-  ["Customer", "Which of the bank's customers it was for. Packs are split on this."],
+  ["Customer", "Which customer it was for. Packs are split on this."],
   ["Authorised by", "The person who approved it, or the policy and version that allowed it."],
   ["Time", "When it happened, in UTC."],
   ["Signature", "Proof the record hasn't changed since it was written."],
@@ -111,15 +61,43 @@ export default function ProductPage() {
   return (
     <>
       <PageHeader
-        title="Evidence of every action, from capture to the bank's desk"
-        lead="Four stages turn what your agent does into a pack a risk team at a bank, insurer or payment firm can read."
+        title="Evidence of every action, from capture to your buyer's risk team"
+        lead="Four stages turn what your agent does into a pack a regulated buyer's risk team can read."
       />
 
-      <Section labelledBy="pipeline-title">
-        <h2 id="pipeline-title" className="sr-only">
-          The four stages
+      <ScrollStory
+        id="stages"
+        heading="Four stages, one record"
+        intro="Scroll to follow a single €240 refund through each stage."
+        steps={steps}
+      />
+
+      <Section tone="ledger" labelledBy="architecture-title">
+        <h2 id="architecture-title" className="max-w-[24ch] text-3xl">
+          How the pieces fit
         </h2>
-        <PipelineDiagram stages={stages} />
+        <p className="mt-4 max-w-[60ch] text-lg text-graphite">
+          Shoirly is designed to run where your agent runs. Raw data stays in your environment. Only proof leaves.
+        </p>
+        <div className="mt-10">
+          <ArchitectureDiagram />
+        </div>
+      </Section>
+
+      <Section labelledBy="pack-title">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+          <div>
+            <h2 id="pack-title" className="text-3xl">
+              What a pack contains
+            </h2>
+            <p className="mt-4 max-w-[42ch] text-lg text-graphite">
+              One pack per customer, per period. A risk team sees what was covered, whether every signature verifies,
+              whether anything went unrecorded, and which control areas it supports, for example DORA for EU banks.
+            </p>
+            <p className="mt-6 text-sm text-graphite">The example on this page uses illustrative data.</p>
+          </div>
+          <PackCard />
+        </div>
       </Section>
 
       <Section tone="ledger" labelledBy="record-title">
@@ -129,7 +107,7 @@ export default function ProductPage() {
               What&apos;s in a record
             </h2>
             <p className="mt-4 max-w-[40ch] text-lg text-graphite">
-              Every action becomes one record with the same six fields, so a bank reads them the same way every time.
+              Every action becomes one record with the same six fields, so a risk team reads them the same way every time.
             </p>
           </div>
           <dl className="grid grid-cols-1 gap-x-10 gap-y-7 sm:grid-cols-2">
@@ -156,9 +134,9 @@ export default function ProductPage() {
           ))}
         </div>
         <p className="mt-12 text-graphite">
-          Selling into EU banks?{" "}
+          For example, if you sell to EU banks or insurers,{" "}
           <Link href="/dora" className="link">
-            Read our plain-English guide to DORA
+            read our plain-English guide to DORA
           </Link>
           .
         </p>

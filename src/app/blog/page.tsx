@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, pageSeo } from "@/lib/metadata";
 import Link from "next/link";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { PageHeader, Section } from "@/components/ui/Layout";
 import { formatDate, publishedPosts } from "@/content/blog";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Blog",
-  description: "Writing on AI agents, security reviews in financial services and DORA from the Shoirly team.",
-  path: "/blog",
-});
+export const metadata: Metadata = pageMetadata(pageSeo["/blog"]);
 
 export default function BlogPage() {
   const posts = publishedPosts();
@@ -18,7 +14,7 @@ export default function BlogPage() {
     <>
       <PageHeader
         title="Blog"
-        lead="Notes on AI agents, security reviews and DORA, for founders selling into banks, payment firms and insurers."
+        lead="Notes on AI agents, security reviews and the rules regulated buyers work under, for founders selling to them."
       />
       <Section labelledBy="posts-title">
         <h2 id="posts-title" className="sr-only">
@@ -28,11 +24,11 @@ export default function BlogPage() {
           <div className="max-w-[56ch] rounded-md border border-dashed border-rule-strong/70 p-8">
             <p className="text-xl font-semibold">First posts are on the way</p>
             <p className="mt-3 text-graphite">
-              In the meantime, our{" "}
+              In the meantime, for example, our{" "}
               <Link href="/dora" className="link">
                 plain-English guide to DORA
               </Link>{" "}
-              covers what banks will ask of AI agent vendors.
+              covers what EU banks ask of AI agent vendors.
             </p>
           </div>
         ) : (

@@ -224,3 +224,210 @@ CLAUDE.md now carries the sharper positioning: EU financial services (banks lead
 ### Phase 0 and 1
 - The screenshot rule now refers to phases. Most of the positioning work had landed in the previous commit. The one change this brief adds is "designed to run where the agent runs" instead of "runs", applied to CLAUDE.md, the home deployment section and /security (last edit to /security before it goes off-limits). CLAUDE.md now says to keep "designed to" until deployments are live.
 - From Phase 2 on I don't touch blog files, /security, /privacy, /terms, the 404, /dora, /about, `src/lib/metadata.ts`, `opengraph-image.tsx`, `icon.tsx`, `apple-icon.tsx`, `sitemap.ts` or `robots.ts`.
+
+### Phase 2: hero animation
+- Pacing went from about 1.9s to about 3.2s per action (arrive 0.8s, authoriser lands 0.95s, signing 0.7s, signed 0.8s), so each action is readable. A full loop is about 22s, which is acceptable because the server-rendered first frame already shows the whole story.
+- The coverage meter now fills steadily (signed out of five). Before, it was signed out of visible, so it dropped each time a new action arrived, which read as a glitch. The percentage and count animate with the same spring as the calculator.
+- "Satisfying moments" are each single, non-looping, transform or opacity only: the authoriser slides in with a seal-wash highlight that fades; the signature resolves at 62ms per character, then the check mark stamps in (spring, slight rotation) with a single expanding ring; the chain node fills with the same ring; and the chain segment back to the previous record draws downward.
+- The pack resolves in two beats: a one-pass sheen across the outline while "Compiling", then the solid card settles, the "Verified" badge stamps in and the DORA tags follow in sequence.
+- Clean loops: the body fades out, then remounts empty under a new cycle key, so rows never visibly unwind or scroll back.
+- Pauses when less than 35% is in view, when the tab is hidden (Page Visibility via `useSyncExternalStore`), or with the Pause button (now a 44px target). Under reduced motion, the static finished frame shows and the Pause button is hidden.
+- Mount animations only run from cycle 1 onwards, so the server HTML (cycle 0) is the finished, fully visible frame.
+- A header status ("Recording", "Checking coverage", "Pack ready") narrates the state. It's text, not a decorative dot.
+
+### Phase 3: how it works and /product
+- One `ScrollStory` component powers both home ("How it works") and /product ("Four stages, one record"), so the two never drift apart.
+- The sticky scene follows one sample action, the €240 refund, through every stage: capture, authorise and sign, coverage check, pack. It reads as one record evolving rather than four unrelated cards. Scene entrances are one-shot CSS keyframes, motion-safe only, that replay when a scene remounts.
+- Scroll-driven: a rail beside the steps fills with `useScroll` progress, step markers fill as they're reached, and a four-segment bar above the sticky scene shows position. Under reduced motion, the rail is static and full and scene swaps are instant.
+- Mobile: a stacked sequence where each step carries its own static scene (animations disabled), on the same rail.
+- The brief now names the Shoirly proxy as the integration point, so it's recorded in CLAUDE.md and the copy says it plainly. SDK languages and frameworks remain a TODO.
+- /product architecture diagram: an environment boundary containing the request path (agent, proxy, tool) and the evidence pipeline (authoriser link, signature, chain, coverage check), with the evidence pack outside it and the crossing labelled "Only proof leaves". Nodes are 48px toggle buttons, and the explanation panel is a polite live region. It defaults to the proxy, the part people ask about first.
+- The diagram's pack text says only proof leaves and that this proof makes the pack verifiable. It doesn't say how readable records reach the bank; that's flagged TODO(team).
+- /product pack card uses "Example Bank", labelled "Illustrative customer" with an "Illustrative data" tag, so nobody reads it as a real customer.
+- Removed the superseded `HowItWorks`, `StepVisuals` and `PipelineDiagram` components.
+
+### Phase 4: calculator
+- One component, `src/components/calculator/StalledDealCalculator.tsx`, with `full` (home) and `compact` (/solutions/agent-vendors) variants. Compact puts the sliders in a 2x2 grid with results underneath.
+- Sliders stay native `<input type="range">`, for free keyboard support (arrows, Page Up/Down, Home/End) and screen-reader semantics. They feel tactile through CSS: a 44px tall hit area, a 6px track, and a thumb that grows with a seal halo on hover, grows further while dragging, and gets a double ring on keyboard focus. A small scale "pop" on the value confirms each change, and is skipped under reduced motion.
+- Before/after review time is two bars on the same 40-week scale, with no background track, as the taste skill asks. The "Today" bar is neutral and the "With evidence" bar is Seal.
+- The screen-reader live region updates 700ms after input settles, rather than on every step of a drag. Each slider keeps its `aria-valuetext`.
+- The assumption is now one line ("Estimate only..."), with "Book a demo" beside it on desktop and under it on mobile.
+- On the vendor page, the FAQ moved to the Ledger tone so the new calculator section and the FAQ don't sit as two consecutive Paper sections.
+
+### Phase 5: motion pass
+- One orchestrated moment per page I'm allowed to edit:
+  - Home: the hero trail.
+  - /product: the architecture diagram's single signal run, where nodes light in order once and the proof line draws across the boundary.
+  - /solutions/agent-vendors: a seal rule draws across each review stage in order, questionnaire to oversight.
+  - /solutions/banks: the three verification checks run and resolve one after another.
+  - /demo: the agenda rules draw as the page opens.
+- Other sections stay still. There's no generic fade-up anywhere.
+- `useRevealOnce` makes moments safe. The server renders the finished state, a moment only "arms" after hydration if the element is off-screen and motion is allowed, and content already on screen never replays.
+- react-bits: adapted StatusMark (trimmed to pending, running and done; recoloured) for the banks checks, because "checking, then verified" is exactly what it animates. Nothing else new was taken. The existing Magnet, DecryptedText, CountUp and SpotlightCard adaptations stay where they were.
+- Page transitions: `src/app/template.tsx` fades each new route in on client navigation (opacity only, 280ms). It skips the first load so first paint and LCP aren't delayed, and is instant under reduced motion. It wraps every route, including the ones other agents own, without editing their files.
+- Header: transparent border at the top of the page. After 8px of scroll (via Motion's `useScroll`, not a scroll listener) it gains a Rule border, a soft shadow and a backdrop blur. It doesn't shrink, because a height change would shift layout.
+- Desktop nav: a hover pill slides between items (shared `layoutId`), and a seal underline marks the current section and slides when the route changes. The header sits in `MotionConfig reducedMotion="user"`, so both snap instead of slide under reduced motion.
+- Smooth in-page scrolling stays the CSS `scroll-behavior: smooth` set under `prefers-reduced-motion: no-preference`, with `scroll-padding-top` clearing the sticky header.
+- Measured layout shift while scrolling every page I edited: 0.0000 on all five.
+
+### Phase 6: responsive pass (one round)
+- One round of screenshots (home, /product, both solutions pages, at 390px and 1440px) plus a tap-target measurement. No page overflowed sideways.
+- Tap targets: medium buttons are 44px below `lg` (40px from `lg` up, where input is a pointer). Also raised to 44px on phones: menu toggle, logo link, skip link, audience links, footer links and email, the mobile menu's email link, and the banks "Copy" button. Links inside running text are exempt, as WCAG 2.5.8 allows. Re-measured afterwards: none under 44px on the four pages.
+- Hero trail on phones: "Coverage check passed" shortens to "Check passed" and "actions" drops out of the count under 420px. The pack subtitle loses its signature count on phones, so the DORA tags no longer crowd the card's edge.
+- Story scenes: the label column narrows to 5.5rem on phones, so action and time values stop truncating.
+- Story step markers now sit level with each step title rather than the middle of the block.
+- Pack card: stat values never wrap ("1,284 of 1,284" stayed broken across lines on phones).
+- Calculator labels shortened to "Annual contract value" and "Weeks in security review", so they fit beside their values on phones.
+- Banks request template: removed hard line breaks mid-sentence, so it wraps naturally on phones and in email clients.
+- Architecture diagram: a wider boundary-crossing column, so "Only proof leaves" doesn't squeeze.
+
+## Real logo (2 Oct 2026)
+
+- The logo files moved from `/shoirly-logo` to `public/brand/` unchanged (including their C2PA content credentials metadata). The README moved with them as the usage reference.
+- `Logo.tsx` now renders `logo.svg` through `next/image` (unoptimized SVG, fixed dimensions, so no layout shift), with a `tone="dark"` option for `logo-white.svg`. No surface on the site is dark yet, so the white version is wired up but unused. The footer uses the wordmark at 48px. The old typographic wordmark is gone.
+- **Overruling the logo README in the header:** the README says to use the mark alone below about 48px tall. The header shows the full wordmark at 36px (about 116px wide), because a mark-only header loses the company name and a 48px wordmark would crowd a 64px header, especially on phones. At 36px the seal still renders at roughly two thirds of the logo's height. Revisit if the team prefers mark plus text, or a taller header.
+- Favicon set rendered from `mark.svg` in the browser at each exact size: `favicon.ico` (16, 32, 48), `icon.svg` (modern browsers), a 180px apple touch icon on white (iOS fills transparency with black), and 192 and 512px manifest icons with a new `manifest.ts`. The old font-drawn `icon.tsx` and `apple-icon.tsx` were removed.
+- The default OG image now uses `logo.svg` at 72px tall, with the headline in Bricolage and the subline in Schibsted, from static font cuts in `src/assets/fonts` (OFL licences included).
+- **Accent switched from green `#0A7350` to the logo's Seal blue `#3157F0`.** The logo's "o" is the brand's verification seal, in blue, so green "verified" ticks beside it meant two verification colours. Contrast: 5.5:1 on Paper, 5.0:1 on Ledger, 5.6:1 for white text on blue. Seal-deep `#2443C7` (7.6:1 on Paper) carries accent text, and Seal-wash `#E8EDFE` is the tint. The CLAUDE.md warning about "purple-to-blue gradient washes" isn't triggered, because this is one flat blue with no gradients.
+- **Ink switched to the logo's `#0F1B17`** (from `#0D1B1E`, a near-identical green-black). Shadows and the hero's ledger grid were retinted to match. The green-grey neutrals (Paper, Ledger, Rule, Graphite) stay, because they sit naturally with this ink.
+- **Headings switched to Bricolage Grotesque** (weight 650, optical sizing on), because Schibsted headings directly under a Bricolage wordmark read as two competing grotesques. Body stays Schibsted Grotesk and data stays IBM Plex Mono.
+- The favicon and OG files were previously off-limits to me because other agents own metadata. They changed only because the logo brief asked for it. Metadata text, sitemap and robots weren't touched.
+
+## Merging Hoplite's work (3 Oct 2026)
+
+- Hoplite's legal-drafts merge (`9295e13`: privacy, terms, 404) fast-forwarded cleanly onto my logo commit and builds. Its privacy draft also removed an unverified claim of mine ("does not set advertising cookies"), which is an improvement.
+- Hoplite's SEO branch (`hoplite/morgantina-f124b23c--seo`) couldn't merge as-is. It was branched before the logo work, so it deleted the logo-based `opengraph-image.tsx`, drew "shoirly" as plain text on its social cards, imported a font helper (`loadBrandFont`) that the logo commit had replaced, and conflicted with the legal merge's metadata in privacy and terms. I merged it with a merge commit, so it's revertable with `git revert -m 1`. I kept its design (`pageSeo` as the single source of titles and descriptions, a social image per page at `/og/...`, Organisation schema, and a sitemap built from `pageSeo`) and resolved the clashes: privacy and terms use `pageSeo`, with the legal merge's newer descriptions carried into it, and the per-page social image now uses the real logo and the Bricolage/Schibsted fonts.
+
+## Demo booking fix (3 Oct 2026)
+
+- On the live /demo page, the button was a correct mailto link, with nothing covering it and no script errors. It "did nothing" because mailto links fail silently on devices with no email app set up, which is common on Windows and in browsers without a mail handler.
+- The button still opens the visitor's email app, now with a prefilled subject and a short message (company, name and role, a couple of times). Right under it, always visible: open the same message in Gmail or Outlook on the web (new tab), or copy `hello@shoirly.com`. After a click, a polite live hint says to use those options if nothing opened.
+- The prefilled message lives in `site.demoRequest` in `src/config/site.ts`, so every email booking link uses the same text. When the Cal.com link replaces the mailto (`bookingIsMailto: false`), the card falls back to a single "Book a demo" button.
+
+## More alive, more modern (3 Oct 2026)
+
+Requested by the founders, overriding the brief's earlier "one orchestrated moment per page" restraint. CLAUDE.md is updated to match. I ran the `find-animation-opportunities` audit first, then applied `apple-design` for layering.
+
+- **Page transitions:** React `<ViewTransition>` in `src/app/template.tsx` drives the browser View Transitions API on every route change. The old page recedes (lifts 24px, scales to 0.975, blurs and fades, 380ms). The new page rises (from 56px below with a blur that clears, 640ms on `--ease-out`, starting 120ms later). The header carries `view-transition-name: site-header` and stays anchored, and the footer and background cross-fade. Clicks pass through during the animation. Reduced motion gets a 160ms cross-fade. Browsers without the API fall back to the earlier opacity fade. Neither runs on first load.
+- **Route sweep and reading progress:** a seal-blue line sweeps across the header's bottom edge on each navigation, and a 2px reading-progress line rides the same edge (scroll-linked, no listener).
+- **Header material:** lighter translucency with a stronger blur and saturation once scrolled, per Apple's "translucent chrome, content scrolls underneath".
+- **Hero, ShapeGrid:** adapted from react-bits as `LedgerGrid`. A canvas grid drifts slowly, cells under the pointer light up seal-blue and fade, and an occasional cell lights on its own on the panel's side. It's masked to sit behind the panel, not the headline, so readability is untouched. It's DPR-aware, draws grid lines as strokes rather than per cell, runs only while on screen with the tab visible, and draws one static frame under reduced motion.
+- **Hero, layered depth:** `HeroStage` stacks three layers, each moving a different amount: an evidence sheet behind (turned 2.5°), the live trail panel (tilting ±5° toward the pointer on a critically damped spring), and the logo seal in front of the pack corner (desktop only). The layers separate slightly on scroll. Tilt runs only for fine, hover-capable pointers. The seal is the unmodified `mark.svg` (no shadow, rotation or recolour, per the logo README).
+- **Headings:** `main section h2` reveal with a pure-CSS scroll-driven animation (`animation-timeline: view()`). It's progressive enhancement: no JavaScript, absent where unsupported or under reduced motion. Being global CSS, it also applies to the pages other agents own, for consistency, without touching their files.
+- **FAQ accordions:** open and close smoothly via `::details-content` and `interpolate-size: allow-keywords`, instantly where unsupported.
+- **Press feedback:** buttons, architecture-diagram nodes, the evidence-preview notes and FAQ rows scale down slightly while pressed (100 to 150ms). Primary buttons get a single light sweep on hover.
+- **Deployment section:** three pulses flow from "your environment" to "Only this leaves", making "only proof leaves" literal. Pure CSS, hidden under reduced motion.
+- **Rejected in the audit:** animating calculator figures or ledger rows further (people are reading that data), changing the nav hover pill (high frequency, already fast), custom cursors or trails, and full-page moving backgrounds.
+
+## Smoother and quicker motion (3 Oct 2026)
+
+Feedback: animations felt very slow, and page transitions choppy and clunky. Measured on the live site first, then fixed.
+
+- **Page transitions:** I had been animating a blur filter on full-page snapshots, which can't stay on the compositor, plus about 0.8s of back-to-back exit and entry. Now it's transform and opacity only, with overlapping halves: the old page fades and lifts 10px in 170ms, and the new page rises 18px in 340ms starting 50ms in. The root cross-fade is 220ms. Measured: about 450ms in total (down from 810–840ms). Leaving home dropped from 6 janky frames with three ~56ms main-thread stalls to 1 janky frame and none.
+- **Hero grid:** the drift used to redraw the whole canvas on the main thread every frame. The grid lines are now a CSS background on a layer the compositor slides one cell and loops seamlessly. The canvas rides on that layer and only redraws while a cell is lit or fading. Measured idle on home: 60fps, 0 janky frames, 0 long animation frames.
+- **Heading reveals:** opacity and transform only (the clip-path is gone), finishing as the heading fully enters rather than a third of the way up the screen.
+- **Hero trail pacing:** about 2.3s per action (was about 3.2s), with snappier row entry, signature resolve (45ms per character), list scroll, coverage fill and pack settle. A loop is now about 16s.
+- **Springs:** the panel tilt and animated numbers are stiffer, still critically damped (no bounce), so they track quicker.
+- **Scene swaps:** "How it works" scenes cross-fade together (the old one leaves in 160ms while the new one arrives in 260ms) instead of waiting for the exit to finish first.
+- **Other timings:** accordion 240ms, header route sweep 450ms, scene stagger delays about a third shorter, the diagram's signal run 170ms per node, and the vendor-stage rules and bank checks paced tighter.
+
+## Wording sweep: any regulated buyer, finance as where we start (3 Oct 2026)
+
+Rule now in CLAUDE.md: default wording is "your customers", "regulated buyers" or "your buyer's risk team". Banks, insurers and DORA appear only as examples (at most one finance example per section, phrased "for example" or "starting with"), or on finance-specific pages. Searched all of `src` for bank, banks, banking, insurer(s), DORA and financial, plus payment firm, fintech, insurance and lender. Every change, by place:
+
+**Site-wide (config and metadata)**
+- Site description (meta and default social card): "...so security reviews with regulated buyers stop stalling your deals. Starting with financial services."
+- Solutions menu, "For agent vendors" description: "Get through security review with regulated buyers"
+- /product meta description: "...share a per-customer evidence pack mapped to the controls your buyers check."
+- /solutions/agent-vendors meta title: "For AI agent companies: close deals with regulated buyers"
+- /solutions/agent-vendors meta description: "Security reviews with regulated buyers stall on one question... starting with DORA for EU financial services."
+- /about meta description: "...signed evidence for AI agents that act for regulated businesses."
+- /blog meta description: "Writing on AI agents, security reviews and the rules regulated buyers work under, from the Shoirly team."
+- /demo meta description: "...how Shoirly fits into your buyer's security review..."
+- Default closing CTA (used on most pages): "Show your buyer what your agent did."
+
+**Home**
+- Hero subline: "Shoirly gives AI agent companies per-customer evidence of every action, mapped to the controls regulated buyers check, so security reviews stop stalling your deals." The hero's one finance example is the DORA tags on its sample pack.
+- Hero trail: "Sample bank" became "Sample customer" (outline and resolved pack), and the screen-reader caption now says "for one customer, tagged with the control areas it covers (DORA, in this sample)".
+- Problem heading: "Your customers want to let your agent do more. Their risk team needs proof it stayed inside the lines."
+- Problem ledger label: "What your buyer's risk team gets today"
+- Ledger rows (shared with /solutions/banks): Certificates now misses "Whether they held for this customer last Tuesday."; AI agent certifications now misses "What it did for this customer."
+- How it works, step 1: "...records each action it takes for a customer."
+- How it works, step 4 title: "Share a per-customer evidence pack, mapped to their controls"
+- How it works, step 4 body: "Each customer gets a pack about its own accounts, organised by the controls its risk team checks (for example, DORA areas for EU banks). Share it through Vanta or your trust centre."
+- How it works scenes: "#4471, sample bank" became "#4471, sample customer", and the pack scene's "Sample bank" became "Sample customer".
+- Evidence preview, note 1: "Each buyer gets evidence about its own customers only, for the period it asks about."
+- Evidence preview, note 4: title "Mapped to their controls", body "Organised by the areas the buyer's risk team already reports against, for example DORA for EU banks."
+- Evidence preview, sample pack: "Sample bank" became "Sample customer", the heading is now "Control mapping (DORA, in this sample)", and the first row reads "...did for this customer, action by action."
+- Deployment diagram: "Your cloud, or your customer's" (label and caption).
+- Calculator first slider (home and vendors page): "Deals with regulated buyers"
+- Trust-centre flow, first node: "Acts for your customers"
+- Audiences, vendor column: "Give each buyer evidence about its own customers, ready before they ask."
+- Audiences, receiving column label: "For risk teams at regulated buyers", with point 3 "Organised by the controls you report against, starting with DORA for EU financial services." It still links to /solutions/banks.
+
+**/product**
+- Title: "Evidence of every action, from capture to your buyer's risk team"
+- Lead: "Four stages turn what your agent does into a pack a regulated buyer's risk team can read."
+- Story step 4: "For each customer, Shoirly compiles a pack for the period they ask about, organised by the controls their risk team checks, starting with DORA..."
+- Architecture node "Tool or system": "...a CRM, a ticketing tool or, for example, a bank's payments API..."
+- Architecture boundary label (visible and screen reader): "Your environment: your cloud or your customer's"
+- What a pack contains: "...and which control areas it supports, for example DORA for EU banks."
+- Pack card: "Example Bank" became "Example Co.", and "DORA areas covered" became "Controls covered (DORA, for example)".
+- What's in a record: "Customer: Which customer it was for." and the lead "...so a risk team reads them the same way every time."
+- Where Shoirly fits: "For example, if you sell to EU banks or insurers, read our plain-English guide to DORA."
+
+**/solutions/agent-vendors**
+- Lead: "Regulated buyers want what your agent does..."
+- Where deals stall lead: "The questions change as a deal moves through your buyer's review."
+- Stage 03 (Contract): "...a concrete way to meet your buyer's audit and access rights, for example under DORA."
+- What you get lead: "...and every customer gets its own pack."
+- What you get, per-customer packs: "...mapped to its controls, starting with DORA."
+- FAQ "We already have SOC 2...": the question ends "Why would a regulated buyer need more?" and the answer says "buyer" throughout (on screen and in the search-engine data).
+- FAQ "We already log everything": "Because your buyer has to take your word..." (both versions).
+- FAQ "Our customers are in the UK, not the EU" became "Is this only for financial services?", answered "No. Every regulated buyer asks the same practical question... DORA, for EU financial services, is where we're starting." The TODO now asks which frameworks and regions come next.
+
+**/demo**
+- Headline: "See what your buyer's risk team would see" (your wording).
+- Agenda: "Your stuck deals: Where security reviews stall today, and what your customers have asked for." / "A sample evidence pack: What a risk team receives, and how verification will work." / "Fit and next steps": unchanged, it already matched your wording.
+- Agenda numbering: the list was numbered by the list itself and also carried "01/02/03" as text, so anything that shows list numbers (reader views, some browsers, screen readers) got both. Now the numbering comes only from the list, styled as 01, 02, 03 (`decimal-leading-zero` markers in mono). I also moved the decorative top rule out of the `<ol>`, where a bare `<span>` wasn't valid HTML.
+
+**Other numbering fix:** /solutions/agent-vendors stage cards had the same double numbering (a list plus "01 Security questionnaire" text). The 01 to 04 labels stay visible but are hidden from assistive tech, so the list's own numbering is the only one announced.
+
+**/about**
+- Lead: "Shoirly exists so that regulated businesses can let AI agents do more..."
+- Why we're building this, paragraph 1: "AI agents are starting to act inside regulated businesses, for example refunding, reviewing and updating accounts at banks. Those buyers are willing to give agents more autonomy..."
+- Paragraph 3: "...and hand the buyer evidence it can check for itself."
+- Made in Dublin: "Dublin sits close to the regulated businesses we're starting with, banks, insurers and payment firms, and to the EU supervisors..."
+
+**/blog listing (not a post)**
+- Lead: "Notes on AI agents, security reviews and the rules regulated buyers work under, for founders selling to them."
+- Empty state: "In the meantime, for example, our plain-English guide to DORA covers what EU banks ask of AI agent vendors."
+
+**/security**
+- Verify step: "...your customers will be able to check signatures and the chain independently."
+- Signing note: "...a verification guide for buyers' risk teams."
+- Where Shoirly runs: "...in your cloud, or in your customer's."
+
+**Code comments only (not visible):** sample data ("real customer, person or company"), the ledger source comment, the stage-grid comment, and the diagram TODO ("reach the customer").
+
+**CLAUDE.md**
+- Who buys: "AI agent companies selling to any regulated buyer. Finance... is where we start, not the whole company." Removed "Banks stay the lead example".
+- New "Default wording" rule, as above.
+- Company intro, Why now, Deployment, Second audience, the honesty rule on verification, site-map lines for home, vendors, /solutions/banks and /dora (the last two marked finance-specific), calculator, voice, hero sub, problem and how-it-works copy all generalised to match.
+
+**Deliberately left unchanged:**
+- /dora and /solutions/banks, including their page metadata: finance-specific by design.
+- The finance blog post and its registry entry ("What DORA means for AI agent vendors selling to banks").
+- Nav "DORA", Solutions "For banks, payment firms and insurers", and footer "For financial firms" / "DORA explained". These are names of the finance-specific pages they link to.
+- /terms "including our DORA guide": it names that page.
+- URLs, code identifiers and comments that refer to the finance pages (`/solutions/banks`, `id: "banks"`, `dora` variables), and the DORA mapping TODOs, which are about the sample's DORA example.
+- The hero trail's sample actions (a refund, a KYC file read, a credit-limit change). They're the hero section's single finance example, labelled "Sample data".
+
+## About: real founder bios (4 Oct 2026)
+
+- Added the four founders' names, roles and bios exactly as supplied. They are biographical facts, so the "finance only as an example" wording rule doesn't apply to them.
+- The bios run 40 to 50 words, so the team section is now a 2x2 grid (one column on phones), each founder a row with a 4:5 portrait beside name, role and bio, instead of four narrow columns. Names are `h3` under the section's `h2`.
+- Each founder has an optional `photo` (a file in `public/team/`, shown through `next/image`). Until it's set, a labelled "Photo to come" placeholder shows.
+- Liam's surname confirmed as Maher.
+- Photos: each original was cropped to a consistent 4:5 head-and-shoulders frame (similar head height and eye line; Laura's head sits a little larger because her original is too small to frame wider), resized to 680x850, saved as progressive JPEG (52-78 KB, down from up to 9 MB) with all metadata stripped (phone photos can carry location). Josephine's was a phone screenshot; the crop removes the iOS "Crop" button. The originals stay in `/team-photos/`, which is gitignored so full-size images and camera metadata never reach the repo.
+- Hoplite's open "DORA/About responsive" PR sets `showTeam = false` "until all four founders have real bios and photos". When that PR is merged, the team section should stay visible (or flip to true once the photos are in).

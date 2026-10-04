@@ -43,3 +43,6 @@ next-env.d.ts
 # research captures and browser automation output
 /research/
 .playwright-cli/
+
+# original team photos (full-size, with camera metadata); the site uses public/team/
+/team-photos/
