@@ -7,7 +7,10 @@ export type PostMeta = {
   /** ISO date, YYYY-MM-DD */
   date: string;
   author: string;
-  /** Drafts render at their URL (noindex) but never appear in the listing or sitemap. */
+  authorBio: string;
+  topic: string;
+  featured?: boolean;
+  /** Drafts are accessible only in local development, never in production. */
   draft: boolean;
   load: () => Promise<{ default: MDXContent }>;
 };
@@ -25,15 +28,32 @@ export const posts: PostMeta[] = [
     date: "2026-10-02",
     // TODO(team): set the real author before publishing.
     author: "The Shoirly team",
+    authorBio: "A four-person founding team in Dublin, building action-level evidence for AI agent vendors selling into financial services.",
+    topic: "DORA",
+    featured: true,
     draft: true,
     load: () => import("./what-dora-means-for-ai-agent-vendors.mdx"),
   },
 ];
 
 export const publishedPosts = () =>
-  posts.filter((p) => !p.draft).sort((a, b) => (a.date < b.date ? 1 : -1));
+  posts.filter((p) => !p.draft).sort((a, b) => b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug));
 
-export const getPost = (slug: string) => posts.find((p) => p.slug === slug);
+export const accessiblePosts = () =>
+  posts.filter((p) => !p.draft || process.env.NODE_ENV === "development");
+
+export const getPost = (slug: string) => accessiblePosts().find((p) => p.slug === slug);
+
+export const featuredPost = () => {
+  const published = publishedPosts();
+  return published.find((p) => p.featured) ?? published[0];
+};
+
+export const relatedPosts = (post: PostMeta) =>
+  publishedPosts()
+    .filter((p) => p.slug !== post.slug)
+    .sort((a, b) => Number(b.topic === post.topic) - Number(a.topic === post.topic))
+    .slice(0, 2);
 
 export const formatDate = (iso: string) =>
   new Intl.DateTimeFormat("en-IE", { day: "numeric", month: "long", year: "numeric" }).format(new Date(`${iso}T12:00:00Z`));
