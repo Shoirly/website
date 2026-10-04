@@ -428,5 +428,6 @@ Rule now in CLAUDE.md: default wording is "your customers", "regulated buyers" o
 - Added the four founders' names, roles and bios exactly as supplied. They are biographical facts, so the "finance only as an example" wording rule doesn't apply to them.
 - The bios run 40 to 50 words, so the team section is now a 2x2 grid (one column on phones), each founder a row with a 4:5 portrait beside name, role and bio, instead of four narrow columns. Names are `h3` under the section's `h2`.
 - Each founder has an optional `photo` (a file in `public/team/`, shown through `next/image`). Until it's set, a labelled "Photo to come" placeholder shows.
-- Liam's surname was given as "[Surname]", so the page shows "Liam" with a TODO(team) until it's confirmed.
+- Liam's surname confirmed as Maher.
+- Photos: each original was cropped to a consistent 4:5 head-and-shoulders frame (similar head height and eye line; Laura's head sits a little larger because her original is too small to frame wider), resized to 680x850, saved as progressive JPEG (52-78 KB, down from up to 9 MB) with all metadata stripped (phone photos can carry location). Josephine's was a phone screenshot; the crop removes the iOS "Crop" button. The originals stay in `/team-photos/`, which is gitignored so full-size images and camera metadata never reach the repo.
 - Hoplite's open "DORA/About responsive" PR sets `showTeam = false` "until all four founders have real bios and photos". When that PR is merged, the team section should stay visible (or flip to true once the photos are in).

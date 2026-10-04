@@ -14,27 +14,30 @@ type Founder = {
   photo?: string;
 };
 
-// TODO(team): add each founder's photo (public/team/*.jpg, portrait 4:5) and set `photo` below.
+// Photos: public/team/*.jpg, cropped to 4:5 head-and-shoulders, 680x850, metadata stripped.
 const team: Founder[] = [
   {
-    // TODO(team): add Liam's surname.
-    name: "Liam",
+    name: "Liam Maher",
     role: "Co-founder & CEO",
+    photo: "/team/liam-maher.jpg",
     bio: "Worked on Bank of America's rates trading technology team and in EY's technology resilience practice, so he's seen first-hand how banks vet the systems they let near their operations. Founded Skillz Camps at 18, now Ireland's largest field hockey academy. Leads strategy, fundraising and product direction.",
   },
   {
     name: "Laura Gonzalez",
     role: "Co-founder & CTO",
+    photo: "/team/laura-gonzalez.jpg",
     bio: "Shipped a product at Workday that companies buy to meet a legal reporting requirement, which is the same job Shoirly does for AI agents. Owns the signed evidence platform end to end.",
   },
   {
     name: "Josephine Burke",
     role: "Co-founder & COO",
+    photo: "/team/josephine-burke.jpg",
     bio: "Built trading analytics on Scotiabank's support desk and an investigative dashboard for the US Marshals Service under a Public Trust designation. Runs operations and the security and trust programme customers and auditors rely on.",
   },
   {
     name: "Danny Dowling",
     role: "Co-founder & Chief Commercial Officer",
+    photo: "/team/danny-dowling.jpg",
     bio: "Built a production agent at Microsoft that fixed security issues with a human approving every change, exactly the kind of workflow Shoirly makes provable. Owns sales, marketing and partnerships with agent vendors.",
   },
 ];
