@@ -66,20 +66,20 @@ export default async function PostPage({ params }: Props) {
       ) : null}
       <article className="pb-16 pt-14 md:pb-24 md:pt-20">
         <Container>
-          <div className="mx-auto max-w-[65ch]">
+          <div className="mx-auto max-w-[68ch]">
             <Link href="/blog" className="link text-sm">
               All posts
             </Link>
             {post.draft ? (
-              <p className="mt-6 rounded-md border border-sh-danger/40 bg-sh-danger/5 px-4 py-3 text-sm text-sh-danger">
+              <p className="mt-6 rounded-sm border border-sh-danger px-4 py-3 text-sm text-sh-danger">
                 Editorial draft. Only available in local development, never in production, RSS or search listings.
               </p>
             ) : null}
             <header>
-              <p className="mt-8 text-sm font-semibold text-sh-accent-text">{post.topic}</p>
+              <p className="label mt-8">{post.topic}</p>
               <h1 className="mt-4 text-4xl">{post.title}</h1>
               <p className="mt-5 text-lg text-sh-muted">{post.description}</p>
-              <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 border-b border-sh-border pb-8 text-sm text-sh-muted">
+              <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 border-b border-sh-border pb-8 font-mono text-xs text-sh-muted">
                 <time dateTime={post.date}>{formatDate(post.date)}</time>
                 <span>{await readingTime(post.slug)}</span>
                 <span>{post.author}</span>
@@ -97,7 +97,7 @@ export default async function PostPage({ params }: Props) {
             {related.length ? (
               <section aria-labelledby="related-title" className="mt-12">
                 <h2 id="related-title" className="mb-6 text-2xl">Related posts</h2>
-                {related.map((other) => <PostCard key={other.slug} post={other} />)}
+                <ol className="border-b border-sh-border">{related.map((other) => <PostCard key={other.slug} post={other} />)}</ol>
               </section>
             ) : null}
           </div>

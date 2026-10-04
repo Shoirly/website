@@ -2,20 +2,28 @@ import Link from "next/link";
 import { formatDate, type PostMeta } from "@/content/blog";
 import { readingTime } from "@/content/blog/reading-time";
 
-export async function PostCard({ post, featured = false }: { post: PostMeta; featured?: boolean }) {
+/** One row of the blog list (BRAND.md 10): date in mono, title in Plex Sans 600 22px, one-line summary. */
+export async function PostCard({ post }: { post: PostMeta }) {
   return (
-    <article className={featured ? "rounded-lg border border-sh-border bg-sh-bg-subtle p-6 md:p-10" : "border-t border-sh-border py-8"}>
-      <p className="text-sm font-semibold text-sh-accent-text">{featured ? "Featured post" : post.topic}</p>
-      <h2 className={`mt-4 ${featured ? "max-w-[26ch] text-3xl" : "text-2xl"}`}>
-        <Link href={`/blog/${post.slug}`} className="hover:text-sh-accent-text">{post.title}</Link>
-      </h2>
-      <p className="mt-4 max-w-[60ch] text-sh-muted">{post.description}</p>
-      <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-sh-muted">
+    <li className="grid grid-cols-1 gap-x-8 gap-y-2 border-t border-sh-border py-8 md:grid-cols-[10rem_minmax(0,1fr)]">
+      <p className="font-mono text-xs text-sh-muted">
         <time dateTime={post.date}>{formatDate(post.date)}</time>
-        <span>{await readingTime(post.slug)}</span>
-        <span>{post.author}</span>
+        <span className="mt-1 block">{await readingTime(post.slug)}</span>
+      </p>
+      <div>
+        <h3 className="text-[1.375rem] leading-snug">
+          <Link
+            href={`/blog/${post.slug}`}
+            className="transition-colors duration-[var(--sh-dur-fast)] hover:text-sh-accent-text"
+          >
+            {post.title}
+          </Link>
+        </h3>
+        <p className="mt-2 max-w-[68ch] text-sh-muted">{post.description}</p>
+        <p className="mt-3 font-mono text-xs text-sh-muted">
+          {post.topic} · {post.author}
+        </p>
       </div>
-      {featured ? <Link href={`/blog/${post.slug}`} className="link mt-6 inline-block">Read the article</Link> : null}
-    </article>
+    </li>
   );
 }
