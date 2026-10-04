@@ -545,3 +545,5 @@ Brief: rebuild the site on `shoirly-brand/BRAND.md`, which overrides CLAUDE.md, 
 
 - **320px fix:** below 640px the header shows only the logo and the menu button (BRAND.md 8 mobile nav). "Book a demo" moves into the ink menu sheet as a full-width primary button. Before this, the header overflowed by 44px at 320px.
 - **Section 13 check:** every page was measured at 320, 768 and 1280px with Playwright. None has horizontal scroll, each has exactly one H1, and there are no failed requests or console errors. Build and lint are clean.
+
+- **IBM Plex Sans is self-hosted.** On Vercel, Turbopack's `next/font/google` loader failed on this one family ("next/font/google queries have exactly one entry"), so the preview build broke. The build passed locally. The latin 400, 500 and 600 woff2 files (OFL licence, from Fontsource) are in `src/assets/fonts/` and load through `next/font/local` with the same `--font-sh-body` variable. Space Mono and Plex Mono still load through `next/font/google`.

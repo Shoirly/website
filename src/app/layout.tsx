@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, Space_Mono } from "next/font/google";
+import { IBM_Plex_Mono, Space_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { site } from "@/config/site";
@@ -7,7 +8,17 @@ import "./globals.css";
 
 // Brand fonts (shoirly-brand/BRAND.md section 4). Display: Space Mono; body: IBM Plex Sans; data: IBM Plex Mono.
 const display = Space_Mono({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-sh-display", display: "swap" });
-const body = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-sh-body", display: "swap" });
+// IBM Plex Sans is self-hosted (latin, OFL licence, from Fontsource): on Vercel, Turbopack's
+// next/font/google loader fails on this family ("queries have exactly one entry").
+const body = localFont({
+  src: [
+    { path: "../assets/fonts/ibm-plex-sans-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "../assets/fonts/ibm-plex-sans-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "../assets/fonts/ibm-plex-sans-latin-600-normal.woff2", weight: "600", style: "normal" },
+  ],
+  variable: "--font-sh-body",
+  display: "swap",
+});
 const mono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-sh-mono", display: "swap" });
 
 export const metadata: Metadata = {
