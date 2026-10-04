@@ -104,7 +104,7 @@ function SolutionsMenu({ pathname }: { pathname: string }) {
             transition={{ duration: 0.18, ease }}
             className="absolute left-1/2 top-full w-[372px] -translate-x-1/2 pt-2"
           >
-            <ul className="rounded-md border border-sh-border bg-sh-bg p-1.5 shadow-paper">
+            <ul className="rounded-md border border-sh-border bg-sh-bg p-1.5 shadow-pop">
               {item.children.map((child) => (
                 <li key={child.href}>
                   <Link
@@ -159,7 +159,7 @@ function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose: () =>
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: reduce ? 0 : 0.15 } }}
           transition={{ duration: 0.2, ease }}
-          className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-sh-bg lg:hidden"
+          className="sh-dark fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-sh-bg lg:hidden"
         >
           <nav aria-label="Mobile" className="px-4 pb-10 pt-4 min-[400px]:px-6">
             <ul className="divide-y divide-sh-border border-b border-sh-border">
@@ -194,40 +194,18 @@ function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose: () =>
   );
 }
 
-const pillSpring = { type: "spring" as const, stiffness: 520, damping: 42 };
-
-/** Sliding hover pill and active underline shared by the desktop nav items. */
-function NavMarks({ hovered, active }: { hovered: boolean; active: boolean }) {
-  return (
-    <>
-      {hovered ? (
-        <motion.span
-          layoutId="nav-hover"
-          aria-hidden
-          className="absolute inset-0 rounded-md bg-sh-ink-soft"
-          transition={pillSpring}
-        />
-      ) : null}
-      {active ? (
-        <motion.span
-          layoutId="nav-active"
-          aria-hidden
-          className="absolute inset-x-3 -bottom-[13px] h-0.5 rounded-full bg-sh-accent"
-          transition={pillSpring}
-        />
-      ) : null}
-    </>
-  );
+/** Current-page marker: a static accent underline (BRAND.md: hover/focus change colour only). */
+function NavMarks({ active }: { hovered?: boolean; active: boolean }) {
+  return active ? (
+    <span aria-hidden className="absolute inset-x-3 -bottom-[13px] h-0.5 bg-sh-accent" />
+  ) : null;
 }
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [hovered, setHovered] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
-  const { scrollY, scrollYProgress } = useScroll();
-  // Counts client-side navigations; the route sweep only plays after the first load.
-  const [navCount, setNavCount] = useState(0);
+  const { scrollY } = useScroll();
   // Border, blur and a soft shadow appear once the page scrolls under the header.
   useMotionValueEvent(scrollY, "change", (y) => {
     const next = y > 8;
@@ -240,7 +218,6 @@ export function SiteHeader() {
   if (pathname !== lastPath) {
     setLastPath(pathname);
     setMenuOpen(false);
-    setNavCount((c) => c + 1);
   }
 
   return (
@@ -262,22 +239,19 @@ export function SiteHeader() {
         }`}
       >
         <div className="mx-auto flex h-16 w-full max-w-[1200px] items-center justify-between gap-6 px-4 min-[400px]:px-6">
-          <Logo />
+          <Link href="/" aria-label="Shoirly home" className="inline-flex min-h-11 items-center">
+            <Logo height={26} title="" />
+          </Link>
 
           <nav aria-label="Main" className="hidden lg:block">
-            <ul className="flex items-center gap-0.5" onMouseLeave={() => setHovered(null)}>
+            <ul className="flex items-center gap-0.5">
               {site.nav.map((item) =>
                 "children" in item ? (
                   <li
                     key={item.label}
                     className="relative"
-                    onMouseEnter={() => setHovered(item.label)}
-                    onFocus={() => setHovered(item.label)}
-                    onBlur={() => setHovered(null)}
                   >
-                    <NavMarks
-                      hovered={hovered === item.label}
-                      active={item.children.some((c) => isActive(pathname, c.href))}
+                    <NavMarks active={item.children.some((c) => isActive(pathname, c.href))}
                     />
                     <div className="relative">
                       <SolutionsMenu pathname={pathname} />
@@ -287,11 +261,8 @@ export function SiteHeader() {
                   <li
                     key={item.href}
                     className="relative"
-                    onMouseEnter={() => setHovered(item.href)}
-                    onFocus={() => setHovered(item.href)}
-                    onBlur={() => setHovered(null)}
                   >
-                    <NavMarks hovered={hovered === item.href} active={isActive(pathname, item.href)} />
+                    <NavMarks active={isActive(pathname, item.href)} />
                     <Link
                       href={item.href}
                       aria-current={isActive(pathname, item.href) ? "page" : undefined}
@@ -321,21 +292,6 @@ export function SiteHeader() {
             </button>
           </div>
         </div>
-        {/* Reading progress along the bottom edge */}
-        <motion.span
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 -bottom-px h-0.5 origin-left bg-sh-accent/70"
-          style={{ scaleX: scrollYProgress }}
-        />
-        {/* A sweep across the bottom edge on every page change */}
-        <motion.span
-          key={pathname}
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 -bottom-px h-0.5 origin-left bg-sh-accent"
-          initial={navCount === 0 ? false : { scaleX: 0, opacity: 1 }}
-          animate={{ scaleX: 1, opacity: 0 }}
-          transition={{ scaleX: { duration: 0.45, ease }, opacity: { duration: 0.25, delay: 0.4 } }}
-        />
       </header>
       <MobileMenu open={menuOpen} onClose={closeMenu} pathname={pathname} />
       </MotionConfig>

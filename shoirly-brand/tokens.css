@@ -1,0 +1,145 @@
+/* ==========================================================================
+   Shoirly design tokens. Source of truth: BRAND.md
+   Plain CSS custom properties. Map these into whatever the repo uses
+   (Tailwind theme, CSS modules, styled-components). Never hard-code hexes.
+   ========================================================================== */
+
+:root {
+  /* ---- Core brand ---- */
+  --sh-blue: #2F5BFF;          /* Electric Blue: mark, primary actions, key accents */
+  --sh-ink: #0B1220;           /* Near Black: text, dark surfaces */
+  --sh-white: #FFFFFF;
+
+  /* ---- Blue scale (500 = brand) ---- */
+  --sh-blue-50:  #EEF2FF;
+  --sh-blue-100: #DCE4FF;
+  --sh-blue-200: #B9C9FF;
+  --sh-blue-300: #7B97FF;      /* blue text / links on ink backgrounds */
+  --sh-blue-400: #5677FF;
+  --sh-blue-500: #2F5BFF;
+  --sh-blue-600: #1F45E0;      /* hover / pressed on primary */
+  --sh-blue-700: #1836B3;
+  --sh-blue-800: #142B85;
+  --sh-blue-900: #0F1F5C;
+
+  /* ---- Neutrals (cool, derived from ink) ---- */
+  --sh-gray-0:   #FFFFFF;
+  --sh-gray-25:  #F7F8FB;      /* page tint, alternate sections */
+  --sh-gray-50:  #F1F3F8;
+  --sh-gray-100: #E4E8F0;      /* hairlines, card borders on white */
+  --sh-gray-200: #CDD3E0;
+  --sh-gray-300: #A9B2C5;
+  --sh-gray-400: #7F8AA3;      /* disabled text, placeholder (large/UI only) */
+  --sh-gray-500: #5B6680;      /* secondary text on white (AA) */
+  --sh-gray-600: #434D66;
+  --sh-gray-700: #2C354B;      /* borders on ink */
+  --sh-gray-800: #1A2235;      /* raised surface on ink */
+  --sh-gray-900: #0B1220;      /* = ink */
+  --sh-gray-950: #060A14;
+
+  /* ---- Status (UI states only, never decoration) ---- */
+  --sh-success: #0F7B3E;
+  --sh-warning: #9A5B00;
+  --sh-danger:  #C72E33;
+
+  /* ---- Semantic: light theme (default) ---- */
+  --sh-bg:            var(--sh-white);
+  --sh-bg-subtle:     var(--sh-gray-25);
+  --sh-surface:       var(--sh-white);
+  --sh-surface-raised:var(--sh-white);
+  --sh-border:        var(--sh-gray-100);
+  --sh-border-strong: var(--sh-gray-200);
+  --sh-text:          var(--sh-ink);
+  --sh-text-muted:    var(--sh-gray-500);
+  --sh-text-inverse:  var(--sh-white);
+  --sh-accent:        var(--sh-blue-500);
+  --sh-accent-hover:  var(--sh-blue-600);
+  --sh-accent-text:   var(--sh-blue-500);  /* blue text on white: 5.2:1 */
+  --sh-accent-soft:   var(--sh-blue-50);
+  --sh-focus:         var(--sh-blue-500);
+  --sh-line:          var(--sh-blue-200);  /* construction lines / blueprint graphics */
+
+  /* ---- Typography ---- */
+  --sh-font-display: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --sh-font-body:    "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sh-font-mono:    "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Type scale (fluid where it matters). Display = Space Mono, rest = Plex */
+  --sh-text-display: clamp(2.75rem, 1.6rem + 4.6vw, 5rem);   /* 44 -> 80px */
+  --sh-text-h1:      clamp(2.25rem, 1.5rem + 3vw, 3.5rem);   /* 36 -> 56px */
+  --sh-text-h2:      clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem); /* 28 -> 40px */
+  --sh-text-h3:      1.5rem;    /* 24px */
+  --sh-text-h4:      1.25rem;   /* 20px */
+  --sh-text-lead:    1.25rem;   /* 20px intro paragraphs */
+  --sh-text-body:    1.0625rem; /* 17px */
+  --sh-text-small:   0.9375rem; /* 15px */
+  --sh-text-label:   0.8125rem; /* 13px mono labels */
+  --sh-text-micro:   0.75rem;   /* 12px legal, captions */
+
+  --sh-leading-tight: 1.1;      /* display, h1 */
+  --sh-leading-snug:  1.25;     /* h2-h4 */
+  --sh-leading-body:  1.6;
+  --sh-tracking-display: -0.04em;  /* Space Mono is wide; tighten big sizes */
+  --sh-tracking-heading: -0.02em;
+  --sh-tracking-label:   0.04em;
+
+  /* ---- Spacing (4px base) ---- */
+  --sh-space-1: 4px;   --sh-space-2: 8px;   --sh-space-3: 12px;
+  --sh-space-4: 16px;  --sh-space-5: 20px;  --sh-space-6: 24px;
+  --sh-space-8: 32px;  --sh-space-10: 40px; --sh-space-12: 48px;
+  --sh-space-16: 64px; --sh-space-20: 80px; --sh-space-24: 96px;
+  --sh-space-32: 128px;
+  --sh-section-y: clamp(64px, 6vw + 32px, 128px);
+
+  /* ---- Layout ---- */
+  --sh-container: 1200px;
+  --sh-container-wide: 1360px;
+  --sh-measure: 68ch;         /* max line length for body copy */
+  --sh-gutter: clamp(20px, 4vw, 40px);
+
+  /* ---- Shape ---- */
+  --sh-radius-0: 0px;         /* default: sections, panels, images */
+  --sh-radius-1: 2px;         /* inputs, buttons, tags */
+  --sh-radius-2: 4px;         /* cards, code blocks */
+  --sh-radius-icon: 22.5%;    /* app icon only */
+  --sh-chamfer: 14px;         /* clipped corner on feature panels */
+  --sh-border-width: 1px;
+  --sh-bracket-size: 14px;    /* corner bracket motif */
+  --sh-bracket-weight: 2px;
+
+  /* ---- Elevation: flat brand, borders over shadows ---- */
+  --sh-shadow-none: none;
+  --sh-shadow-pop: 0 8px 24px -12px rgba(11, 18, 32, 0.25); /* menus, popovers only */
+
+  /* ---- Motion ---- */
+  --sh-ease: cubic-bezier(0.2, 0, 0, 1);
+  --sh-dur-fast: 120ms;
+  --sh-dur: 200ms;
+  --sh-dur-slow: 480ms;       /* the single hero tick-draw moment */
+}
+
+/* ---- Dark theme: ink surfaces. Apply with [data-theme="dark"] or a dark section class ---- */
+[data-theme="dark"], .sh-dark {
+  --sh-bg:            var(--sh-ink);
+  --sh-bg-subtle:     var(--sh-gray-950);
+  --sh-surface:       var(--sh-gray-900);
+  --sh-surface-raised:var(--sh-gray-800);
+  --sh-border:        var(--sh-gray-700);
+  --sh-border-strong: var(--sh-gray-600);
+  --sh-text:          var(--sh-white);
+  --sh-text-muted:    var(--sh-gray-300);
+  --sh-text-inverse:  var(--sh-ink);
+  --sh-accent:        var(--sh-blue-500);   /* fills, the mark, buttons */
+  --sh-accent-hover:  var(--sh-blue-400);
+  --sh-accent-text:   var(--sh-blue-300);   /* blue TEXT on ink must use 300 (6:1) */
+  --sh-accent-soft:   rgba(47, 91, 255, 0.14);
+  --sh-focus:         var(--sh-blue-300);
+  --sh-line:          rgba(47, 91, 255, 0.45);
+  --sh-success: #3FCF7F;
+  --sh-warning: #F2B33D;
+  --sh-danger:  #FF7A7E;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --sh-dur-fast: 0ms; --sh-dur: 0ms; --sh-dur-slow: 0ms; }
+}

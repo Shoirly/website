@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     publishedTime: post.date,
     noindex: post.draft,
   });
-  const image = { url: `${site.url}/blog/${post.slug}/og`, width: 1200, height: 630, alt: post.title };
+  const image = { url: `${site.url}/og-image.png`, width: 1200, height: 630, alt: post.title };
   return {
     ...base,
     openGraph: { ...base.openGraph, type: "article", images: [image], authors: [post.author] },

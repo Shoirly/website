@@ -97,8 +97,9 @@ export const organisationSchema = {
 export function pageMetadata({ title, description, path, type = "website", publishedTime, noindex }: PageMetaInput): Metadata {
   const url = path === "/" ? site.url : `${site.url}${path}`;
   const socialTitle = title ? `${title} | ${site.name}` : DEFAULT_TITLE;
+  // Brand social image (shoirly-brand icons/og-image.png), shared by every page.
   const ogImage = {
-    url: `${site.url}/og${path === "/" ? "/home" : path}`,
+    url: `${site.url}/og-image.png`,
     width: 1200,
     height: 630,
     alt: socialTitle,

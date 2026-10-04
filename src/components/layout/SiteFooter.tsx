@@ -1,16 +1,16 @@
 import Link from "next/link";
-import { LogoImage } from "@/components/brand/Logo";
+import { Logo } from "@/components/brand/Logo";
 import { Container } from "@/components/ui/Layout";
 import { site } from "@/config/site";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-t border-sh-border bg-sh-bg-subtle">
+    <footer className="sh-dark">
       <Container className="py-14 md:py-16">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.3fr_2fr]">
           <div>
-            <LogoImage height={48} />
+            <Logo tone="dark" height={28} />
             <p className="mt-4 max-w-[34ch] text-sm text-sh-muted">
               Signed evidence of what your AI agent did, and who approved it.
             </p>
