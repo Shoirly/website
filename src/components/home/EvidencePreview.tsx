@@ -6,7 +6,7 @@ import { Spotlight } from "@/components/fx/Spotlight";
 import { Section } from "@/components/ui/Layout";
 import { sampleActions } from "@/content/sample";
 
-type Region = "header" | "approval" | "coverage" | "dora";
+type Region = "header" | "approval" | "coverage" | "mapping";
 
 const notes: { id: Region; title: string; body: string }[] = [
   {
@@ -25,16 +25,17 @@ const notes: { id: Region; title: string; body: string }[] = [
     body: "Attempted actions are counted against signed records, so anything unrecorded stands out.",
   },
   {
-    id: "dora",
+    id: "mapping",
     title: "Mapped to their controls",
     body: "Organised by the areas the buyer's risk team already reports against, for example DORA for EU banks.",
   },
 ];
 
-const dora = [
-  { area: "ICT third-party risk", ref: "Art. 28-30", what: "What the provider's system did for this customer, action by action." },
-  { area: "ICT risk management", ref: "Art. 5-16", what: "Attributable actions with their authorisation and a tamper-evident record." },
-  { area: "Incident management", ref: "Art. 17-23", what: "A signed timeline to reconstruct events if something goes wrong." },
+// Framework-neutral control areas; the references show DORA as the example framework.
+const mapping = [
+  { area: "Third-party oversight", ref: "DORA 28-30", what: "What the provider's system did for this customer, action by action." },
+  { area: "Access and authorisation", ref: "DORA 5-16", what: "Attributable actions with their authorisation and a tamper-evident record." },
+  { area: "Incident response", ref: "DORA 17-23", what: "A signed timeline to reconstruct events if something goes wrong." },
 ];
 
 function regionClass(active: Region | null, id: Region) {
@@ -75,7 +76,7 @@ export function EvidencePreview() {
               <dl className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 text-xs sm:grid-cols-4">
                 {[
                   ["Period", "1-30 Sep 2026"],
-                  ["Agent", "Collections assistant"],
+                  ["Agent", "Customer ops agent"],
                   ["Prepared", "1 Oct 2026"],
                   ["Pack ID", "ep_7f21c9"],
                 ].map(([k, v]) => (
@@ -128,11 +129,11 @@ export function EvidencePreview() {
               </ul>
             </div>
 
-            {/* DORA */}
-            <div className={`mt-6 -mx-2 p-2 ${regionClass(active, "dora")}`}>
-              <p className="text-xs font-semibold">Control mapping (DORA, in this sample)</p>
+            {/* Control mapping */}
+            <div className={`mt-6 -mx-2 p-2 ${regionClass(active, "mapping")}`}>
+              <p className="text-xs font-semibold">Control mapping (shown against DORA as an example)</p>
               <dl className="mt-3 space-y-3">
-                {dora.map((d) => (
+                {mapping.map((d) => (
                   <div key={d.area} className="grid grid-cols-1 gap-x-4 gap-y-0.5 text-xs sm:grid-cols-[15rem_1fr]">
                     <dt className="text-ink">
                       {d.area} <span className="whitespace-nowrap font-mono text-graphite">{d.ref}</span>
@@ -168,8 +169,8 @@ export function EvidencePreview() {
         </ul>
       </div>
       <p className="mt-8 max-w-[70ch] text-xs text-graphite">
-        Sample pack. Names, figures and the DORA mapping are illustrative.
-        {/* TODO(team): have the DORA article references reviewed before launch. */}
+        Sample pack. Names, figures and the mapping are illustrative.
+        {/* TODO(team): have the DORA references reviewed before launch. */}
       </p>
     </Section>
   );

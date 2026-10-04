@@ -23,8 +23,8 @@ const receive = [
     body: "The number of actions the agent attempted against the number of signed records. It shows whether anything went unrecorded.",
   },
   {
-    title: "A DORA mapping",
-    body: "Evidence organised by the areas your team already works in: ICT third-party risk, ICT risk management and incident management.",
+    title: "A mapping to your controls",
+    body: "Evidence organised by the areas your team already reports against, such as third-party oversight, access and incident response.",
   },
 ];
 
@@ -38,7 +38,7 @@ const template = `Subject: Evidence of agent actions for our customers
 
 Hello,
 
-As part of our ICT third-party oversight under DORA, we'd like evidence of the actions your AI agent takes for our customers.
+As part of our third-party oversight, we'd like evidence of the actions your AI agent takes for our customers.
 
 For the period [start date] to [end date], please provide:
 
@@ -52,12 +52,13 @@ A per-customer evidence pack (for example from Shoirly) would meet this request.
 Thank you,
 [Name], [Role]`;
 
+// URL kept as /solutions/banks so existing links keep working; the page now serves any regulated buyer's risk team.
 export default function BanksPage() {
   return (
     <>
       <PageHeader
         title="See what your vendor's AI agent did for your customers"
-        lead="For risk, procurement and third-party oversight teams at banks, payment firms and insurers. When a vendor uses Shoirly, you get signed, per-customer evidence instead of reassurance."
+        lead="For risk, procurement and third-party oversight teams at regulated businesses, starting with banks, insurers and payment firms. When a vendor uses Shoirly, you get signed, per-customer evidence instead of reassurance."
       />
 
       <Section labelledBy="today-title">
@@ -121,7 +122,7 @@ export default function BanksPage() {
               your process.
             </p>
             <p className="mt-6 text-graphite">
-              New to DORA&apos;s third-party rules?{" "}
+              In EU financial services, for example, DORA sets the third-party rules.{" "}
               <Link href="/dora" className="link">
                 Read our plain-English guide
               </Link>

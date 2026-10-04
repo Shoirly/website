@@ -11,7 +11,7 @@ const nodes: Record<NodeId, { n: number; label: string; title: string; body: str
     n: 1,
     label: "Your agent",
     title: "Your agent",
-    body: "Your AI agent, unchanged. It decides what to do, then calls a tool to do it, such as issuing a refund or updating a credit limit.",
+    body: "Your AI agent, unchanged. It decides what to do, then calls a tool to do it, such as issuing a refund or updating an account.",
   },
   proxy: {
     n: 2,
@@ -23,7 +23,7 @@ const nodes: Record<NodeId, { n: number; label: string; title: string; body: str
     n: 3,
     label: "Tool or system",
     title: "The tool or system",
-    body: "The API or system the agent acts on: a CRM, a ticketing tool or, for example, a bank's payments API. It receives the call exactly as your agent sent it.",
+    body: "The API or system the agent acts on: a CRM, a ticketing tool or a billing system. It receives the call exactly as your agent sent it.",
   },
   auth: {
     n: 4,

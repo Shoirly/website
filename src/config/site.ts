@@ -46,18 +46,17 @@ export const site = {
       label: "Solutions",
       children: [
         {
-          label: "For agent vendors",
+          label: "For AI agent companies",
           href: "/solutions/agent-vendors",
           description: "Get through security review with regulated buyers",
         },
         {
-          label: "For banks, payment firms and insurers",
+          label: "For buyers' risk teams",
           href: "/solutions/banks",
           description: "What your risk team receives, and how to ask for it",
         },
       ],
     },
-    { label: "DORA", href: "/dora" },
     { label: "Security", href: "/security" },
     { label: "Blog", href: "/blog" },
     { label: "About", href: "/about" },
@@ -75,21 +74,21 @@ export const site = {
     {
       heading: "Solutions",
       links: [
-        { label: "For agent vendors", href: "/solutions/agent-vendors" },
-        { label: "For financial firms", href: "/solutions/banks" },
-        { label: "DORA explained", href: "/dora" },
+        { label: "For AI agent companies", href: "/solutions/agent-vendors" },
+        { label: "For buyers' risk teams", href: "/solutions/banks" },
+      ],
+    },
+    {
+      heading: "Resources",
+      links: [
+        { label: "Blog", href: "/blog" },
+        { label: "DORA guide (EU finance)", href: "/dora" },
       ],
     },
     {
       heading: "Company",
       links: [
         { label: "About", href: "/about" },
-        { label: "Blog", href: "/blog" },
-      ],
-    },
-    {
-      heading: "Legal",
-      links: [
         { label: "Privacy", href: "/privacy" },
         { label: "Terms", href: "/terms" },
       ],

@@ -5,7 +5,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { ArrowElbowDownRight, CheckCircle, Pause, Play, SealCheck, ShieldCheck, User } from "@phosphor-icons/react";
 import { AnimatedNumber } from "@/components/fx/AnimatedNumber";
 import { ScrambleHash } from "@/components/fx/ScrambleHash";
-import { sampleActions, samplePackDora, type SampleAction } from "@/content/sample";
+import { sampleActions, samplePackControls, type SampleAction } from "@/content/sample";
 
 /*
  * The hero's evidence trail: a loop of five sample agent actions. Each one
@@ -336,12 +336,12 @@ function TrailBody({
               </span>
             </div>
             <ul className="flex flex-wrap gap-1.5">
-              {samplePackDora.map((d) => (
+              {samplePackControls.map((d) => (
                 <li
                   key={d}
                   className="rounded-sm border border-dashed border-rule-strong/60 px-1.5 py-0.5 text-[11px] leading-4 text-graphite"
                 >
-                  DORA: {d}
+                  {d}
                 </li>
               ))}
             </ul>
@@ -388,7 +388,7 @@ function TrailBody({
                 </motion.span>
               </div>
               <ul className="flex flex-wrap gap-1.5">
-                {samplePackDora.map((d, i) => (
+                {samplePackControls.map((d, i) => (
                   <motion.li
                     key={d}
                     className="rounded-sm border border-rule px-1.5 py-0.5 text-[11px] leading-4 text-graphite"
@@ -396,7 +396,7 @@ function TrailBody({
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, ease, delay: animateIn ? 0.32 + i * 0.06 : 0 }}
                   >
-                    DORA: {d}
+                    {d}
                   </motion.li>
                 ))}
               </ul>
@@ -447,10 +447,10 @@ export function EvidenceTrail() {
       aria-labelledby="trail-caption"
     >
       <figcaption id="trail-caption" className="sr-only">
-        Animated sample of an evidence trail. Five agent actions, such as a €240 refund and a credit limit change,
+        Animated sample of an evidence trail. Five agent actions, such as a €240 refund and an account upgrade,
         are each linked to the policy or person who approved them, signed, and chained together. Coverage reaches
         100 percent and the trail compiles into an evidence pack for one customer, tagged with the control areas it
-        covers (DORA, in this sample).
+        covers.
       </figcaption>
 
       {/* Header */}

@@ -7,7 +7,7 @@ This file is the source of truth for the Shoirly marketing site. Read it fully b
 Shoirly gives AI agent companies independent, verifiable evidence of what their agent did and who authorised each action. Vendors already say "we log everything". Shoirly makes those records provably complete and unedited, per customer: each action is signed and chained, a coverage check shows whether anything went unrecorded, and the output is mapped to the controls regulated buyers check, starting with DORA for EU financial services.
 
 - **Who buys:** AI agent companies selling to any regulated buyer. Finance (banks, payment firms and insurers, under DORA) is where we start, not the whole company.
-- **Default wording:** "your customers", "regulated buyers" or "your buyer's risk team". Banks, insurers and DORA appear only as examples (at most one finance example per section, phrased "for example" or "starting with"), or on pages that are specifically about them: `/dora`, `/solutions/banks`, and blog posts about finance.
+- **Default wording:** "your customers", "regulated buyers" or "your buyer's risk team". Banks, insurers and DORA appear only as examples (at most one finance example per section, phrased "for example" or "starting with"), or on pages that are specifically about them: `/dora` and blog posts about finance. Aim for no more than about one finance example per page, not just per section. Sample data stays industry-neutral.
 - **Their pain:** deals stall in the buyer's security review and vendor due diligence. A SOC 2 or ISO cert helps a buyer shortlist a vendor, but on its own it usually isn't enough. Today the buyer's evidence is contract clauses plus periodic service reviews. Nothing shows what the vendor's system actually did on a given day, for a given action.
 - **Why now:** regulators are paying close attention to AI, and regulated buyers will give agents more autonomy only inside defined risk tolerances, with proof the controls held. In EU financial services, for example, DORA gives firms audit and information rights over their ICT third parties.
 - **Where we sit:**
@@ -45,7 +45,7 @@ Shoirly gives AI agent companies independent, verifiable evidence of what their 
 | `/` | Home. Hero, problem, how it works (animated), evidence pack preview, where it runs (only proof leaves), cost-of-a-stalled-deal calculator, works-with-your-trust-centre, for vendors / for buyers' risk teams split, final CTA |
 | `/product` | Deeper how-it-works: capture, sign, coverage check, evidence pack. Interactive diagram |
 | `/solutions/agent-vendors` | For AI agent companies: close deals with regulated buyers faster |
-| `/solutions/banks` | Finance-specific page for the receiving side (banks, payment firms and insurers): what a risk team gets and how to request it |
+| `/solutions/banks` | For buyers' risk teams at any regulated business (starting with banks, insurers and payment firms): what they receive and how to request it. URL kept for existing links |
 | `/dora` | Finance-specific: plain-English DORA explainer and how Shoirly evidence maps to it. Strong SEO page |
 | `/security` | Trust page: how evidence is signed and verified, where Shoirly runs and what leaves, what we're building next (roadmap, clearly not yet available). Unknowns marked TODO |
 | `/about` | Mission, team of four, Dublin |
@@ -54,7 +54,7 @@ Shoirly gives AI agent companies independent, verifiable evidence of what their 
 | `/privacy`, `/terms` | Placeholder legal pages, clearly marked draft |
 | `404` | On-brand not-found page |
 
-Nav: Product, Solutions (Agent vendors, Banks), DORA, Security, Blog, About, plus a "Book a demo" button. Footer carries the full map, hello@shoirly.com and "Made in Dublin".
+Nav: Product, Solutions (For AI agent companies, For buyers' risk teams), Security, Blog, About, plus a "Book a demo" button. Footer: Product, Solutions, Resources (Blog, DORA guide), Company (About, Privacy, Terms), hello@shoirly.com and "Made in Dublin".
 
 ## Tech
 
@@ -78,7 +78,7 @@ The subject is evidence: signatures, chains of custody, receipts, audit files, a
 
 ### Hero animation concept
 
-A live "evidence trail": a stream of agent actions (e.g. "Refund €240 to customer #4471", "Read KYC file", "Update credit limit") flows in. Each action gets linked to the human or policy that authorised it, receives a signature, and joins a tamper-evident chain. A coverage meter fills to 100%. The trail compiles into a per-customer evidence pack card labelled with the DORA areas it covers. One tasteful loop, pausable, static frame under reduced motion.
+A live "evidence trail": a stream of agent actions from an industry-neutral customer-operations agent (e.g. "Refund €240 to customer #4471", "Read account history", "Upgrade account to Business plan") flows in. Each action gets linked to the human or policy that authorised it, receives a signature, and joins a tamper-evident chain. A coverage meter fills to 100%. The trail compiles into a per-customer evidence pack card labelled with the control areas it covers (framework-neutral; DORA only as an example elsewhere). One tasteful loop, pausable, static frame under reduced motion.
 
 ### Cost-of-a-stalled-deal calculator
 

@@ -27,8 +27,8 @@ export const pageSeo: Record<string, PageMetaInput> = {
     path: "/solutions/agent-vendors",
   },
   "/solutions/banks": {
-    title: "For banks, payment firms and insurers: evidence of what your vendor's AI agent did",
-    description: "What risk, procurement and third-party oversight teams at banks, payment firms and insurers receive from vendors using Shoirly, and how to ask for it.",
+    title: "For buyers' risk teams: evidence of what your vendor's AI agent did",
+    description: "What risk, procurement and third-party oversight teams at regulated businesses receive from AI agent vendors using Shoirly, and how to ask for it. Starting with financial services.",
     path: "/solutions/banks",
   },
   "/dora": {

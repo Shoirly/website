@@ -5,6 +5,7 @@ import { ClosingCta } from "@/components/layout/ClosingCta";
 import { Faq, FaqJsonLd, type FaqItem } from "@/components/ui/Faq";
 import { Container, PageHeader, Section } from "@/components/ui/Layout";
 import { site } from "@/config/site";
+import styles from "@/components/dora-about/ResponsivePage.module.css";
 
 /*
  * TODO(team): have this page reviewed by someone with DORA expertise before
@@ -150,7 +151,7 @@ const articleJsonLd = {
 
 export default function DoraPage() {
   return (
-    <>
+    <div className={styles.page}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <PageHeader
         title="DORA, explained for AI agent vendors"
@@ -221,8 +222,26 @@ export default function DoraPage() {
             Shoirly supports the bank&apos;s obligations. It doesn&apos;t discharge them. The mapping below is
             indicative.
           </p>
-          <div className="mt-10 overflow-x-auto rounded-md border border-rule bg-paper">
-            <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+          <ul className="mt-10 space-y-4 md:hidden">
+            {mapping.map((m) => (
+              <li key={m.area} className="rounded-md border border-rule bg-paper p-5">
+                <h3>{m.area}</h3>
+                <p className="mt-1 font-mono text-xs text-graphite">{m.ref}</p>
+                <dl className="mt-5 space-y-4">
+                  <div>
+                    <dt className="font-semibold">What the bank needs</dt>
+                    <dd className="mt-1 text-graphite">{m.need}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold">Shoirly evidence</dt>
+                    <dd className="mt-1">{m.evidence}</dd>
+                  </div>
+                </dl>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-10 hidden rounded-md border border-rule bg-paper md:block">
+            <table className="w-full table-fixed border-collapse text-left text-sm">
               <caption className="sr-only">DORA areas, what banks need, and the Shoirly evidence that supports it</caption>
               <thead>
                 <tr className="border-b border-ink">
@@ -252,12 +271,11 @@ export default function DoraPage() {
             </table>
           </div>
           <p className="mt-6 text-graphite">
-            Want to see it as a bank would?{" "}
-            <Link href="/solutions/banks" className="link">
-              What a risk team receives
-            </Link>
-            .
+            Want to see it as a bank would?
           </p>
+          <Link href="/solutions/banks" className="link inline-flex min-h-11 items-center py-2">
+            What a risk team receives
+          </Link>
         </Container>
       </section>
 
@@ -275,6 +293,6 @@ export default function DoraPage() {
         title="Make DORA questions easier to answer."
         body="We'll show you how per-customer evidence fits into a bank's third-party review."
       />
-    </>
+    </div>
   );
 }
