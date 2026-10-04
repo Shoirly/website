@@ -3,6 +3,7 @@ import { pageMetadata, pageSeo } from "@/lib/metadata";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import Image from "next/image";
 import { PageHeader, Section } from "@/components/ui/Layout";
+import styles from "@/components/dora-about/ResponsivePage.module.css";
 
 export const metadata: Metadata = pageMetadata(pageSeo["/about"]);
 
@@ -42,9 +43,12 @@ const team: Founder[] = [
   },
 ];
 
+// Keep incomplete team profiles off the page.
+const showTeam = team.every((founder) => founder.bio.trim() && founder.photo);
+
 export default function AboutPage() {
   return (
-    <>
+    <div className={styles.page}>
       <PageHeader
         title="Agents should earn trust the way people do: by showing their work"
         lead="Shoirly exists so that regulated businesses can let AI agents do more, because they can see exactly what those agents did and who allowed it."
@@ -74,6 +78,7 @@ export default function AboutPage() {
         </div>
       </Section>
 
+      {showTeam && (
       <Section tone="ledger" labelledBy="team-title">
         <h2 id="team-title" className="text-3xl">
           The team
@@ -109,6 +114,7 @@ export default function AboutPage() {
           ))}
         </ul>
       </Section>
+      )}
 
       <Section labelledBy="where-title">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
@@ -129,6 +135,6 @@ export default function AboutPage() {
       </Section>
 
       <ClosingCta title="Talk to the people building it." />
-    </>
+    </div>
   );
 }
